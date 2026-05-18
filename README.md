@@ -1,3 +1,3 @@
 # WDD Meesterproef Videlio
 
-[Wiki](/wiki)
+[Wiki](./wiki)
