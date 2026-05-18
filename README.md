@@ -1,1 +1,1 @@
-# wdd-videlio-2026
+# WDD Meesterproef Videlio
