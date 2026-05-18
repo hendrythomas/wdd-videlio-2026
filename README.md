@@ -1,3 +1,3 @@
 # WDD Meesterproef Videlio
 
-[Wiki](./wiki)
+[Wiki](https://github.com/hendrythomas/wdd-videlio-2026/wiki)
