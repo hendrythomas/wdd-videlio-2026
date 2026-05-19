@@ -1,0 +1,41 @@
+@import url("");
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /*Colors:*/
+    --background: #2F3742;
+    --primary-color: #FFFFFF;
+    --highlight-color: #FAEA07;
+
+    --text-primary: var(--primary-color);
+    --text-hightligt: var(--highlight-color);
+
+    /*Typografie:*/
+    --primary-font: "Noto sans";
+    --heading-font-size: 2rem;
+    --title-font-size: 4rem;
+    --paragraph-font-size: 1.5rem;
+}
+
+body {
+    background-color: var(--background);
+}
+
+h1 {
+    color: var(--text-primary);
+    font-size: var(--heading-font-size);
+}
+
+h2 {
+    color: var(--text-primary);
+    font-size: var(--title-font-size);
+}
+
+p {
+    color: var(--text-primary);
+    font-size: var(--paragraph-font-size);
+}
