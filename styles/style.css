@@ -31,7 +31,7 @@
     --button-text: var(--secondary-color);
 
     /*Typografie:*/
-    --primary-font: "Noto sans", sans-serif;
+    --primary-font: 'Noto Sans', sans-serif;
     --heading-font-size: 2rem;
     --title-font-size: 4rem;
     --paragraph-font-size: 1.5rem;
