@@ -24,6 +24,7 @@
     --primary-color: #FFFFFF;
     --highlight-color: #FAEA07;
     --secondary-color: #000000;
+    --logo-color: #FF0000;
 
     --text-primary: var(--primary-color);
     --text-hightlight: var(--highlight-color);
