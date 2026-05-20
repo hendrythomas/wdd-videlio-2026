@@ -17,9 +17,9 @@
 
 
 .project-card {
-    border: solid yellow;
-    background-color: #2f3947;
-    width: 350px;
+    border: solid var(--highlight-color);
+    background-color: var(--background);
+    width: 360px;
     height: 500px;
     border-radius: 20px;
     overflow: hidden;
@@ -58,26 +58,18 @@
 
 .info-projects-link {
     display: inline-block;
-    background-color: #FFFFFF;
-    color: black;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     text-decoration: none;
     padding: 16px 40px;
     border-radius: 20px;
     font-size: 1.05rem;
     font-weight: bold;
-    margin-top: 100px;
+    margin-top: 90px;
 
     transition: 0.3s;
 }
 
 .info-projects-link:hover {
-    background-color: #FAEA07;
-}
-
-    /* width: 150px;
-    height: 20px;
-    background-color: #FAEA07;
-    color: black;
-    border-radius: 5px;
-    text-align: center; */
+    background-color: var(--highlight-color);
 }
