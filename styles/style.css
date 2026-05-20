@@ -26,15 +26,20 @@
     --secondary-color: #000000;
 
     --text-primary: var(--primary-color);
-    --text-hightligt: var(--highlight-color);
+    --text-hightlight: var(--highlight-color);
     --button-background: var(--highlight-color);
     --button-text: var(--secondary-color);
 
     /*Typografie:*/
-    --primary-font: 'Noto Sans', sans-serif;
+    --primary-font: "Noto sans", sans-serif;
+    --small-heading-font-size: 1.5rem;
     --heading-font-size: 2rem;
     --title-font-size: 4rem;
     --paragraph-font-size: 1.5rem;
+}
+
+body, h1, h2, p, a {
+    font-family: var(--primary-font);
 }
 
 body {
@@ -54,4 +59,18 @@ h2 {
 p {
     color: var(--text-primary);
     font-size: var(--paragraph-font-size);
+}
+
+a {
+    color: var(--text-primary);
+}
+
+button {
+    background-color: var(--highlight-color);
+    color: var(--button-text-primary);
+    border: none;
+    padding: 1.5rem;
+    font-size: var(--paragraph-font-size);
+    border-radius: 1.5rem;
+    cursor: pointer;
 }

@@ -1,0 +1,22 @@
+@import url('style.css');
+
+#main-workshops-content {
+    .heading {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr auto 1fr;
+        width: 100%;
+        padding: 2rem;
+
+        a {
+            grid-column: 1;
+            grid-row: 1;
+            font-size: var(--small-heading-font-size);
+        }
+
+        h1 {
+            grid-column: 2;
+            grid-row: 1;
+        }
+    }
+}
