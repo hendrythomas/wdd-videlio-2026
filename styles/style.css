@@ -23,9 +23,12 @@
     --background: #2F3742;
     --primary-color: #FFFFFF;
     --highlight-color: #FAEA07;
+    --secondary-color: #000000;
 
     --text-primary: var(--primary-color);
     --text-hightligt: var(--highlight-color);
+    --button-background: var(--highlight-color);
+    --button-text: var(--secondary-color);
 
     /*Typografie:*/
     --primary-font: 'Noto Sans';
