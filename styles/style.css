@@ -1,4 +1,17 @@
-@import url("");
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('/assets/fonts/NotoSans-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Noto Sans';
+    font-weight: bold;
+    src: url('/assets/fonts/NotoSans-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Noto Sans';
+    font-weight: lighter;
+    src: url('/assets/fonts/NotoSans-Light.ttf') format('truetype');
+}
 
 * {
     margin: 0;
@@ -15,7 +28,7 @@
     --text-hightligt: var(--highlight-color);
 
     /*Typografie:*/
-    --primary-font: "Noto sans";
+    --primary-font: 'Noto Sans';
     --heading-font-size: 2rem;
     --title-font-size: 4rem;
     --paragraph-font-size: 1.5rem;
