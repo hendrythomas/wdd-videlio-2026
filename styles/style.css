@@ -65,7 +65,7 @@ a {
     color: var(--text-primary);
 }
 
-button {
+.button {
     background-color: var(--highlight-color);
     color: var(--button-text-primary);
     border: none;
