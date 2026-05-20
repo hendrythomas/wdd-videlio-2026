@@ -58,13 +58,13 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 4rem;
-    justify-content: space-between;
+    gap: 2rem;
+    justify-content: center;
 }
 
 /* --- Board card ------------------------------------------- */
 .board-card {
-    width: 260px;
+    width: 230px;
     min-height: 380px;
     display: flex;
     flex-direction: column;
