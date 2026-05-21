@@ -27,11 +27,24 @@ main {
   gap: 4rem;
 
   > section {
-    > h2 {
+    > h1 {
       text-align: center;
     }
     > p {
       text-align: justify;
     }
   }
+}
+
+section.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+article {
+  flex: 1;
+  min-width: 300px;
+  aspect-ratio: 3/2;
+  background-color: yellow;
 }
