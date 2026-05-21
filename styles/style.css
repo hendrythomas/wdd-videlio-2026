@@ -88,4 +88,20 @@ input, textarea {
     border-radius: 1.5rem;
     cursor: pointer;
     transition: background-color .3s linear;
-}
+
+  /* focus styling  */
+  :focus-visible {
+    outline: 3px solid var(--highlight-color);
+    outline-offset: 5px;
+    border-radius: 4px;
+    box-shadow:
+      0 0 0 6px rgba(250, 234, 7, 0.2),
+      0 0 12px rgba(250, 234, 7, 0.15);
+    transition: outline-offset 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  /* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
+  :focus:not(:focus-visible) {
+    outline: none;
+  >>>>>>> main
+  }
