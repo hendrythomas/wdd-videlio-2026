@@ -3,19 +3,22 @@
 }
 
 /* navbar */
-body > nav {
+body > header {
   position: fixed;
+  width: 100%;
+}
+
+body > header > nav {
   padding: 2rem;
   background-color: var(--background);
   overflow-x: auto;
   overflow-y: hidden;
 }
-body > nav,
-body > nav > .mobile-menu {
+body > header > nav,
+body > header > nav > .mobile-menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width:  100%;
   height: var(--nav-height);
   gap: 2rem;
 
@@ -79,15 +82,15 @@ body > nav > .mobile-menu {
     display: contents;
   }
 }
-body:has(> nav)::before {
+body:has(> header)::before {
   content: '';
   margin-top: var(--nav-height);
 }
 
 /* mobile menu */
 @media (max-width: 500px) {
-  body > nav,
-  body > nav > .mobile-menu {
+  body > header > nav,
+  body > header > nav > .mobile-menu {
 
     > .hamburger {
       display: flex;
