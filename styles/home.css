@@ -1,0 +1,50 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+
+p:not(:first-child) {
+  margin-top: 1rem;
+}
+
+html {
+  scrollbar-color: #ffffff80 transparent;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  font-family: var(--primary-font);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: 4rem;
+
+  > section {
+    > h1 {
+      text-align: center;
+    }
+    > p {
+      text-align: justify;
+    }
+  }
+}
+
+section.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+article {
+  flex: 1;
+  min-width: 300px;
+  aspect-ratio: 3/2;
+  background-color: yellow;
+}
