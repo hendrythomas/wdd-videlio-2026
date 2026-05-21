@@ -42,12 +42,19 @@
                 <a class="button" href="#">Doe mee aan deze workshop!</a>
             </div>
         </div>
+        <div aria-live="polite" id="offer-workshop-form" class="hidden">
+            <h2>Vertel ons jouw ideeën</h2>
+            <form>
+                <label></label>
+            </form>
+        </div>
     </main>
 
 </body>
 
 <script>
     const toggleWorkshopsButton = document.getElementById('toggle-workshops');
+    const buttons = document.querySelectorAll('button');
     toggleWorkshopsButton.addEventListener('click', (event) => {
         const button = event.target;
         const workshopList = document.getElementById('workshops-list');
