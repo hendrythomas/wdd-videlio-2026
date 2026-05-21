@@ -2,6 +2,10 @@
   --nav-height: 100px;
 }
 
+html {
+  container-type: scroll-state;
+}
+
 /* navbar */
 body > header {
   position: fixed;
@@ -14,6 +18,11 @@ body > header > nav {
   background-color: var(--background);
   overflow-x: auto;
   overflow-y: hidden;
+  transition: box-shadow 0.2s ease;
+
+  @container scroll-state(scrollable: top) {
+    box-shadow: 0 4px 12px 0 #00000040;
+  }
 }
 body > header > nav,
 body > header > nav > .mobile-menu {
@@ -21,7 +30,7 @@ body > header > nav > .mobile-menu {
   justify-content: space-between;
   align-items: center;
   height: var(--nav-height);
-  gap: 2rem;
+  gap: 1rem;
 
   > a {
     flex-shrink: 0;
@@ -46,6 +55,7 @@ body > header > nav > .mobile-menu {
     background-color: var(--logo-color);
     color: var(--text-primary);
     border: 2px solid #ffffff60;
+    transition: none;
 
     &:hover,
     &:focus-visible {
@@ -89,7 +99,7 @@ body:has(> header)::before {
 }
 
 /* mobile menu */
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   body > header > nav,
   body > header > nav > .mobile-menu {
 
