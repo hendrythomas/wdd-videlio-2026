@@ -16,6 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 1rem;
   gap: 2rem;
   font-family: var(--primary-font);
 }
@@ -45,6 +46,10 @@ section.grid {
 article {
   flex: 1;
   min-width: 300px;
-  aspect-ratio: 3/2;
+  height: 200px;
   background-color: yellow;
+
+  > img {
+    width: 100%;
+  }
 }
