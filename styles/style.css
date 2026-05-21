@@ -57,6 +57,12 @@ h2 {
     font-size: var(--heading-font-size);
 }
 
+h3 {
+    color: var(--text-primary);
+    font-size: var(--paragraph-font-size);
+    font-weight: bold;
+}
+
 p {
     color: var(--text-primary);
     font-size: var(--paragraph-font-size);
@@ -74,4 +80,5 @@ a {
     font-size: var(--paragraph-font-size);
     border-radius: 1.5rem;
     cursor: pointer;
+    transition: background-color .5s linear;
 }
