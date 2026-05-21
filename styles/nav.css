@@ -2,6 +2,7 @@
   --nav-height: 100px;
 }
 
+/* navbar */
 body > nav {
   position: fixed;
   padding: 2rem;
@@ -16,7 +17,7 @@ body > nav > .mobile-menu {
   align-items: center;
   width:  100%;
   height: var(--nav-height);
-  gap: 1rem;
+  gap: 2rem;
 
   > a {
     flex-shrink: 0;
@@ -40,8 +41,10 @@ body > nav > .mobile-menu {
     border-radius: var(--height);
     background-color: var(--logo-color);
     color: var(--text-primary);
+    border: 2px solid #ffffff60;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background-color: var(--button-background);
       color: var(--secondary-color);
       text-decoration: none;
@@ -64,8 +67,11 @@ body > nav > .mobile-menu {
     font-size: 40px;
     color: white;
 
-    &:has(:checked) {
-      color: var(--logo-color);
+    > i::after {
+      content: 'menu';
+    }
+    &:has(> :checked) > i::after {
+      content: 'close';
     }
   }
 
@@ -82,11 +88,11 @@ body:has(> nav)::before {
 @media (max-width: 500px) {
   body > nav,
   body > nav > .mobile-menu {
-    
+
     > .hamburger {
       display: flex;
     }
-    
+
     > .mobile-menu {
       all: unset;
       display: flex;
@@ -102,7 +108,7 @@ body:has(> nav)::before {
       transition: left 0.4s ease;
     }
     &:has(> .hamburger :checked) > .mobile-menu,
-    .mobile-menu:has(:focus-visible) {
+    > .mobile-menu:has(:focus-visible) {
       left: 0;
     }
   }
