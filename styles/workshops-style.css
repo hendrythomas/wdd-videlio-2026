@@ -1,5 +1,9 @@
 @import url('style.css');
 
+body > header {
+    position: static;
+}
+
 #main-workshops-content {
     display: flex;
     flex-direction: column;
@@ -143,6 +147,5 @@
             padding: 1rem;
             grid-area: p;
         }
-
     }
 }
