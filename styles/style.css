@@ -71,6 +71,10 @@ p, label {
     font-size: var(--paragraph-font-size);
 }
 
+strong{
+    color: var(--highlight-color);
+}
+
 a {
     color: var(--text-primary);
 }

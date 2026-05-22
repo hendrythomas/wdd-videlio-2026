@@ -41,6 +41,11 @@ body > header > nav > .mobile-menu > a {
   font-size: var(--paragraph-font-size);
   font-weight: bold;
   text-decoration: none;
+
+  &.active {
+    color: var(--logo-color);
+    text-decoration: underline;
+  }
 }
 
 body > header > nav > .mobile-menu > a:hover {

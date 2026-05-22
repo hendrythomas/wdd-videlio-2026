@@ -54,10 +54,6 @@
   margin-bottom: 0;
 }
 
-strong{
-    color: var(--highlight-color);
-}
-
 /* --- Sections --------------------------------------------- */
 .section {
     margin-bottom: 3rem;
