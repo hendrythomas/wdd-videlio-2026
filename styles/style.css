@@ -103,5 +103,5 @@ input, textarea {
   /* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
   :focus:not(:focus-visible) {
     outline: none;
-  >>>>>>> main
   }
+}
