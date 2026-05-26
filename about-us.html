@@ -8,26 +8,52 @@
 
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/about-us-style.css" />
+    <link rel="stylesheet" href="./styles/nav.css" />
+    <link rel="stylesheet" href="./styles/icons.css" />
 </head>
 
 <body>
 
+    <header>
+        <nav>
+        <a class="logo" href="./" aria-label="Home">
+            <img src="../assets/images/branding/logo.png">
+        </a>
+        <label class="hamburger" aria-label="Open navigatie">
+            <input type="checkbox">
+            <i class="material-icon"></i>
+        </label>
+        <div class="mobile-menu">
+            <a href="../projecten/index.html">Projecten</a>
+            <a href="../workshops/index.html">Workshops</a>
+            <a class="active" href="../about-us.html">Over ons</a>
+            <a class="button" href="">Doneer</a>
+        </div>
+        </nav>
+  </header>
+
     <!-- MAIN CONTENT -->
     <main id="main-content" tabindex="-1" aria-label="Over ons">
         <div class="page-wrapper">
-
-            <h1 class="page-title">Over ons</h1>
+            <div class="page-header">
+                <a href="index.html" class="back-home" aria-label="Terug naar de homepagina">
+                    ← Terug
+                </a>
+                <h1 class="page-title">Over ons</h1>
+            </div>
 
             <!-- WIE ZIJN WIJ -->
             <section class="section" aria-labelledby="section-who">
                 <div class="banner">
-                <img src="assets/images/decoratie/about-us-banner.png" alt="">
+                    <!-- <img src="assets/images/decoratie/about-us-banner.png" alt=""> -->
                 </div>
                 <h2 id="section-who" class="section-heading">Wie zijn wij</h2>
                 <p class="section-text">
-                    <strong> Stichting Videlio is opgericht door mensen met een visuele beperking. We willen dat mensen met een
-                    visuele beperking meer zichtbaar zijn om volwaardig mee te doen in de samenleving met eigenwaarde en
-                    eigen regie. </strong>
+                    <strong> Stichting Videlio is opgericht door mensen met een visuele beperking. We willen dat mensen
+                        met een
+                        visuele beperking meer zichtbaar zijn om volwaardig mee te doen in de samenleving met
+                        eigenwaarde en
+                        eigen regie. </strong>
                     <br><br>
                     Onze kernpunten zijn bewustwording, participatie, ontmoeting, innovatie. John Willemse
                     en Peter Meuleman zijn de oprichters van Videlio. Zij zijn beide slechtziend en staan midden in de
@@ -45,8 +71,9 @@
                     <br><br>
 
                     Wij geloven in de kracht van samenwerking, ervaringsdeskundigheid en innovatie. Door bewustwording
-                    te creëren en praktische oplossingen te bieden, zorgen we voor <strong> een samenleving waarin VIPs volledig
-                    kunnen meedoen. </strong>
+                    te creëren en praktische oplossingen te bieden, zorgen we voor <strong> een samenleving waarin VIPs
+                        volledig
+                        kunnen meedoen. </strong>
                 </p>
             </section>
 
@@ -117,7 +144,32 @@
                 </div>
             </section>
 
-
+            <!-- WAAR ZIJN WE TE VINDEN -->
+            <section class="section" aria-labelledby="section-location">
+                <h2 id="section-location" class="section-heading">Waar zijn we te vinden</h2>
+                <div class="location-block">
+                    <div class="location-info">
+                        <p class="location-address">
+                            <strong>Stichting Videlio</strong><br>
+                            Rusthoven 40<br>
+                            5655 CN Eindhoven
+                        </p>
+                        <a class="location-btn"
+                            href="https://www.google.com/maps/search/?api=1&query=Rusthoven+40+5655+CN+Eindhoven"
+                            target="_blank" rel="noopener noreferrer"
+                            aria-label="Open het adres van Videlio in Google Maps (opent in nieuw tabblad)">
+                            Bekijk op Google Maps
+                        </a>
+                    </div>
+                    <div class="location-map">
+                        <iframe title="Kaart van Stichting Videlio, Rusthoven 40 Eindhoven"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2487.5!2d5.4697!3d51.4416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRusthoven+40%2C+5655+CN+Eindhoven!5e0!3m2!1snl!2snl!4v1"
+                            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 

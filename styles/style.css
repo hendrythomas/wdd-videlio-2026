@@ -1,3 +1,6 @@
+@import url(nav.css);
+@import url(icons.css);
+
 @font-face {
     font-family: 'Noto Sans';
     src: url('/assets/fonts/NotoSans-Regular.ttf') format('truetype');
@@ -63,22 +66,49 @@ h3 {
     font-weight: bold;
 }
 
-p {
+p, label {
     color: var(--text-primary);
     font-size: var(--paragraph-font-size);
+}
+
+strong{
+    color: var(--highlight-color);
 }
 
 a {
     color: var(--text-primary);
 }
 
+input, textarea {
+    color: var(--secondary-color);
+    font-size: var(--paragraph-font-size);
+    border-radius: .5rem;
+    resize: none;
+}
+
 .button {
     background-color: var(--highlight-color);
     color: var(--button-text-primary);
     border: none;
-    padding: 1.5rem;
+    padding: 1rem;
     font-size: var(--paragraph-font-size);
     border-radius: 1.5rem;
     cursor: pointer;
-    transition: background-color .5s linear;
+    transition: background-color .3s linear;
+
+  /* focus styling  */
+  :focus-visible {
+    outline: 3px solid var(--highlight-color);
+    outline-offset: 5px;
+    border-radius: 4px;
+    box-shadow:
+      0 0 0 6px rgba(250, 234, 7, 0.2),
+      0 0 12px rgba(250, 234, 7, 0.15);
+    transition: outline-offset 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  /* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }

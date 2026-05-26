@@ -1,115 +1,137 @@
-:root {
-  --nav-height: 100px;
+ /* navbar */
+body > header {
+  width: 100%;
+  background-color: var(--background);
 }
 
-/* navbar */
-body > nav {
-  position: fixed;
-  padding: 2rem;
-  background-color: var(--background);
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-body > nav,
-body > nav > .mobile-menu {
+body > header > nav {
+  position: relative;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width:  100%;
-  height: var(--nav-height);
+
+  padding: 1rem 2rem;
   gap: 2rem;
 
-  > a {
-    flex-shrink: 0;
-    width: fit-content;
-    color: var(--text-primary);
-    font-size: var(--paragraph-font-size);
-    text-decoration: none;
-    font-weight: bold;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  > .button {
-    --height: 3rem;
-    line-height: var(--height);
-    padding: 0;
-    padding-left:  1rem;
-    padding-right: 1rem;
-    border-radius: var(--height);
-    background-color: var(--logo-color);
-    color: var(--text-primary);
-    border: 2px solid #ffffff60;
-
-    &:hover,
-    &:focus-visible {
-      background-color: var(--button-background);
-      color: var(--secondary-color);
-      text-decoration: none;
-    }
-  }
-
-  > .logo {
-    height: 4rem;
-
-    > img {
-      height: 100%;
-    }
-  }
-
-  > .hamburger {
-    flex-shrink: 0;
-    display: none;
-    width:  3rem;
-    height: 3rem;
-    font-size: 40px;
-    color: white;
-
-    > i::after {
-      content: 'menu';
-    }
-    &:has(> :checked) > i::after {
-      content: 'close';
-    }
-  }
-
-  > .mobile-menu {
-    display: contents;
-  }
-}
-body:has(> nav)::before {
-  content: '';
-  margin-top: var(--nav-height);
+  background-color: var(--background);
 }
 
-/* mobile menu */
-@media (max-width: 500px) {
-  body > nav,
-  body > nav > .mobile-menu {
+/* logo */
+body > header > nav > .logo {
+  flex-shrink: 0;
+  height: 4rem;
+}
 
-    > .hamburger {
-      display: flex;
-    }
+body > header > nav > .logo > img {
+  display: block;
+  height: 100%;
+}
 
-    > .mobile-menu {
-      all: unset;
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      top:  var(--nav-height);
-      left: 100%;
-      width:  100%;
-      height: 100%;
-      padding: 2rem;
-      gap: 1rem;
-      background-color: var(--background);
-      transition: left 0.4s ease;
-    }
-    &:has(> .hamburger :checked) > .mobile-menu,
-    > .mobile-menu:has(:focus-visible) {
-      left: 0;
-    }
+/* menu */
+body > header > nav > .mobile-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* links */
+body > header > nav > .mobile-menu > a {
+  color: var(--text-primary);
+  font-size: var(--paragraph-font-size);
+  font-weight: bold;
+  text-decoration: none;
+
+  &.active {
+    color: var(--logo-color);
+    text-decoration: underline;
+  }
+}
+
+body > header > nav > .mobile-menu > a:hover {
+  text-decoration: underline;
+}
+
+/* button */
+body > header > nav > .mobile-menu > .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--logo-color);
+  border: 2px solid #ffffff60;
+
+  color: var(--text-primary);
+}
+
+body > header > nav > .mobile-menu > .button:hover,
+body > header > nav > .mobile-menu > .button:focus-visible {
+  background-color: var(--button-background);
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+/* hamburger */
+body > header > nav > .hamburger {
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 3rem;
+  aspect-ratio: 1;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+  color: white;
+  font-size: 40px;
+
+  z-index: 10;
+}
+
+body > header > nav > .hamburger > input {
+  display: none;
+}
+
+body > header > nav > .hamburger > i::after {
+  content: 'menu';
+}
+
+body > header > nav > .hamburger:has(input:checked) > i::after {
+  content: 'close';
+}
+
+/* mobile */
+@media (max-width: 700px) {
+
+  body > header > nav > .hamburger {
+    display: flex;
+  }
+
+  body > header > nav > .mobile-menu {
+    position: fixed;
+
+    inset: 0;
+
+    padding:
+      calc(4rem + 2rem)
+      2rem
+      2rem;
+
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    background-color: var(--background);
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+
+    z-index: 5;
+  }
+
+  body > header > nav:has(.hamburger input:checked) > .mobile-menu {
+    transform: translateX(0);
   }
 }
