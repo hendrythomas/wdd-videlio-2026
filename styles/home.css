@@ -45,11 +45,6 @@ main {
   }
 }
 
-.h2-home{
-  margin-bottom: 0.5rem;
-
-}
-
 
 /* --- Grid sectie ------------------------------------------ */
 .grid {
@@ -59,7 +54,6 @@ main {
   align-items: stretch;
   border-top: solid var(--highlight-color) 2px;
   padding-top: 1rem;
-  margin-bottom: 2rem;
 }
 
 /* --- Kaart ------------------------------------------------ */

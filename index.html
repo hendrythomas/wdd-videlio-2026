@@ -5,29 +5,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./styles/style.css">
-  <link rel="stylesheet" href="./styles/home.css">
-  <link rel="stylesheet" href="./styles/nav.css">
-  <link rel="stylesheet" href="./styles/icons.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/home.css">
 </head>
 
 <body>
   <header>
     <nav>
-      <a class="logo" href="./" aria-label="Home">
-        <img src="./assets/images/branding/logo.png">
+      <a class="logo" href="../" aria-label="Home">
+        <img src="../assets/images/branding/logo.png">
       </a>
       <label class="hamburger" aria-label="Open navigatie">
+        <i class="material-icon" aria-hidden="true"></i>
         <input type="checkbox">
-        <i class="material-icon"></i>
       </label>
       <div class="mobile-menu">
-        <a href="./" class="active">Doe mee</a>
-        <a href="./projecten/index.html">Projecten</a>
-        <a href="./workshops/index.html">Workshops</a>
-        <a href="./about-us.html">Over ons</a>
+        <a class="active" href="../">Doe mee</a>
+        <a href="../verhalen.html">Verhalen</a>
+        <a href="../projecten/index.html">Innovaties</a>
+        <a href="../about-us.html">Over</a>
       </div>
     </nav>
+    <label class="access-button">
+      <i class="material-icon" aria-hidden="true"></i>
+      <span class="desktop">Toegankelijkheid</span>
+      <input type="checkbox">
+    </label>
+    <div class="access-menu">
+      <button>Tekstgrootte</button>
+    </div>
   </header>
   <main>
     <section>
