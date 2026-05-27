@@ -161,9 +161,16 @@ body > header > nav > .mobile-menu {
       text-decoration: none;
       font-weight: bold;
       cursor: pointer;
+
+      &:focus-visible {
+        outline: auto;
+      }
     }
   }
-  &:has(> .access-button :checked) > .access-menu {
+  &:has(> .access-button input:not(:checked)) > .access-menu > * {
+    display: none;
+  }
+  &:has(> .access-button input:checked) > .access-menu {
     left: calc(
       100% -
       var(--width) -
@@ -214,8 +221,10 @@ body:has(> header)::before {
       background-color: var(--background);
       transition: left 0.4s ease;
     }
-    &:has(> .hamburger :checked) > .mobile-menu,
-    > .mobile-menu:has(:focus-visible) {
+    &:has(> .hamburger input:not(:checked)) > .mobile-menu > * {
+      display: none;
+    }
+    &:has(> .hamburger input:checked) > .mobile-menu {
       left: 0;
     }
   }
