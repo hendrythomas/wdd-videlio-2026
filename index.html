@@ -1,54 +1,112 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./styles/style.css">
-  <link rel="stylesheet" href="./styles/home.css">
-  <link rel="stylesheet" href="./styles/nav.css">
-  <link rel="stylesheet" href="./styles/icons.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/home.css">
 </head>
+
 <body>
   <header>
     <nav>
-      <a class="logo" href="./" aria-label="Home">
-        <img src="./assets/images/branding/logo.png">
+      <a class="logo" href="../" aria-label="Home">
+        <img src="../assets/images/branding/logo.png">
       </a>
       <label class="hamburger" aria-label="Open navigatie">
+        <i class="material-icon" aria-hidden="true"></i>
         <input type="checkbox">
-        <i class="material-icon"></i>
       </label>
       <div class="mobile-menu">
-        <a href="./projecten/index.html">Projecten</a>
-        <a href="./workshops/index.html">Workshops</a>
-        <a href="./about-us.html">Over ons</a>
-        <a class="button" href="">Doneer</a>
+        <a class="active" href="../">Doe mee</a>
+        <a href="../verhalen.html">Verhalen</a>
+        <a href="../projecten/index.html">Innovaties</a>
+        <a href="../about-us.html">Over</a>
       </div>
     </nav>
+    <label class="access-button">
+      <i class="material-icon" aria-hidden="true"></i>
+      <span class="desktop">Toegankelijkheid</span>
+      <input type="checkbox">
+    </label>
+    <div class="access-menu">
+      <button>Tekstgrootte</button>
+    </div>
   </header>
   <main>
-    <section>
+    <section class="hero">
       <h1><strong>Samen</strong> anders zien</h1>
-      <!-- <p>
-        Videlio helpt mensen met een visuele beperking te ontdekken wat ze nodig hebben om hun eigenwaarde terug te vinden, te groeien als persoon en volwaardig mee te doen in de maatschappij. In alles wat wij doen staat positiviteit centraal - want ja, er kan écht veel!
-      </p> -->
-      <p>Je bent meer dan je blind- of slechtziendheid. Meer dan de wereld soms in jou denkt te zien.</p>
 
-      <p>Bij Videlio ontmoet je mensen die begrijpen hoe het écht is én die geloven in wat wel mogelijk is. <br />
-          Een community voor, door en met VIPs (Visual Impaired Persons), waarin je jezelf niet hoeft uit te leggen, maar juist ontdekt wat je te bieden hebt. </p>
+      <div class="hero-body">
+        <div class="hero-text">
+          <p>Je bent meer dan je blind- of slechtziendheid. Meer dan de wereld soms in jou denkt te zien.</p>
+          <p>Een community <strong>voor, door en met VIPs (Visual Impaired Persons) </strong>, waarin je jezelf niet hoeft uit te leggen, maar juist ontdekt wat je te bieden hebt.</p>
+          <p>Videlio. <br />
+            Niet focussen op wat je mist, <strong>maar versterken wie je bent.</strong></p>
+        </div>
 
-      <p>Van persoonlijke ontwikkeling en inspirerende events tot innovatieve tools, zoals de LumiCane en het VIPlab. <br />
-          Wij bouwen samen aan een wereld waarin VIPs niet aan de zijlijn staan, maar meedoen en impact maken.</p>
-
-      <p>Videlio. <br />
-          Niet focussen op wat je mist, maar versterken wie je bent.</p>
+        <article class="card card-featured hero-card" aria-labelledby="card-workshop">
+          <div class="card-label" aria-label="Uitgelichte workshop">Uitgelicht</div>
+          <img class="article-image" src="assets/images/decoratie/creatief-schrijven-workshop.png"
+            alt="Deelnemers aan de workshop creatief schrijven" />
+          <div class="card-content hero-content">
+            <h2 id="card-workshop" class="card-title">Workshop: Creatief schrijven</h2>
+            <p class="card-text">Vertel jouw verhaal op jouw manier. In deze workshop ontdek je hoe schrijven een krachtig middel is om jezelf uit te drukken.</p>
+            <div class="card-meta">
+              <span aria-label="Datum">15:00, 15 juni 2026</span>
+              <span aria-label="Locatie">Eindhoven</span>
+            </div>
+          </div>
+          <a href="./workshops/index.html" class="card-btn"
+            aria-label="Bekijk alle workshops van Videlio">
+            Bekijk meer
+          </a>
+        </article>
+      </div>
     </section>
-    <section class="grid">
-      <article></article>
-      <article></article>
-      <article></article>
-    </section>
+
+    <div>
+      <h2 class="h2-home"><strong>Ontdek meer:</strong></h2>
+
+      <section class="grid" aria-label="Uitgelichte activiteiten">
+
+        <!-- Article 1: Inlopen -->
+        <article class="card card-featured" aria-labelledby="card-inloop">
+          <img class="article-image" src="/assets/images/decoratie/loop-binnen.png" alt="">
+          <div class="card-content">
+            <h2 id="card-inloop" class="card-title">Loop gerust binnen</h2>
+            <p class="card-text">
+              Geen afspraak nodig. Kom langs voor een kopje koffie, een gesprek,
+              of gewoon om even bij andere VIPs te zijn. Je bent altijd welkom.
+            </p>
+            <a href="./contact.html" class="card-btn" aria-label="Meer informatie over inlopen bij Videlio">
+              Kom langs
+            </a>
+          </div>
+        </article>
+
+        <!-- Article 3: VIP Lab -->
+        <article class="card card-featured" aria-labelledby="card-viplab">
+          <img class="article-image" src="/assets/images/decoratie/lumicane2.png"
+            alt="Man die s'nachts met een lichtgevende blindde stok loopt. ">
+          <div class="card-content">
+            <h2 id="card-viplab" class="card-title">VIP Lab</h2>
+            <p class="card-text">
+              Innovatie door ervaringsdeskundigheid. In het VIP Lab werken we
+              aan slimme oplossingen die het leven met een visuele beperking
+              makkelijker en rijker maken.
+            </p>
+            <a href="./projecten/vip-lab.html" class="card-btn" aria-label="Meer weten over het VIP Lab">
+              Ontdek het lab
+            </a>
+          </div>
+        </article>
+
+      </section>
+    </div>
   </main>
 </body>
+
 </html>

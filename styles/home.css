@@ -11,10 +11,17 @@ p:not(:first-child) {
 html {
   scrollbar-color: #ffffff80 transparent;
 }
-
+main {
+  &>section{
+    &> p{
+      text-align: justify;
+      line-height: 3rem;
+    }
+  }
+}
 body {
   margin: 0;
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,16 +45,233 @@ main {
   }
 }
 
-section.grid {
+
+/* --- Hero sectie ------------------------------------------ */
+.hero {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 2rem;
 }
 
-article {
+.hero h1 {
+  text-align: center;
+}
+
+.hero-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hero-card {
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .hero-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Grid sectie ------------------------------------------ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+  border-top: solid var(--highlight-color) 2px;
+  padding-top: 1rem;
+}
+
+/* --- Kaart ------------------------------------------------ */
+.card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(250, 234, 7, 0.18);
+  border-radius: 16px;
+  padding: 1rem 1rem 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+  cursor: pointer;
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(250, 234, 7, 0.5);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.article-image {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+.hero-card .article-image {
+  height: 16rem;
+}
+
+.hero-card {
+  height: auto;
+}
+
+.hero-card .article-image {
+  height: 12rem;
+}
+
+.hero-card .card-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0;
+}
+
+.hero-card .card-title {
+  grid-column: 1 / 3;
+}
+
+.hero-card .card-text {
+  padding-right: 1.5rem;
+  border-right: 1px solid rgba(250, 234, 7, 0.25);
+}
+
+.hero-card .card-meta {
+  padding-left: 1.5rem;
+  justify-content: center;
+}
+/* Uitgelichte kaart */
+.card-featured {
+  border-color: var(--highlight-color);
+  background: rgba(250, 234, 7, 0.06);
+  position: relative;
+}
+
+/* Label "Uitgelicht" */
+.card-label {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--highlight-color);
+  color: #1a1e24;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+}
+
+/* Icoon */
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Content */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   flex: 1;
-  min-width: 300px;
-  aspect-ratio: 3/2;
-  background-color: yellow;
-  border-radius: 2rem;
+}
+
+.card-content.hero-content {
+    padding-bottom: 1rem;
+}
+
+
+
+
+
+/* Titel (h2) */
+.card-title {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Tekst */
+.card-text {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+}
+
+/* Meta (datum, locatie) */
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  align-self: end;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  padding: 1rem;
+  color: var(--highlight-color);
+}
+
+/* Knoppen wrapper */
+.card-actions {
+  margin-top: auto;
+  width: calc(100% + 3rem);
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}
+
+/* Knop — verticale layout (standaard desktop) */
+.card-btn,
+.card-btn-outline {
+  display: block;
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-top: auto;
+  padding: 0.85rem 1rem;
+  background: rgba(250, 234, 7, 0.1);
+  color: var(--highlight-color);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--primary-font), sans-serif;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-top: 1px solid rgba(250, 234, 7, 0.2);
+  border-radius: 0 0 16px 16px;
+  transition: background 0.2s ease, color 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.card-btn:hover,
+.card-btn:focus-visible,
+.card-btn-outline:hover,
+.card-btn-outline:focus-visible {
+  background: var(--highlight-color);
+  color: #1a1e24;
+}
+
+/* --- Responsive ------------------------------------------- */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
