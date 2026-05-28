@@ -38,5 +38,6 @@ button:has(> .material-icon) {
 
   > input {
     all: unset;
+    position: absolute;
   }
 }
