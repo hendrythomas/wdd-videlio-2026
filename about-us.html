@@ -13,24 +13,31 @@
 </head>
 
 <body>
-
     <header>
-        <nav>
+      <nav>
         <a class="logo" href="./" aria-label="Home">
-            <img src="../assets/images/branding/logo.png">
+          <img src="../assets/images/branding/logo.png" alt="">
         </a>
         <label class="hamburger" aria-label="Open navigatie">
-            <input type="checkbox">
-            <i class="material-icon"></i>
+          <i class="material-icon" aria-hidden="true"></i>
+          <input type="checkbox">
         </label>
         <div class="mobile-menu">
-            <a href="../projecten/index.html">Projecten</a>
-            <a href="../workshops/index.html">Workshops</a>
-            <a class="active" href="../about-us.html">Over ons</a>
-            <a class="button" href="">Doneer</a>
+          <a href="../">Doe mee</a>
+          <a href="../verhalen.html">Verhalen</a>
+          <a href="../projecten/index.html">Innovaties</a>
+          <a class="active" href="../about-us.html">Over</a>
         </div>
-        </nav>
-  </header>
+      </nav>
+      <label class="access-button">
+        <i class="material-icon" aria-hidden="true"></i>
+        <span class="desktop">Toegankelijkheid</span>
+        <input type="checkbox">
+      </label>
+      <div class="access-menu">
+        <button>Tekstgrootte</button>
+      </div>
+    </header>
 
     <!-- MAIN CONTENT -->
     <main id="main-content" tabindex="-1" aria-label="Over ons">
@@ -43,9 +50,8 @@
             </div>
 
             <!-- WIE ZIJN WIJ -->
-            <section class="section" aria-labelledby="section-who">
+            <section class="section">
                 <div class="banner">
-                    <!-- <img src="assets/images/decoratie/about-us-banner.png" alt=""> -->
                 </div>
                 <h2 id="section-who" class="section-heading">Wie zijn wij</h2>
                 <p class="section-text">
@@ -62,7 +68,7 @@
             </section>
 
             <!-- ONZE MISSIE -->
-            <section class="section" aria-labelledby="section-mission">
+            <section class="section">
                 <h2 id="section-mission" class="section-heading">Onze missie</h2>
                 <p class="section-text">
                     Wij streven naar een inclusieve samenleving waarin mensen met een visuele beperking gelijke kansen

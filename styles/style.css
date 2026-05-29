@@ -4,17 +4,17 @@
 
 @font-face {
     font-family: 'Noto Sans';
-    src: url('/assets/fonts/NotoSans-Regular.ttf') format('truetype');
+    src: url('../assets/fonts/NotoSans-Regular.ttf') format('truetype');
 }
 @font-face {
     font-family: 'Noto Sans';
     font-weight: bold;
-    src: url('/assets/fonts/NotoSans-Bold.ttf') format('truetype');
+    src: url('../assets/fonts/NotoSans-Bold.ttf') format('truetype');
 }
 @font-face {
     font-family: 'Noto Sans';
     font-weight: lighter;
-    src: url('/assets/fonts/NotoSans-Light.ttf') format('truetype');
+    src: url('../assets/fonts/NotoSans-Light.ttf') format('truetype');
 }
 
 * {

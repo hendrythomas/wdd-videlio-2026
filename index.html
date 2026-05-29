@@ -4,53 +4,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./styles/style.css">
-  <link rel="stylesheet" href="./styles/home.css">
-  <link rel="stylesheet" href="./styles/nav.css">
-  <link rel="stylesheet" href="./styles/icons.css">
+  <title>Home | Videlio</title>
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/home.css">
 </head>
 
 <body>
   <header>
-    <nav>
-      <a class="logo" href="./" aria-label="Home">
-        <img src="./assets/images/branding/logo.png">
+    <nav aria-label="Navigatie menu">
+      <a class="logo" href="../" aria-label="Terug naar Home pagina">
+        <img src="../assets/images/branding/logo.png" alt="">
       </a>
       <label class="hamburger" aria-label="Open navigatie">
+        <i class="material-icon" aria-hidden="true"></i>
         <input type="checkbox">
-        <i class="material-icon"></i>
       </label>
       <div class="mobile-menu">
-        <a href="./" class="active">Doe mee</a>
-        <a href="./projecten/index.html">Projecten</a>
-        <a href="./workshops/index.html">Workshops</a>
-        <a href="./about-us.html">Over ons</a>
+        <a class="active" href="../">Doe mee</a>
+        <a href="../verhalen.html">Verhalen</a>
+        <a href="../projecten/index.html">Innovaties</a>
+        <a href="../about-us.html">Over</a>
       </div>
     </nav>
+    <label class="access-button">
+      <i class="material-icon" aria-hidden="true"></i>
+      <span class="desktop">Toegankelijkheid</span>
+      <input type="checkbox">
+    </label>
+    <div class="access-menu">
+      <button>Tekstgrootte</button>
+    </div>
   </header>
   <main>
-    <section>
+    <section class="hero">
       <h1><strong>Samen</strong> anders zien</h1>
 
-      <p>Je bent meer dan je blind- of slechtziendheid. Meer dan de wereld soms in jou denkt te zien.</p>
+      <div class="hero-body">
+        <div class="hero-text">
+          <p>Je bent meer dan je blind- of slechtziendheid. Meer dan de wereld soms in jou denkt te zien.</p>
+          <p>Een community <strong>voor, door en met VIPs (Visual Impaired Persons) </strong>, waarin je jezelf niet hoeft uit te leggen, maar juist ontdekt wat je te bieden hebt.</p>
+          <p>Videlio. <br />
+            Niet focussen op wat je mist, <strong>maar versterken wie je bent.</strong></p>
+        </div>
 
-      <p>Een community <strong> voor, door en met VIPs (Visual Impaired Persons) </strong>, waarin je jezelf niet hoeft uit te leggen, maar
-        juist ontdekt wat je te bieden hebt. </p>
-
-      <p>Videlio. <br />
-        Niet focussen op wat je mist, <strong> maar versterken wie je bent.</strong></p>
+        <article class="card card-featured hero-card">
+          <div class="card-label" aria-label="Uitgelichte workshop">Uitgelicht</div>
+          <img class="article-image" src="assets/images/decoratie/creatief-schrijven-workshop.png" aria-hidden="true"
+            alt="Deelnemers aan de workshop creatief schrijven" />
+          <div class="card-content hero-content">
+            <h2 id="card-workshop" class="card-title">Workshop: Creatief schrijven</h2>
+            <p class="card-text">Vertel jouw verhaal op jouw manier. In deze workshop ontdek je hoe schrijven een krachtig middel is om jezelf uit te drukken.</p>
+            <div class="card-meta">
+              <span aria-label="Datum">15:00, 15 juni 2026</span>
+              <span aria-label="Locatie">Eindhoven</span>
+            </div>
+          </div>
+          <a href="./workshops/index.html" class="card-btn"
+            aria-label="Bekijk alle workshops van Videlio">
+            Bekijk meer
+          </a>
+        </article>
+      </div>
     </section>
 
     <div>
-      <h2 class="h2-home"><strong>Uitgelicht:</strong></h2>
+      <h2 class="h2-home"><strong>Ontdek meer:</strong></h2>
 
       <section class="grid" aria-label="Uitgelichte activiteiten">
 
-
         <!-- Article 1: Inlopen -->
-        <article class="card card-featured" aria-labelledby="card-inloop">
-          <img class="article-image" src="/assets/images/decoratie/loop-binnen.png" alt="">
+        <article class="card card-featured" >
+          <img class="article-image" src="/assets/images/decoratie/loop-binnen.png" alt="" aria-hidden="true">
           <div class="card-content">
             <h2 id="card-inloop" class="card-title">Loop gerust binnen</h2>
             <p class="card-text">
@@ -63,35 +87,11 @@
           </div>
         </article>
 
-        <!-- Article 2: Workshop -->
-        <article class="card card-featured" aria-labelledby="card-workshop">
-          <img class="article-image" src="/assets/images/decoratie/creatief-schrijven-workshop.png" alt="">
-
-          <div class="card-content">
-            <h2 id="card-workshop" class="card-title">Workshop: Creatief schrijven</h2>
-            <p class="card-text">
-              Vertel jouw verhaal op jouw manier. In deze workshop ontdek je
-              hoe schrijven een krachtig middel is om jezelf uit te drukken.
-            </p>
-            <div class="card-meta">
-              <span aria-label="Datum"> 15 juni 2026</span>
-              <span aria-label="Locatie"> Eindhoven</span>
-            </div>
-            <div class="card-actions">
-              <a href="./workshops/index.html" class="card-btn card-btn-outline"
-                aria-label="Bekijk alle workshops van Videlio">
-                Bekijk meer
-              </a>
-            </div>
-          </div>
-        </article>
-
         <!-- Article 3: VIP Lab -->
-        <article class="card card-featured" aria-labelledby="card-viplab">
+        <article class="card card-featured" >
           <img class="article-image" src="/assets/images/decoratie/lumicane2.png"
             alt="Man die s'nachts met een lichtgevende blindde stok loopt. ">
-
-          <div class="card-content ">
+          <div class="card-content">
             <h2 id="card-viplab" class="card-title">VIP Lab</h2>
             <p class="card-text">
               Innovatie door ervaringsdeskundigheid. In het VIP Lab werken we
