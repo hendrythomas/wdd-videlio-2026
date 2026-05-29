@@ -147,7 +147,7 @@ padding: 1.6rem 1.4rem 0;
 }
 
 /* --- Foto (cirkel) ---------------------------------------- */
-.board-card__photo {
+.board-card-photo {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -158,12 +158,12 @@ padding: 1.6rem 1.4rem 0;
 }
 
 /* --- Identity wrapper (naam + rol) ------------------------ */
-.board-card__identity {
+.board-card-identity {
     width: 100%;
 }
 
 /* --- Naam (h3) -------------------------------------------- */
-.board-card__name {
+.board-card-name {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--primary-color);
@@ -172,7 +172,7 @@ padding: 1.6rem 1.4rem 0;
 }
 
 /* --- Functietitel ----------------------------------------- */
-.board-card__role {
+.board-card-role {
     font-size: 0.9rem;
     color: var(--highlight-color);
     font-style: italic;
@@ -180,7 +180,7 @@ padding: 1.6rem 1.4rem 0;
 }
 
 /* --- Scheidingslijn --------------------------------------- */
-.board-card__divider {
+.board-card-divider {
     width: 100%;
     height: 1px;
     background: rgba(250, 234, 7, 0.18);
@@ -188,7 +188,7 @@ padding: 1.6rem 1.4rem 0;
 }
 
 /* --- Quote ------------------------------------------------ */
-.board-card__quote {
+.board-card-quote {
     font-size: 1rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.8);
@@ -200,7 +200,7 @@ padding: 1.6rem 1.4rem 0;
     margin: 0;
 }
 
-.board-card__quote::before {
+.board-card-quote::before {
     content: '\201C';
     position: absolute;
     left: -0.5rem;
@@ -213,7 +213,7 @@ padding: 1.6rem 1.4rem 0;
 }
 
 /* --- Contactlijst ----------------------------------------- */
-.board-card__btn {
+.board-card-btn {
   display: block;
   width: calc(100% + 2.8rem);
   margin-left: -1.4rem;
@@ -234,8 +234,8 @@ padding: 1.6rem 1.4rem 0;
   transition: background 0.2s ease, color 0.2s ease;
   letter-spacing: 0.02em;
 }
-.board-card__btn:hover,
-.board-card__btn:focus-visible {
+.board-card-btn:hover,
+.board-card-btn:focus-visible {
   background: var(--highlight-color);
   color: #1a1e24;
   border:solid 2px #1a1e24;
