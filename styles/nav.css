@@ -26,6 +26,7 @@ body > header > nav {
   overflow-y: hidden;
   transition: box-shadow 0.1s ease;
 }
+
 body > header,
 body > header > nav,
 body > header > nav > .mobile-menu {
