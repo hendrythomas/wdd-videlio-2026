@@ -93,7 +93,7 @@ main {
 /* --- Kaart ------------------------------------------------ */
 .card {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(250, 234, 7, 0.18);
+  border: 2px solid rgba(250, 234, 7, 0.18);
   border-radius: 16px;
   padding: 1rem 1rem 0;
   display: flex;
@@ -128,9 +128,7 @@ main {
   height: auto;
 }
 
-.hero-card .article-image {
-  height: 12rem;
-}
+
 
 .hero-card .card-content {
   display: grid;
