@@ -1,5 +1,6 @@
-@import url('nav.css');
-@import url('icons.css');
+@import url(nav.css);
+@import url(icons.css);
+@import url(footer.css);
 
 @font-face {
     font-family: 'Noto Sans';
@@ -30,7 +31,7 @@
     --logo-color: #FF0000;
 
     --text-primary: var(--primary-color);
-    --text-hightlight: var(--highlight-color);
+    --text-highlight: var(--highlight-color);
     --button-background: var(--highlight-color);
     --button-text: var(--secondary-color);
 
@@ -61,8 +62,8 @@ h2 {
 }
 
 h3 {
-    color: var(--text-primary);
-    font-size: var(--paragraph-font-size);
+    color: var(--text-highlight);
+    font-size: var(small-heading-font-size);
     font-weight: bold;
 }
 
@@ -71,7 +72,7 @@ p, label {
     font-size: var(--paragraph-font-size);
 }
 
-strong{
+strong {
     color: var(--highlight-color);
 }
 
