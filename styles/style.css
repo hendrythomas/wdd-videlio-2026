@@ -47,6 +47,8 @@ body, h1, h2, p, a {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     background-color: var(--background);
 }
 
