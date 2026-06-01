@@ -27,7 +27,7 @@ import './podcasts.css';
                             id="progress1">
 
                     <div class="control-buttons" id="button1">
-                        <button class="play-button" onclick="toggleAudio('audio1, progress', this)">
+                        <button class="play-button">
                             ▶
                         </button>
                     </div>
@@ -49,13 +49,14 @@ import './podcasts.css';
                             id="progress2">
 
                     <div class="control-buttons" id="button2">
-                        <button class="play-button" onclick="toggleAudio('audio2, progress2', this)">
+                        <button class="play-button">
                             ▶
                         </button>
                     </div>
                 </div>
             </section>
         </main>
+    </section>
 </MainLayout>
 
 
@@ -64,43 +65,43 @@ import './podcasts.css';
     const button1 = document.getElementById('button1');
     const button2 = document.getElementById('button2');
 
+    function toggleAudio(event, audioId, progressId) {
+        const button = event.target;
+
+        const audio = document.getElementById(audioId);
+        const progress = document.getElementById(progressId);
+
+        //Play en pause
+        if (audio.paused) {
+            audio.play();
+            button.innerHTML = "▶";
+        } else {
+            audio.pause();
+            button.innerHTML = "▶";
+        }
+
+        //Slider werkt zodra metadata geladen is
+        audio.addEventListener("loadedmetadata", () => {
+            progress.max = audio.duration;
+        });
+
+        //Slider beweegt mee
+        audio.addEventListener("timeupdate", () => {
+            progress.value = audio.currentTime;
+        });
+
+        //Zelf door of terug kunnen spoelen
+        progress.addEventListener("input", () => {
+            audio.currentTime = progress.value;
+        });
+
+        //Als de audio klaar is
+        audio.addEventListener("ended", () => {
+            button.innerHTML = "▶";
+            progress.value = 0;
+        });
+    }
+
     button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
     button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
-
-        function toggleAudio(event, audioId, progressId) {
-            const button = event.target;
-
-            const audio = document.getElementById(audioId);
-            const progress = document.getElementById(progressId);
-
-            //Play en pause
-            if (audio.paused) {
-                audio.play();
-                button.innerHTML = "▶";
-            } else {
-                audio.pause();
-                button.innerHTML = "▶";
-            }
-
-            //Slider werkt zodra metadata geladen is
-            audio.addEventListener("loadedmetadata", () => {
-                progress.max = audio.duration;
-            });
-
-            //Slider beweegt mee
-            audio.addEventListener("timeupdate", () => {
-                progress.value = audio.currentTime;
-            });
-
-            //Zelf door of terug kunnen spoelen
-            progress.addEventListener("input", () => {
-                audio.currentTime = progress.value;
-            });
-
-            //Als de audio klaar is
-            audio.addEventListener("ended", () => {
-                button.innerHTML = "▶";
-                progress.value = 0;
-            });
-        }
     </script>
