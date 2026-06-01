@@ -1,0 +1,21 @@
+---
+import './nav.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav aria-label="Navigatie menu">
+    <a class="logo" href="../" aria-label="Terug naar Home pagina">
+        <img src="../assets/images/branding/logo.png" alt="">
+    </a>
+    <label class="hamburger" aria-label="Open navigatie">
+        <i class="material-icon" aria-hidden="true"></i>
+        <input type="checkbox">
+    </label>
+    <div class="mobile-menu">
+        <a class={(currentPath === '/' || currentPath.includes('/Doe-Mee!')) ? 'active' : ''} href="../">Doe mee</a>
+        <a class={currentPath.includes('/Verhalen-Media')  ? 'active' : ''} href="/Verhalen-Media">Verhalen</a>
+        <a class={currentPath.includes('/Innovaties')  ? 'active' : ''} href="/Innovaties">Innovaties</a>
+        <a class={currentPath.includes('/About') ? 'active' : ''} href="/About">Over ons</a>
+    </div>
+</nav>
