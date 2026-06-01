@@ -1,4 +1,5 @@
 ---
+//@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
 import './podcasts.css';
 ---
@@ -7,52 +8,99 @@ import './podcasts.css';
     <section class="project-section">
         <h1>Podcasts</h1>
 
-        <h2 class="name-podcast">John Willemse</h2>
+        <h2>John Willemse</h2>
 
         <main>
             <section class="grid-projects">
                 <div class="project-card">
-                    <a href="https://videlio.nl/wp-content/uploads/2026/01/AUDIO-2025-12-05-10-14-18.mp3">
-                        <img src="/assets/images/decoratie/john.png">
-                    </a>
+                    <img src="../assets/images/decoratie/john.png">
+                    
+                    <h4>Nr 1. Introductie podcast</h4>
 
-                    <div class="podcast-info">
-                        <h4>Nr 1. Introductie podcast</h4>
+                    <audio id="audio1">
+                        <source src="podcast.mp3" type="audio/mpeg">
+                    </audio>
+
+                    <input type="range"
+                            value="0"
+                            class="progress"
+                            id="progress1">
+
+                    <div class="control-buttons" id="button1">
+                        <button class="play-button" onclick="toggleAudio('audio1, progress', this)">
+                            ▶
+                        </button>
                     </div>
+                    
                 </div>
 
                 <div class="project-card">
-                    <a href="https://videlio.nl/wp-content/uploads/2026/01/AUDIO-2025-12-05-10-23-57.mp3">
-                        <img src="/assets/images/decoratie/john.png">
-                    </a>
+                    <img src="../assets/images/decoratie/john.png">
+                    
+                    <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
 
-                    <div class="podcast-info">
-                        <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
-                    </div>
-                </div>
+                    <audio id="audio2">
+                        <source src="podcast2.mp3" type="audio/mpeg">
+                    </audio>
 
-                <div class="project-card">
-                    <a href="https://videlio.nl/wp-content/uploads/2026/01/AUDIO-2025-12-05-10-28-22.mp3">
-                        <img src="/assets/images/decoratie/john.png">
-                    </a>
+                    <input type="range"
+                            value="0"
+                            class="progress"
+                            id="progress2">
 
-                    <div class="podcast-info">
-                        <h4>Nr 3. De cijfers, achtergronden en oplossingen</h4>
-                    </div>
-                </div>
-            </section>
-
-            <section class="grid-projects">
-                <div class="project-card">
-                    <a href="">
-                        <img src="/assets/images/decoratie/niet_te_zien.png">
-                    </a>
-
-                    <div class="podcast-info">
-                        <h4>1. Is dit creatief plannen, of toch gewoon uitstel gedrag?</h4>
+                    <div class="control-buttons" id="button2">
+                        <button class="play-button" onclick="toggleAudio('audio2, progress2', this)">
+                            ▶
+                        </button>
                     </div>
                 </div>
             </section>
         </main>
-    </section>
 </MainLayout>
+
+
+<script>
+    // @ts-nocheck
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+
+    button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
+    button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
+
+        function toggleAudio(event, audioId, progressId) {
+            const button = event.target;
+
+            const audio = document.getElementById(audioId);
+            const progress = document.getElementById(progressId);
+
+            //Play en pause
+            if (audio.paused) {
+                audio.play();
+                button.innerHTML = "▶";
+            } else {
+                audio.pause();
+                button.innerHTML = "▶";
+            }
+
+            //Slider werkt zodra metadata geladen is
+            audio.addEventListener("loadedmetadata", () => {
+                progress.max = audio.duration;
+            });
+
+            //Slider beweegt mee
+            audio.addEventListener("timeupdate", () => {
+                progress.value = audio.currentTime;
+            });
+
+            //Zelf door of terug kunnen spoelen
+            progress.addEventListener("input", () => {
+                audio.currentTime = progress.value;
+            });
+
+            //Als de audio klaar is
+            audio.addEventListener("ended", () => {
+                button.innerHTML = "▶";
+                progress.value = 0;
+            });
+        }
+    </script>
