@@ -1,0 +1,81 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import innovaties from '../../data/innovations.json';
+
+
+export function getStaticPaths() {
+  return innovaties.map((item) => ({
+    params: { detail: item.slug },
+    props: { item },
+  }));
+}
+
+const { item: propItem } = Astro.props;
+const item = propItem ?? innovaties.find(i => i.slug === Astro.params.detail);
+
+if (!item) return Astro.redirect('/innovaties');
+
+const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
+  year: 'numeric',
+  month: 'long',
+});
+---
+
+<MainLayout>
+  <article class="detail-page">
+    <div class="detail-container">
+      
+      <a href="/innovaties" class="back-link">← Terug naar overzicht</a>
+
+      <header class="detail-header">
+        <h1 class="detail-title">{item.title}</h1>
+        <time class="detail-date" datetime={item.date}>{formattedDate}</time>
+      </header>
+
+      <div class="detail-image-wrap">
+        <img src={item.image} alt={item.imageAlt} />
+      </div>
+
+      <div class="detail-content" set:html={item.content} />
+
+    </div>
+  </article>
+</MainLayout>
+
+<style>
+  .detail-page {
+    padding: 4rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .back-link {
+    color: var(--highlight-color);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+  .detail-title {
+    font-size: 2.5rem;
+    color: #fff;
+    margin: 0.5rem 0;
+  }
+  .detail-date {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+  }
+  .detail-image-wrap {
+    margin: 2rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .detail-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .detail-content {
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.1rem;
+  }
+</style>

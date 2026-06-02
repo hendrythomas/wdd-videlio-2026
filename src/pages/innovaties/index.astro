@@ -1,51 +1,94 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import InnovatieCard from '../../components/Innovatie-li/Innovatie-li.astro';
+import innovaties from '../../data/innovations.json';
 
 import './innovaties.css';
+
+/**
+ * Nu: lokale JSON. Later: vervang de import hierboven door een fetch():
+
+ */
 ---
 
 <MainLayout>
-    <section class="project-section">
-        <h1>Projecten</h1>
+  <section class="innovaties-section">
 
-        <main class="grid-projects">
-            <div class="project-card">
-                <img src="/assets/images/decoratie/lumicane2.png" alt="man die in het donker op straat een lichtgevende blindenstok vasthoudt">
+    <div class="innovaties-header">
+      <h1 class="innovaties-title">Innovaties</h1>
+      <p class="innovaties-intro">
+        Uitgelichte ontwikkelingen in toegankelijkheid, ... & ...
+      </p>
 
-                <div class="info-projects">
-                    <h2>LumiCane</h2>
+      <!-- View toggle -->
+      <div class="view-toggle" role="group" aria-label="Weergave kiezen">
+        <button
+          class="view-toggle-btn view-toggle-btn--active"
+          id="btn-grid"
+          aria-pressed="true"
+          aria-label="Gridweergave"
+          data-view="grid"
+        >
+          <!-- Grid icon -->
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="7" height="7" rx="1.5" fill="currentColor"/>
+            <rect x="12" y="1" width="7" height="7" rx="1.5" fill="currentColor"/>
+            <rect x="1" y="12" width="7" height="7" rx="1.5" fill="currentColor"/>
+            <rect x="12" y="12" width="7" height="7" rx="1.5" fill="currentColor"/>
+          </svg>
+          Grid
+        </button>
+        <button
+          class="view-toggle-btn"
+          id="btn-list"
+          aria-pressed="false"
+          aria-label="Lijstweergave"
+          data-view="list"
+        >
+          <!-- List icon -->
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <rect x="1" y="2" width="18" height="3" rx="1.5" fill="currentColor"/>
+            <rect x="1" y="8.5" width="18" height="3" rx="1.5" fill="currentColor"/>
+            <rect x="1" y="15" width="18" height="3" rx="1.5" fill="currentColor"/>
+          </svg>
+          Lijst
+        </button>
+      </div>
+    </div>
 
-                    <p>Lichtgevende stok.........</p>
+    <!-- Kaarten grid/list -->
+    <ul class="innovaties-grid" id="innovaties-grid" data-view="grid" aria-label="Overzicht innovaties">
+      {innovaties.map(item => (
+        <li>
+          <InnovatieCard item={item} view="grid" />
+        </li>
+      ))}
+    </ul>
 
-                    <a href="/Innovaties/Lumicane" class="info-projects-link">Lees meer</a>
-                </div>
-            </div>
-
-
-            <div class="project-card">
-                <img src="/assets/images/decoratie/viziere.jpg" alt="een meisje dat braille leest">
-
-                <div class="info-projects">
-                    <h2>Project Viziere</h2>
-
-                    <p>basic!pakket zo iets.........</p>
-
-                    <a href="/Innovaties/Viziere" class="info-projects-link">Lees meer</a>
-                </div>
-            </div>
-
-
-            <div class="project-card">
-                <img src="/assets/images/decoratie/ov_knoop.jpg" alt="het gebouw De Bubble in het centrum van Eindhoven, met daarnaast het kantoorgebouw van Philips">
-
-                <div class="info-projects">
-                    <h2>OV Knoop Eindhoven</h2>
-
-                    <p>eindhoven ov herbouwen.......</p>
-
-                    <a href="/Innovaties/OV-knoop" class="info-projects-link">Lees meer</a>
-                </div>
-            </div>
-        </main>
-    </section>
+  </section>
 </MainLayout>
+
+<script>
+  const grid = document.getElementById('innovaties-grid');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.view-toggle-btn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view as 'grid' | 'list';
+
+      // Update grid data attribute (CSS reageert hierop)
+      grid?.setAttribute('data-view', view);
+
+      // Update kaarten data-view attribuut
+      grid?.querySelectorAll<HTMLElement>('.innovatie-card').forEach(card => {
+        card.className = `innovatie-card innovatie-card--${view}`;
+      });
+
+      // Toggle active state buttons
+      buttons.forEach(b => {
+        b.classList.toggle('view-toggle-btn--active', b === btn);
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+    });
+  });
+</script>

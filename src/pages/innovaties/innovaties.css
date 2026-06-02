@@ -1,81 +1,249 @@
-body {
-    display: flex;
+
+
+/* --- Pagina layout  */
+.innovaties-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+  font-family: var(--primary-font), sans-serif;
+}
+
+/* --- Header blok  */
+.innovaties-header {
+  margin-bottom: 3rem;
+}
+
+.innovaties-title {
+  font-size: var(--title-font-size);
+  color: var(--highlight-color);
+  margin-bottom: 1rem;
+}
+
+.innovaties-intro {
+  line-height: 1.8;
+  border-left: 2px solid rgba(250, 234, 7, 0.3);
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* --- View toggle  */
+.view-toggle {
+  display: inline-flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(250, 234, 7, 0.2);
+  border-radius: 999px;
+  padding: 0.3rem;
+}
+
+.view-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--primary-font), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.view-toggle-btn--active {
+  background: var(--highlight-color);
+  color: #1a1e24;
+}
+
+.view-toggle-btn:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 2px;
+}
+
+/* --- Grid container  */
+.innovaties-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+
+/* Rasterweergave: 3 kolommen */
+.innovaties-grid[data-view="grid"] {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Lijstweergave: 1 kolom */
+.innovaties-grid[data-view="list"] {
+  grid-template-columns: 1fr;
+}
+
+/* MARK: Innovatie kaart */
+.innovatie-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  border-radius: 20px;
+  border: 1px solid rgba(250, 234, 7, 0.25);
+  background: var(--background);
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.innovatie-card-link:hover {
+  border-color: var(--highlight-color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.innovatie-card-link:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 3px;
+}
+
+/* --- Grid card layout  */
+.innovatie-card--grid .innovatie-card-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.innovatie-card--grid .innovatie-card-img-wrap {
+  width: 100%;
+  height: 200px;
+}
+
+.innovatie-card--grid .innovatie-card-body {
+  padding: 1.25rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.innovatie-card--grid .innovatie-card-cta {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* --- List card layout  */
+.innovatie-card--list .innovatie-card-link {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.innovatie-card--list .innovatie-card-img-wrap {
+  width: 220px;
+  flex-shrink: 0;
+  height: auto;
+}
+
+.innovatie-card--list .innovatie-card-body {
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+/* --- Afbeelding  */
+.innovatie-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.innovatie-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.innovatie-card-link:hover .innovatie-card-img-wrap img {
+  transform: scale(1.04);
+}
+
+
+
+/* --- Meta  */
+.innovatie-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+
+.innovatie-card-meta time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.innovatie-card-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.innovatie-card-tags li {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--highlight-color);
+  border: 1px solid rgba(250, 234, 7, 0.35);
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+}
+
+/* --- Titel  */
+.innovatie-card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+
+/* --- Samenvatting  */
+.innovatie-card-summary {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* --- CTA label  */
+.innovatie-card-cta {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--highlight-color);
+  letter-spacing: 0.03em;
+}
+
+/* --- Responsive  */
+@media (max-width: 640px) {
+  .innovaties-grid[data-view="grid"],
+  .innovaties-grid[data-view="list"] {
+    grid-template-columns: 1fr;
+  }
+
+  .innovatie-card--list .innovatie-card-link {
     flex-direction: column;
-}
+  }
 
-.project-section {
-    padding: 60px;
-}
-
-.project-section h1 {
-    text-align: center;
-    margin-bottom: 80px;
-}
-
-.grid-projects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 20px;
-    justify-items: center;
-}
-
-
-.project-card {
-    border: solid var(--highlight-color);
-    background-color: var(--background);
-    width: 360px;
-    height: 500px;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.project-card img {
+  .innovatie-card--list .innovatie-card-img-wrap {
     width: 100%;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 20px;
-    padding: 12px;
-    box-sizing: border-box;
+    height: 180px;
+  }
 
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover img {
-    transform: scale(1.05);
-}
-
-
-.info-projects {
-    padding: 0 20px 20px 20px;
-}
-
-.info-projects h2 {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    font-size: 30px;
-    color: var(--highlight-color);
-}
-
-.info-projects p {
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.info-projects-link {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    text-decoration: none;
-    padding: 16px 40px;
-    border-radius: 20px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    margin-top: 90px;
-
-    transition: 0.3s;
-}
-
-.info-projects-link:hover {
-    background-color: var(--highlight-color);
+  .innovaties-title {
+    font-size: 2.5rem;
+  }
 }

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "lumicane",
+    "slug": "lumicane",
+    "type": "project",
+    "title": "LumiCane",
+    "summary": "Een lichtgevende blindenstok die de veiligheid en zichtbaarheid van blinden en slechtzienden vergroot in het donker.",
+    "image": "/assets/images/decoratie/lumicane2.png",
+    "imageAlt": "Man die in het donker op straat een lichtgevende blindenstok vasthoudt",
+    "date": "2024-03-01",
+    "tags": ["Toegankelijkheid", "Mobiliteit"],
+    "detailPath": "/innovaties/lumicane",
+    "content": "<p><strong>Wat is LumiCane?</strong><br>LumiCane is een innovatieve lichtgevende blindenstok die speciaal is ontwikkeld voor blinden en slechtzienden. Het doel van het product is simpel maar krachtig: mensen met een visuele beperking beter zichtbaar én herkenbaar maken in het donker of bij slechte weeromstandigheden.</p><p><strong>Het ontstaan van LumiCane.</strong><br>Uit interviews blijkt dat het idee meer dan 10 jaar geleden, na een bezoek aan het lichtfestival Glow Eindhoven is ontstaan. Peter Meuleman is zwaar slechtziend. Hij voelde zich 's avonds onveilig met een normale witte stok. Andere weggebruikers zagen hem vaak te laat. Samen met zijn zoon, Thijmen Meuleman, ontstond het idee voor de LumiCane.</p><p><strong>Samenwerking met Videlio.</strong><br>Videlio helpt mee aan de ontwikkeling van de LumiCane. Videlio is betrokken bij het prototypen, technische- en productontwikkeling en de innovatiebegeleiding.</p><p><strong>Het probleem dat LumiCane oplost.</strong><br>De standaard witte stok is overdag herkenbaar, maar in het donker nauwelijks tot niet zichtbaar. Dit brengt risico's met zich mee. Weggebruikers zien de stokken niet of nauwelijks, waardoor ze de persoon ook niet of te laat zien. Gebruikers voelen zich onveilig en vermijden donkere situaties. De LumiCane wil dat oplossen door de stok zelf licht te laten geven, zonder extra ingewikkelde technologieën toe te voegen en de herkenbaarheid van de witte stok te behouden.</p><p><strong>Waarom LumiCane anders is dan andere \"smart canes\".</strong><br>Veel bestaande smart cane-producten focussen zich op ultrasone sensoren, AI, GPS, obstacle detection, apps en camera's. Maar LumiCane kiest bewust voor eenvoud. Volgens Thijmen: \"Gebruikers willen vaak helemaal geen complexe functies. Ze willen gewoon veilig en zichtbaar zijn.\"</p>"
+  },
+  {
+    "id": "viziere",
+    "slug": "viziere",
+    "type": "project",
+    "title": "Project Viziere",
+    "summary": "Een basisplatform dat mensen met een visuele beperking toegang geeft tot essentiële digitale diensten.",
+    "image": "/assets/images/decoratie/viziere.jpg",
+    "imageAlt": "Een meisje dat braille leest",
+    "date": "2024-01-15",
+    "tags": ["Digitale toegankelijkheid", "Platform"],
+    "detailPath": "/innovaties/viziere",
+    "content": "<p>Viziere is een basisplatform dat mensen met een visuele beperking toegang geeft tot essentiële digitale diensten.</p>"
+  },
+  {
+    "id": "ov-knoop",
+    "slug": "ov-knoop",
+    "type": "project",
+    "title": "OV Knoop Eindhoven",
+    "summary": "Onderzoek naar een toegankelijker openbaar vervoersknooppunt in Eindhoven voor mensen met een visuele beperking.",
+    "image": "/assets/images/decoratie/ov_knoop.jpg",
+    "imageAlt": "Het gebouw De Bubble in het centrum van Eindhoven",
+    "date": "2023-11-01",
+    "tags": ["Openbaar vervoer", "Onderzoek"],
+    "detailPath": "/innovaties/ov-knoop",
+    "content": "<p>Onderzoek naar een toegankelijker openbaar vervoersknooppunt in Eindhoven voor mensen met een visuele beperking.</p>"
+  }
+]

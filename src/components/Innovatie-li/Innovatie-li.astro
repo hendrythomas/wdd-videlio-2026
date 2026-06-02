@@ -1,0 +1,63 @@
+---
+
+
+interface Props {
+  item: {
+    id: string;
+    slug: string;
+    type: string;
+    title: string;
+    summary: string;
+    image: string;
+    imageAlt: string;
+    tags: string[];
+    date: string;
+    detailPath: string;
+  };
+  view: 'grid' | 'list';
+}
+
+const { item, view } = Astro.props;
+
+const typeLabels: Record<string, string> = {
+  project:  'Project',
+  artikel:  'Artikel',
+  onderzoek: 'Onderzoek',
+};
+
+const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
+  year: 'numeric',
+  month: 'long',
+});
+---
+
+<article class={`innovatie-card innovatie-card--${view}`} aria-label={item.title}>
+  <a href={item.detailPath} class="innovatie-card-link" aria-label={`Lees meer over ${item.title}`}>
+
+    <div class="innovatie-card-img-wrap">
+      <img
+        src={item.image}
+        alt={item.imageAlt}
+        width="400"
+        height="240"
+        loading="lazy"
+      />
+      <span class="innovatie-card-type">{typeLabels[item.type] ?? item.type}</span>
+    </div>
+
+    <div class="innovatie-card-body">
+      <div class="innovatie-card-meta">
+        <time datetime={item.date}>{formattedDate}</time>
+        <ul class="innovatie-card-tags" aria-label="Categorieën">
+          {item.tags.map(tag => <li>{tag}</li>)}
+        </ul>
+      </div>
+
+      <h2 class="innovatie-card-title">{item.title}</h2>
+      <p class="innovatie-card-summary">{item.summary}</p>
+
+      <span class="innovatie-card-cta" aria-hidden="true">Lees meer →</span>
+    </div>
+
+  </a>
+</article>
