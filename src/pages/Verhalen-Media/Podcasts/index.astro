@@ -2,11 +2,12 @@
 //@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
 import './podcasts.css';
-import img1 from '../../../../assets/images/decoratie/john.png'
-import img2 from '../../../../assets/images/decoratie/niet_te_zien.png'
-import audio1 from '../../../../assets/images/audio/podcasts/podcast1_john.mp3'
-import audio2 from '../../../../assets/images/audio/podcasts/podcast2_john.mp3'
-import audio3 from '../../../../assets/images/audio/podcasts/podcast3_john.mp3'
+import img1 from '../../../../assets/images/decoratie/john.png';
+import img2 from '../../../../assets/images/decoratie/niet_te_zien.png';
+import audio1 from '../../../../assets/images/audio/podcasts/podcast1_john.mp3';
+import audio2 from '../../../../assets/images/audio/podcasts/podcast2_john.mp3';
+import audio3 from '../../../../assets/images/audio/podcasts/podcast3_john.mp3';
+import audio4 from '../../../../assets/images/audio/podcasts/'
 ---
 
 <MainLayout>
@@ -19,73 +20,102 @@ import audio3 from '../../../../assets/images/audio/podcasts/podcast3_john.mp3'
             <!--Podcasts John Willemse-->
             <section class="grid-projects">
                 <!--1e podcast-->
-                <div class="project-card">
-                    <img src={img1}>
+                <div class="read-more-box">
+                    <div class="folding-in stories-content">
+                        <div class="project-card">
+                            <img src={img1}>
                     
-                    <h4>Nr 1. Introductie podcast</h4>
+                            <h4>Nr 1. Introductie podcast</h4>
 
-                    <audio id="audio1" src={audio1}></audio>
+                            <audio id="audio1" src={audio1}></audio>
 
-                    <input type="range"
-                            value="0"
-                            class="progress"
-                            id="progress1">
+                            <input type="range"
+                                    value="0"
+                                    class="progress"
+                                    id="progress1">
 
-                    <div class="control-buttons">
-                        <button class="play-button" id="button1">
-                            ▶
-                        </button>
-                    </div>
-                </div>
+                            <div class="control-buttons">
+                                <button class="play-button" id="button1">
+                                    ▶
+                                </button>
+                            </div>
+                        </div>
 
-                <!--2e podcast-->
-                <div class="project-card">
-                    <img src={img1}>
+                        <!--2e podcast-->
+                        <div class="project-card">
+                            <img src={img1}>
                     
-                    <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
+                            <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
 
-                    <audio id="audio2" src={audio2}></audio>
+                            <audio id="audio2" src={audio2}></audio>
 
-                    <input type="range"
-                            value="0"
-                            class="progress"
-                            id="progress2">
+                            <input type="range"
+                                    value="0"
+                                    class="progress"
+                                    id="progress2">
 
-                    <div class="control-buttons">
-                        <button class="play-button" id="button2">
-                            ▶
-                        </button>
-                    </div>
-                </div>
+                            <div class="control-buttons">
+                                <button class="play-button" id="button2">
+                                    ▶
+                                </button>
+                            </div>
+                        </div>
 
-                <!--3e podcast-->
-                <div class="project-card">
-                    <img src={img1}>
+                        <!--3e podcast-->
+                        <div class="project-card">
+                            <img src={img1}>
                     
-                    <h4>Nr 3. De cijfers, achtergronden en oplossingen</h4>
+                            <h4>Nr 3. De cijfers, achtergronden en oplossingen</h4>
 
-                    <audio id="audio3" src={audio3}></audio>
+                            <audio id="audio3" src={audio3}></audio>
 
-                    <input type="range"
-                            value="0"
-                            class="progress"
-                            id="progress3">
+                            <input type="range"
+                                    value="0"
+                                    class="progress"
+                                    id="progress3">
 
-                    <div class="control-buttons">
-                        <button class="play-button" id="button3">
-                            ▶
-                        </button>
+                            <div class="control-buttons">
+                                <button class="play-button" id="button3">
+                                    ▶
+                                </button>
+                            </div>
+                        </div>
+
+                        <!--4e podcast-->
+                        <div class="project-card">
+                            <img src={img1}>
+                    
+                            <h4>Nr 4. Wat is jouw doel en identiteit?</h4>
+
+                            <audio id="audio4" src={}></audio>
+
+                            <input type="range"
+                                    value="0"
+                                    class="progress"
+                                    id="progress3">
+
+                            <div class="control-buttons">
+                                <button class="play-button" id="button3">
+                                    ▶
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="read-less-box">
+                            <a href="#" class="read-less">Lees minder</a>
+                        </div>
                     </div>
+
+                    <a href="#" class="read-more">Lees meer</a>
                 </div>
             </section>
-        </main>
-    </section>
 
-    <!--Podcasts Niet te zien-->
+
+
+            <!--Podcasts Niet te zien-->
     <section class="project-section">
         <h2>Niet te zien</h2>
 
-        <main>
             <section class="grid-projects">
                 <!--1e podcast-->
                 <div class="project-card">
@@ -148,12 +178,65 @@ import audio3 from '../../../../assets/images/audio/podcasts/podcast3_john.mp3'
                 </div>
             </section>
         </main>
-    </section>
 </MainLayout>
 
+        <style>
+    .read-more-box {
+        max-width: 900px;
+    }
+
+    .stories-content {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .stories-content.folding-in {
+        max-height: 400px;
+    }
+
+    .read-less-box {
+        margin-top: 10px;
+        display: none;
+    }
+
+    .stories-content.expanded .read-less-box {
+        display: block;
+    }
+
+    a {
+        color: var(--highlight-color);
+        text-decoration: none;
+    }
+</style>
 
 <script>
-    // @ts-nocheck
+    //@ts-nocheck
+    //openen en sluiten meer zien
+    document.querySelectorAll('.read-more-box').forEach(box => {
+        const textContent = box.querySelector('.stories-content');
+        const readMore = box.querySelector('.read-more');
+        const readLess = box.querySelector('.read-less');
+
+        if (!textContent || !readMore || !readLess) return;
+
+        readMore.addEventListener('click', function(e) {
+            e.preventDefault();
+
+        textContent.classList.remove('folding-in');
+        textContent.classList.add('expanded');
+            readMore.style.display = 'none';
+        });
+
+        readLess.addEventListener('click', function(e) {
+            e.preventDefault();
+
+        textContent.classList.remove('expanded');
+        textContent.classList.add('folding-in');
+            readMore.style.display = 'inline';
+        });
+    });
+
+    //playbuttons
     const button1 = document.getElementById('button1');
     const button2 = document.getElementById('button2');
     const button3 = document.getElementById('button3');
@@ -198,4 +281,4 @@ import audio3 from '../../../../assets/images/audio/podcasts/podcast3_john.mp3'
     button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
     button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
     button3.addEventListener("click", (event) => { toggleAudio(event, 'audio3', 'progress3') });
-    </script>
+</script>
