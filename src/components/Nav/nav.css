@@ -129,6 +129,7 @@ body:has(> header)::before {
 
     &:has(> .hamburger input:not(:checked)) > .mobile-menu > * {
       visibility: hidden;
+      transition: visibility 0.4s linear;
     }
 
     &:has(> .hamburger input:checked) > .mobile-menu {
