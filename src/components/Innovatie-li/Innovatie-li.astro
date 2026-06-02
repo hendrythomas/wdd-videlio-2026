@@ -46,17 +46,18 @@ const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
     </div>
 
     <div class="innovatie-card-body">
-      <div class="innovatie-card-meta">
+     
+      <h2 class="innovatie-card-title">{item.title}</h2>
+
+       <div class="innovatie-card-meta">
         <time datetime={item.date}>{formattedDate}</time>
         <ul class="innovatie-card-tags" aria-label="Categorieën">
           {item.tags.map(tag => <li>{tag}</li>)}
         </ul>
       </div>
-
-      <h2 class="innovatie-card-title">{item.title}</h2>
       <p class="innovatie-card-summary">{item.summary}</p>
 
-      <span class="innovatie-card-cta" aria-hidden="true">Lees meer →</span>
+      <span class="innovatie-card-cta" aria-hidden="true">Lees meer over {item.title}→</span>
     </div>
 
   </a>
