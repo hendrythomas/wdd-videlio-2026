@@ -7,7 +7,8 @@ import img2 from '../../../../assets/images/decoratie/niet_te_zien.png';
 import audio1 from '../../../../assets/images/audio/podcasts/podcast1_john.mp3';
 import audio2 from '../../../../assets/images/audio/podcasts/podcast2_john.mp3';
 import audio3 from '../../../../assets/images/audio/podcasts/podcast3_john.mp3';
-import audio4 from '../../../../assets/images/audio/podcasts/'
+import audio4 from '../../../../assets/images/audio/podcasts/podcast4_john.mp3';
+import audio5 from '../../../../assets/images/audio/podcasts/podcast5_john.mp4';
 ---
 
 <MainLayout>
@@ -87,15 +88,15 @@ import audio4 from '../../../../assets/images/audio/podcasts/'
                     
                             <h4>Nr 4. Wat is jouw doel en identiteit?</h4>
 
-                            <audio id="audio4" src={}></audio>
+                            <audio id="audio4" src={audio4}></audio>
 
                             <input type="range"
                                     value="0"
                                     class="progress"
-                                    id="progress3">
+                                    id="progress4">
 
                             <div class="control-buttons">
-                                <button class="play-button" id="button3">
+                                <button class="play-button" id="button4">
                                     ▶
                                 </button>
                             </div>
@@ -240,6 +241,7 @@ import audio4 from '../../../../assets/images/audio/podcasts/'
     const button1 = document.getElementById('button1');
     const button2 = document.getElementById('button2');
     const button3 = document.getElementById('button3');
+    const button4 = document.getElementById('button4');
 
     function toggleAudio(event, audioId, progressId) {
         const button = event.target;
@@ -281,4 +283,5 @@ import audio4 from '../../../../assets/images/audio/podcasts/'
     button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
     button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
     button3.addEventListener("click", (event) => { toggleAudio(event, 'audio3', 'progress3') });
+    button4?.addEventListener('click', (evebt) => { toggleAudio(event, 'audio4', 'progress4') });
 </script>
