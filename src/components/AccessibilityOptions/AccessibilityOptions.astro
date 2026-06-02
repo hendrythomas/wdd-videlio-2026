@@ -16,10 +16,10 @@ import '../../style/icons.css';
   </div>
   <div class="access-item">
     <span>Lettertype</span>
-    <button title="Verkleinen">
+    <button title="Verkleinen" data-action="setting-decrease-font">
       <i class="material-icon" aria-hidden="true">remove</i>
     </button>
-    <button title="Vergroten">
+    <button title="Vergroten" data-action="setting-increase-font">
       <i class="material-icon" aria-hidden="true">add</i>
     </button>
   </div>
@@ -27,14 +27,14 @@ import '../../style/icons.css';
     <span>Muisaanwijzer vergroten</span>
     <label data-title="Aanzetten" data-checked-title="Uitzetten">
       <i class="material-icon" aria-hidden="true"></i>
-      <input type="checkbox">
+      <input type="checkbox" id="setting-big-cursor">
     </label>
   </div>
   <div class="access-item">
     <span>Contrastthema gebruiken</span>
     <label data-title="Aanzetten" data-checked-title="Uitzetten">
       <i class="material-icon" aria-hidden="true"></i>
-      <input type="checkbox">
+      <input type="checkbox" id="setting-contrast-theme">
     </label>
   </div>
 </div>
@@ -42,12 +42,22 @@ import '../../style/icons.css';
 <script>
 
   document.addEventListener('DOMContentLoaded', (e) => {
+    updateSettings();
     updateTooltips();
   });
 
   document.addEventListener('change', (e) => {
     updateTooltips();
+    
+    const elem = e.target;
+    tryToggleBigCursor(elem);
+    tryToggleContrastTheme(elem);
   });
+
+  function updateSettings() {
+    tryToggleBigCursor(null);
+    tryToggleContrastTheme(null);
+  }
 
   function updateTooltips() {
     const tooltipLabels = document.querySelectorAll('[data-title][data-checked-title]');
@@ -58,5 +68,22 @@ import '../../style/icons.css';
       if (input.checked)  label.title = label.dataset.checkedTitle;
     }
   }
+
+  function tryToggleBigCursor(elem) {
+    let input = elem;
+    if (elem === null) {
+      input = document.getElementById('setting-big-cursor');
+      if (input === null) return;
+    }
+    if (input.id !== 'setting-big-cursor') return;
+    
+    if (input.checked) {
+      document.documentElement.classList.add('big-cursor');
+    } else {
+      document.documentElement.classList.remove('big-cursor');
+    }
+  }
+
+  function tryToggleContrastTheme(elem) {}
 
 </script>
