@@ -2,6 +2,9 @@
 //@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
 import './podcasts.css';
+import audio1 from '../../../../assets/images/audio/podcasts/podcast1_john.mp3'
+import audio2 from '../../../../assets/images/audio/podcasts/podcast2_john.mp3'
+import audio3 from '../../../../assets/images/audio/podcasts'
 ---
 
 <MainLayout>
@@ -12,14 +15,13 @@ import './podcasts.css';
 
         <main>
             <section class="grid-projects">
+                <!--1e podcast-->
                 <div class="project-card">
                     <img src="../assets/images/decoratie/john.png">
                     
                     <h4>Nr 1. Introductie podcast</h4>
 
-                    <audio id="audio1">
-                        <source src="/podcast1_john.mp3" type="audio/mpeg">
-                    </audio>
+                    <audio id="audio1" src={audio1}></audio>
 
                     <input type="range"
                             value="0"
@@ -31,17 +33,15 @@ import './podcasts.css';
                             ▶
                         </button>
                     </div>
-                    
                 </div>
 
+                <!--2e podcast-->
                 <div class="project-card">
                     <img src="../assets/images/decoratie/john.png">
                     
                     <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
 
-                    <audio id="audio2">
-                        <source src="../../../../assets" type="audio/mpeg">
-                    </audio>
+                    <audio id="audio2" src={audio2}></audio>
 
                     <input type="range"
                             value="0"
@@ -50,6 +50,26 @@ import './podcasts.css';
 
                     <div class="control-buttons">
                         <button class="play-button" id="button2">
+                            ▶
+                        </button>
+                    </div>
+                </div>
+
+                <!--3e podcast-->
+                <div class="project-card">
+                    <img src="../assets/images/decoratie/john.png">
+                    
+                    <h4>Nr 3. De cijfers, achtergronden en oplossingen</h4>
+
+                    <audio id="audio3" src={audio3}></audio>
+
+                    <input type="range"
+                            value="0"
+                            class="progress"
+                            id="progress3">
+
+                    <div class="control-buttons">
+                        <button class="play-button" id="button3">
                             ▶
                         </button>
                     </div>

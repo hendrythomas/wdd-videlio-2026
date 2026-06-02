@@ -5,7 +5,7 @@ import MainLayout from '../../../layouts/MainLayout.astro';
 <MainLayout>
     <main>
         <div class="read-more-box">
-            <div class="folding-in" id="stories-content">
+            <div class="folding-in stories-content">
                 <h2>Peter Meuleman</h2>
                 <p>Een aantal jaar geleden werd ik door een oogziekte blind. <br />
                     Dat is nogal wat, als vader in een jong gezin en als professional bij Philips. <br />
@@ -22,43 +22,88 @@ import MainLayout from '../../../layouts/MainLayout.astro';
                 <p>Mijn geleidehond Inca komt daarbij altijd mee. Naast mijn ogen is zij mijn spiegel. <br />
                     Immers, de helderste lessen over teamwork en vertrouwen leer ik van haar. Tijdens een doorsneu druilerige avondspits op een druk, donker kruispunt.</p>
 
-                <div id="read-less-box">
-                    <a href="#" id="read-less">Lees minder</a>
+                <div class="read-less-box">
+                    <a href="#" class="read-less">Lees minder</a>
                 </div>
             </div>
 
-            <a href="#" id="read-more">Lees meer</a>
+            <a href="#" class="read-more">Lees meer</a>
         </div>
 
         <br />
 
         <div class="read-more-box">
-            <div class="folding-in" id="">
+            <div class="folding-in stories-content">
                 <h2>Hans Huijkman</h2>
                 <p></p>
+
+                <div class="read-less-box">
+                    <a href="#" class="read-less">Lees minder</a>
+                </div>
             </div>
+
+            <a href="#" class="read-more">Lees meer</a>
         </div>
 
         <br />
 
         <div class="read-more-box">
-            <div class="folding-in" id="">
+            <div class="folding-in stories-content">
                 <h2>Roger Ravelli</h2>
-                <p></p>
+                <p>Roger Ravelli (1966) groeide op in Bilthoven, als praktische denker en doener in een gezin vol academici. <br />
+                    Na de MTS en later de HTS Werktuigbouwkunde werkte hij in uiteenlopende technische en creatieve omgevingen. <br />
+                    Hij heeft ruim 5 jaar bij de Rijksakademie van Beeldende Kunsten gewerkt, en 22 jaar bij NOVEM, AgentschapNL en de Rijksdienst voor Ondernemend Nederland (RVO).</p>
+
+                <p>Op zijn 43e werd de diagnose Centrale Areolaire Chorioidea Dystrofie vastgesteld. <br />
+                    Zijn hele leven zag hij zwarte vlekken voor zijn ogen die door niemand serieus werden genomen. <br />
+                    Bij zijn diagnose was zijn zicht nog maar 20% en sindsdien is het teruggelopen. Deze ingrijpende wending dwong hem zijn leven opnieuw in te richten.</p> <br />
+
+                <p>Via persoonlijke coaching, visuele revalidatie en zijn passie voor beeldhouwen ontdekte hij nieuwe manieren om zijn creativiteit en vakmanschap in te zetten. <br />
+                    Filosofie en zelfreflectie kregen een belangrijke plaats in zijn leven.</p> <br />
+
+                <p>In zijn vrijwilligerswerk combineert hij techniek, creativiteit en mensgericht denken. Deze vaardigheden hoopt hij ook bij Stichting Videlio in te zetten om innovatieve oplossingen te helpen ontwikkelen en implementeren die niet alleen technisch uitblinken, maar ook toegankelijk en betekenisvol zijn voor deze doelgroep.</p> <br />
+                    
+                <p>Roger: “mijn ambitie bij Stichting Videlio is om projecten te realiseren die verbinden, inspireren en duurzame impact maken. Daarbij ligt mijn focus op het vertalen van complexe technische mogelijkheden naar gebruiksvriendelijke toepassingen, met oog voor inclusie en beleving. <br />
+                    Mijn persoonlijke achtergrond leert me dat beperkingen vaak deuren openen naar nieuwe perspectieven. Ik ben er goed in om verschillende brillen op te zetten om naar mezelf, de wereld en de samenleving te kijken. <br />
+                    Samen met anderen leer ik anders te zien.”</p>
+
+                <div class="read-less-box">
+                    <a href="#" class="read-less">Lees minder</a>
+                </div>
             </div>
+
+            <a href="#" class="read-more">Lees meer</a>
         </div>
+
+        <br />
 
         <div class="read-more-box">
-            <div class="folding-in" id="">
+            <div class="folding-in stories-content">
                 <h2>John Willemse</h2>
                 <p>(boek)</p>
+
+                <div class="read-less-box">
+                    <a href="#" class="read-less">Lees minder</a>
+                </div>
             </div>
+
+            <a href="#" class="read-more">Lees meer</a>
         </div>
 
-        <div></div>
+        <br />
 
+        <div class="read-more-box">
+            <div class="folding-in stories-content">
+                <h2>Gerard Kwak</h2>
+                <p></p>
 
-        <h2>Gerard Kwak</h2>
+                <div class="read-less-box">
+                    <a href="#" class="read-less">Lees minder</a>
+                </div>
+            </div>
+
+            <a href="#" class="read-more">Lees meer</a>
+        </div>
 
     </main>
 </MainLayout>
@@ -68,21 +113,21 @@ import MainLayout from '../../../layouts/MainLayout.astro';
         max-width: 900px;
     }
 
-    #stories-content {
+    .stories-content {
         overflow: hidden;
         transition: max-height 0.3s ease;
     }
 
-    #stories-content.folding-in {
+    .stories-content.folding-in {
         max-height: 110px;
     }
 
-    #read-less-box {
+    .read-less-box {
         margin-top: 10px;
         display: none;
     }
 
-    #stories-content.expanded #read-less-box {
+    .stories-content.expanded .read-less-box {
         display: block;
     }
 
@@ -94,22 +139,27 @@ import MainLayout from '../../../layouts/MainLayout.astro';
 
 <script>
     //@ts-nocheck
-    const textContent = document.getElementById('stories-content');
-    const readMore = document.getElementById('read-more');
-    const readLess = document.getElementById('read-less');
-    readMore.addEventListener('click', function(e) {
-        e.preventDefault();
+    document.querySelectorAll('.read-more-box').forEach(box => {
+        const textContent = box.querySelector('.stories-content');
+        const readMore = box.querySelector('.read-more');
+        const readLess = box.querySelector('.read-less');
 
-    textContent.classList.remove('folding-in');
-    textContent.classList.add('expanded');
-        readMore.style.display = 'none';
-    });
+        if (!textContent || !readMore || !readLess) return;
 
-    readLess.addEventListener('click', function(e) {
-        e.preventDefault();
+        readMore.addEventListener('click', function(e) {
+            e.preventDefault();
 
-    textContent.classList.remove('expanded');
-    textContent.classList.add('folding-in');
-        readMore.style.display = 'inline';
+        textContent.classList.remove('folding-in');
+        textContent.classList.add('expanded');
+            readMore.style.display = 'none';
+        });
+
+        readLess.addEventListener('click', function(e) {
+            e.preventDefault();
+
+        textContent.classList.remove('expanded');
+        textContent.classList.add('folding-in');
+            readMore.style.display = 'inline';
+        });
     });
 </script>
