@@ -4,17 +4,112 @@ import MainLayout from '../../../layouts/MainLayout.astro';
 
 <MainLayout>
     <main>
+        <div class="read-more-box">
+            <div class="folding-in" id="stories-content">
+                <h2>Peter Meuleman</h2>
+                <p>Een aantal jaar geleden werd ik door een oogziekte blind. <br />
+                    Dat is nogal wat, als vader in een jong gezin en als professional bij Philips. <br />
+                    En als mens, vol dromen en verwachtingen.</p> <br />
 
-        <h2>Peter Meuleman</h2>
+                <p>Over blind worden vertel ik verhalen. <br />
+                    Die zijn persoonlijk, stevig, inspirerend en humoristisch. <br />
+                    Ze raken je diep, want ze gaan over universele thema's als veerkracht, autonomie en vertrouwen.</p> <br />
 
-        <h2>Hans Huijkman</h2>
+                <p>Ik doe dit als ambassadeur en voorlichter voor de geleidehondenopleiding KNGF, en als ervaringsdeskundige voor stichting Mens Achter de Patient.</p> <br />
 
-        <h2>Roger Ravelli</h2>
+                <p>Daarnaast, op persoonlijke titel, vertel ik mijn verhalen bij bedrijven en organisaties, en inspireer ik heidagen, klanten-avonden of strategiesessies.</p> <br />
 
-        <h2>John Willemse</h2>
-        <p>(boek)</p>
+                <p>Mijn geleidehond Inca komt daarbij altijd mee. Naast mijn ogen is zij mijn spiegel. <br />
+                    Immers, de helderste lessen over teamwork en vertrouwen leer ik van haar. Tijdens een doorsneu druilerige avondspits op een druk, donker kruispunt.</p>
+
+                <div id="read-less-box">
+                    <a href="#" id="read-less">Lees minder</a>
+                </div>
+            </div>
+
+            <a href="#" id="read-more">Lees meer</a>
+        </div>
+
+        <br />
+
+        <div class="read-more-box">
+            <div class="folding-in" id="">
+                <h2>Hans Huijkman</h2>
+                <p></p>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="read-more-box">
+            <div class="folding-in" id="">
+                <h2>Roger Ravelli</h2>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="read-more-box">
+            <div class="folding-in" id="">
+                <h2>John Willemse</h2>
+                <p>(boek)</p>
+            </div>
+        </div>
+
+        <div></div>
+
 
         <h2>Gerard Kwak</h2>
 
     </main>
 </MainLayout>
+
+<style>
+    .read-more-box {
+        max-width: 900px;
+    }
+
+    #stories-content {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    #stories-content.folding-in {
+        max-height: 110px;
+    }
+
+    #read-less-box {
+        margin-top: 10px;
+        display: none;
+    }
+
+    #stories-content.expanded #read-less-box {
+        display: block;
+    }
+
+    a {
+        color: var(--highlight-color);
+        text-decoration: none;
+    }
+</style>
+
+<script>
+    //@ts-nocheck
+    const textContent = document.getElementById('stories-content');
+    const readMore = document.getElementById('read-more');
+    const readLess = document.getElementById('read-less');
+    readMore.addEventListener('click', function(e) {
+        e.preventDefault();
+
+    textContent.classList.remove('folding-in');
+    textContent.classList.add('expanded');
+        readMore.style.display = 'none';
+    });
+
+    readLess.addEventListener('click', function(e) {
+        e.preventDefault();
+
+    textContent.classList.remove('expanded');
+    textContent.classList.add('folding-in');
+        readMore.style.display = 'inline';
+    });
+</script>
