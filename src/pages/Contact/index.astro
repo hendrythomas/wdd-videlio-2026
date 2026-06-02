@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import './about.css'
+import './contact.css'
 ---
 
 <MainLayout>
@@ -13,45 +13,11 @@ import './about.css'
                 <h1 class="page-title">Over ons</h1>
             </div>
 
-            <!-- WIE ZIJN WIJ -->
-            <section class="section">
-                <div class="banner">
-                </div>
-                <h2 id="section-who" class="section-heading">Wie zijn wij</h2>
-                <p class="section-text">
-                    <strong> Stichting Videlio is opgericht door mensen met een visuele beperking. We willen dat mensen
-                        met een
-                        visuele beperking meer zichtbaar zijn om volwaardig mee te doen in de samenleving met
-                        eigenwaarde en
-                        eigen regie. </strong>
-                    <br><br>
-                    Onze kernpunten zijn bewustwording, participatie, ontmoeting, innovatie. John Willemse
-                    en Peter Meuleman zijn de oprichters van Videlio. Zij zijn beide slechtziend en staan midden in de
-                    samenleving.
-                </p>
-            </section>
-
-            <!-- ONZE MISSIE -->
-            <section class="section">
-                <h2 id="section-mission" class="section-heading">Onze missie</h2>
-                <p class="section-text">
-                    Wij streven naar een inclusieve samenleving waarin mensen met een visuele beperking gelijke kansen
-                    hebben op het gebied van persoonlijke ontwikkeling en sociale participatie.
-
-                    <br><br>
-
-                    Wij geloven in de kracht van samenwerking, ervaringsdeskundigheid en innovatie. Door bewustwording
-                    te creëren en praktische oplossingen te bieden, zorgen we voor <strong> een samenleving waarin VIPs
-                    volledig
-                    kunnen meedoen. </strong>
-                </p>
-            </section>
-
-            <!-- BESTUURSLEDEN -->
+            <!-- BESTUURSLEDEN / CONTACT -->
             <section class="section" aria-labelledby="section-board">
-                <h2 class="section-heading">Bestuursleden</h2>
+                <h2 id="section-board" class="section-heading">Neem contact op</h2>
+                <p class="section-intro">Heb je een vraag of wil je meer weten over Videlio? Neem direct contact op met een van onze bestuursleden.</p>
                 <div class="board-bg">
-
                     <ul class="board-grid" role="list">
 
                         <!-- Lid 1 – John Willemse -->
@@ -132,14 +98,45 @@ import './about.css'
                         </a>
                     </div>
                     <div class="location-map">
-                        <iframe title="Kaart van Stichting Videlio, Rusthoven 40 Eindhoven"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2487.5!2d5.4697!3d51.4416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRusthoven+40%2C+5655+CN+Eindhoven!5e0!3m2!1snl!2snl!4v1"
-                                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                        <img
+                            src="assets/images/building-placeholder.jpg"
+                            alt="Buitenkant van het gebouw van Stichting Videlio aan de Rusthoven 40 in Eindhoven"
+                            width="100%"
+                            height="300"
+                            style="object-fit: cover; border-radius: 8px; display: block;"
+                        />
                     </div>
                 </div>
             </section>
+
+            <!-- WIE ZIJN WIJ -->
+            <section class="section">
+                <div class="banner"></div>
+                <h2 id="section-who" class="section-heading">Wie zijn wij</h2>
+                <p class="section-text">
+                    <strong>Stichting Videlio is opgericht door mensen met een visuele beperking. We willen dat mensen
+                        met een visuele beperking meer zichtbaar zijn om volwaardig mee te doen in de samenleving met
+                        eigenwaarde en eigen regie.</strong>
+                    <br><br>
+                    Onze kernpunten zijn bewustwording, participatie, ontmoeting, innovatie. John Willemse
+                    en Peter Meuleman zijn de oprichters van Videlio. Zij zijn beide slechtziend en staan midden in de
+                    samenleving.
+                </p>
+            </section>
+
+            <!-- ONZE MISSIE -->
+            <section class="section">
+                <h2 id="section-mission" class="section-heading">Onze missie</h2>
+                <p class="section-text">
+                    Wij streven naar een inclusieve samenleving waarin mensen met een visuele beperking gelijke kansen
+                    hebben op het gebied van persoonlijke ontwikkeling en sociale participatie.
+                    <br><br>
+                    Wij geloven in de kracht van samenwerking, ervaringsdeskundigheid en innovatie. Door bewustwording
+                    te creëren en praktische oplossingen te bieden, zorgen we voor <strong>een samenleving waarin VIPs
+                    volledig kunnen meedoen.</strong>
+                </p>
+            </section>
+
         </div>
     </main>
 </MainLayout>
