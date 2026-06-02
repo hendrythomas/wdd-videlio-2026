@@ -1,17 +1,42 @@
 ---
 import './accessibilityOptions.css';
 import '../../style/icons.css';
+
+
 ---
 
-<label class="access-button">
-    <i class="material-icon" aria-hidden="true"></i>
-    <span class="desktop">Toegankelijkheid</span>
-    <input type="checkbox">
-</label>
-<div class="access-menu"> <!--TODO: Hier een popover van maken-->
-    <button>Lettertype vergroten</button>
-    <button>Lettertype verkleinen</button>
-    <button>Contrastthema gebruiken</button>
-    <button>Muisaanwijzer vergroten</button>
-    <button>Animaties gebruiken</button>
+<button class="access-button" popovertarget="access-menu">
+  <i class="material-icon" aria-hidden="true"></i>
+  <span class="desktop">Toegankelijkheid</span>
+</button>
+<div class="access-menu" popover id="access-menu">
+  <div class="access-item">
+    <h2>Toegankelijkheid</h2>
+    <button class="button" popovertarget="access-menu" popovertargetaction="hide">
+      <i class="material-icon" aria-hidden="true">close</i>
+    </button>
+  </div>
+  <div class="access-item">
+    <span>Lettertype</span>
+    <button>
+      <i class="material-icon" aria-hidden="true">remove</i>
+    </button>
+    <button>
+      <i class="material-icon" aria-hidden="true">add</i>
+    </button>
+  </div>
+  <div class="access-item">
+    <span>Muisaanwijzer vergroten</span>
+    <label>
+      <i class="material-icon" aria-hidden="true"></i>
+      <input type="checkbox">
+    </label>
+  </div>
+  <div class="access-item">
+    <span>Contrastthema gebruiken</span>
+    <label>
+      <i class="material-icon" aria-hidden="true"></i>
+      <input type="checkbox">
+    </label>
+  </div>
 </div>
