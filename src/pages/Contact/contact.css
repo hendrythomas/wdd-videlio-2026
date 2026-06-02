@@ -13,7 +13,6 @@
     gap: 1.25rem;
     margin-bottom: 2rem;
     padding-bottom: 0.75rem;
-  
 }
 
 /* --- Terug naar home knop --------------------------------- */
@@ -90,6 +89,8 @@
 .section-text {
     line-height: 1.8;
     max-width: 65ch;
+    margin-left: auto;
+    margin-right: auto;
     border-left: 2px solid rgba(250, 234, 7, 0.3);
     padding-left: 1.5rem;
 }
@@ -142,6 +143,8 @@
     border: 1px solid rgba(0, 0, 0, 0.15);
     overflow: hidden;
     text-align: center;
+    text-decoration: none;
+    cursor: pointer;
     transition:
         border-color 0.2s ease,
         transform 0.2s ease,
@@ -154,8 +157,9 @@
     border-color: rgba(0, 0, 0, 0.3);
 }
 
-.board-card:focus-within {
+.board-card:focus-visible {
     outline: 2px solid var(--highlight-color);
+    outline-offset: 2px;
 }
 
 /* --- Foto (cirkel) ---------------------------------------- */
@@ -246,11 +250,11 @@
     letter-spacing: 0.02em;
 }
 
-.board-card-btn:hover,
-.board-card-btn:focus-visible {
+.board-card:hover .board-card-btn,
+.board-card:focus-visible .board-card-btn {
     background: var(--highlight-color);
     color: #1a1e24;
-    border: solid 2px #1a1e24;
+    border-top: solid 2px #1a1e24;
 }
 
 /* --- Visually hidden -------------------------------------- */
