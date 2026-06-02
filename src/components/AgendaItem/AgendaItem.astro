@@ -1,0 +1,16 @@
+---
+import './agendaItem.css';
+
+const { title, description, date } = Astro.props;
+
+const day = date.getDate();
+const month = date.toLocaleString('nl', { month: 'long' });
+
+---
+
+<div>
+    <span>{day}</span>
+    <span>{month}</span>
+    <h3>{title}</h3>
+    <p>{description}</p>
+</div>
