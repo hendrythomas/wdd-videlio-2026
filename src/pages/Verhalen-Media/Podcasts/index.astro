@@ -2,24 +2,22 @@
 //@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
 import './podcasts.css';
-import img1 from '../../../../assets/images/decoratie/john.png';
-import img2 from '../../../../assets/images/decoratie/niet_te_zien.png';
 import audio1 from '../../../../assets/images/audio/podcasts/podcast1_john.mp3';
 import audio2 from '../../../../assets/images/audio/podcasts/podcast2_john.mp3';
 import audio3 from '../../../../assets/images/audio/podcasts/podcast3_john.mp3';
 import audio4 from '../../../../assets/images/audio/podcasts/podcast4_john.mp3';
-import audio5 from '../../../../assets/images/audio/podcasts/';
-import audio6 from '../../../../assets/images/audio/podcasts/';
-import audio7 from '../../../../assets/images/audio/podcasts/';
-import audio8 from '../../../../assets/images/audio/podcasts/';
-import audio9 from '../../../../assets/images/audio/podcasts/';
-import audio10 from '../../../../assets/images/audio/podcasts/';
-import audio11 from '../../../../assets/images/audio/podcasts/';
-import audio12 from '../../../../assets/images/audio/podcasts/';
-import audio13 from '../../../../assets/images/audio/podcasts/';
-import audio14 from '../../../../assets/images/audio/podcasts/';
-import audio15 from '../../../../assets/images/audio/podcasts/';
-import audio16 from '../../../../assets/images/audio/podcasts/';
+import audio5 from '../../../../assets/images/audio/podcasts/podcast5_john.mp3';
+import audio6 from '../../../../assets/images/audio/podcasts/podcast6_john.mp3';
+import audio7 from '../../../../assets/images/audio/podcasts/podcast7_john.mp3';
+import audio8 from '../../../../assets/images/audio/podcasts/podcast8_john.mp3';
+import audio9 from '../../../../assets/images/audio/podcasts/podcast9_john.mp3';
+import audio10 from '../../../../assets/images/audio/podcasts/podcast10_john.mp3';
+import audio11 from '../../../../assets/images/audio/podcasts/podcast11_john.mp3';
+import audio12 from '../../../../assets/images/audio/podcasts/podcast12_john.mp3';
+import audio13 from '../../../../assets/images/audio/podcasts/podcast13_john.mp3';
+import audio14 from '../../../../assets/images/audio/podcasts/podcast14_john.mp3';
+import audio15 from '../../../../assets/images/audio/podcasts/podcast15_john.mp3';
+import audio16 from '../../../../assets/images/audio/podcasts/podcast16_john.mp3';
 ---
 
 <MainLayout>
@@ -33,7 +31,7 @@ import audio16 from '../../../../assets/images/audio/podcasts/';
             <section class="grid-projects">
                 <!--1e podcast-->
                         <div class="project-card">
-                            <img src={img1}>
+                            <img src="../../../../public/">
                     
                             <h4>Nr 1. Introductie podcast.</h4>
 
@@ -520,5 +518,17 @@ import audio16 from '../../../../assets/images/audio/podcasts/';
     button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
     button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
     button3.addEventListener("click", (event) => { toggleAudio(event, 'audio3', 'progress3') });
-    button4.addEventListener('click', (evebt) => { toggleAudio(event, 'audio4', 'progress4') });
+    button4.addEventListener('click', (event) => { toggleAudio(event, 'audio4', 'progress4') });
+    button5.addEventListener('click', (event) => { toggleAudio(event, 'audio5', 'progress5') });
+    button6.addEventListener('click', (event) => { toggleAudio(event, 'audio6', 'progress6') });
+    button7.addEventListener('click', (event) => { toggleAudio(event, 'audio7', 'progress7') });
+    button8.addEventListener('click', (event) => { toggleAudio(event, 'audio8', 'progress8') });
+    button9.addEventListener('click', (event) => { toggleAudio(event, 'audio9', 'progress9') });
+    button10.addEventListener('click', (event) => { toggleAudio(event, 'audio10', 'progress10') });
+    button11.addEventListener('click', (event) => { toggleAudio(event, 'audio11', 'progress11') });
+    button12.addEventListener('click', (event) => { toggleAudio(event, 'audio12', 'progress12') });
+    button13.addEventListener('click', (event) => { toggleAudio(event, 'audio13', 'progress13') });
+    button14.addEventListener('click', (event) => { toggleAudio(event, 'audio14', 'progress14') });
+    button15.addEventListener('click', (event) => { toggleAudio(event, 'audio15', 'progress15') });
+    button16.addEventListener('click', (event) => { toggleAudio(event, 'audio16', 'progress16') });
 </script>
