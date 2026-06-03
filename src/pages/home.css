@@ -98,20 +98,39 @@ main {
   padding: 1rem 1rem 0;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   height: 100%;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 
   cursor: pointer;
 }
+/* Hele kaart klikbaar via link wrapper */
+.card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .card:hover {
   transform: translateY(-2px);
   border-color: rgba(250, 234, 7, 0.5);
   background: rgba(255, 255, 255, 0.07);
 }
 
-.card:hover .card-btn,
-.card:hover .card-btn-outline {
+.card:hover .card-btn {
+  background: var(--highlight-color);
+  color: #1a1e24;
+}
+
+.card-link:focus-visible {
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+.card-link:focus-visible .card-btn {
   background: var(--highlight-color);
   color: #1a1e24;
 }
@@ -267,18 +286,6 @@ main {
   
 }
 
-.card:has(.card-btn:focus-visible),
-.card:has(.card-btn-outline:focus-visible) {
-  outline: 3px solid var(--highlight-color);
-  outline-offset: 4px;
-  border-color: rgba(250, 234, 7, 0.6);
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.card-btn:focus-visible,
-.card-btn-outline:focus-visible {
-  outline: none;
-}
 
 /* --- Responsive ------------------------------------------- */
 
