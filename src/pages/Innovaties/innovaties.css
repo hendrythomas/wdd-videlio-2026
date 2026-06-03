@@ -61,21 +61,3 @@ body {
     margin-bottom: 10px;
     font-size: 20px;
 }
-
-.info-projects-link {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    text-decoration: none;
-    padding: 16px 40px;
-    border-radius: 20px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    margin-top: 90px;
-
-    transition: 0.3s;
-}
-
-.info-projects-link:hover {
-    background-color: var(--highlight-color);
-}

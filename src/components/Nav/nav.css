@@ -33,25 +33,6 @@ body > header > nav > .mobile-menu {
     }
   }
 
-  > .button {
-    --height: 3rem;
-    line-height: var(--height);
-    padding: 0;
-    padding-left:  1rem;
-    padding-right: 1rem;
-    border-radius: var(--height);
-    border: 2px solid #ffffff60;
-    background-color: var(--logo-color);
-    color: var(--text-primary);
-    transition: none;
-
-    &:hover {
-      background-color: var(--button-background);
-      color: var(--secondary-color);
-      text-decoration: none;
-    }
-  }
-
   > .logo {
     height: 4rem;
 

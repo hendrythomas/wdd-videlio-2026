@@ -1,16 +1,19 @@
 ---
+import Button from '../Button/Button.astro';
 import './agendaItem.css';
 
-const { title, description, date } = Astro.props;
+const { title, description, date, buttonText } = Astro.props;
 
 const day = date.getDate();
 const month = date.toLocaleString('nl', { month: 'long' });
-
 ---
 
-<div>
-    <span>{day}</span>
-    <span>{month}</span>
-    <h3>{title}</h3>
-    <p>{description}</p>
-</div>
+<section class="agenda-item">
+    <p class="agenda-item__date">
+        <span class="agenda-item__day">{day}</span>
+        <span class="agenda-item__month">{month}</span>
+    </p>
+    <h3 class="agenda-item__title">{title}</h3>
+    <p class="agenda-item__description">{description}</p>
+    <Button buttonClass="agenda-item__button">{buttonText ?? 'Doe mee'}</Button>
+</section>

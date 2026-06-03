@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
 import './contact.css'
 ---
 
@@ -7,9 +8,9 @@ import './contact.css'
     <main id="main-content" tabindex="-1" aria-label="Over ons">
         <div class="page-wrapper">
             <div class="page-header">
-                <a href="index.html" class="back-home" aria-label="Terug naar de homepagina">
+                <ButtonLink href="/" class="back-home" aria-label="Terug naar de homepagina">
                     ← Terug
-                </a>
+                </ButtonLink>
                 <h1 class="page-title">Over ons</h1>
             </div>
 
@@ -90,12 +91,13 @@ import './contact.css'
                             Rusthoven 40<br>
                             5655 CN Eindhoven
                         </p>
-                        <a class="location-btn"
-                           href="https://www.google.com/maps/search/?api=1&query=Rusthoven+40+5655+CN+Eindhoven"
-                           target="_blank" rel="noopener noreferrer"
-                           aria-label="Open het adres van Videlio in Google Maps (opent in nieuw tabblad)">
+                        <ButtonLink
+                                aria-label="Open het adres van Videlio in Google Maps (opent in nieuw tabblad)"
+                                target="_blank" rel="noopener noreferrer"
+                                href="https://www.google.com/maps/search/?api=1&query=Rusthoven+40+5655+CN+Eindhoven"
+                        >
                             Bekijk op Google Maps
-                        </a>
+                        </ButtonLink>
                     </div>
                     <div class="location-map">
                         <img
