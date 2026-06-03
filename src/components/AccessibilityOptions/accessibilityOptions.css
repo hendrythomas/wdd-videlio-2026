@@ -56,6 +56,37 @@
   }
 }
 
+.access-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  > span {
+    flex-shrink: 0;
+    margin-right: auto;
+    max-width: 50%;
+    font-size: var(--paragraph-font-size);
+  }
+
+  > button,
+  > label {
+    flex-shrink: 0;
+    width:  3rem;
+    height: 3rem;
+
+    > i {
+      font-size: 3rem;
+    }
+    &:has(input) > i::after {
+      content: 'toggle_off';
+    }
+    &:has(input:checked) > i::after {
+      content: 'toggle_on';
+      color: var(--highlight-color);
+      font-variation-settings: 'FILL' 1;
+    }
+  }
+}
 .access-item:first-of-type {
   align-items: center;
 
@@ -71,30 +102,7 @@
   }
 }
 
-.access-item {
-  display: flex;
 
-  > span {
-    margin-right: auto;
-    max-width: 50%;
-    font-size: var(--paragraph-font-size);
-  }
-
-  > button,
-  > label {
-    flex-shrink: 0;
-    width:  3rem;
-    height: 3rem;
-
-    > i {
-      font-size: 2rem;
-    }
-    &:has(input) > i::after {
-      content: 'toggle_off';
-    }
-    &:has(input:checked) > i::after {
-      content: 'toggle_on';
-      font-variation-settings: 'FILL' 1;
-    }
-  }
+:root.high-contrast {
+  --background: black;
 }
