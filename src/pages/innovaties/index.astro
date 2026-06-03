@@ -1,0 +1,62 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import InnovatieCard from '../../components/Innovatie-li/Innovatie-li.astro';
+import innovaties from '../../data/innovations.json';
+import ViewToggle from '../../components/Innovatie-li/view-toggle.astro'
+
+import './innovaties.css';
+
+/**
+ * Nu: lokale JSON. Later: vervang de import hierboven door een fetch():
+
+ */
+---
+
+<MainLayout>
+  <section class="innovaties-section">
+
+    <div class="innovaties-header">
+      <h1 class="innovaties-title">Innovaties</h1>
+      <p class="innovaties-intro">
+        Uitgelichte ontwikkelingen in toegankelijkheid, ... & ...
+      </p>
+
+      <ViewToggle />
+    </div>
+
+    <!-- Kaarten grid/list -->
+    <ul class="innovaties-grid" id="innovaties-grid" data-view="grid" aria-label="Overzicht innovaties">
+      {innovaties.map(item => (
+        <li>
+          <InnovatieCard item={item} view="grid" />
+        </li>
+      ))}
+    </ul>
+
+  </section>
+</MainLayout>
+
+<script>
+  const grid = document.getElementById('innovaties-grid');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.view-toggle-btn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view as 'grid' | 'list';
+
+      // Update grid data attribute (CSS reageert hierop)
+      grid?.setAttribute('data-view', view);
+
+      // Update kaarten data-view attribuut
+      grid?.querySelectorAll<HTMLElement>('.innovatie-card').forEach(card => {
+        card.className = `innovatie-card innovatie-card--${view}`;
+      });
+
+      // Toggle active state buttons
+      buttons.forEach(b => {
+        b.classList.toggle('view-toggle-btn--active', b === btn);
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+    });
+  });
+</script>

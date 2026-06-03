@@ -1,0 +1,147 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import './contact.css'
+---
+
+<MainLayout>
+    <main id="main-content" tabindex="-1" aria-label="Over ons">
+        <div class="page-wrapper">
+            <div class="page-header">
+                <h1 class="page-title">Contact <strong>ons</strong> </h1>
+            </div>
+
+            <!-- BESTUURSLEDEN / CONTACT -->
+            <section id="contact-section" class="section" aria-labelledby="section-board">
+                <h2 id="section-board" class="section-heading">Neem contact op</h2>
+                <p class="section-intro">Heb je een vraag of wil je meer weten over Videlio? Neem direct contact op met een van onze bestuursleden.</p>
+                <div class="board-bg">
+                    <ul class="board-grid" role="list">
+
+                        <!-- Lid 1 – John Willemse -->
+                        <li>
+                            <a class="board-card" href="mailto:john@videlio.nl"
+                               aria-label="Stuur een e-mail naar John Willemse, Voorzitter">
+                                <img class="board-card-photo" src="assets/images/members/JohnWillemse.png"
+                                     alt="Portretfoto van John Willemse" width="110" height="110" />
+                                <div class="board-card-identity">
+                                    <h3 class="board-card-name">John Willemse</h3>
+                                    <p class="board-card-role">Voorzitter</p>
+                                </div>
+                                <div class="board-card-divider" aria-hidden="true"></div>
+                                <p class="board-card-quote">Maak het onmogelijke mogelijk!</p>
+                                <span class="board-card-btn" aria-hidden="true">E-mail John</span>
+                            </a>
+                        </li>
+
+                        <!-- Lid 2 – Peter Meulenman -->
+                        <li>
+                            <a class="board-card" href="mailto:peter@videlio.nl"
+                               aria-label="Stuur een e-mail naar Peter Meulenman, Secretaris en Penningmeester">
+                                <img class="board-card-photo" src="assets/images/members/PeterMeulenman.jpg"
+                                     alt="Portretfoto van Peter Meulenman" width="110" height="110" />
+                                <div class="board-card-identity">
+                                    <h3 class="board-card-name">Peter Meulenman</h3>
+                                    <p class="board-card-role">Secretaris en Penningmeester</p>
+                                </div>
+                                <div class="board-card-divider" aria-hidden="true"></div>
+                                <p class="board-card-quote">Je moet bewegen voor je kunt sturen.</p>
+                                <span class="board-card-btn" aria-hidden="true">E-mail Peter</span>
+                            </a>
+                        </li>
+
+                        <!-- Lid 3 – Hans Kuijten -->
+                        <li>
+                            <a class="board-card" href="mailto:hans@videlio.nl"
+                               aria-label="Stuur een e-mail naar Hans Kuijten, Algemeen bestuurslid">
+                                <img class="board-card-photo" src="assets/images/members/HansKuijten.png"
+                                     alt="Portretfoto van Hans Kuijten" width="110" height="110" />
+                                <div class="board-card-identity">
+                                    <h3 class="board-card-name">Hans Kuijten</h3>
+                                    <p class="board-card-role">Algemeen bestuurslid</p>
+                                </div>
+                                <div class="board-card-divider" aria-hidden="true"></div>
+                                <p class="board-card-quote">Toegankelijkheid voor iedereen in Eindhoven</p>
+                                <span class="board-card-btn" aria-hidden="true">E-mail Hans</span>
+                            </a>
+                        </li>
+
+                        <!-- Lid 4 – Roger Ravelli -->
+                        <li>
+                            <a class="board-card" href="mailto:roger@videlio.nl"
+                               aria-label="Stuur een e-mail naar Roger Ravelli, Algemeen bestuurslid">
+                                <img class="board-card-photo" src="assets/images/members/RogerRavelli.jpg"
+                                     alt="Portretfoto van Roger Ravelli" width="110" height="110" />
+                                <div class="board-card-identity">
+                                    <h3 class="board-card-name">Roger Ravelli</h3>
+                                    <p class="board-card-role">Algemeen bestuurslid</p>
+                                </div>
+                                <div class="board-card-divider" aria-hidden="true"></div>
+                                <p class="board-card-quote">Roeien met de riemen die je wel hebt.</p>
+                                <span class="board-card-btn" aria-hidden="true">E-mail Roger</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </section>
+
+            <!-- WAAR ZIJN WE TE VINDEN -->
+            <section class="section" aria-labelledby="section-location">
+                <h2 id="section-location" class="section-heading">Waar zijn we te vinden</h2>
+                <div class="location-block">
+                    <div class="location-info">
+                        <p class="location-address">
+                            <strong>Stichting Videlio</strong><br>
+                            Bomanshof 147<br>
+                            5611 NR Eindhoven
+                        </p>
+                        <a class="location-btn"
+                           href="https://www.google.com/maps/search/?api=1&query=Bomanshof+147+5611+NR+Eindhoven"
+                           target="_blank" rel="noopener noreferrer"
+                           aria-label="Open het adres van Videlio in Google Maps (opent in nieuw tabblad)">
+                            Bekijk op Google Maps
+                        </a>
+                    </div>
+                    <div class="location-map">
+                        <img
+                            src="assets/images/decoratie/Videlio-locatie.png"
+                            alt="Buitenkant van het gebouw van Stichting Videlio aan de Bomanshof 147 in Eindhoven"
+                            width="100%"
+                            height="300"
+                            style="object-fit: cover; border-radius: 8px; display: block;"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <!-- WIE ZIJN WIJ -->
+            <section id="about-us-section" class="section">
+                <div class="banner"></div>
+                <h2 id="section-who" class="section-heading">Wie zijn wij</h2>
+                <p class="section-text">
+                    <strong>Stichting Videlio is opgericht door mensen met een visuele beperking. We willen dat mensen
+                        met een visuele beperking meer zichtbaar zijn om volwaardig mee te doen in de samenleving met
+                        eigenwaarde en eigen regie.</strong>
+                    <br><br>
+                    Onze kernpunten zijn bewustwording, participatie, ontmoeting, innovatie. John Willemse
+                    en Peter Meuleman zijn de oprichters van Videlio. Zij zijn beide slechtziend en staan midden in de
+                    samenleving.
+                </p>
+            </section>
+
+            <!-- ONZE MISSIE -->
+            <section class="section">
+                <h2 id="section-mission" class="section-heading">Onze missie</h2>
+                <p class="section-text">
+                    Wij streven naar een inclusieve samenleving waarin mensen met een visuele beperking gelijke kansen
+                    hebben op het gebied van persoonlijke ontwikkeling en sociale participatie.
+                    <br><br>
+                    Wij geloven in de kracht van samenwerking, ervaringsdeskundigheid en innovatie. Door bewustwording
+                    te creëren en praktische oplossingen te bieden, zorgen we voor <strong>een samenleving waarin VIPs
+                    volledig kunnen meedoen.</strong>
+                </p>
+            </section>
+
+        </div>
+    </main>
+</MainLayout>
