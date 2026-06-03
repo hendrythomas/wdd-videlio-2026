@@ -16,12 +16,19 @@ import '../../style/icons.css';
   </div>
   <div class="access-item">
     <span>Lettertype</span>
-    <button title="Verkleinen" data-action="setting-decrease-font">
+    <button title="Verkleinen" id="setting-decrease-font">
       <i class="material-icon" aria-hidden="true">remove</i>
     </button>
-    <button title="Vergroten" data-action="setting-increase-font">
+    <button title="Vergroten" id="setting-increase-font">
       <i class="material-icon" aria-hidden="true">add</i>
     </button>
+  </div>
+  <div class="access-item">
+    <span>Contrastthema gebruiken</span>
+    <label data-title="Aanzetten" data-checked-title="Uitzetten">
+      <i class="material-icon" aria-hidden="true"></i>
+      <input type="checkbox" id="setting-high-contrast">
+    </label>
   </div>
   <div class="access-item">
     <span>Muisaanwijzer vergroten</span>
@@ -30,16 +37,11 @@ import '../../style/icons.css';
       <input type="checkbox" id="setting-big-cursor">
     </label>
   </div>
-  <div class="access-item">
-    <span>Contrastthema gebruiken</span>
-    <label data-title="Aanzetten" data-checked-title="Uitzetten">
-      <i class="material-icon" aria-hidden="true"></i>
-      <input type="checkbox" id="setting-contrast-theme">
-    </label>
-  </div>
 </div>
 
-<script>
+<script is:inline>
+
+  let addedFontSize = 0;
 
   document.addEventListener('DOMContentLoaded', (e) => {
     updateSettings();
@@ -47,16 +49,19 @@ import '../../style/icons.css';
   });
 
   document.addEventListener('change', (e) => {
+    updateSettings(e.target);
     updateTooltips();
-    
-    const elem = e.target;
-    tryToggleBigCursor(elem);
-    tryToggleContrastTheme(elem);
   });
 
-  function updateSettings() {
-    tryToggleBigCursor(null);
-    tryToggleContrastTheme(null);
+  document.addEventListener('click', (e) => {
+    updateSettings(e.target);
+  });
+
+  function updateSettings(elem = null) {
+    tryToggleBigCursor(elem);
+    tryToggleContrastTheme(elem);
+    tryIncreaseFontSize(elem);
+    tryDecreaseFontSize(elem);
   }
 
   function updateTooltips() {
@@ -64,26 +69,47 @@ import '../../style/icons.css';
     
     for (const label of tooltipLabels || []) {
       const input = label.querySelector('input');
-      if (!input.checked) label.title = label.dataset.title;
-      if (input.checked)  label.title = label.dataset.checkedTitle;
+      if (input.checked) {
+        label.title = label.dataset.checkedTitle;
+      } else {
+        label.title = label.dataset.title;
+      }
     }
   }
 
   function tryToggleBigCursor(elem) {
+  }
+
+  function tryToggleContrastTheme(elem) {
     let input = elem;
     if (elem === null) {
-      input = document.getElementById('setting-big-cursor');
+      input = document.getElementById('setting-high-contrast');
       if (input === null) return;
     }
-    if (input.id !== 'setting-big-cursor') return;
+    if (input.id !== 'setting-high-contrast') return;
     
     if (input.checked) {
-      document.documentElement.classList.add('big-cursor');
+      document.documentElement.classList.add('high-contrast');
     } else {
-      document.documentElement.classList.remove('big-cursor');
+      document.documentElement.classList.remove('high-contrast');
     }
   }
 
-  function tryToggleContrastTheme(elem) {}
+  function tryIncreaseFontSize(button) {
+    if (button === null || button.id !== 'setting-increase-font') return;
+    addedFontSize += 1;
+    updateDocumentFontSize();
+  }
+
+function tryDecreaseFontSize(button) {
+  if (button === null || button.id !== 'setting-decrease-font') return;
+  addedFontSize -= 1;
+  if (addedFontSize < 0) addedFontSize = 0;
+  updateDocumentFontSize();
+}
+
+  function updateDocumentFontSize() {
+    document.documentElement.style.fontSize = `calc(1rem + ${addedFontSize}px)`;
+  }
 
 </script>
