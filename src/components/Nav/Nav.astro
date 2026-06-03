@@ -15,7 +15,7 @@ const currentPath = Astro.url.pathname;
     <div class="mobile-menu">
         <a class={(currentPath === '/' || currentPath.includes('/Doe-Mee!')) ? 'active' : ''} href="../">Doe mee</a>
         <a class={currentPath.includes('/Verhalen-Media')  ? 'active' : ''} href="/Verhalen-Media">Verhalen</a>
-        <a class={currentPath.includes('/Innovaties')  ? 'active' : ''} href="/innovaties">Innovaties</a>
+        <a class={currentPath.includes('/innovaties')  ? 'active' : ''} href="/innovaties">Innovaties</a>
         <a class={currentPath.includes('/Contact') ? 'active' : ''} href="/Contact">Contact</a>
     </div>
 </nav>
