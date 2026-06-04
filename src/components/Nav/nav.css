@@ -93,7 +93,7 @@ body:has(> header)::before {
 }
 
 
-@media (max-width: 1170px) {
+@media (max-width: 1220px) {
   .desktop {
     position: absolute;
     left: -999em;
@@ -102,7 +102,7 @@ body:has(> header)::before {
 }
 
 /* mobile menu */
-@media (max-width: 950px) {
+@media (max-width: 990px) {
   body > header > nav,
   body > header > nav > .mobile-menu {
 
