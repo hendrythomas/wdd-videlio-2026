@@ -1,16 +1,14 @@
 ---
 import './verhalen-media.css';
 import MainLayout from "../../layouts/MainLayout.astro";
-import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
 ---
-<MainLayout pageTitle='Verhalen'>
+<MainLayout>
     <section class="project-section">
         <h1>Verhalen & <strong>media</strong></h1>
 
         <main class="grid-projects">
-            
             <article class="project-card">
-                <ButtonLink href="/Verhalen-Media/Verhalen" class="project-card-link" aria-label="Lees of beluister verhalen van mede-VIPs">
+                <a href="/Verhalen-Media/Verhalen" class="project-card-link" aria-label="Lees of beluister verhalen van mede-VIPs">
                     <div class="project-card-img-wrap">
                         <img src="/assets/images/decoratie/verhalenVIPS.png" alt="">
                     </div>
@@ -19,7 +17,7 @@ import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
                         <p>Mensen met een visuele beperking die midden in het leven staan. In hun eigen woorden.</p>
                         <span class="info-projects-cta" aria-hidden="true">Bekijk alle verhalen van VIPS</span>
                     </div>
-                </ButtonLink>
+                </a>
             </article>
 
             <article class="project-card">
@@ -29,30 +27,8 @@ import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
                     </div>
                     <div class="info-projects">
                         <h2>Podcasts</h2>
-                        <p>uister naar VIPs die vertellen hoe zij de wereld ervaren.</p>
+                        <p>Luister naar VIPs die vertellen hoe zij de wereld ervaren.</p>
 
-                </div>
-            </div>
-
-            <div class="project-card">
-                <img src="assets/images/decoratie/podcast.png" alt="peter en patrick die ieder voor een microfoon zitten">
-
-                <div class="info-projects">
-                    <h2>Podcasts</h2>
-
-                    <ButtonLink href="/Verhalen-Media/Podcasts" class="info-projects-link">Hoor meer</ButtonLink>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <img src="assets/images/decoratie/rararadio.png" alt="peter meuleman die voor een microfoon staat">
-
-                <div class="info-projects">
-                    <h2>Radio</h2>
-
-                    <ButtonLink href="/Verhalen-Media/Radio" class="info-projects-link">Hoor meer</ButtonLink>
-                </div>
-            </div>
                         <span class="info-projects-cta" aria-hidden="true">Bekijk alle podcasts</span>
                     </div>
                 </a>
