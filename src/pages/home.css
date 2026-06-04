@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
 }
@@ -11,14 +12,16 @@ p:not(:first-child) {
 html {
   scrollbar-color: #ffffff80 transparent;
 }
+
 main {
-  &>section{
-    &> p{
+  &>section {
+    &>p {
       text-align: justify;
       line-height: 3rem;
     }
   }
 }
+
 body {
   margin: 0;
 
@@ -35,11 +38,12 @@ main {
   width: 80%;
   gap: 4rem;
 
-  > section {
-    > h1 {
+  >section {
+    >h1 {
       text-align: center;
     }
-    > p {
+
+    >p {
       text-align: justify;
     }
   }
@@ -104,6 +108,7 @@ main {
 
   cursor: pointer;
 }
+
 /* Hele kaart klikbaar via link wrapper */
 .card-link {
   display: flex;
@@ -145,6 +150,7 @@ main {
   border-radius: 1rem;
   margin-bottom: 1rem;
 }
+
 .hero-card .article-image {
   height: 16rem;
 }
@@ -175,6 +181,9 @@ main {
   padding-left: 1.5rem;
   justify-content: center;
 }
+
+
+
 /* Uitgelichte kaart */
 .card-featured {
   border-color: var(--highlight-color);
@@ -211,7 +220,7 @@ main {
 }
 
 .card-content.hero-content {
-    padding-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 
@@ -236,13 +245,13 @@ main {
 }
 
 /* Meta (datum, locatie) */
-.card-meta {
+.card-meta span {
   display: flex;
   flex-direction: column;
   align-self: end;
   gap: 0.3rem;
   font-size: 0.9rem;
-  padding: 1rem;
+  padding: 0.5rem;
   color: var(--highlight-color);
 }
 
@@ -283,7 +292,7 @@ main {
 .card-btn-outline:focus-visible {
   background: var(--highlight-color);
   color: #1a1e24;
-  
+
 }
 
 /* --- Responsive  */
