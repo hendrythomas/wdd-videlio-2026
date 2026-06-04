@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
 }
@@ -11,14 +12,16 @@ p:not(:first-child) {
 html {
   scrollbar-color: #ffffff80 transparent;
 }
+
 main {
-  &>section{
-    &> p{
+  &>section {
+    &>p {
       text-align: justify;
       line-height: 3rem;
     }
   }
 }
+
 body {
   margin: 0;
 
@@ -35,18 +38,19 @@ main {
   width: 80%;
   gap: 4rem;
 
-  > section {
-    > h1 {
+  >section {
+    >h1 {
       text-align: center;
     }
-    > p {
+
+    >p {
       text-align: justify;
     }
   }
 }
 
 
-/* --- Hero sectie ------------------------------------------ */
+/* --- Hero sectie  */
 .hero {
   display: flex;
   flex-direction: column;
@@ -80,7 +84,7 @@ main {
   }
 }
 
-/* --- Grid sectie ------------------------------------------ */
+/* --- Grid sectie  */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -90,7 +94,7 @@ main {
   padding-top: 1rem;
 }
 
-/* --- Kaart ------------------------------------------------ */
+/* --- Kaart  */
 .card {
   background: rgba(255, 255, 255, 0.04);
   border: 2px solid rgba(250, 234, 7, 0.18);
@@ -98,16 +102,42 @@ main {
   padding: 1rem 1rem 0;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   height: 100%;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 
   cursor: pointer;
 }
+
+/* Hele kaart klikbaar via link wrapper */
+.card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .card:hover {
   transform: translateY(-2px);
   border-color: rgba(250, 234, 7, 0.5);
   background: rgba(255, 255, 255, 0.07);
+}
+
+.card:hover .card-btn {
+  background: var(--highlight-color);
+  color: #1a1e24;
+}
+
+.card-link:focus-visible {
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+.card-link:focus-visible .card-btn {
+  background: var(--highlight-color);
+  color: #1a1e24;
 }
 
 .article-image {
@@ -120,6 +150,7 @@ main {
   border-radius: 1rem;
   margin-bottom: 1rem;
 }
+
 .hero-card .article-image {
   height: 16rem;
 }
@@ -150,6 +181,9 @@ main {
   padding-left: 1.5rem;
   justify-content: center;
 }
+
+
+
 /* Uitgelichte kaart */
 .card-featured {
   border-color: var(--highlight-color);
@@ -186,7 +220,7 @@ main {
 }
 
 .card-content.hero-content {
-    padding-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 
@@ -211,13 +245,13 @@ main {
 }
 
 /* Meta (datum, locatie) */
-.card-meta {
+.card-meta span {
   display: flex;
   flex-direction: column;
   align-self: end;
   gap: 0.3rem;
   font-size: 0.9rem;
-  padding: 1rem;
+  padding: 0.5rem;
   color: var(--highlight-color);
 }
 
@@ -229,7 +263,7 @@ main {
   margin-right: -1.5rem;
 }
 
-/* Knop — verticale layout (standaard desktop) */
+/* Knop  */
 .card-btn,
 .card-btn-outline {
   display: block;
@@ -258,9 +292,10 @@ main {
 .card-btn-outline:focus-visible {
   background: var(--highlight-color);
   color: #1a1e24;
+
 }
 
-/* --- Responsive ------------------------------------------- */
+/* --- Responsive  */
 
 @media (max-width: 900px) {
   .grid {

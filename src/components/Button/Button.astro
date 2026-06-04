@@ -1,0 +1,14 @@
+---
+import './button.css';
+
+const {
+    title,
+    buttonClass = '',
+} = Astro.props;
+
+const hasText = Astro.slots.has('default');
+---
+
+<button aria-label={title} class={`${buttonClass} button`} title={hasText ? '' : title}>
+    <slot />
+</button>

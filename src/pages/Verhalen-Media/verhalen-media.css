@@ -1,81 +1,129 @@
-body {
-    display: flex;
-    flex-direction: column;
-}
-
 .project-section {
-    padding: 60px;
+  padding: 60px 10%;
 }
 
 .project-section h1 {
-    text-align: center;
-    margin-bottom: 80px;
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .grid-projects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
 
-    gap: 20px;
-    justify-items: center;
+    .project-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px solid rgba(250, 234, 7, 0.18);
+  border-radius: 16px;
+  overflow: visible;
+  height: 100%;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 
-.project-card {
-    border: solid var(--highlight-color);
-    background-color: var(--background);
-    width: 360px;
-    height: 500px;
-    border-radius: 20px;
-    overflow: hidden;
+
+.project-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(250, 234, 7, 0.5);
+  background: rgba(255, 255, 255, 0.07);
 }
 
-.project-card img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 20px;
-    padding: 12px;
-    box-sizing: border-box;
-
-    transition: transform 0.3s ease;
+.project-card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
-.project-card:hover img {
-    transform: scale(1.05);
+.project-card-link:focus-visible {
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+.project-card-link:hover .info-projects-cta,
+.project-card-link:focus-visible .info-projects-cta {
+  background: var(--highlight-color);
+  color: #1a1e24;
+}
+
+.project-card-img-wrap {
+  width: 100%;
+  height: 10rem;
+  overflow: hidden;
+  padding: 1rem 1rem 0;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.project-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+  display: block;
+  transition: transform 0.35s ease;
 }
 
 
+/* Info sectie */
 .info-projects {
-    padding: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1rem 1rem 0;
+  gap: 1rem;
 }
 
 .info-projects h2 {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    font-size: 30px;
-    color: var(--highlight-color);
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin: 0;
+  line-height: 1.3;
 }
-
 .info-projects p {
-    margin-bottom: 10px;
-    font-size: 20px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+}
+/* CTA knop — zelfde als .card-btn */
+.info-projects-cta {
+  display: block;
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-top: auto;
+  padding: 0.85rem 1rem;
+  background: rgba(250, 234, 7, 0.1);
+  color: var(--highlight-color);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  border-top: 1px solid rgba(250, 234, 7, 0.2);
+  border-radius: 0 0 16px 16px;
+  transition: background 0.2s ease, color 0.2s ease;
+  letter-spacing: 0.02em;
 }
 
-.info-projects-link {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    text-decoration: none;
-    padding: 16px 40px;
-    border-radius: 20px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    margin-top: 90px;
-
-    transition: 0.3s;
+.project-card-link:hover .info-projects-cta {
+  background: var(--highlight-color);
+  color: #1a1e24;
 }
 
-.info-projects-link:hover {
-    background-color: var(--highlight-color);
+/* Responsive */
+@media (max-width: 900px) {
+  .grid-projects {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid-projects {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,0 +1,12 @@
+.link {
+    flex-shrink: 0;
+    width: fit-content;
+    color: var(--text-primary);
+    font-size: var(--paragraph-font-size);
+    text-decoration: none;
+    font-weight: bold;
+
+
+    &.active {
+        color: var(--highlight-color);    }
+}
