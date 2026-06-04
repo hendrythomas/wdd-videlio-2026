@@ -24,6 +24,9 @@
     user-select: none;
     padding-right: 0.5rem;
   }
+  &:hover > span {
+    color: var(--secondary-color);
+  }
 }
 
 .access-menu {
