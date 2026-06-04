@@ -8,70 +8,78 @@ import './contact.css'
     <main id="main-content" tabindex="-1" aria-label="Over ons">
         <div class="page-wrapper">
             <div class="page-header">
-                <h1 class="page-title">Over ons</h1>
+                <h1 class="page-title">Contact <strong>ons</strong> </h1>
             </div>
 
             <!-- BESTUURSLEDEN / CONTACT -->
-            <section class="section" aria-labelledby="section-board">
+            <section id="contact-section" class="section" aria-labelledby="section-board">
                 <h2 id="section-board" class="section-heading">Neem contact op</h2>
                 <p class="section-intro">Heb je een vraag of wil je meer weten over Videlio? Neem direct contact op met een van onze bestuursleden.</p>
                 <div class="board-bg">
                     <ul class="board-grid" role="list">
 
                         <!-- Lid 1 – John Willemse -->
-                        <li class="board-card" aria-label="Bestuurslid John Willemse, Voorzitter">
-                            <img class="board-card-photo" src="assets/images/members/JohnWillemse.png"
-                                 alt="Portretfoto van John Willemse" width="110" height="110" />
-                            <div class="board-card-identity">
-                                <h3 class="board-card-name">John Willemse</h3>
-                                <p class="board-card-role">Voorzitter</p>
-                            </div>
-                            <div class="board-card-divider" aria-hidden="true"></div>
-                            <p class="board-card-quote">Maak het onmogelijke mogelijk!</p>
-                            <a class="board-card-btn" href="mailto:john@videlio.nl"
-                               aria-label="Stuur een e-mail naar John Willemse">E-mail John</a>
+                        <li>
+                            <a class="board-card" href="mailto:john@videlio.nl"
+                               aria-label="Stuur een e-mail naar voorzitter, John Willemse.">
+                                <img class="board-card-photo" src="assets/images/members/JohnWillemse.png"
+                                     alt="Portretfoto van John Willemse" width="110" height="110" />
+                                <div class="board-card-identity">
+                                    <h3 class="board-card-name">John Willemse</h3>
+                                    <p class="board-card-role">Voorzitter</p>
+                                </div>
+                                <div class="board-card-divider" aria-hidden="true"></div>
+                                <p class="board-card-quote">Maak het onmogelijke mogelijk!</p>
+                                <span class="board-card-btn" aria-hidden="true">E-mail John</span>
+                            </a>
                         </li>
 
                         <!-- Lid 2 – Peter Meulenman -->
-                        <li class="board-card" aria-label="Bestuurslid Peter Meulenman, Secretaris en Penningmeester">
-                            <img class="board-card-photo" src="assets/images/members/PeterMeulenman.jpg"
-                                 alt="Portretfoto van Peter Meulenman" width="110" height="110" />
-                            <div class="board-card-identity">
-                                <h3 class="board-card-name">Peter Meulenman</h3>
-                                <p class="board-card-role">Secretaris en Penningmeester</p>
-                            </div>
-                            <div class="board-card-divider" aria-hidden="true"></div>
-                            <p class="board-card-quote">Je moet bewegen voor je kunt sturen.</p>
-                            <a class="board-card-btn" href="mailto:peter@videlio.nl"
-                               aria-label="Stuur een e-mail naar Peter Meulenman">E-mail Peter</a>
+                        <li>
+                            <a class="board-card" href="mailto:peter@videlio.nl"
+                               aria-label="Stuur een e-mail naar Secretaris en Penningmeester, Peter Meulenman.">
+                                <img class="board-card-photo" src="assets/images/members/PeterMeulenman.jpg"
+                                     alt="Portretfoto van Peter Meulenman" width="110" height="110" />
+                                <div class="board-card-identity">
+                                    <h3 class="board-card-name">Peter Meulenman</h3>
+                                    <p class="board-card-role">Secretaris en Penningmeester</p>
+                                </div>
+                                <div class="board-card-divider" aria-hidden="true"></div>
+                                <p class="board-card-quote">Je moet bewegen voor je kunt sturen.</p>
+                                <span class="board-card-btn" aria-hidden="true">E-mail Peter</span>
+                            </a>
                         </li>
 
                         <!-- Lid 3 – Hans Kuijten -->
-                        <li class="board-card" aria-label="Bestuurslid Hans Kuijten, Algemeen bestuurslid">
-                            <img class="board-card-photo" src="assets/images/members/HansKuijten.png"
-                                 alt="Portretfoto van Hans Kuijten" width="110" height="110" />
-                            <div class="board-card-identity">
-                                <h3 class="board-card-name">Hans Kuijten</h3>
-                                <p class="board-card-role">Algemeen bestuurslid</p>
-                            </div>
-                            <div class="board-card-divider" aria-hidden="true"></div>
-                            <p class="board-card-quote">Toegankelijkheid voor iedereen in Eindhoven</p>
-                            <a class="board-card-btn" href="mailto:hans@videlio.nl"
-                               aria-label="Stuur een e-mail naar Hans Kuijten">E-mail Hans</a>
+                        <li>
+                            <a class="board-card" href="mailto:hans@videlio.nl"
+                               aria-label="Stuur een e-mail naar Algemeen bestuurslid, Hans Kuijten.">
+                                <img class="board-card-photo" src="assets/images/members/HansKuijten.png"
+                                     alt="Portretfoto van Hans Kuijten" width="110" height="110" />
+                                <div class="board-card-identity">
+                                    <h3 class="board-card-name">Hans Kuijten</h3>
+                                    <p class="board-card-role">Algemeen bestuurslid</p>
+                                </div>
+                                <div class="board-card-divider" aria-hidden="true"></div>
+                                <p class="board-card-quote">Toegankelijkheid voor iedereen in Eindhoven</p>
+                                <span class="board-card-btn" aria-hidden="true">E-mail Hans</span>
+                            </a>
                         </li>
 
                         <!-- Lid 4 – Roger Ravelli -->
-                        <li class="board-card" aria-label="Bestuurslid Roger Ravelli, Algemeen bestuurslid">
-                            <img class="board-card-photo" src="assets/images/members/RogerRavelli.jpg"
-                                 alt="Portretfoto van Roger Ravelli" width="110" height="110" />
-                            <div class="board-card-identity">
-                                <h3 class="board-card-name">Roger Ravelli</h3>
-                                <p class="board-card-role">Algemeen bestuurslid</p>
-                            </div>
-                            <div class="board-card-divider" aria-hidden="true"></div>
-                            <p class="board-card-quote">Roeien met de riemen die je wel hebt.</p>
-                            <a class="board-card-btn" href="mailto:roger@videlio.nl"
-                               aria-label="Stuur een e-mail naar Roger Ravelli">E-mail Roger</a>
+                        <li>
+                            <a class="board-card" href="mailto:roger@videlio.nl"
+                               aria-label="Stuur een e-mail naar  Algemeen bestuurslid, Roger Ravelli">
+                                <img class="board-card-photo" src="assets/images/members/RogerRavelli.jpg"
+                                     alt="Portretfoto van Roger Ravelli" width="110" height="110" />
+                                <div class="board-card-identity">
+                                    <h3 class="board-card-name">Roger Ravelli</h3>
+                                    <p class="board-card-role">Algemeen bestuurslid</p>
+                                </div>
+                                <div class="board-card-divider" aria-hidden="true"></div>
+                                <p class="board-card-quote">Roeien met de riemen die je wel hebt.</p>
+                                <span class="board-card-btn" aria-hidden="true">E-mail Roger</span>
+                            </a>
                         </li>
 
                     </ul>
@@ -85,8 +93,8 @@ import './contact.css'
                     <div class="location-info">
                         <p class="location-address">
                             <strong>Stichting Videlio</strong><br>
-                            Rusthoven 40<br>
-                            5655 CN Eindhoven
+                            Bomanshof 147<br>
+                            5611 NR Eindhoven
                         </p>
                         <ButtonLink
                                 aria-label="Open het adres van Videlio in Google Maps (opent in nieuw tabblad)"
@@ -98,8 +106,8 @@ import './contact.css'
                     </div>
                     <div class="location-map">
                         <img
-                            src="assets/images/building-placeholder.jpg"
-                            alt="Buitenkant van het gebouw van Stichting Videlio aan de Rusthoven 40 in Eindhoven"
+                            src="assets/images/decoratie/Videlio-locatie.png"
+                            alt="Buitenkant van het gebouw van Stichting Videlio aan de Bomanshof 147 in Eindhoven"
                             width="100%"
                             height="300"
                             style="object-fit: cover; border-radius: 8px; display: block;"
@@ -109,7 +117,7 @@ import './contact.css'
             </section>
 
             <!-- WIE ZIJN WIJ -->
-            <section class="section">
+            <section id="about-us-section" class="section">
                 <div class="banner"></div>
                 <h2 id="section-who" class="section-heading">Wie zijn wij</h2>
                 <p class="section-text">
