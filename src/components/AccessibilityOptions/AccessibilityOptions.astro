@@ -16,6 +16,9 @@ import '../../style/icons.css';
   </div>
   <div class="access-item">
     <span>Lettertype</span>
+    <button title="Resetten" id="setting-reset-font">
+      <i class="material-icon" aria-hidden="true">refresh</i>
+    </button>
     <button title="Verkleinen" id="setting-decrease-font">
       <i class="material-icon" aria-hidden="true">remove</i>
     </button>
@@ -39,12 +42,12 @@ import '../../style/icons.css';
   </div>
 </div>
 
-<script is:inline>
+<script>
 
   let addedFontSize = 0;
 
   document.addEventListener('DOMContentLoaded', (e) => {
-    updateSettings();
+    updateSettings(); /* TODO: use localstorage */
     updateTooltips();
   });
 
@@ -62,6 +65,7 @@ import '../../style/icons.css';
     tryToggleContrastTheme(elem);
     tryIncreaseFontSize(elem);
     tryDecreaseFontSize(elem);
+    tryResetFontSize(elem);
   }
 
   function updateTooltips() {
@@ -95,21 +99,31 @@ import '../../style/icons.css';
     }
   }
 
-  function tryIncreaseFontSize(button) {
-    if (button === null || button.id !== 'setting-increase-font') return;
-    addedFontSize += 1;
+  function tryResetFontSize(button) {
+    if (button === null || button.id !== 'setting-reset-font') return;
+
+    addedFontSize = 0;
     updateDocumentFontSize();
   }
 
-function tryDecreaseFontSize(button) {
-  if (button === null || button.id !== 'setting-decrease-font') return;
-  addedFontSize -= 1;
-  if (addedFontSize < 0) addedFontSize = 0;
-  updateDocumentFontSize();
-}
+  function tryIncreaseFontSize(button) {
+    if (button === null || button.id !== 'setting-increase-font') return;
+
+    addedFontSize += 0.1;
+    if (addedFontSize > 1) addedFontSize = 1;
+    updateDocumentFontSize();
+  }
+
+  function tryDecreaseFontSize(button) {
+    if (button === null || button.id !== 'setting-decrease-font') return;
+
+    addedFontSize -= 0.1;
+    if (addedFontSize < -0.5) addedFontSize = -0.5;
+    updateDocumentFontSize();
+  }
 
   function updateDocumentFontSize() {
-    document.documentElement.style.fontSize = `calc(1rem + ${addedFontSize}px)`;
+    document.documentElement.style.fontSize = `${1 + addedFontSize}rem`;
   }
 
 </script>
