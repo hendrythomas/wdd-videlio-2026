@@ -1,5 +1,6 @@
 ---
 import './nav.css';
+import Link from '../Link/Link.astro';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -13,10 +14,10 @@ const currentPath = Astro.url.pathname;
         <input type="checkbox">
     </label>
     <div class="mobile-menu">
-        <a class={currentPath === '/' ? 'active' : ''} href="../">Doe mee</a>
-        <a class={currentPath.includes('/Agenda') ? 'active' : ''} href="/Agenda">Agenda</a>
-        <a class={currentPath.includes('/Verhalen-Media')  ? 'active' : ''} href="/Verhalen-Media">Verhalen</a>
-        <a class={currentPath.includes('/Innovaties')  ? 'active' : ''} href="/Innovaties">Innovaties</a>
-        <a class={currentPath.includes('/Contact') ? 'active' : ''} href="/Contact">Contact</a>
+        <Link isActive={currentPath === '/'} href="../">Doe mee</Link>
+        <Link isActive={currentPath.includes('/Agenda')} href="/Agenda">Agenda</Link>
+        <Link isActive={currentPath.includes('/Verhalen-Media')} href="/Verhalen-Media">Verhalen</Link>
+        <Link isActive={currentPath.includes('/Innovaties')} href="/Innovaties">Innovaties</Link>
+        <Link isActive={currentPath.includes('/Contact')} href="/Contact">Contact</Link>
     </div>
 </nav>

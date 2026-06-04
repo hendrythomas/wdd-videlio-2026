@@ -15,24 +15,6 @@ body > header > nav > .mobile-menu {
   height: var(--nav-height);
   gap: 2rem;
 
-  > a {
-    flex-shrink: 0;
-    width: fit-content;
-    color: var(--text-primary);
-    font-size: var(--paragraph-font-size);
-    text-decoration: none;
-    font-weight: bold;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    &.active {
-      color: var(--highlight-color);
-      text-decoration: underline;
-    }
-  }
-
   > .logo {
     height: 4rem;
 
