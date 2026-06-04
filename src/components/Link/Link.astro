@@ -1,0 +1,14 @@
+---
+import './link.css';
+
+const {
+    isActive,
+    ...rest
+} = Astro.props;
+
+const className = `${isActive ? 'active' : ''} link`;
+---
+
+<a class={className} {...rest}>
+    <slot />
+</a>

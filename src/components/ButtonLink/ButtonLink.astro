@@ -1,0 +1,12 @@
+---
+import './buttonLink.css';
+
+const {
+    linkClass,
+    ...rest
+} = Astro.props;
+---
+
+<a class=`${linkClass} button-link` {...rest}>
+    <slot />
+</a>

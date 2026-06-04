@@ -15,43 +15,6 @@ body > header > nav > .mobile-menu {
   height: var(--nav-height);
   gap: 2rem;
 
-  > a {
-    flex-shrink: 0;
-    width: fit-content;
-    color: var(--text-primary);
-    font-size: var(--paragraph-font-size);
-    text-decoration: none;
-    font-weight: bold;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    &.active {
-      color: var(--highlight-color);
-      text-decoration: underline;
-    }
-  }
-
-  > .button {
-    --height: 3rem;
-    line-height: var(--height);
-    padding: 0;
-    padding-left:  1rem;
-    padding-right: 1rem;
-    border-radius: var(--height);
-    border: 2px solid #ffffff60;
-    background-color: var(--logo-color);
-    color: var(--text-primary);
-    transition: none;
-
-    &:hover {
-      background-color: var(--button-background);
-      color: var(--secondary-color);
-      text-decoration: none;
-    }
-  }
-
   > .logo {
     height: 4rem;
 

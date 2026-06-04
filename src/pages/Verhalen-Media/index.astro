@@ -1,8 +1,9 @@
 ---
 import './verhalen-media.css';
 import MainLayout from "../../layouts/MainLayout.astro";
+import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
 ---
-<MainLayout>
+<MainLayout pageTitle='Verhalen'>
     <section class="project-section">
         <h1>Verhalen & media</h1>
 
@@ -13,7 +14,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
                 <div class="info-projects">
                     <h2>Verhalen van VIPs</h2>
 
-                    <a href="/Verhalen-Media/Verhalen" class="info-projects-link">Hoor meer</a>
+                    <ButtonLink href="/Verhalen-Media/Verhalen" class="info-projects-link">Hoor meer</ButtonLink>
                 </div>
             </div>
 
@@ -23,7 +24,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
                 <div class="info-projects">
                     <h2>Podcasts</h2>
 
-                    <a href="/Verhalen-Media/Podcasts" class="info-projects-link">Hoor meer</a>
+                    <ButtonLink href="/Verhalen-Media/Podcasts" class="info-projects-link">Hoor meer</ButtonLink>
                 </div>
             </div>
 
@@ -33,7 +34,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
                 <div class="info-projects">
                     <h2>Radio</h2>
 
-                    <a href="/Verhalen-Media/Radio" class="info-projects-link">Hoor meer</a>
+                    <ButtonLink href="/Verhalen-Media/Radio" class="info-projects-link">Hoor meer</ButtonLink>
                 </div>
             </div>
         </main>
