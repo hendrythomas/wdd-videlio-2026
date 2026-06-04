@@ -1,10 +1,12 @@
 ---
 import Header from '../components/Header/Header.astro';
 import Footer from '../components/Footer/Footer.astro';
+import ButtonLink from '../components/ButtonLink/ButtonLink.astro';
 
-const { pageTitle } = Astro.props;
+const { pageTitle, backHref } = Astro.props;
 
 import '../style/index.css';
+import './mainLayout.css';
 ---
 
 <html lang="nl">
@@ -17,6 +19,7 @@ import '../style/index.css';
 
 <body>
     <Header />
+    { backHref && <ButtonLink linkClass="main-layout-back-button" href={backHref}>← Terug</ButtonLink> }
     <slot />
     <Footer />
 </body>

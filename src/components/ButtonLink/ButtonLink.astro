@@ -2,10 +2,11 @@
 import './buttonLink.css';
 
 const {
+    linkClass,
     ...rest
 } = Astro.props;
 ---
 
-<a class="button-link" {...rest}>
+<a class=`${linkClass} button-link` {...rest}>
     <slot />
 </a>
