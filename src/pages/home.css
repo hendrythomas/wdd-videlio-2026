@@ -46,7 +46,7 @@ main {
 }
 
 
-/* --- Hero sectie ------------------------------------------ */
+/* --- Hero sectie  */
 .hero {
   display: flex;
   flex-direction: column;
@@ -80,7 +80,7 @@ main {
   }
 }
 
-/* --- Grid sectie ------------------------------------------ */
+/* --- Grid sectie  */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -90,7 +90,7 @@ main {
   padding-top: 1rem;
 }
 
-/* --- Kaart ------------------------------------------------ */
+/* --- Kaart  */
 .card {
   background: rgba(255, 255, 255, 0.04);
   border: 2px solid rgba(250, 234, 7, 0.18);
@@ -254,7 +254,7 @@ main {
   margin-right: -1.5rem;
 }
 
-/* Knop — verticale layout (standaard desktop) */
+/* Knop  */
 .card-btn,
 .card-btn-outline {
   display: block;
