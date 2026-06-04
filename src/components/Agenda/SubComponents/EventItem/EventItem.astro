@@ -1,0 +1,13 @@
+---
+import ButtonLink from '../../../ButtonLink/ButtonLink.astro';
+
+import './eventItem.css';
+const { event } = Astro.props;
+---
+
+<section class="event-item">
+    <h3>{event.title}</h3>
+    <p>{event.description}</p>
+
+    <ButtonLink linkClass='event-item__button'>Meer info</ButtonLink>
+</section>
