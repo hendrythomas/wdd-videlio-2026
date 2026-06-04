@@ -59,7 +59,10 @@
 .access-item {
   display: flex;
   flex-wrap: wrap;
+  padding: 1rem;
   gap: 1rem;
+  border-radius: 10px;
+  border: 2px solid #ffffff40;
 
   > span {
     flex-shrink: 0;
@@ -89,6 +92,7 @@
 }
 .access-item:first-of-type {
   align-items: center;
+  border: none;
 
   > h2 {
     margin-right: auto;
