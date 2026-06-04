@@ -24,12 +24,14 @@ body > header > nav > .mobile-menu {
     font-weight: bold;
 
     &:hover {
-      text-decoration: underline;
+      color: var(--highlight-color);
+      border-bottom: solid 1px var(--highlight-color);
+
     }
 
     &.active {
       color: var(--highlight-color);
-      text-decoration: underline;
+      border-bottom: solid 1px var(--highlight-color);
     }
   }
 

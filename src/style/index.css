@@ -70,7 +70,7 @@ h3 {
     font-weight: bold;
 }
 
-p, label {
+p, label, span {
     color: var(--text-primary);
     font-size: var(--paragraph-font-size);
 }

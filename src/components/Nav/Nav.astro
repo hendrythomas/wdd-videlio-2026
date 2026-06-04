@@ -1,10 +1,11 @@
 ---
 import './nav.css';
+import Link from '../Link/Link.astro';
 
 const currentPath = Astro.url.pathname;
 ---
 
-<nav aria-label="Navigatie menu">
+<nav class="navigation" aria-label="Navigatie menu">
     <a class="logo" href="../" aria-label="Terug naar Home pagina">
         <img src="../assets/images/branding/logo_yellow.svg" alt="">
     </a>
@@ -13,9 +14,10 @@ const currentPath = Astro.url.pathname;
         <input type="checkbox">
     </label>
     <div class="mobile-menu">
-        <a class={(currentPath === '/' || currentPath.includes('/Doe-Mee!')) ? 'active' : ''} href="../">Doe mee</a>
-        <a class={currentPath.includes('/Verhalen-Media')  ? 'active' : ''} href="/Verhalen-Media">Verhalen</a>
-        <a class={currentPath.includes('/Innovaties')  ? 'active' : ''} href="/innovaties">Innovaties</a>
-        <a class={currentPath.includes('/Contact') ? 'active' : ''} href="/Contact">Contact</a>
+        <Link isActive={currentPath === '/' || currentPath.includes('/Doe-Mee!')} href="../">Doe mee</Link>
+        <Link isActive={currentPath.includes('/Agenda')} href="/Agenda">Agenda</Link>
+        <Link isActive={currentPath.includes('/Verhalen-Media')} href="/Verhalen-Media">Verhalen</Link>
+        <Link isActive={currentPath.includes('/innovaties')} href="/innovaties">Innovaties</Link>
+        <Link isActive={currentPath.includes('/Contact')} href="/Contact">Contact</Link>
     </div>
 </nav>
