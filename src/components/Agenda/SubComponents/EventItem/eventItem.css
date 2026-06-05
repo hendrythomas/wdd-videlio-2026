@@ -1,0 +1,8 @@
+.event-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-item__button {
+    align-self: flex-end;
+}
