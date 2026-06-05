@@ -1,9 +1,23 @@
 ---
-import AgendaItem from '../AgendaItem/AgendaItem.astro';
+import AgendaItem from './SubComponents/AgendaItem/AgendaItem.astro';
 
 import './agenda.css';
+
+const events = [
+    {
+        date: new Date(),
+        title: 'Title',
+        description: 'description ehwhfuiwhuehd chwhfuhd uiehwnd ieofwuhf ijf',
+    },
+    {
+        date: new Date(),
+        title: 'Title',
+        description: 'description ehwhfuiwhuehd chwhfuhd uiehwnd ieofwuhf ijf',
+    }
+]
 ---
 
 <div>
-    <AgendaItem date={new Date()} title="Titel" description="blablabal ufhueheewu diehuwduheuw UHEdiheuhdehiuhd... We kunnen hier dit en dit doen." />
+    <AgendaItem events={events} />
+    <AgendaItem events={events} />
 </div>
