@@ -16,51 +16,95 @@ import '../../style/icons.css';
   </div>
   <div class="access-item">
     <span>Lettertype</span>
-    <button title="Resetten" id="setting-reset-font">
-      <i class="material-icon" aria-hidden="true">refresh</i>
-    </button>
-    <button title="Verkleinen" id="setting-decrease-font">
+    <button title="Verkleinen" id="setting-decrease-font" data-access-setting>
       <i class="material-icon" aria-hidden="true">remove</i>
     </button>
-    <button title="Vergroten" id="setting-increase-font">
+    <button title="Vergroten" id="setting-increase-font" data-access-setting>
       <i class="material-icon" aria-hidden="true">add</i>
+    </button>
+    <button title="Resetten" id="setting-reset-font" data-access-setting>
+      <i class="material-icon" aria-hidden="true">refresh</i>
     </button>
   </div>
   <div class="access-item">
     <span>Contrastthema gebruiken</span>
     <label data-title="Aanzetten" data-checked-title="Uitzetten">
       <i class="material-icon" aria-hidden="true"></i>
-      <input type="checkbox" id="setting-high-contrast">
+      <input type="checkbox" id="setting-high-contrast" data-access-setting>
     </label>
   </div>
   <div class="access-item">
     <span>Muisaanwijzer vergroten</span>
     <label data-title="Aanzetten" data-checked-title="Uitzetten">
       <i class="material-icon" aria-hidden="true"></i>
-      <input type="checkbox" id="setting-big-cursor">
+      <input type="checkbox" id="setting-big-cursor" data-access-setting>
     </label>
   </div>
 </div>
 
 <script>
+  class Setting {
+    constructor(id, checked) {
+      this.id = id;
+      this.checked = checked;
+    }
+  }
+
+  let settings = [];
+  
+  function getSettings() {
+    const storageSettingsJson = localStorage.getItem('settings');
+    settings = JSON.parse(storageSettingsJson) || [];
+  }
+
+  function saveSettings() {
+    const settingsJson = JSON.stringify(settings)
+    localStorage.setItem('settings', settingsJson);
+  }
+
+  function setSettingElems() {
+    getSettings();
+
+    for (const setting of settings) {
+      const settingElem = document.getElementById(setting.id);
+      settingElem.checked = setting.checked;
+    }
+  }
+
+  function saveSettingElems() {
+    const settingElems = document.querySelectorAll('[data-access-setting]');
+    if (settingElems === null) return;
+
+    settings = [];
+    for (const settingElem of settingElems) {
+      if (settingElem.checked === undefined) continue;
+      settings.push(
+        new Setting(settingElem.id, settingElem.checked)
+      );
+    }
+
+    saveSettings();
+  } 
 
   let addedFontSize = 0;
 
   document.addEventListener('DOMContentLoaded', (e) => {
-    updateSettings(); /* TODO: use localstorage */
+    setSettingElems();
+    triggerSettings();
     updateTooltips();
   });
 
   document.addEventListener('change', (e) => {
-    updateSettings(e.target);
+    triggerSettings(e.target);
     updateTooltips();
+    saveSettingElems();
   });
 
   document.addEventListener('click', (e) => {
-    updateSettings(e.target);
+    triggerSettings(e.target);
   });
 
-  function updateSettings(elem = null) {
+  function triggerSettings(elem = null) {
     tryToggleBigCursor(elem);
     tryToggleContrastTheme(elem);
     tryIncreaseFontSize(elem);
