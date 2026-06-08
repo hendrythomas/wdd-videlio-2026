@@ -1,0 +1,169 @@
+---
+//@ts-nocheck
+import MainLayout from '../../../../layouts/MainLayout.astro';
+import audio1 from '../../../../../assets/audio/podcasts/podcast1_john.mp3';
+import audio2 from '../../../../../assets/audio/podcasts/podcast2_john.mp3';
+import audio3 from '../../../../../assets/audio/podcasts/podcast3_john.mp3';
+import audio4 from '../../../../../assets/audio/podcasts/podcast4_john.mp3';
+import audio5 from '../../../../../assets/audio/podcasts/podcast5_john.mp3';
+import audio6 from '../../../../../assets/audio/podcasts/podcast6_john.mp3';
+import audio7 from '../../../../../assets/audio/podcasts/podcast7_john.mp3';
+import audio8 from '../../../../../assets/audio/podcasts/podcast8_john.mp3';
+import audio9 from '../../../../../assets/audio/podcasts/podcast9_john.mp3';
+import audio10 from '../../../../../assets/audio/podcasts/podcast10_john.mp3';
+import audio11 from '../../../../../assets/audio/podcasts/podcast11_john.mp3';
+import audio12 from '../../../../../assets/audio/podcasts/podcast12_john.mp3';
+import audio13 from '../../../../../assets/audio/podcasts/podcast13_john.mp3';
+import audio14 from '../../../../../assets/audio/podcasts/podcast14_john.mp3';
+import audio15 from '../../../../../assets/audio/podcasts/podcast15_john.mp3';
+import audio16 from '../../../../../assets/audio/podcasts/podcast16_john.mp3';
+import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
+---
+
+<MainLayout>
+    <section class="project-section">
+        <h1>Podcasts/John Willemse</h1>
+    </section>
+
+    <section class="podcast-page">
+        <div class="audio">
+            <img src="../../assets/images/decoratie/john.png" class="main-img">
+
+            <h4 id="current-title">Nr 1. Introductie podcast</h4>
+
+            <audio id="audio1"></audio>
+
+            <div class="control-buttons">
+                <button id="play-button">
+                    ▶
+                </button>
+
+                <input type="range" value="0" id="progress">
+            </div>
+        </div>
+
+        <div class="playlist">
+            <div class="podcast" data-src={} data-title="Nr 1. Introductie podcast">
+                Nr 1. Introductie podcast
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 2. De samenleving heeft een handicap. Niet ik!">
+                Nr 2. De samenleving heeft een handicap. Niet ik!
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 3. De cijfers, achtergronden en oplossingen">
+                Nr 3. De cijfers, achtergronden en oplossingen
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 4. Wat is jouw doel en identiteit?">
+                Nr 4. Wat is jouw doel en identiteit?
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 5. Jouw perspectief, wat vind je echt belangrijk?">
+                Nr 5. Jouw perspectief, wat vind je echt belangrijk?
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 6. De activiteiten van Videlio">
+                Nr 6. De activiteiten van Videlio
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 7. Bijziendheid epidemie">
+                Nr 7. Bijziendheid epidemie
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 8. Mentale weerbaarheid">
+                Nr 8. Mentale weerbaarheid
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 9. Ben een mentale winnaar">
+                Nr 9. Ben een mentale winnaar
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 10. Van beperkingen naar mogelijkheden zien">
+                Nr 10. Van beperkingen naar mogelijkheden zien
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 11.">
+                Nr 11.
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 12. De weg naar succes">
+                Nr 12. De weg naar succes
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 13.Emotionele intelligentie">
+                Nr 13. Emotionele intelligentie
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 14. Zinvolutie: de zin van jouw leven">
+                Nr 14. Zinvolutie: de zin van jouw leven
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 15. Succesfactoren naar werk toe">
+                Nr 15. Succesfactoren naar werk toe
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 16. Elke dag beter, leer van de besten!">
+                Nr 16. Elke dag beter, leer van de besten!
+            </div>
+
+            <div class="podcast" data-src={} data-title="Nr 17. Wat is jouw zicht op verandering?">
+                Nr 17. Wat is jouw zicht op verandering?
+            </div>
+        </div>
+    </section>
+</MainLayout>
+
+<style>
+    .project-section {
+        padding: 30px;
+    }
+
+    .podcast-page {
+        display: flex;
+        gap: 40px;
+        padding: 30px;
+    }
+
+    .audio {
+        width: 350px;
+    }
+
+    .main-img {
+        width: 100%;
+    }
+
+    .control-buttons {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    #progress {
+        flex: 1;
+    }
+
+    .podcast {
+        border: 2px solid gray;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+
+    .podcast:hover {
+        border-color: var(--highlight-color);
+    }
+</style>
+
+<script>
+    const audio = document.getElementById("audio");
+    const progress = document.getElementById("progress");
+    const playButton = document.getElementById("play-button");
+    const title = document.getElementById("current-title");
+
+    document.querySelectorAll(".podcast")
+    .forEach(item => {
+        item.addEventListener
+    })
+</script>
