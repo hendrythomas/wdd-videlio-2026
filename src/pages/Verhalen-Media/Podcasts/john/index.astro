@@ -164,6 +164,38 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
 
     document.querySelectorAll(".podcast")
     .forEach(item => {
-        item.addEventListener
-    })
+        item.addEventListener("click", () => {
+            audio.src = item.dataset.src;
+            title.textContent = item.dataset.title;
+
+            audio.play();
+            playButton.textContent = "⏸️";
+        });
+    });
+
+    playButton.addEventListener("click", () => {
+        if(audio.paused) {
+            audio.play();
+            playButton.textContent = "⏸️";
+        } else {
+            audio.pause();
+            playButton.textContent = "▶";
+        }
+    });
+
+    audio.addEventListener("loadedmetadata", () => {
+        progress.max = audio.duration;
+    });
+
+    audio.addEventListener("timeupdate", () => {
+        progress.value = audio.currenTime;
+    });
+
+    progress.addEventListener("input", () => {
+        audio.currentTime = progress.value;
+    });
+
+    audio.addEventListener("ended", () => {
+        playButton.textContent = "▶";
+    });
 </script>
