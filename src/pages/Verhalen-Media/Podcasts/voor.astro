@@ -1,0 +1,615 @@
+---
+//@ts-nocheck
+import MainLayout from '../../../layouts/MainLayout.astro';
+import './podcasts.css';
+import audio1 from '../../../../assets/audio/podcasts/podcast1_john.mp3';
+import audio2 from '../../../../assets/audio/podcasts/podcast2_john.mp3';
+import audio3 from '../../../../assets/audio/podcasts/podcast3_john.mp3';
+import audio4 from '../../../../assets/audio/podcasts/podcast4_john.mp3';
+import audio5 from '../../../../assets/audio/podcasts/podcast5_john.mp3';
+import audio6 from '../../../../assets/audio/podcasts/podcast6_john.mp3';
+import audio7 from '../../../../assets/audio/podcasts/podcast7_john.mp3';
+import audio8 from '../../../../assets/audio/podcasts/podcast8_john.mp3';
+import audio9 from '../../../../assets/audio/podcasts/podcast9_john.mp3';
+import audio10 from '../../../../assets/audio/podcasts/podcast10_john.mp3';
+import audio11 from '../../../../assets/audio/podcasts/podcast11_john.mp3';
+import audio12 from '../../../../assets/audio/podcasts/podcast12_john.mp3';
+import audio13 from '../../../../assets/audio/podcasts/podcast13_john.mp3';
+import audio14 from '../../../../assets/audio/podcasts/podcast14_john.mp3';
+import audio15 from '../../../../assets/audio/podcasts/podcast15_john.mp3';
+import audio16 from '../../../../assets/audio/podcasts/podcast16_john.mp3';
+---
+
+<MainLayout>
+    <section class="project-section">
+        <h1>Podcasts</h1>
+
+        <h2>John Willemse</h2>
+
+        <main>
+            <!--Podcasts John Willemse-->
+            <section class="grid-projects">
+                <!--1e podcast-->
+                        <div class="project-card">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 1. Introductie podcast.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio1" src={audio1}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress1">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button1">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--2e podcast-->
+                        <div class="project-card">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio2" src={audio2}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress2">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button2">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--3e podcast-->
+                        <div class="project-card">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 3. De cijfers, achtergronden en oplossingen.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio3" src={audio3}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress3">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button3">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--4e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 4. Wat is jouw doel en identiteit?</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio4" src={audio4}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress4">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button4">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--5e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 5. Jouw perspectief, wat vind je echt belangrijk?</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio5" src={audio5}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress5">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button5">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--6e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 6. De activiteiten van Videlio.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio6" src={audio6}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress6">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button6">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--7e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 7. Bijziendheid epidemie.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio7" src={audio7}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress7">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button7">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--8e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 8. Mentale weerbaarheid.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio8" src={audio8}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress8">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button8">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--9e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 9. Ben een mentale winnaar.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio9" src={audio9}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress9">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button9">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--10e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 10. Van beperkingen naar mogelijkheden zien.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio10" src={audio10}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress10">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button10">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--11e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 11.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio11" src={audio11}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress11">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button11">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--12e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 12. De weg naar succes.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio12" src={audio12}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress12">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button12">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--13e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 13. Emotionele intelligentie.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio13" src={audio13}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress13">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button13">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--14e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 14. Zinvolutie: de zin van jouw leven.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio14" src={audio14}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress14">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button14">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--15e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 15. Succesfactoren naar werk toe.</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio15" src={audio15}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress15">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button15">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--16e podcast-->
+                        <div class="project-card extra-podcast">
+                            <div class="image">
+                                <img src="../assets/images/decoratie/john.png">
+                    
+                                <h4>Nr 16. Elke dag beter, leer van de beste!</h4>
+                            </div>
+
+                            <div class="under-image">
+                                <audio id="audio16" src={audio16}></audio>
+
+                                <input type="range"
+                                        value="0"
+                                        class="progress"
+                                        id="progress16">
+
+                                <div class="control-buttons">
+                                    <button class="play-button" id="button16">
+                                        ▶
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <a href="#" class="read-more">Luister meer</a>
+            </section>
+
+    <section class="project-section">
+        <h2>Niet te zien</h2>
+
+            <section class="grid-projects">
+                <!--1e podcast-->
+                <div class="project-card">
+                    <img src="../assets/images/decoratie/niet_te_zien.png">
+                    
+                    <h4>1. Is dit creatief plannen, of toch gewoon uitstelgedrag?</h4>
+
+                    <div class="under-image">
+                        <audio id="audio01" src={}></audio>
+
+                        <input type="range"
+                                value="0"
+                                class="progress"
+                                id="progress01">
+
+                        <div class="control-buttons">
+                            <button class="play-button" id="button01">
+                                ▶
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--2e podcast-->
+                <div class="project-card">
+                    <img src="../assets/images/decoratie/niet_te_zien.png">
+                    
+                    <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
+
+                    <audio id="audio02" src={}></audio>
+
+                    <input type="range"
+                            value="0"
+                            class="progress"
+                            id="progress02">
+
+                    <div class="control-buttons">
+                        <button class="play-button" id="button02">
+                            ▶
+                        </button>
+                    </div>
+                </div>
+
+                <!--3e podcast-->
+                <div class="project-card">
+                    <img src="../assets/images/decoratie/niet_te_zien.png">
+                    
+                    <h4>Nr 3. De cijfers, achtergronden en oplossingen</h4>
+
+                    <audio id="audio03" src={}></audio>
+
+                    <input type="range"
+                            value="0"
+                            class="progress"
+                            id="progress03">
+
+                    <div class="control-buttons">
+                        <button class="play-button" id="button03">
+                            ▶
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+</MainLayout>
+
+<style>
+    .grid-projects {
+        display: grid;
+        grid-template-columns: repeat(3, 320px);
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .project-card h4 {
+        flex-grow: 1;
+    }
+
+    .image h4 {
+        min-height: 3.5rem;
+    }
+
+    .extra-podcast {
+        display: none;
+    }
+
+    .grid-projects.expanded .extra-podcast {
+        display: block;
+    }
+
+    a {
+        color: var(--highlight-color);
+        text-decoration: none;
+    }
+</style>
+
+<script>
+    //@ts-nocheck
+    //openen en sluiten meer zien
+    const readMore = document.querySelector('.read-more');
+    const grid = document.querySelector('.grid-projects');
+
+    readMore.addEventListener('click', (e) => {
+        e.preventDefault();
+        grid.classList.toggle('expanded');
+
+        if
+        (grid.classList.contains('expanded')) {
+            readMore.textContent = 'Luister minder';
+        } else {
+            readMore.textContent = 'Luister meer';
+        }
+    })
+
+    //playbuttons
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+    const button3 = document.getElementById('button3');
+    const button4 = document.getElementById('button4');
+    const button5 = document.getElementById('button5');
+    const button6 = document.getElementById('button6');
+    const button7 = document.getElementById('button7');
+    const button8 = document.getElementById('button8');
+    const button9 = document.getElementById('button9');
+    const button10 = document.getElementById('button10');
+    const button11 = document.getElementById('button11');
+    const button12 = document.getElementById('button12');
+    const button13 = document.getElementById('button13');
+    const button14 = document.getElementById('button14');
+    const button15 = document.getElementById('button15');
+    const button16 = document.getElementById('button16');
+
+    function toggleAudio(event, audioId, progressId) {
+        const button = event.target;
+
+        const audio = document.getElementById(audioId);
+        const progress = document.getElementById(progressId);
+
+        //Play en pause
+        if (audio.paused) {
+            audio.play();
+            button.innerHTML = "▶";
+        } else {
+            audio.pause();
+            button.innerHTML = "▶";
+        }
+
+        //Slider werkt zodra metadata geladen is
+        audio.addEventListener("loadedmetadata", () => {
+            progress.max = audio.duration;
+        });
+
+        //Slider beweegt mee
+        audio.addEventListener("timeupdate", () => {
+            progress.value = audio.currentTime;
+        });
+
+        //Zelf door of terug kunnen spoelen
+        progress.addEventListener("input", () => {
+            audio.currentTime = progress.value;
+        });
+
+        //Als de audio klaar is
+        audio.addEventListener("ended", () => {
+            button.innerHTML = "▶";
+            progress.value = 0;
+        });
+    }
+
+    button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
+    button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
+    button3.addEventListener("click", (event) => { toggleAudio(event, 'audio3', 'progress3') });
+    button4.addEventListener('click', (event) => { toggleAudio(event, 'audio4', 'progress4') });
+    button5.addEventListener('click', (event) => { toggleAudio(event, 'audio5', 'progress5') });
+    button6.addEventListener('click', (event) => { toggleAudio(event, 'audio6', 'progress6') });
+    button7.addEventListener('click', (event) => { toggleAudio(event, 'audio7', 'progress7') });
+    button8.addEventListener('click', (event) => { toggleAudio(event, 'audio8', 'progress8') });
+    button9.addEventListener('click', (event) => { toggleAudio(event, 'audio9', 'progress9') });
+    button10.addEventListener('click', (event) => { toggleAudio(event, 'audio10', 'progress10') });
+    button11.addEventListener('click', (event) => { toggleAudio(event, 'audio11', 'progress11') });
+    button12.addEventListener('click', (event) => { toggleAudio(event, 'audio12', 'progress12') });
+    button13.addEventListener('click', (event) => { toggleAudio(event, 'audio13', 'progress13') });
+    button14.addEventListener('click', (event) => { toggleAudio(event, 'audio14', 'progress14') });
+    button15.addEventListener('click', (event) => { toggleAudio(event, 'audio15', 'progress15') });
+    button16.addEventListener('click', (event) => { toggleAudio(event, 'audio16', 'progress16') });
+</script>
