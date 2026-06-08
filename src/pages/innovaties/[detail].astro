@@ -1,62 +1,78 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import innovaties from '../../data/innovations.json';
+import localInnovaties from '../../data/innovations.json';
 
-export function getStaticPaths() {
-  return innovaties.map((item) => ({
-    params: { detail: item.slug },
-    props: { item },
-  }));
+const { detail } = Astro.params;
+
+export async function getStaticPaths() {
+  let wpPaths: { params: { detail: string }; props: { post: any } }[] = [];
+  try {
+    const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/posts?per_page=100&_embed=true');
+    const posts = await res.json();
+    wpPaths = posts.map((post: any) => ({
+      params: { detail: post.slug },
+      props: { post },
+    }));
+  } catch {}
+
+  const wpSlugs = new Set(wpPaths.map(p => p.params.detail));
+  const localPaths = localInnovaties
+    .filter(item => !wpSlugs.has(item.slug))
+    .map(item => ({ params: { detail: item.slug }, props: { post: null } }));
+
+  return [...wpPaths, ...localPaths];
 }
 
-const { item: propItem } = Astro.props;
-const item = propItem ?? innovaties.find(i => i.slug === Astro.params.detail);
+interface Props { post: any; }
+const { post } = Astro.props as Props;
 
-if (!item) return Astro.redirect('/innovaties');
+const rawItem = post ?? localInnovaties.find(i => i.slug === detail);
+
+if (!rawItem) return Astro.redirect('/innovaties');
+
+// Normaliseer WP post én lokale JSON naar één interface
+const isWp = !!post;
+const item = {
+  title: isWp ? rawItem.title.rendered : rawItem.title,
+  summary: isWp ? rawItem.excerpt.rendered : rawItem.summary,
+  content: isWp ? rawItem.content.rendered : rawItem.content,
+  date: rawItem.date,
+  image: isWp ? rawItem._embedded?.['wp:featuredmedia']?.[0]?.source_url : rawItem.image,
+  imageAlt: isWp ? rawItem.title.rendered : (rawItem.imageAlt ?? rawItem.title),
+};
 
 const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
   year: 'numeric',
   month: 'long',
 });
-
-const typeLabels: Record<string, string> = {
-  project:   'Project',
-  artikel:   'Artikel',
-  onderzoek: 'Onderzoek',
-};
 ---
 
 <MainLayout>
   <article class="detail-page">
 
-    <!-- Terug link -->
     <div class="detail-back-wrap">
       <a href="/innovaties" class="detail-back">← Terug naar overzicht</a>
     </div>
 
-    <!-- Hero: afbeelding links, titel/meta rechts -->
     <div class="detail-hero">
       <div class="detail-hero-meta">
-        <ul class="detail-tags">
-          {item.tags.map(tag => <li>{tag}</li>)}
-        </ul>
         <h1 class="detail-title">{item.title}</h1>
-        <p class="detail-summary">{item.summary}</p>
+        <p class="detail-summary" set:html={item.summary} />
         <time class="detail-date" datetime={item.date}>{formattedDate}</time>
       </div>
 
-      <div class="detail-hero-img-wrap">
-        <img
-          src={item.image}
-          alt={item.imageAlt}
-          width="600"
-          height="420"
-        />
-        <span class="detail-type-badge">{typeLabels[item.type] ?? item.type}</span>
-      </div>
+      {item.image && (
+        <div class="detail-hero-img-wrap">
+          <img
+            src={item.image}
+            alt={item.imageAlt}
+            width="400"
+            height="600"
+          />
+        </div>
+      )}
     </div>
 
-    <!-- Inhoud -->
     <div class="detail-content" set:html={item.content} />
 
   </article>
@@ -111,7 +127,9 @@ const typeLabels: Record<string, string> = {
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid rgba(250, 234, 7, 0.2);
-    aspect-ratio: 4 / 3;
+    width: 400px;
+    height: 500px;
+    max-width: 100%;
   }
 
   .detail-hero-img-wrap img {
@@ -246,7 +264,9 @@ const typeLabels: Record<string, string> = {
     }
 
     .detail-hero-img-wrap {
-      aspect-ratio: 16 / 9;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
     }
   }
 </style>

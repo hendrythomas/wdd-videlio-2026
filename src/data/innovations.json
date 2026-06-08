@@ -14,7 +14,7 @@
   },
   {
     "id": "viziere",
-    "slug": "viziere",
+    "slug": "project-viziere",
     "type": "project",
     "title": "Project Viziere",
     "summary": "Een basisplatform dat mensen met een visuele beperking toegang geeft tot essentiële digitale diensten.",
@@ -22,12 +22,12 @@
     "imageAlt": "Een meisje dat braille leest",
     "date": "2024-01-15",
     "tags": ["Toegankelijkheid"],
-    "detailPath": "/innovaties/viziere",
+    "detailPath": "/innovaties/project-viziere",
     "content": "<p>Viziere is een basisplatform dat mensen met een visuele beperking toegang geeft tot essentiële digitale diensten.</p>"
   },
   {
     "id": "ov-knoop",
-    "slug": "ov-knoop",
+    "slug": "ov-knoop-eindhoven",
     "type": "project",
     "title": "OV Knoop Eindhoven",
     "summary": "Onderzoek naar een toegankelijker openbaar vervoersknooppunt in Eindhoven voor mensen met een visuele beperking.",
@@ -35,7 +35,7 @@
     "imageAlt": "Het gebouw De Bubble in het centrum van Eindhoven",
     "date": "2023-11-01",
     "tags": ["Openbaar vervoer"],
-    "detailPath": "/innovaties/ov-knoop",
+    "detailPath": "/innovaties/ov-knoop-eindhoven",
     "content": "<p>Onderzoek naar een toegankelijker openbaar vervoersknooppunt in Eindhoven voor mensen met een visuele beperking.</p>"
   }
 ]
