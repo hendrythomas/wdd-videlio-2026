@@ -1,20 +1,31 @@
 ---
+//@ts-nocheck
 import AgendaItem from './SubComponents/AgendaItem/AgendaItem.astro';
 
 import './agenda.css';
 
-const events = [
-    {
-        date: new Date(),
-        title: 'Title',
-        description: 'description ehwhfuiwhuehd chwhfuhd uiehwnd ieofwuhf ijf',
-    },
-    {
-        date: new Date(),
-        title: 'Title',
-        description: 'description ehwhfuiwhuehd chwhfuhd uiehwnd ieofwuhf ijf',
-    }
-]
+const fetchSessions = async () => {
+    const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/sessions?&acf_format=standard');
+    const data = await res.json();
+
+    return data.map((session) => {
+        const startDate = session.acf.start_date_time;
+        const endDate = session.acf.end_date_time;
+        console.log(startDate);
+        console.log(endDate);
+        return {
+            title: session.title.rendered,
+            summary: session.acf.summary,
+            longDescription: session.acf.long_description,
+            startDate,
+            endDate,
+            type: session.acf.type.name
+        }
+    })
+};
+
+const events = await fetchSessions();
+
 ---
 
 <div>
