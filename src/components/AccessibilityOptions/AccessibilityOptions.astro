@@ -54,8 +54,8 @@ import '../../style/icons.css';
 
   document.addEventListener('DOMContentLoaded', (e) => {
     storageLoadSettings();
-    applySettings();
     updateCheckboxes();
+    applySettings();
     updateTooltips();
   });
 
@@ -71,7 +71,7 @@ import '../../style/icons.css';
 
   function applySettings(elem = null) {
     tryToggleBigCursor(elem);
-    tryToggleContrastTheme(elem);
+    tryToggleContrastTheme();
     tryIncreaseFontSize(elem);
     tryDecreaseFontSize(elem);
     tryResetFontSize(elem);
@@ -95,13 +95,10 @@ import '../../style/icons.css';
     const checkboxes = document.querySelectorAll('input[data-access-setting]');
     if (checkboxes === null) return;
 
-    // TODO: REPLACE OBJECT INSTEAD OF ENTIRE ARRAY
-    settings = [];
     for (const checkbox of checkboxes) {
       if (checkbox.checked === undefined) continue;
-      settings.push(
-        new Setting(checkbox.id, checkbox.checked)
-      );
+      const setting = getSetting(checkbox.id);
+      setting.value = checkbox.checked;
     }
   }
 
@@ -138,7 +135,15 @@ import '../../style/icons.css';
   function tryToggleBigCursor(elem) {
   }
 
-  function tryToggleContrastTheme(elem) {
+  function tryToggleContrastTheme() {
+    const input = document.getElementById('setting-high-contrast');
+    if (input === null) return;
+    
+    if (input.checked) {
+      document.documentElement.classList.add('high-contrast');
+    } else {
+      document.documentElement.classList.remove('high-contrast');
+    }
   }
 
   function updateDocumentFontSize() {
