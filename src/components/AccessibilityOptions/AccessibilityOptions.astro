@@ -67,6 +67,7 @@ import '../../style/icons.css';
   document.addEventListener('change', (e) => {
     saveCheckboxSettings();
     storageSaveSettings();
+    updateTooltips();
   });
 
   function applySettings(elem = null) {
