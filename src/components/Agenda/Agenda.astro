@@ -5,30 +5,50 @@ import AgendaItem from './SubComponents/AgendaItem/AgendaItem.astro';
 import './agenda.css';
 
 const fetchSessions = async () => {
-    const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/sessions?&acf_format=standard');
+    const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/activities?&acf_format=standard');
     const data = await res.json();
 
-    return data.map((session) => {
-        const startDate = session.acf.start_date_time;
-        const endDate = session.acf.end_date_time;
-        console.log(startDate);
-        console.log(endDate);
+    return data.map(session => {
         return {
             title: session.title.rendered,
             summary: session.acf.summary,
             longDescription: session.acf.long_description,
-            startDate,
-            endDate,
+            startDate: session.acf.start_date_time,
+            endDate: session.acf.end_date_time,
             type: session.acf.type.name
-        }
-    })
+    }});
 };
 
 const events = await fetchSessions();
+const groupEventsByDateTime = (events) => {
+    const grouped = {};
+    for (const event of events) {
+        if (new Date(event.startDate) > new Date()) {
+            const dateKey = new Date(event.startDate).toISOString().split('T')[0];
+            if (!grouped[dateKey]) {
+                grouped[dateKey] = [];
+            }
+            grouped[dateKey].push(event);
+        }
+    }
 
+    const groupedEventsArray = Object.values(grouped);
+    return groupedEventsArray
+        .sort((a, b) => new Date(a[0].startDate) - new Date(b[0].startDate))
+        .map(dayEvents =>
+            dayEvents.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+        );
+};
+
+const sortedEvents = groupEventsByDateTime(events);
 ---
 
 <div>
-    <AgendaItem events={events} />
-    <AgendaItem events={events} />
+    {
+        sortedEvents.map(dayEvents => {
+            return (
+                <AgendaItem events={dayEvents} />
+            )
+        })
+    }
 </div>

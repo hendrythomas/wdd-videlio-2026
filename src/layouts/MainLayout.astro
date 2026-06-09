@@ -21,7 +21,9 @@ import './mainLayout.css';
 <body>
     <Header />
     { backHref && <ButtonLink linkClass="main-layout-back-button" href={backHref}>← Terug</ButtonLink> }
-    <slot />
+    <div class="page">
+        <slot />
+    </div>
     <Footer />
 </body>
 

@@ -53,7 +53,7 @@ body, h1, h2, p, a {
 }
 
 body {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -96,29 +96,12 @@ input, textarea {
     resize: none;
 }
 
-.button {
-    background-color: var(--highlight-color);
-    color: var(--button-text);
-    border: none;
-    padding: 1rem;
-    font-size: var(--paragraph-font-size);
-    border-radius: 1.5rem;
-    cursor: pointer;
-    transition: background-color .3s linear;
+.page {
+    width: 80dvw;
+    margin: auto;
+    height: auto;
 
-    /* focus styling  */
-    :focus-visible {
-        outline: 3px solid var(--highlight-color);
-        outline-offset: 5px;
-        border-radius: 4px;
-        box-shadow:
-                0 0 0 6px rgba(250, 234, 7, 0.2),
-                0 0 12px rgba(250, 234, 7, 0.15);
-        transition: outline-offset 0.1s ease, box-shadow 0.1s ease;
-    }
-
-    /* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
-    :focus:not(:focus-visible) {
-        outline: none;
+    @media (max-width: 768px) {
+        width: 90dvw;
     }
 }
