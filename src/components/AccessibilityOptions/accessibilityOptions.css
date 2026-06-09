@@ -42,6 +42,7 @@
   padding: 2rem;
   gap: 2rem;
   border: none;
+  border-right: 2px solid #ffffff40;
   background-color: var(--background);
   box-shadow: 2px 0 10px 0 #00000060;
   color: var(--text-primary);
