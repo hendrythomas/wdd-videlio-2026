@@ -24,7 +24,7 @@
     font-size: 40px;
   }
 }
-@media (max-width: 1000px) {
+@media (max-width: 600px) {
   .access-button > span {
     display: none;
   }

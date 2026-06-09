@@ -89,7 +89,7 @@ body > header > nav > .mobile-menu {
 }
 body:has(> header)::before {
   content: '';
-  margin-top: var(--nav-height);
+  margin-top: calc(var(--nav-height) + var(--access-button-height));
 }
 
 /* mobile menu */
