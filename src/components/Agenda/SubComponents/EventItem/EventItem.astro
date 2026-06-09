@@ -8,6 +8,15 @@ const { event } = Astro.props;
 <section class="event-item">
     <h3>{event.title}</h3>
     <p>{event.summary}</p>
+    {
+        event.longDescription && (
+            <details>
+                <summary>Lees meer</summary>
+                {event.longDescription}
+            </details>
+        )
+    }
+
 
     <ButtonLink linkClass='event-item__button'>Meer info</ButtonLink>
 </section>
