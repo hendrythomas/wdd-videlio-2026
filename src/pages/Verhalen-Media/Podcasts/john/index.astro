@@ -282,14 +282,14 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
             title.textContent = item.dataset.title;
 
             audio.play();
-            playButton.textContent = "⏸️";
+            playButton.textContent = "⏸";
         });
     });
 
     playButton.addEventListener("click", () => {
         if(audio.paused) {
             audio.play();
-            playButton.textContent = "⏸️";
+            playButton.textContent = "⏸";
         } else {
             audio.pause();
             playButton.textContent = "▶";
