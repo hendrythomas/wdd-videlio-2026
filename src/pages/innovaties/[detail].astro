@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import ReadAloud from '../../components/AccessibilityOptions/ReadAloudButton.astro';
 import localInnovaties from '../../data/innovations.json';
 
 const { detail } = Astro.params;
@@ -57,8 +58,13 @@ const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
     <div class="detail-hero">
       <div class="detail-hero-meta">
         <h1 class="detail-title">{item.title}</h1>
-        <p class="detail-summary" set:html={item.summary} />
-        <time class="detail-date" datetime={item.date}>{formattedDate}</time>
+
+        <ReadAloud variant="asymmetric" targetId="detail-intro" />
+
+        <div id="detail-intro">
+          <p class="detail-summary" set:html={item.summary} />
+          <time class="detail-date" datetime={item.date}>{formattedDate}</time>
+        </div>
       </div>
 
       {item.image && (
@@ -73,7 +79,9 @@ const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
       )}
     </div>
 
-    <div class="detail-content" set:html={item.content} />
+    <ReadAloud variant="asymmetric" targetId="detail-body" />
+
+    <div id="detail-body" class="detail-content" set:html={item.content} />
 
   </article>
 </MainLayout>
