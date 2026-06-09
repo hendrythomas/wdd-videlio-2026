@@ -1,16 +1,19 @@
 	---
 	// Serverside code hier
 	import MainLayout from '../layouts/MainLayout.astro';
+	import ReadAloudButton from '../components/AccessibilityOptions/ReadAloudButton.astro';
 
 	import './home.css';
 	---
-	<MainLayout>
+	<MainLayout pageTitle="Doe mee!">
 		<main>
 			<section class="hero">
 				<h1><strong>Samen</strong> anders zien</h1>
 
 				<div class="hero-body">
-					<div class="hero-text">
+					<div class="hero-text" id="hero-intro">
+						<ReadAloudButton variant="asymmetric" targetId="hero-intro" />
+
 						<p>Je bent meer dan je blind- of slechtziendheid. Meer dan de wereld soms in jou denkt te zien.</p>
 						<p>Een community <strong>voor, door en met VIPs (Visual Impaired Persons) </strong>, waarin je jezelf niet
 							hoeft uit te leggen, maar juist ontdekt wat je te bieden hebt.</p>

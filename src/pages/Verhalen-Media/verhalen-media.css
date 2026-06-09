@@ -1,5 +1,6 @@
 .project-section {
-  padding: 60px 10%;
+  padding: 0 10%;
+  padding-bottom: 10%
 }
 
 .project-section h1 {
@@ -52,7 +53,7 @@
 }
 
 .project-card-img-wrap {
-  width: 100%;
+  width: 100%;  
   height: 10rem;
   overflow: hidden;
   padding: 1rem 1rem 0;
