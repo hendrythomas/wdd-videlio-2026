@@ -35,7 +35,7 @@
 
     /*Typography:*/
     --primary-font: "Noto sans", sans-serif;
-    --small-heading-font-size: 1.5rem;
+    --small-heading-font-size: 1.75rem;
     --heading-font-size: 2rem;
     --title-font-size: 4rem;
     --paragraph-font-size: 1.5rem;
@@ -71,7 +71,7 @@ h2 {
 }
 
 h3 {
-    color: var(--text-highlight);
+    color: var(--text-primary);
     font-size: var(--small-heading-font-size);
     font-weight: bold;
 }

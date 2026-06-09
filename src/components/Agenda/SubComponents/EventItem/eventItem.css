@@ -1,8 +1,13 @@
 .event-item {
     display: flex;
     flex-direction: column;
+    border: solid 2px var(--highlight-color);
+    background: rgba(250, 234, 7, 0.06);
+    border-radius: 16px;
+    padding: 1rem;
 }
 
 .event-item__button {
     align-self: flex-end;
 }
+
