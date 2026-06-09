@@ -84,6 +84,8 @@ const { variant = 'asymmetric', targetId } = Astro.props;
 <style>
   :root {
     --a11y-color: #a93226;
+    --highlight-color: #FAEA07;
+
   }
 
   .read-aloud {
@@ -104,12 +106,15 @@ const { variant = 'asymmetric', targetId } = Astro.props;
     cursor: pointer;
     border: none;
     transition: opacity 0.2s, box-shadow 0.2s, background 0.2s;
+
+    min-width: 200px  ;
+  justify-content: center;
   }
 
   .read-aloud-btn svg {
     width: 20px;
     height: 20px;
-    fill: currentColor;
+    fill: #FFF;
     flex-shrink: 0;
   }
 
@@ -176,14 +181,14 @@ const { variant = 'asymmetric', targetId } = Astro.props;
   .read-aloud-fill {
     height: 100%;
     width: 0%;
-    background: var(--a11y-color);
+    background: var(--highlight-color);
     border-radius: 2px;
     transition: width 0.3s linear;
   }
 
   .read-aloud-status {
     font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--highlight-color);
     font-style: italic;
     min-height: 1em;
   }
