@@ -5,7 +5,7 @@ import '../../style/icons.css';
 
 <button class="access-button" popovertarget="access-menu">
   <i class="material-icon" aria-hidden="true"></i>
-  <span class="desktop">Toegankelijkheid</span>
+  <span>Toegankelijkheid</span>
 </button>
 <div class="access-menu" popover id="access-menu">
   <div class="access-item">
@@ -44,72 +44,113 @@ import '../../style/icons.css';
 
 <script>
   class Setting {
-    constructor(id, checked) {
+    constructor(id, value) {
       this.id = id;
-      this.checked = checked;
+      this.value = value;
     }
   }
 
   let settings = [];
-  
-  function getSettings() {
-    const storageSettingsJson = localStorage.getItem('settings');
-    settings = JSON.parse(storageSettingsJson) || [];
-  }
-
-  function saveSettings() {
-    const settingsJson = JSON.stringify(settings)
-    localStorage.setItem('settings', settingsJson);
-  }
-
-  function setSettingElems() {
-    getSettings();
-
-    for (const setting of settings) {
-      const settingElem = document.getElementById(setting.id);
-      settingElem.checked = setting.checked;
-    }
-  }
-
-  function saveSettingElems() {
-    const settingElems = document.querySelectorAll('[data-access-setting]');
-    if (settingElems === null) return;
-
-    settings = [];
-    for (const settingElem of settingElems) {
-      if (settingElem.checked === undefined) continue;
-      settings.push(
-        new Setting(settingElem.id, settingElem.checked)
-      );
-    }
-
-    saveSettings();
-  } 
-
-  let addedFontSize = 0;
 
   document.addEventListener('DOMContentLoaded', (e) => {
-    setSettingElems();
-    triggerSettings();
+    storageLoadSettings();
+    updateCheckboxes();
+    applySettings();
     updateTooltips();
-  });
-
-  document.addEventListener('change', (e) => {
-    triggerSettings(e.target);
-    updateTooltips();
-    saveSettingElems();
   });
 
   document.addEventListener('click', (e) => {
-    triggerSettings(e.target);
+    applySettings(e.target);
+    storageSaveSettings();
   });
 
-  function triggerSettings(elem = null) {
+  document.addEventListener('change', (e) => {
+    saveCheckboxSettings();
+    storageSaveSettings();
+    updateTooltips();
+  });
+
+  function applySettings(elem = null) {
     tryToggleBigCursor(elem);
-    tryToggleContrastTheme(elem);
+    tryToggleContrastTheme();
     tryIncreaseFontSize(elem);
     tryDecreaseFontSize(elem);
     tryResetFontSize(elem);
+    updateDocumentFontSize();
+  }
+
+  function updateCheckboxes() {
+    const checkboxes = document.querySelectorAll('input[data-access-setting]');
+    
+    for (const checkbox of checkboxes || []) {
+      const setting = settings.find((s) => {
+        return s.id === checkbox.id;
+      });
+      if (setting !== undefined) {
+        checkbox.checked = setting.value;
+      }
+    }
+  }
+
+  function saveCheckboxSettings() {
+    const checkboxes = document.querySelectorAll('input[data-access-setting]');
+    if (checkboxes === null) return;
+
+    for (const checkbox of checkboxes) {
+      if (checkbox.checked === undefined) continue;
+      const setting = getSetting(checkbox.id);
+      setting.value = checkbox.checked;
+    }
+  }
+
+  function tryIncreaseFontSize(button) {
+    if (button === null || button.id !== 'setting-increase-font') return;
+
+    const settingAddedFontSize = getSetting('setting-added-font-size');
+
+    settingAddedFontSize.value += 0.1;
+    if (settingAddedFontSize.value > 1) {
+      settingAddedFontSize.value = 1;
+    }
+  }
+
+  function tryDecreaseFontSize(button) {
+    if (button === null || button.id !== 'setting-decrease-font') return;
+
+    const settingAddedFontSize = getSetting('setting-added-font-size');
+
+    settingAddedFontSize.value -= 0.1;
+    if (settingAddedFontSize.value < -0.5) {
+      settingAddedFontSize.value = -0.5;
+    }
+  }
+
+  function tryResetFontSize(button) {
+    if (button === null || button.id !== 'setting-reset-font') return;
+
+    const settingAddedFontSize = getSetting('setting-added-font-size');
+
+    settingAddedFontSize.value = 0;
+  }
+
+  function tryToggleBigCursor(elem) {
+  }
+
+  function tryToggleContrastTheme() {
+    const input = document.getElementById('setting-high-contrast');
+    if (input === null) return;
+    
+    if (input.checked) {
+      document.documentElement.classList.add('high-contrast');
+    } else {
+      document.documentElement.classList.remove('high-contrast');
+    }
+  }
+
+  function updateDocumentFontSize() {
+    const addedFontSize = getSetting('setting-added-font-size').value;
+
+    document.documentElement.style.fontSize = `${1 + addedFontSize}rem`;
   }
 
   function updateTooltips() {
@@ -125,49 +166,25 @@ import '../../style/icons.css';
     }
   }
 
-  function tryToggleBigCursor(elem) {
-  }
-
-  function tryToggleContrastTheme(elem) {
-    let input = elem;
-    if (elem === null) {
-      input = document.getElementById('setting-high-contrast');
-      if (input === null) return;
+  function getSetting(key) {
+    let setting;
+    setting = settings.find(s => {
+      return s.id === key;
+    });
+    if (setting === undefined) {
+      setting = settings.push(new Setting(key, 0));
     }
-    if (input.id !== 'setting-high-contrast') return;
-    
-    if (input.checked) {
-      document.documentElement.classList.add('high-contrast');
-    } else {
-      document.documentElement.classList.remove('high-contrast');
-    }
+    return setting;
+  }
+  
+  function storageLoadSettings() {
+    const storageSettingsJson = localStorage.getItem('settings');
+    settings = JSON.parse(storageSettingsJson) || [];
   }
 
-  function tryResetFontSize(button) {
-    if (button === null || button.id !== 'setting-reset-font') return;
-
-    addedFontSize = 0;
-    updateDocumentFontSize();
-  }
-
-  function tryIncreaseFontSize(button) {
-    if (button === null || button.id !== 'setting-increase-font') return;
-
-    addedFontSize += 0.1;
-    if (addedFontSize > 1) addedFontSize = 1;
-    updateDocumentFontSize();
-  }
-
-  function tryDecreaseFontSize(button) {
-    if (button === null || button.id !== 'setting-decrease-font') return;
-
-    addedFontSize -= 0.1;
-    if (addedFontSize < -0.5) addedFontSize = -0.5;
-    updateDocumentFontSize();
-  }
-
-  function updateDocumentFontSize() {
-    document.documentElement.style.fontSize = `${1 + addedFontSize}rem`;
+  function storageSaveSettings() {
+    const settingsJson = JSON.stringify(settings)
+    localStorage.setItem('settings', settingsJson);
   }
 
 </script>

@@ -89,20 +89,11 @@ body > header > nav > .mobile-menu {
 }
 body:has(> header)::before {
   content: '';
-  margin-top: var(--nav-height);
-}
-
-
-@media (max-width: 1220px) {
-  .desktop {
-    position: absolute;
-    left: -999em;
-    opacity: 0;
-  }
+  margin-top: calc(var(--nav-height) + var(--access-button-height));
 }
 
 /* mobile menu */
-@media (max-width: 990px) {
+@media (max-width: 1000px) {
   body > header > nav,
   body > header > nav > .mobile-menu {
 
