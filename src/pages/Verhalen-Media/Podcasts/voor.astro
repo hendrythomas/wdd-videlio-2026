@@ -536,6 +536,13 @@ import audio16 from '../../../../assets/audio/podcasts/podcast16_john.mp3';
         }
     })
 
+
+    document.querySelectorAll(".play-button").forEach((button, i) => {
+        button.addEventListener("click", function(){
+            toggleAudio(event, 'audio' + i+1, 'progress' + i+1)
+        })
+    })
+
     //playbuttons
     const button1 = document.getElementById('button1');
     const button2 = document.getElementById('button2');
@@ -591,20 +598,20 @@ import audio16 from '../../../../assets/audio/podcasts/podcast16_john.mp3';
         });
     }
 
-    button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
-    button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
-    button3.addEventListener("click", (event) => { toggleAudio(event, 'audio3', 'progress3') });
-    button4.addEventListener('click', (event) => { toggleAudio(event, 'audio4', 'progress4') });
-    button5.addEventListener('click', (event) => { toggleAudio(event, 'audio5', 'progress5') });
-    button6.addEventListener('click', (event) => { toggleAudio(event, 'audio6', 'progress6') });
-    button7.addEventListener('click', (event) => { toggleAudio(event, 'audio7', 'progress7') });
-    button8.addEventListener('click', (event) => { toggleAudio(event, 'audio8', 'progress8') });
-    button9.addEventListener('click', (event) => { toggleAudio(event, 'audio9', 'progress9') });
-    button10.addEventListener('click', (event) => { toggleAudio(event, 'audio10', 'progress10') });
-    button11.addEventListener('click', (event) => { toggleAudio(event, 'audio11', 'progress11') });
-    button12.addEventListener('click', (event) => { toggleAudio(event, 'audio12', 'progress12') });
-    button13.addEventListener('click', (event) => { toggleAudio(event, 'audio13', 'progress13') });
-    button14.addEventListener('click', (event) => { toggleAudio(event, 'audio14', 'progress14') });
-    button15.addEventListener('click', (event) => { toggleAudio(event, 'audio15', 'progress15') });
-    button16.addEventListener('click', (event) => { toggleAudio(event, 'audio16', 'progress16') });
+    // button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
+    // button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
+    // button3.addEventListener("click", (event) => { toggleAudio(event, 'audio3', 'progress3') });
+    // button4.addEventListener('click', (event) => { toggleAudio(event, 'audio4', 'progress4') });
+    // button5.addEventListener('click', (event) => { toggleAudio(event, 'audio5', 'progress5') });
+    // button6.addEventListener('click', (event) => { toggleAudio(event, 'audio6', 'progress6') });
+    // button7.addEventListener('click', (event) => { toggleAudio(event, 'audio7', 'progress7') });
+    // button8.addEventListener('click', (event) => { toggleAudio(event, 'audio8', 'progress8') });
+    // button9.addEventListener('click', (event) => { toggleAudio(event, 'audio9', 'progress9') });
+    // button10.addEventListener('click', (event) => { toggleAudio(event, 'audio10', 'progress10') });
+    // button11.addEventListener('click', (event) => { toggleAudio(event, 'audio11', 'progress11') });
+    // button12.addEventListener('click', (event) => { toggleAudio(event, 'audio12', 'progress12') });
+    // button13.addEventListener('click', (event) => { toggleAudio(event, 'audio13', 'progress13') });
+    // button14.addEventListener('click', (event) => { toggleAudio(event, 'audio14', 'progress14') });
+    // button15.addEventListener('click', (event) => { toggleAudio(event, 'audio15', 'progress15') });
+    // button16.addEventListener('click', (event) => { toggleAudio(event, 'audio16', 'progress16') });
 </script>

@@ -31,7 +31,7 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
 
             <h4 id="current-title">Nr 1. Introductie podcast</h4>
 
-            <audio id="audio1"></audio>
+            <audio id="audio"></audio>
 
             <div class="control-buttons">
                 <button id="play-button">
@@ -42,73 +42,145 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
             </div>
         </div>
 
-        <div class="playlist">
-            <div class="podcast" data-src={} data-title="Nr 1. Introductie podcast">
-                Nr 1. Introductie podcast
-            </div>
+        <div class="playlist-container">
+            <h3 id="podcast-count"></h3>
 
-            <div class="podcast" data-src={} data-title="Nr 2. De samenleving heeft een handicap. Niet ik!">
-                Nr 2. De samenleving heeft een handicap. Niet ik!
-            </div>
+            <div class="playlist">
+                <div class="podcast" data-src={audio1} data-title="Nr 1. Introductie podcast">
+                    <h4>Nr 1. Introductie podcast</h4>
 
-            <div class="podcast" data-src={} data-title="Nr 3. De cijfers, achtergronden en oplossingen">
-                Nr 3. De cijfers, achtergronden en oplossingen
-            </div>
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
 
-            <div class="podcast" data-src={} data-title="Nr 4. Wat is jouw doel en identiteit?">
-                Nr 4. Wat is jouw doel en identiteit?
-            </div>
+                <div class="podcast" data-src={audio2} data-title="Nr 2. De samenleving heeft een handicap. Niet ik!">
+                    <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
 
-            <div class="podcast" data-src={} data-title="Nr 5. Jouw perspectief, wat vind je echt belangrijk?">
-                Nr 5. Jouw perspectief, wat vind je echt belangrijk?
-            </div>
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
 
-            <div class="podcast" data-src={} data-title="Nr 6. De activiteiten van Videlio">
-                Nr 6. De activiteiten van Videlio
-            </div>
+                <div class="podcast" data-src={audio3} data-title="Nr 3. De cijfers, achtergronden en oplossingen">
+                    <h4>Nr 3. De cijfers, achtergronden en oplossingen</h4>
 
-            <div class="podcast" data-src={} data-title="Nr 7. Bijziendheid epidemie">
-                Nr 7. Bijziendheid epidemie
-            </div>
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
 
-            <div class="podcast" data-src={} data-title="Nr 8. Mentale weerbaarheid">
-                Nr 8. Mentale weerbaarheid
-            </div>
+                <div class="podcast" data-src={audio4} data-title="Nr 4. Wat is jouw doel en identiteit?">
+                    <h4>Nr 4. Wat is jouw doel en identiteit?</h4>
 
-            <div class="podcast" data-src={} data-title="Nr 9. Ben een mentale winnaar">
-                Nr 9. Ben een mentale winnaar
-            </div>
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
 
-            <div class="podcast" data-src={} data-title="Nr 10. Van beperkingen naar mogelijkheden zien">
-                Nr 10. Van beperkingen naar mogelijkheden zien
-            </div>
+                <div class="podcast" data-src={audio5} data-title="Nr 5. Jouw perspectief, wat vind je echt belangrijk?">
+                    <h4>Nr 5. Jouw perspectief, wat vind je echt belangrijk?</h4>
 
-            <div class="podcast" data-src={} data-title="Nr 11.">
-                Nr 11.
-            </div>
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
 
-            <div class="podcast" data-src={} data-title="Nr 12. De weg naar succes">
-                Nr 12. De weg naar succes
-            </div>
+                <div class="podcast" data-src={audio6} data-title="Nr 6. De activiteiten van Videlio">
+                    <h4>Nr 6. De activiteiten van Videlio</h4>
 
-            <div class="podcast" data-src={} data-title="Nr 13.Emotionele intelligentie">
-                Nr 13. Emotionele intelligentie
-            </div>
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
 
-            <div class="podcast" data-src={} data-title="Nr 14. Zinvolutie: de zin van jouw leven">
-                Nr 14. Zinvolutie: de zin van jouw leven
-            </div>
+                <div class="podcast" data-src={audio7} data-title="Nr 7. Bijziendheid epidemie">
+                    <h4>Nr 7. Bijziendheid epidemie</h4>
 
-            <div class="podcast" data-src={} data-title="Nr 15. Succesfactoren naar werk toe">
-                Nr 15. Succesfactoren naar werk toe
-            </div>
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
 
-            <div class="podcast" data-src={} data-title="Nr 16. Elke dag beter, leer van de besten!">
-                Nr 16. Elke dag beter, leer van de besten!
-            </div>
+                <div class="podcast" data-src={audio8} data-title="Nr 8. Mentale weerbaarheid">
+                    <h4>Nr 8. Mentale weerbaarheid</h4>
 
-            <div class="podcast" data-src={} data-title="Nr 17. Wat is jouw zicht op verandering?">
-                Nr 17. Wat is jouw zicht op verandering?
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio9} data-title="Nr 9. Ben een mentale winnaar">
+                    <h4>Nr 9. Ben een mentale winnaar</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio10} data-title="Nr 10. Van beperkingen naar mogelijkheden zien">
+                    <h4>Nr 10. Van beperkingen naar mogelijkheden zien</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio11} data-title="Nr 11.">
+                    <h4>Nr 11.</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio12} data-title="Nr 12. De weg naar succes">
+                    <h4>Nr 12. De weg naar succes</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio13} data-title="Nr 13.Emotionele intelligentie">
+                    <h4>Nr 13. Emotionele intelligentie</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio14} data-title="Nr 14. Zinvolutie: de zin van jouw leven">
+                    <h4>Nr 14. Zinvolutie: de zin van jouw leven</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio15} data-title="Nr 15. Succesfactoren naar werk toe">
+                    <h4>Nr 15. Succesfactoren naar werk toe</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio16} data-title="Nr 16. Elke dag beter, leer van de besten!">
+                    <h4>Nr 16. Elke dag beter, leer van de besten!</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="podcast" data-src={audio17} data-title="Nr 17. Wat is jouw zicht op verandering?">
+                    <h4>Nr 17. Wat is jouw zicht op verandering?</h4>
+
+                    <button id="play-button">
+                        ▶
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -129,6 +201,14 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
         width: 350px;
     }
 
+    img {
+        border-radius: 10px;
+    }
+
+    h4 {
+        color: var(--highlight-color);
+    }
+
     .main-img {
         width: 100%;
     }
@@ -140,15 +220,47 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
         gap: 15px;
     }
 
+    .control-buttons button {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        border: none;
+        font-size: 18px;
+    }
+
     #progress {
         flex: 1;
     }
 
+    .playlist-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .playlist {
+        overflow-y: scroll;
+        height: 400px;
+        padding: 10px;
+    }
+
     .podcast {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
         border: 2px solid gray;
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 15px;
+    }
+
+    .podcast button {
+        border-radius: 50%;
+        border: none;
+        height: 30px;
+        width: 30px;
+        font-size: 15px;
     }
 
     .podcast:hover {
@@ -157,6 +269,7 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
 </style>
 
 <script>
+    //@ts-nocheck
     const audio = document.getElementById("audio");
     const progress = document.getElementById("progress");
     const playButton = document.getElementById("play-button");
@@ -188,7 +301,7 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
     });
 
     audio.addEventListener("timeupdate", () => {
-        progress.value = audio.currenTime;
+        progress.value = audio.currentTime;
     });
 
     progress.addEventListener("input", () => {
@@ -198,4 +311,14 @@ import audio17 from '../../../../../assets/audio/podcasts/podcast17_john.mp3';
     audio.addEventListener("ended", () => {
         playButton.textContent = "▶";
     });
+
+//Aantal afleveringen
+document.addEventListener("DOMContentLoaded", () => {
+    const podcastCount = document.getElementById("podcast-count");
+    const podcasts = document.querySelectorAll(".podcast");
+
+    console.log(podcasts.length);
+
+    podcastCount.textContent = `${podcasts.length} afleveringen`;
+})
 </script>
