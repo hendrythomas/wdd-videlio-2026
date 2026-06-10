@@ -1,6 +1,8 @@
 ---
 import './nav.css';
 import Link from '../Link/Link.astro';
+import Search from '../AccessibilityOptions/SearchBar.astro';
+
 
 const currentPath = Astro.url.pathname;
 ---
@@ -20,4 +22,6 @@ const currentPath = Astro.url.pathname;
         <Link isActive={currentPath.includes('/innovaties')} href="/innovaties">Innovaties</Link>
         <Link isActive={currentPath.includes('/Contact')} href="/Contact">Contact</Link>
     </div>
+
+    <Search />
 </nav>

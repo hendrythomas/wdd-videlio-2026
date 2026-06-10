@@ -1,0 +1,203 @@
+---
+
+---
+
+<div class="search-wrapper" role="search" aria-label="Zoek op de website">
+    <div id="search-input-wrap">
+        <label for="search-input" class="sr-only">Zoekterm</label>
+        <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Zoeken..."
+            aria-label="Zoek op de website"
+            aria-controls="search-results"
+            aria-autocomplete="list"
+            autocomplete="off"
+        />
+    </div>
+
+    <ul
+        id="search-results"
+        class="search-results"
+        role="listbox"
+        aria-label="Zoekresultaten"
+        aria-live="polite"
+        hidden
+    >
+    </ul>
+</div>
+
+<script>
+    async function initSearch() {
+        try {
+            // Dynamische import — Vite probeert dit niet te resolven tijdens dev
+            const pagefind = await import(
+                /* @vite-ignore */ "/pagefind/pagefind.js"
+            );
+            await pagefind.init();
+
+            const input = document.getElementById(
+                "search-input",
+            ) as HTMLInputElement;
+            const results = document.getElementById(
+                "search-results",
+            ) as HTMLUListElement;
+
+            input.addEventListener("input", async () => {
+                const query = input.value.trim();
+
+                if (!query) {
+                    results.hidden = true;
+                    results.innerHTML = "";
+                    return;
+                }
+
+                const search = await pagefind.search(query);
+                const data = await Promise.all(
+                    search.results.slice(0, 6).map((r: any) => r.data()),
+                );
+
+                if (data.length === 0) {
+                    results.innerHTML = `<li class="search-no-results" role="option">Geen resultaten voor "${query}"</li>`;
+                    results.hidden = false;
+                    return;
+                }
+
+                results.innerHTML = data
+                    .map(
+                        (item: any) => `
+        <li role="option">
+          <a class="search-result-link" href="${item.url}">
+            <span class="search-result-title">${item.meta.title}</span>
+            <span class="search-result-excerpt">${item.excerpt}</span>
+          </a>
+        </li>
+      `,
+                    )
+                    .join("");
+
+                results.hidden = false;
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!results.contains(e.target as Node) && e.target !== input) {
+                    results.hidden = true;
+                }
+            });
+
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    results.hidden = true;
+                    input.value = "";
+                }
+            });
+        } catch {
+            // Pagefind nog niet beschikbaar — alleen na npm run build
+            console.info("Zoekfunctie niet beschikbaar in dev mode.");
+        }
+    }
+
+    initSearch();
+</script>
+
+<style>
+    .search-wrapper {
+        position: relative;
+    }
+
+    .search-input {
+        width: 200px;
+        padding: 0.45rem 1rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 999px;
+        color: var(--primary-color);
+        font-family: var(--primary-font), sans-serif;
+        font-size: 0.9rem;
+        transition:
+            border-color 0.2s,
+            width 0.3s ease,
+            background 0.2s;
+    }
+
+    .search-input:focus {
+        outline: 3px solid var(--highlight-color);
+        outline-offset: 2px;
+        border-color: var(--highlight-color);
+        width: 280px;
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .search-results {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        right: 0;
+        width: 360px;
+        background: #1c2330;
+        border: 1px solid rgba(250, 234, 7, 0.25);
+        border-radius: 12px;
+        list-style: none;
+        padding: 0.5rem;
+        margin: 0;
+        z-index: 100;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .search-result-link {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        color: inherit;
+        border-radius: 8px;
+        transition: background 0.15s;
+    }
+
+    .search-result-link:hover,
+    .search-result-link:focus-visible {
+        background: rgba(250, 234, 7, 0.08);
+        outline: 2px solid var(--highlight-color);
+        outline-offset: 2px;
+    }
+
+    .search-result-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    .search-result-excerpt {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .search-no-results {
+        padding: 0.75rem 1rem;
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.9rem;
+        font-style: italic;
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+    }
+</style>
