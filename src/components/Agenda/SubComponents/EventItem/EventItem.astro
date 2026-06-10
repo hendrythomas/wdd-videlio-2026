@@ -1,22 +1,79 @@
 ---
+//@ts-nocheck
 import ButtonLink from '../../../ButtonLink/ButtonLink.astro';
 
 import './eventItem.css';
+
 const { event } = Astro.props;
+
+const startDate = new Date(event.startDate);
+const endDate = new Date(event.endDate);
+const startDateOptions = {
+    day: 'numeric',
+    month: 'long',
+    hour: '2-digit',
+    minute: '2-digit',
+};
+const endDateOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+}
+if (!endDate.getDate() === startDate.getDate()) {
+    endDateOptions = startDateOptions;
+}
+
 ---
 
 <section class="event-item">
-    <h3>{event.title}</h3>
-    <p>{event.summary}</p>
+    <div class="event-item__main-info">
+        <div class="event-item__header">
+            <h3 class="event-item__title">{event.title}</h3>
+            <span class="event-item__card-tag">{`${event.type}`}</span>
+        </div>
+    </div>
+    <div class="event-item__summary">
+        <div aria-hidden="true" class="event-item__extra-info">
+            <span class="event-item__time">
+                <span>{startDate.toLocaleString('nl-NL', startDateOptions)}</span>
+                { event.endDate && (
+                        <span>{`- ${endDate.toLocaleTimeString('nl-NL', endDateOptions)}`}</span>
+                )}
+            </span>
+            <span class="event-item__location">
+                    Bomanshof 147 <br/> 5611 NR Eindhoven
+                </span>
+        </div>
+        <p>
+            {event.summary}
+        </p>
+    </div>
     {
         event.longDescription && (
-            <details>
+            <details class="event-item__details">
                 <summary>Lees meer</summary>
                 {event.longDescription}
             </details>
         )
     }
+    <div class="visually-hidden">
+        <span class="event-item__time">
+            <span>{startDate.toLocaleString('nl-NL', {
+                day: 'numeric',
+                month: 'long',
+                hour: '2-digit',
+                minute: '2-digit',
+            })}</span>
+            { event.endDate && (
+                    <span>{`- ${endDate.toLocaleTimeString('nl-NL', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    })}`}</span>
+            )}
+        </span>
+        <span class="event-item__location">
+            Bomanshof 147 <br/> 5611 NR Eindhoven
+        </span>
+    </div>
 
-
-    <ButtonLink linkClass='event-item__button'>Meer info</ButtonLink>
+    <ButtonLink linkClass='event-item__button'>Meld je aan</ButtonLink>
 </section>
