@@ -81,6 +81,10 @@
 .event-item__button {
     margin-top:.5rem;
     align-self: center;
+
+    @media (max-width: 600px) {
+        align-self: start;
+    }
 }
 
 .event-item__card-tag {
