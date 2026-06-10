@@ -1,0 +1,7 @@
+#agenda-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    margin-block-end: 5rem;
+}

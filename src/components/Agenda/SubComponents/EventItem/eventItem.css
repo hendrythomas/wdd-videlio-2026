@@ -27,6 +27,12 @@
 
 .event-item__summary {
     grid-area: s;
+
+    @media (max-width: 600px) {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+    }
 }
 
 .event-item__extra-info {
@@ -41,6 +47,12 @@
         color: var(--highlight-color);
         font-size: 1.25rem;
     }
+
+    @media (max-width: 600px) {
+        float: unset;
+        margin: 0;
+        order: 1;
+    }
 }
 
 .event-item__location {
@@ -49,11 +61,26 @@
 
 .event-item__details {
     grid-area: d;
+    border-bottom: var(--highlight-color) 2px solid;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding-top: .5rem;
+
+    summary {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    @media (max-width: 600px) {
+        padding-top: 0;
+    }
 }
 
 .event-item__button {
-    grid-area: b;
-    align-self: flex-end;
+    margin-top:.5rem;
+    align-self: center;
 }
 
 .event-item__card-tag {

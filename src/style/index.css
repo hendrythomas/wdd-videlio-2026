@@ -87,6 +87,10 @@ strong {
 
 a {
     color: var(--text-primary);
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 input, textarea {

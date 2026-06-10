@@ -40,40 +40,33 @@ if (!endDate.getDate() === startDate.getDate()) {
                 )}
             </span>
             <span class="event-item__location">
-                    Bomanshof 147 <br/> 5611 NR Eindhoven
-                </span>
+                Bomanshof 147 <br/> 5611 NR Eindhoven
+            </span>
+            <ButtonLink linkClass='event-item__button'>Meld je aan</ButtonLink>
         </div>
         <p>
             {event.summary}
         </p>
+        {
+            event.longDescription && (
+                <details class="event-item__details">
+                    <summary>Lees meer</summary>
+                    {event.longDescription}
+                </details>
+            )
+        }
     </div>
-    {
-        event.longDescription && (
-            <details class="event-item__details">
-                <summary>Lees meer</summary>
-                {event.longDescription}
-            </details>
-        )
-    }
+
     <div class="visually-hidden">
         <span class="event-item__time">
-            <span>{startDate.toLocaleString('nl-NL', {
-                day: 'numeric',
-                month: 'long',
-                hour: '2-digit',
-                minute: '2-digit',
-            })}</span>
+                <span>{startDate.toLocaleString('nl-NL', startDateOptions)}</span>
             { event.endDate && (
-                    <span>{`- ${endDate.toLocaleTimeString('nl-NL', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                    })}`}</span>
+                    <span>{`- ${endDate.toLocaleTimeString('nl-NL', endDateOptions)}`}</span>
             )}
         </span>
         <span class="event-item__location">
             Bomanshof 147 <br/> 5611 NR Eindhoven
         </span>
+        <ButtonLink linkClass='event-item__button'>Meld je aan</ButtonLink>
     </div>
-
-    <ButtonLink linkClass='event-item__button'>Meld je aan</ButtonLink>
 </section>
