@@ -7,47 +7,62 @@ import MainLayout from '../../../layouts/MainLayout.astro';
 <MainLayout>
     <section class="project-section">
         <h1>Podcasts</h1>
-    </section>
-
-    <main>
             <!--Podcasts John Willemse-->
-            <section class="grid-projects">
-                <!--1e podcast-->
+            <div class="grid-projects">
+                <!--Podcast John-->
                         <div class="project-card">
                             <div class="image">
-                                <a href="./Podcasts/john"><img src="../assets/images/decoratie/john.png"></a>
-
-                                <h4>
-                                    John Willemse
-                                </h4>
+                                <a href="./Podcasts/john">
+                                    <img src="../assets/images/decoratie/john.png">
+                                    <h4>John Willemse</h4>
+                                </a>
                             </div>
                         </div>
-            </section>
-
-            <!--Podcasts Niet te zien-->
-            <section class="grid-projects">
-                <!--22e podcast-->
+                        
+                        <!--Podcast Niet te zien -->
                         <div class="project-card">
-                            <div class="image">
-                                <a href="./Podcasts/niet_te_zien"><img src="../assets/images/decoratie/niet_te_zien.png"></a>
-
+                            <a href="./Podcasts/niet_te_zien">
+                                <img src="../assets/images/decoratie/niet_te_zien.png">
                                 <h4>Niet te zien</h4>
-                            </div>
+                            </a>
                         </div>
+                    </div>
             </section>
-    </main>
 </MainLayout>
 
 <style>
-    .grid-projects {
+    .project-section {
+        padding: 80px;
+        min-height: 100vh;
+    }
 
+    .project-section h1 {
+        color: var(--highlight-color);
+        margin-bottom: 40px;
+    }
+
+    .grid-projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        column-gap: 250px;
+        max-width: 800px;
     }
 
     .project-card {
-        
+        width: 400px;
     }
 
-    .image {
-
+    .project-card img {
+        width: 100%;
+        border-radius: 10px;
+        display: block;
     }
+
+    .project-card h4 {
+        color: var(--highlight-color);
+        margin-top: 15px;
+        font-size: 2rem;
+        text-decoration: none;
+    }
+
 </style>
