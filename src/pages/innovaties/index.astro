@@ -2,6 +2,7 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import InnovatieCard from '../../components/Innovatie-li/Innovatie-li.astro';
 import ViewToggle from '../../components/Innovatie-li/view-toggle.astro'
+import indexCSS from "../../style/index.css";
 
 import './innovaties.css';
 
@@ -45,6 +46,10 @@ try {
 ---
 
 <MainLayout pageTitle="Innovaties" backHref="/">
+
+      <!--Voor focus-indicator van anchor positioning-->
+			<div class="focus-indicator"></div>
+
   <section class="innovaties-section">
 
     <div class="innovaties-header">
