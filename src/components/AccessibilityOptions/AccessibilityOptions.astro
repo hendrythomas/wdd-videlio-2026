@@ -3,15 +3,188 @@ import './accessibilityOptions.css';
 import '../../style/icons.css';
 ---
 
-<label class="access-button">
-    <i class="material-icon" aria-hidden="true"></i>
-    <span class="desktop">Toegankelijkheid</span>
-    <input type="checkbox">
-</label>
-<div class="access-menu"> <!--TODO: Hier een popover van maken-->
-    <button>Lettertype vergroten</button>
-    <button>Lettertype verkleinen</button>
-    <button>Contrastthema gebruiken</button>
-    <button>Muisaanwijzer vergroten</button>
-    <button>Animaties gebruiken</button>
+<button class="access-button" popovertarget="access-menu">
+  <i class="material-icon" aria-hidden="true"></i>
+  <span>Toegankelijkheid</span>
+</button>
+<div class="access-menu" popover id="access-menu">
+  <div class="access-item">
+    <h2>Toegankelijkheid</h2>
+    <button class="button" title="Menu sluiten" popovertarget="access-menu" popovertargetaction="hide">
+      <i class="material-icon" aria-hidden="true">close</i>
+    </button>
+  </div>
+  <div class="access-item">
+    <span>Lettertype</span>
+    <button title="Verkleinen" id="setting-decrease-font" data-access-setting>
+      <i class="material-icon" aria-hidden="true">remove</i>
+    </button>
+    <button title="Vergroten" id="setting-increase-font" data-access-setting>
+      <i class="material-icon" aria-hidden="true">add</i>
+    </button>
+    <button title="Resetten" id="setting-reset-font" data-access-setting>
+      <i class="material-icon" aria-hidden="true">refresh</i>
+    </button>
+  </div>
+  <div class="access-item">
+    <span>Contrastthema gebruiken</span>
+    <label data-title="Aanzetten" data-checked-title="Uitzetten">
+      <i class="material-icon" aria-hidden="true"></i>
+      <input type="checkbox" id="setting-high-contrast" data-access-setting>
+    </label>
+  </div>
+  <div class="access-item">
+    <span>Muisaanwijzer vergroten</span>
+    <label data-title="Aanzetten" data-checked-title="Uitzetten">
+      <i class="material-icon" aria-hidden="true"></i>
+      <input type="checkbox" id="setting-big-cursor" data-access-setting>
+    </label>
+  </div>
 </div>
+
+<script>
+  class Setting {
+    constructor(id, value) {
+      this.id = id;
+      this.value = value;
+    }
+  }
+
+  let settings = [];
+
+  document.addEventListener('DOMContentLoaded', (e) => {
+    storageLoadSettings();
+    updateCheckboxes();
+    applySettings();
+    updateTooltips();
+  });
+
+  document.addEventListener('click', (e) => {
+    applySettings(e.target);
+    storageSaveSettings();
+  });
+
+  document.addEventListener('change', (e) => {
+    saveCheckboxSettings();
+    storageSaveSettings();
+    updateTooltips();
+  });
+
+  function applySettings(elem = null) {
+    tryToggleBigCursor(elem);
+    tryToggleContrastTheme();
+    tryIncreaseFontSize(elem);
+    tryDecreaseFontSize(elem);
+    tryResetFontSize(elem);
+    updateDocumentFontSize();
+  }
+
+  function updateCheckboxes() {
+    const checkboxes = document.querySelectorAll('input[data-access-setting]');
+    
+    for (const checkbox of checkboxes || []) {
+      const setting = settings.find((s) => {
+        return s.id === checkbox.id;
+      });
+      if (setting !== undefined) {
+        checkbox.checked = setting.value;
+      }
+    }
+  }
+
+  function saveCheckboxSettings() {
+    const checkboxes = document.querySelectorAll('input[data-access-setting]');
+    if (checkboxes === null) return;
+
+    for (const checkbox of checkboxes) {
+      if (checkbox.checked === undefined) continue;
+      const setting = getSetting(checkbox.id);
+      setting.value = checkbox.checked;
+    }
+  }
+
+  function tryIncreaseFontSize(button) {
+    if (button === null || button.id !== 'setting-increase-font') return;
+
+    const settingAddedFontSize = getSetting('setting-added-font-size');
+
+    settingAddedFontSize.value += 0.1;
+    if (settingAddedFontSize.value > 1) {
+      settingAddedFontSize.value = 1;
+    }
+  }
+
+  function tryDecreaseFontSize(button) {
+    if (button === null || button.id !== 'setting-decrease-font') return;
+
+    const settingAddedFontSize = getSetting('setting-added-font-size');
+
+    settingAddedFontSize.value -= 0.1;
+    if (settingAddedFontSize.value < -0.5) {
+      settingAddedFontSize.value = -0.5;
+    }
+  }
+
+  function tryResetFontSize(button) {
+    if (button === null || button.id !== 'setting-reset-font') return;
+
+    const settingAddedFontSize = getSetting('setting-added-font-size');
+
+    settingAddedFontSize.value = 0;
+  }
+
+  function tryToggleBigCursor(elem) {
+  }
+
+  function tryToggleContrastTheme() {
+    const input = document.getElementById('setting-high-contrast');
+    if (input === null) return;
+    
+    if (input.checked) {
+      document.documentElement.classList.add('high-contrast');
+    } else {
+      document.documentElement.classList.remove('high-contrast');
+    }
+  }
+
+  function updateDocumentFontSize() {
+    const addedFontSize = getSetting('setting-added-font-size').value;
+
+    document.documentElement.style.fontSize = `${1 + addedFontSize}rem`;
+  }
+
+  function updateTooltips() {
+    const tooltipLabels = document.querySelectorAll('[data-title][data-checked-title]');
+    
+    for (const label of tooltipLabels || []) {
+      const input = label.querySelector('input');
+      if (input.checked) {
+        label.title = label.dataset.checkedTitle;
+      } else {
+        label.title = label.dataset.title;
+      }
+    }
+  }
+
+  function getSetting(key) {
+    let setting;
+    setting = settings.find(s => {
+      return s.id === key;
+    });
+    if (setting === undefined) {
+      setting = settings.push(new Setting(key, 0));
+    }
+    return setting;
+  }
+  
+  function storageLoadSettings() {
+    const storageSettingsJson = localStorage.getItem('settings');
+    settings = JSON.parse(storageSettingsJson) || [];
+  }
+
+  function storageSaveSettings() {
+    const settingsJson = JSON.stringify(settings)
+    localStorage.setItem('settings', settingsJson);
+  }
+
+</script>

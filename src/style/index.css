@@ -42,6 +42,11 @@
 
     /*Metrics*/
     --nav-height: 100px;
+    --access-button-height: 3.5rem;
+}
+
+html {
+    height: 100%;
 }
 
 body, h1, h2, p, a {
@@ -49,8 +54,10 @@ body, h1, h2, p, a {
 }
 
 body {
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     background-color: var(--background);
 }
 

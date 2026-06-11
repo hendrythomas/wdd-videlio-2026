@@ -22,8 +22,8 @@
   user-select: none;
 }
 
-label:has(> .material-icon),
-button:has(> .material-icon) {
+label:where(:has(> .material-icon)),
+button:where(:has(> .material-icon)) {
   all: unset;
   display: flex;
   justify-content: center;

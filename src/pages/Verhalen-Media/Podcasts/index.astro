@@ -1,107 +1,68 @@
 ---
 //@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
-import './podcasts.css';
+// import './podcasts.css';
 ---
 
 <MainLayout>
     <section class="project-section">
         <h1>Podcasts</h1>
-
-        <h2>John Willemse</h2>
-
-        <main>
-            <section class="grid-projects">
-                <div class="project-card">
-                    <img src="../assets/images/decoratie/john.png">
-                    
-                    <h4>Nr 1. Introductie podcast</h4>
-
-                    <audio id="audio1">
-                        <source src="podcast.mp3" type="audio/mpeg">
-                    </audio>
-
-                    <input type="range"
-                            value="0"
-                            class="progress"
-                            id="progress1">
-
-                    <div class="control-buttons" id="button1">
-                        <button class="play-button">
-                            ▶
-                        </button>
+            <!--Podcasts John Willemse-->
+            <div class="grid-projects">
+                <!--Podcast John-->
+                        <div class="project-card">
+                            <div class="image">
+                                <a href="./Podcasts/john">
+                                    <img src="../assets/images/decoratie/john.png">
+                                    <h4>John Willemse</h4>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!--Podcast Niet te zien -->
+                        <div class="project-card">
+                            <a href="./Podcasts/niet_te_zien">
+                                <img src="../assets/images/decoratie/niet_te_zien.png">
+                                <h4>Niet te zien</h4>
+                            </a>
+                        </div>
                     </div>
-                    
-                </div>
-
-                <div class="project-card">
-                    <img src="../assets/images/decoratie/john.png">
-                    
-                    <h4>Nr 2. De samenleving heeft een handicap. Niet ik!</h4>
-
-                    <audio id="audio2">
-                        <source src="podcast2.mp3" type="audio/mpeg">
-                    </audio>
-
-                    <input type="range"
-                            value="0"
-                            class="progress"
-                            id="progress2">
-
-                    <div class="control-buttons" id="button2">
-                        <button class="play-button">
-                            ▶
-                        </button>
-                    </div>
-                </div>
             </section>
-        </main>
-    </section>
 </MainLayout>
 
-
-<script>
-    // @ts-nocheck
-    const button1 = document.getElementById('button1');
-    const button2 = document.getElementById('button2');
-
-    function toggleAudio(event, audioId, progressId) {
-        const button = event.target;
-
-        const audio = document.getElementById(audioId);
-        const progress = document.getElementById(progressId);
-
-        //Play en pause
-        if (audio.paused) {
-            audio.play();
-            button.innerHTML = "▶";
-        } else {
-            audio.pause();
-            button.innerHTML = "▶";
-        }
-
-        //Slider werkt zodra metadata geladen is
-        audio.addEventListener("loadedmetadata", () => {
-            progress.max = audio.duration;
-        });
-
-        //Slider beweegt mee
-        audio.addEventListener("timeupdate", () => {
-            progress.value = audio.currentTime;
-        });
-
-        //Zelf door of terug kunnen spoelen
-        progress.addEventListener("input", () => {
-            audio.currentTime = progress.value;
-        });
-
-        //Als de audio klaar is
-        audio.addEventListener("ended", () => {
-            button.innerHTML = "▶";
-            progress.value = 0;
-        });
+<style>
+    .project-section {
+        padding: 80px;
+        min-height: 100vh;
     }
 
-    button1.addEventListener("click", (event) => { toggleAudio(event, 'audio1', 'progress1') });
-    button2.addEventListener("click", (event) => { toggleAudio(event, 'audio2', 'progress2') });
-    </script>
+    .project-section h1 {
+        color: var(--highlight-color);
+        margin-bottom: 40px;
+    }
+
+    .grid-projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        column-gap: 250px;
+        max-width: 800px;
+    }
+
+    .project-card {
+        width: 400px;
+    }
+
+    .project-card img {
+        width: 100%;
+        border-radius: 10px;
+        display: block;
+    }
+
+    .project-card h4 {
+        color: var(--highlight-color);
+        margin-top: 15px;
+        font-size: 2rem;
+        text-decoration: none;
+    }
+
+</style>
