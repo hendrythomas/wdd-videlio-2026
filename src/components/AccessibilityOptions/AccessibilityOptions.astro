@@ -52,6 +52,8 @@ import '../../style/icons.css';
 
   let settings = [];
 
+  let cursorStyle = [];
+
   document.addEventListener('DOMContentLoaded', (e) => {
     storageLoadSettings();
     updateCheckboxes();
@@ -69,6 +71,13 @@ import '../../style/icons.css';
     storageSaveSettings();
     updateTooltips();
   });
+
+  document.addEventListener('mouseover', (e) => {
+    setCustomCursor(e);
+  }, true);
+  document.addEventListener('mouseleave', (e) => {
+    resetCustomCursor();
+  }, true);
 
   function applySettings(elem = null) {
     tryToggleBigCursor(elem);
@@ -185,6 +194,27 @@ import '../../style/icons.css';
   function storageSaveSettings() {
     const settingsJson = JSON.stringify(settings)
     localStorage.setItem('settings', settingsJson);
+  }
+
+  function setCustomCursor(e) {
+    const styleCursor = getComputedStyle(e.target).cursor;
+    if (styleCursor === 'pointer') {
+      cursorStyle = 'pointer';
+    }
+    else if (
+      e.target.lastChild &&
+      e.target.lastChild.nodeName === '#text'
+    ) {
+      cursorStyle = 'text';
+    }
+
+    console.log(cursorStyle)
+  }
+
+  function resetCustomCursor() {
+    cursorStyle = 'default';
+
+    console.log(cursorStyle)
   }
 
 </script>
