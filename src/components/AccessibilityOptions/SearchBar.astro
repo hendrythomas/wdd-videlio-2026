@@ -3,38 +3,38 @@
 ---
 
 <div class="search-wrapper" role="search" aria-label="Zoek op de website">
-    <div id="search-input-wrap">
-        <label for="search-input" class="sr-only">Zoekterm</label>
-        <input
-            type="search"
-            id="search-input"
-            class="search-input"
-            placeholder="Zoeken..."
-            aria-label="Zoek op de website"
-            aria-controls="search-results"
-            aria-autocomplete="list"
-            autocomplete="off"
-        />
-    </div>
-
-    <ul
-        id="search-results"
-        class="search-results"
-        role="listbox"
-        aria-label="Zoekresultaten"
-        aria-live="polite"
-        hidden
-    >
-    </ul>
+  <div id="search-input-wrap" style="position: relative; flex: 1; display: flex; align-items: center;">
+    <span class="search-icon" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+    <label for="search-input" class="sr-only">Zoekterm</label>
+    <input
+      type="search"
+      id="search-input"
+      class="search-input"
+      aria-label="Zoek op de website"
+      aria-controls="search-results"
+      aria-autocomplete="list"
+      autocomplete="off"
+    />
+  </div>
+  <ul
+    id="search-results"
+    class="search-results"
+    role="listbox"
+    aria-label="Zoekresultaten"
+    aria-live="polite"
+    hidden
+  ></ul>
 </div>
 
 <script>
     async function initSearch() {
         try {
             // Dynamische import — Vite probeert dit niet te resolven tijdens dev
-            const pagefind = await import(
-                /* @vite-ignore */ "/pagefind/pagefind.js"
-            );
+            const pagefind = await new Function('return import("/pagefind/pagefind.js")')();
             await pagefind.init();
 
             const input = document.getElementById(
@@ -102,102 +102,116 @@
 </script>
 
 <style>
-    .search-wrapper {
-        position: relative;
-    }
+  .search-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
 
-    .search-input {
-        width: 200px;
-        padding: 0.45rem 1rem;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 999px;
-        color: var(--primary-color);
-        font-family: var(--primary-font), sans-serif;
-        font-size: 0.9rem;
-        transition:
-            border-color 0.2s,
-            width 0.3s ease,
-            background 0.2s;
-    }
+  .search-icon {
+    position: absolute;
+    left: 0.85rem;
+    color: var(--highlight-color);
+    font-size: 1.1rem;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
 
-    .search-input:focus {
-        outline: 3px solid var(--highlight-color);
-        outline-offset: 2px;
-        border-color: var(--highlight-color);
-        width: 280px;
-        background: rgba(255, 255, 255, 0.12);
-    }
+  .search-input {
+    width: 100%;
+    padding: 0.55rem 1.2rem 0.55rem 2.6rem;
+    margin-right: 0.5rem;
+    background: rgba(250, 234, 7, 0.08);
+    border: 1.5px solid rgba(250, 234, 7, 0.5);
+    border-radius: 10px;
+    color: var(--primary-color);
+    font-family: var(--primary-font), sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
 
-    .search-input::placeholder {
-        color: rgba(255, 255, 255, 0.4);
-    }
+  .search-input:focus {
+    outline: 3px solid var(--highlight-color);
+    outline-offset: 2px;
+    border-color: var(--highlight-color);
+    background: rgba(250, 234, 7, 0.14);
+    box-shadow: 0 0 0 3px rgba(250, 234, 7, 0.2);
+  }
 
-    .search-results {
-        position: absolute;
-        top: calc(100% + 0.5rem);
-        right: 0;
-        width: 360px;
-        background: #1c2330;
-        border: 1px solid rgba(250, 234, 7, 0.25);
-        border-radius: 12px;
-        list-style: none;
-        padding: 0.5rem;
-        margin: 0;
-        z-index: 100;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+  }
 
-    .search-result-link {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-        padding: 0.75rem 1rem;
-        text-decoration: none;
-        color: inherit;
-        border-radius: 8px;
-        transition: background 0.15s;
-    }
+  .search-results {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 100%;
+    min-width: 320px;
+    background: #1c2330;
+    border: 1px solid rgba(250, 234, 7, 0.25);
+    border-radius: 10px;
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
 
-    .search-result-link:hover,
-    .search-result-link:focus-visible {
-        background: rgba(250, 234, 7, 0.08);
-        outline: 2px solid var(--highlight-color);
-        outline-offset: 2px;
-    }
+  .search-result-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
 
-    .search-result-title {
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: var(--primary-color);
-    }
+  .search-result-link:hover,
+  .search-result-link:focus-visible {
+    background: rgba(250, 234, 7, 0.08);
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 2px;
+  }
 
-    .search-result-excerpt {
-        font-size: 0.8rem;
-        color: rgba(255, 255, 255, 0.55);
-        line-height: 1.5;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
+  .search-result-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
 
-    .search-no-results {
-        padding: 0.75rem 1rem;
-        color: rgba(255, 255, 255, 0.45);
-        font-size: 0.9rem;
-        font-style: italic;
-    }
+  .search-result-excerpt {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
-    .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        white-space: nowrap;
-        border: 0;
-    }
+  .search-no-results {
+    padding: 0.75rem 1rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
 </style>
