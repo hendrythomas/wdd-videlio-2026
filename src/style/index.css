@@ -127,20 +127,46 @@ input, textarea {
     border-radius: 1.5rem;
     cursor: pointer;
     transition: background-color .3s linear;
+}
 
     /* focus styling  */
-    :focus-visible {
-        outline: 3px solid var(--highlight-color);
-        outline-offset: 5px;
-        border-radius: 4px;
-        box-shadow:
-                0 0 0 6px rgba(250, 234, 7, 0.2),
-                0 0 12px rgba(250, 234, 7, 0.15);
-        transition: outline-offset 0.1s ease, box-shadow 0.1s ease;
-    }
+.button:focus-visible {
+    outline: 3px solid var(--highlight-color); /*Als de anchor positioning niet werkt blijft de gebruiker toch een focusrand zien.*/
+    outline-offset: 5px;
+    border-radius: 4px;
+    box-shadow:
+            0 0 0 6px rgba(250, 234, 7, 0.2),
+            0 0 12px rgba(250, 234, 7, 0.15);
+    transition: outline-offset 0.1s ease, box-shadow 0.1s ease;
+}
 
     /* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
-    :focus:not(:focus-visible) {
+.button:focus:not(:focus-visible) {
         outline: none;
     }
+
+/*Element met focus heet tijdelijk --focus-anchor*/
+.button:focus-visible, a:focus-visible {
+    anchor-name: --focus-anchor;
+}
+
+/*Beweegt indicator naar volgend element met tab*/
+.focus-indicator {
+    position: fixed;
+    position-anchor: --focus-anchor;
+
+    left: anchor(left);
+    top: anchor(top);
+    width: anchor-size(width);
+    height: anchor-size(height);
+
+    border: 3px solid var(--highlight-color);
+    border-radius: 10px;
+    pointer-events: none;
+
+    transition:
+        left 0.3s ease,
+        top 0.3s ease,
+        width 0.3s ease,
+        height 0.3s ease;
 }
