@@ -1,0 +1,230 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+---
+
+<MainLayout backHref="/">
+  <main id="main-content" tabindex="-1" aria-label="Draag bij aan Videlio">
+
+    <h1>Draag bij aan <strong>Videlio</strong></h1>
+
+    <div class="donate-body">
+
+      <div class="donate-intro">
+        <p>Videlio is een stichting zonder winstoogmerk. We zijn afhankelijk van subsidies, co-financiering en donaties om onze activiteiten van hoge kwaliteit te blijven organiseren — samen met onze doelgroep.</p>
+        <p>Ons doel is dat mensen met een visuele beperking volwaardig kunnen deelnemen aan de samenleving. Stap voor stap maken wij die wereld toegankelijker en socialer.</p>
+        <p>We besteden elke donatie zorgvuldig en leggen als stichting verantwoording af aan jou en de samenleving. <strong>We doen het samen.</strong></p>
+        <p class="donate-cta-text">Steun Videlio met een eenmalige of maandelijkse donatie:</p>
+      </div>
+
+      <div class="donate-bank" aria-label="Bankgegevens van Stichting Videlio">
+
+        <div class="donate-bank-item">
+          <span class="donate-bank-label">Rekeningnummer</span>
+          <div class="donate-bank-row">
+            <strong class="donate-bank-value">NL54 ABNA 0133 2626 50</strong>
+            <button class="donate-copy-btn"
+                    data-copy="NL54 ABNA 0133 2626 50"
+                    aria-label="Kopieer rekeningnummer">
+              <span class="donate-copy-label">Kopieer</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="donate-bank-divider" aria-hidden="true"></div>
+
+        <div class="donate-bank-item">
+          <span class="donate-bank-label">Ten name van</span>
+          <div class="donate-bank-row">
+            <strong class="donate-bank-value">Stichting Videlio</strong>
+            <button class="donate-copy-btn"
+                    data-copy="Stichting Videlio"
+                    aria-label="Kopieer naam">
+             <span class="donate-copy-label">Kopieer</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="donate-bank-divider" aria-hidden="true"></div>
+
+        <div class="donate-bank-item">
+          <span class="donate-bank-label">KvK-nummer</span>
+          <div class="donate-bank-row">
+            <strong class="donate-bank-value">92984185</strong>
+            <button class="donate-copy-btn"
+                    data-copy="92984185"
+                    aria-label="Kopieer KvK-nummer">
+              <span class="donate-copy-label">Kopieer</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+</MainLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.donate-copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy ?? '';
+      const label = btn.querySelector<HTMLElement>('.donate-copy-label');
+      if (!label) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+
+        label.textContent = 'Gekopieerd!';
+        btn.setAttribute('aria-label', (btn.getAttribute('aria-label') ?? '').replace('Kopieer', 'Gekopieerd'));
+        btn.classList.add('donate-copy-btn--success');
+
+        setTimeout(() => {
+          label.textContent = 'Kopieer';
+          btn.classList.remove('donate-copy-btn--success');
+        }, 2000);
+
+      } catch {
+        label.textContent = 'Mislukt';
+        setTimeout(() => {
+          label.textContent = 'Kopieer';
+        }, 2000);
+      }
+    });
+  });
+</script>
+
+<style>
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  h1 {
+    font-size: var(--title-font-size);
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .donate-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .donate-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-left: 1rem;
+  }
+
+  .donate-intro p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+  }
+
+  .donate-cta-text {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 1rem !important;
+  }
+
+  .donate-bank {
+    background: rgba(250, 234, 7, 0.06);
+    border: 1px solid rgba(250, 234, 7, 0.35);
+    border-radius: 16px;
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  
+  }
+
+  .donate-bank-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .donate-bank-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .donate-bank-value {
+    font-size: 1.3rem;
+    color: var(--highlight-color);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .donate-bank-divider {
+    height: 1px;
+    background: rgba(250, 234, 7, 0.15);
+  }
+
+  .donate-bank-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+
+  }
+
+  .donate-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    background: transparent;
+    border: 1px solid rgba(250, 234, 7, 0.35);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: var(--primary-font), sans-serif;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .donate-copy-btn:hover,
+  .donate-copy-btn:focus-visible {
+    background: var(--highlight-color);
+    color: #1a1e24;
+  }
+
+   .donate-copy-btn:hover span {
+    background: var(--highlight-color);
+    color: #1a1e24;
+  }
+
+
+  .donate-copy-btn--success, .donate-copy-btn--success span {
+    background: var(--highlight-color);
+    color: #1a1e24;
+    border-color: var(--highlight-color);
+  }
+
+  @media (max-width: 700px) {
+    h1 { font-size: 2.5rem; }
+
+    .donate-body {
+      grid-template-columns: 1fr;
+    }
+
+    .donate-bank {
+      position: static;
+      padding: 1.25rem;
+    }
+
+    .donate-bank-value { font-size: 1.1rem; }
+  }
+</style>

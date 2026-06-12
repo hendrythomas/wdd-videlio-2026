@@ -42,6 +42,7 @@
 
     /*Metrics*/
     --nav-height: 100px;
+    --access-button-height: 3.5rem;
 }
 
 html {

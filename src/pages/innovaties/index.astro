@@ -1,18 +1,50 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import InnovatieCard from '../../components/Innovatie-li/Innovatie-li.astro';
-import innovaties from '../../data/innovations.json';
 import ViewToggle from '../../components/Innovatie-li/view-toggle.astro'
 
 import './innovaties.css';
 
-/**
- * Nu: lokale JSON. Later: vervang de import hierboven door een fetch():
+// Probeer eerst WordPress, val terug op lokale data
+interface Innovatie {
+  id: string;
+  slug: string;
+  type: string;
+  title: string;
+  summary: string;
+  image: string;
+  imageAlt: string;
+  tags: string[];
+  date: string;
+  detailPath: string;
+}
 
- */
+let innovaties: Innovatie[] = [];
+
+try {
+  const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/posts?per_page=100&_embed=true');
+  const wpPosts = await res.json();
+
+  innovaties = wpPosts.map((post: any) => ({
+    id: String(post.id),
+    slug: post.slug,
+    type: 'innovatie',
+    title: post.title.rendered,
+    summary: post.excerpt.rendered.replace(/<[^>]*>/g, '').trim(),
+    date: post.date,
+    image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? '',
+    imageAlt: post.title.rendered,
+    tags: post._embedded?.['wp:term']?.flat().map((t: any) => t.name) ?? [],
+    detailPath: `/innovaties/${post.slug}`,
+  }));
+} catch {
+  // Fallback naar lokale JSON
+  const local = await import('../../data/innovations.json');
+  innovaties = local.default;
+}
 ---
 
-<MainLayout>
+<MainLayout pageTitle="Innovaties" backHref="/">
   <section class="innovaties-section">
 
     <div class="innovaties-header">
