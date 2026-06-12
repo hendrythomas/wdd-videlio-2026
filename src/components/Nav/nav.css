@@ -5,6 +5,15 @@ body > header > nav {
   transition: box-shadow 0.1s ease;
 }
 
+/* Dropdown moet buiten de nav kunnen vallen */
+header {
+  overflow: visible;
+}
+
+.navigation {
+  overflow: visible;
+}
+
 body > header,
 body > header > nav,
 body > header > nav > .mobile-menu {
@@ -141,6 +150,8 @@ body:has(> header)::before {
 
 /* Zoekbalk rechts gedrukt via margin-left: auto */
 .navigation .search-wrapper {
+  overflow: visible;
+  position: relative;
   margin-left: auto;
   max-width: 500px;
   width: 100%;
