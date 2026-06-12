@@ -5,3 +5,7 @@
 
     margin-block-end: 5rem;
 }
+
+main a {
+    color: var(--highlight-color);
+}
