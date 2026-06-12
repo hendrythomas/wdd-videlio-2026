@@ -102,17 +102,11 @@ a {
     }
 }
 
-details {
-
-    > summary {
-        font-size: var(--paragraph-font-size);
-        color: var(--text-primary);
-        list-style: none;
-    }
-    &:not([open]) > summary {
-        text-decoration: underline;
-        cursor: pointer;
-    }
+summary {
+    font-size: var(--paragraph-font-size);
+    color: var(--text-primary);
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 input, textarea {
