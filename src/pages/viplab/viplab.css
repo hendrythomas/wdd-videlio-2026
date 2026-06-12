@@ -27,8 +27,8 @@ main {
     color: var(--text-primary);
   }
   
-  p {
-    margin-top:    1rem;
+  p:not(:first-child) {
+    margin-top: 1rem;
   }
   p:not(:last-child) {
     margin-bottom: 1rem;
@@ -36,6 +36,9 @@ main {
 
   a {
     color: var(--highlight-color);
+  }
+  a:where([href^='#']) {
+      color: var(--text-primary);
   }
 
   .button-link {
@@ -94,7 +97,7 @@ main {
 .carrousel-item {
   flex-shrink: 0;
   padding: 1rem;
-  width: 300px;
+  width: 400px;
   border-radius: var(--container-radius);
   border: 2px solid #ffffff40;
   box-shadow: 0 2px 8px 0 #00000040;
