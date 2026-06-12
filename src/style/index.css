@@ -35,17 +35,26 @@
 
     /*Typography:*/
     --primary-font: "Noto sans", sans-serif;
-    --small-heading-font-size: 1.5rem;
+    --small-heading-font-size: 1.75rem;
     --heading-font-size: 2rem;
     --title-font-size: 4rem;
     --paragraph-font-size: 1.5rem;
 
+    /*Borders*/
+    --container-radius: 16px;
+    --button-radius: 999px;
+
     /*Metrics*/
     --nav-height: 100px;
+    --access-button-height: 3.5rem;
 }
 
 html {
     height: 100%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+    }
 }
 
 body, h1, h2, p, a {
@@ -53,7 +62,7 @@ body, h1, h2, p, a {
 }
 
 body {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -71,12 +80,12 @@ h2 {
 }
 
 h3 {
-    color: var(--text-highlight);
+    color: var(--text-primary);
     font-size: var(--small-heading-font-size);
     font-weight: bold;
 }
 
-p, label, span {
+p, label, span, details, summary {
     color: var(--text-primary);
     font-size: var(--paragraph-font-size);
 }
@@ -87,6 +96,17 @@ strong {
 
 a {
     color: var(--text-primary);
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+summary {
+    font-size: var(--paragraph-font-size);
+    color: var(--text-primary);
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 input, textarea {
@@ -94,6 +114,16 @@ input, textarea {
     font-size: var(--paragraph-font-size);
     border-radius: .5rem;
     resize: none;
+}
+
+.page {
+    width: 80dvw;
+    margin: auto;
+    height: auto;
+
+    @media (max-width: 768px) {
+        width: 90dvw;
+    }
 }
 
 .button {
@@ -105,20 +135,46 @@ input, textarea {
     border-radius: 1.5rem;
     cursor: pointer;
     transition: background-color .3s linear;
+}
 
-    /* focus styling  */
-    :focus-visible {
-        outline: 3px solid var(--highlight-color);
-        outline-offset: 5px;
-        border-radius: 4px;
-        box-shadow:
-                0 0 0 6px rgba(250, 234, 7, 0.2),
-                0 0 12px rgba(250, 234, 7, 0.15);
-        transition: outline-offset 0.1s ease, box-shadow 0.1s ease;
-    }
+/* focus styling  */
+.button:focus-visible {
+    outline: 3px solid var(--highlight-color); /*Als de anchor positioning niet werkt blijft de gebruiker toch een focusrand zien.*/
+    outline-offset: 5px;
+    border-radius: 4px;
+    box-shadow:
+            0 0 0 6px rgba(250, 234, 7, 0.2),
+            0 0 12px rgba(250, 234, 7, 0.15);
+    transition: outline-offset 0.1s ease, box-shadow 0.1s ease;
+}
 
-    /* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
-    :focus:not(:focus-visible) {
-        outline: none;
-    }
+/* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
+.button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/*Element met focus heet tijdelijk --focus-anchor*/
+.button:focus-visible, a:focus-visible {
+    anchor-name: --focus-anchor;
+}
+
+/*Beweegt indicator naar volgend element met tab*/
+.focus-indicator {
+    position: fixed;
+    position-anchor: --focus-anchor;
+
+    left: anchor(left);
+    top: anchor(top);
+    width: anchor-size(width);
+    height: anchor-size(height);
+
+    border: 3px solid var(--highlight-color);
+    border-radius: 10px;
+    pointer-events: none;
+
+    transition:
+        left 0.3s ease,
+        top 0.3s ease,
+        width 0.3s ease,
+        height 0.3s ease;
 }

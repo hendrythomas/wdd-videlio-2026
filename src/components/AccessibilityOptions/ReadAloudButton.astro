@@ -1,0 +1,195 @@
+---
+// Verander 'pill' naar 'block' of 'asymmetric' voor andere vormen
+const { variant = 'asymmetric', targetId } = Astro.props;
+---
+
+<div class="read-aloud" data-target={targetId}>
+  <button
+    class={`read-aloud-btn read-aloud-btn--${variant}`}
+    aria-label="Lees pagina voor"
+    aria-pressed="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+    </svg>
+    <span class="read-aloud-label">Lees voor</span>
+  </button>
+  <div class="read-aloud-progress" aria-hidden="true">
+    <div class="read-aloud-fill"></div>
+  </div>
+  <span class="read-aloud-status" aria-live="polite"></span>
+</div>
+
+<script>
+  document.querySelectorAll('.read-aloud').forEach(widget => {
+    const btn = widget.querySelector('.read-aloud-btn') as HTMLButtonElement;
+    const label = widget.querySelector('.read-aloud-label') as HTMLElement;
+    const fill = widget.querySelector('.read-aloud-fill') as HTMLElement;
+    const status = widget.querySelector('.read-aloud-status') as HTMLElement;
+    const targetId = widget.getAttribute('data-target');
+    const target = targetId ? document.getElementById(targetId) : document.querySelector('main');
+
+    let playing = false;
+    let interval: ReturnType<typeof setInterval>;
+
+    function stop() {
+      window.speechSynthesis.cancel();
+      playing = false;
+      btn.setAttribute('aria-pressed', 'false');
+      btn.classList.remove('is-playing');
+      label.textContent = 'Lees voor';
+      fill.style.width = '0%';
+      status.textContent = '';
+      clearInterval(interval);
+    }
+
+    btn.addEventListener('click', () => {
+      if (playing) { stop(); return; }
+
+      const text = target?.innerText ?? document.body.innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'nl-NL';
+      utterance.rate = 0.95;
+
+      const duration = (text.split(' ').length / 150) * 60 * 1000;
+      const start = Date.now();
+
+      utterance.onstart = () => {
+        playing = true;
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('is-playing');
+        label.textContent = 'Stop';
+        status.textContent = 'Bezig met voorlezen...';
+        interval = setInterval(() => {
+          fill.style.width = Math.min(((Date.now() - start) / duration) * 100, 98) + '%';
+        }, 200);
+      };
+
+      utterance.onend = () => {
+        fill.style.width = '100%';
+        status.textContent = 'Klaar';
+        clearInterval(interval);
+        setTimeout(stop, 800);
+      };
+
+      utterance.onerror = () => {
+        status.textContent = 'Niet beschikbaar in deze browser';
+        stop();
+      };
+
+      window.speechSynthesis.speak(utterance);
+    });
+  });
+</script>
+
+<style>
+  :root {
+    --a11y-color: #a93226;
+    --highlight-color: #FAEA07;
+
+  }
+
+  .read-aloud {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: fit-content;
+  }
+
+  /* Gedeelde knopstijl */
+  .read-aloud-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: var(--primary-font), sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s, box-shadow 0.2s, background 0.2s;
+
+    min-width: 200px  ;
+  justify-content: center;
+  }
+
+  .read-aloud-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #FFF;
+    flex-shrink: 0;
+  }
+
+  .read-aloud-btn:focus-visible {
+    outline: 3px solid var(--a11y-color);
+    outline-offset: 4px;
+  }
+
+  /* Variant: pill */
+  .read-aloud-btn--pill {
+    padding: 0.75rem 2rem;
+    background: var(--a11y-color);
+    color: #1a1e24;
+    border-radius: 999px;
+  }
+  .read-aloud-btn--pill:hover {
+  }
+
+  /* Variant: block */
+  .read-aloud-btn--block {
+    padding: 0.75rem 1.6rem;
+    background: var(--a11y-color);
+    color: #1a1e24;
+    border-radius: 12px;
+  }
+  .read-aloud-btn--block:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  /* Variant: asymmetric */
+  .read-aloud-btn--asymmetric {
+    padding: 0.75rem 1.6rem;
+    background: var(--a11y-color);
+    color: #ffffff;
+    border-radius: 0px 16px 16px 0px;
+    border-left: 4px solid #e74c3c;
+    box-shadow: 0 4px 16px rgba(169, 50, 38, 0.35);
+    letter-spacing: 0.03em;
+  }
+  .read-aloud-btn--asymmetric:hover {
+    background: #c0392b;
+    box-shadow: 0 6px 24px rgba(169, 50, 38, 0.5);
+  }
+  .read-aloud-btn--asymmetric.is-playing {
+    background: #7b241c;
+    color: #ffffff;
+  }
+
+  /* Spelend state */
+  .read-aloud-btn.is-playing {
+    background: #f14f4f;
+    color: #1a1e24;
+  }
+  
+  /* Voortgangsbalk */
+  .read-aloud-progress {
+    height: 4px;
+    background: rgba(169, 50, 38, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .read-aloud-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--highlight-color);
+    border-radius: 2px;
+    transition: width 0.3s linear;
+  }
+
+  .read-aloud-status {
+    font-size: 0.78rem;
+    color: var(--highlight-color);
+    font-style: italic;
+    min-height: 1em;
+  }
+</style>
