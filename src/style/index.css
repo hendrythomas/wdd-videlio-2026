@@ -35,7 +35,7 @@
 
     /*Typography:*/
     --primary-font: "Noto sans", sans-serif;
-    --small-heading-font-size: 1.5rem;
+    --small-heading-font-size: 1.75rem;
     --heading-font-size: 2rem;
     --title-font-size: 4rem;
     --paragraph-font-size: 1.5rem;
@@ -62,7 +62,7 @@ body, h1, h2, p, a {
 }
 
 body {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -80,12 +80,12 @@ h2 {
 }
 
 h3 {
-    color: var(--text-highlight);
+    color: var(--text-primary);
     font-size: var(--small-heading-font-size);
     font-weight: bold;
 }
 
-p, label, span {
+p, label, span, details, summary {
     color: var(--text-primary);
     font-size: var(--paragraph-font-size);
 }
@@ -96,19 +96,17 @@ strong {
 
 a {
     color: var(--text-primary);
-}
 
-details {
-
-    > summary {
-        font-size: var(--paragraph-font-size);
-        color: var(--text-primary);
-        list-style: none;
-    }
-    &:not([open]) > summary {
-        text-decoration: underline;
+    &:hover {
         cursor: pointer;
     }
+}
+
+summary {
+    font-size: var(--paragraph-font-size);
+    color: var(--text-primary);
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 input, textarea {
@@ -116,6 +114,16 @@ input, textarea {
     font-size: var(--paragraph-font-size);
     border-radius: .5rem;
     resize: none;
+}
+
+.page {
+    width: 80dvw;
+    margin: auto;
+    height: auto;
+
+    @media (max-width: 768px) {
+        width: 90dvw;
+    }
 }
 
 .button {
@@ -129,7 +137,7 @@ input, textarea {
     transition: background-color .3s linear;
 }
 
-    /* focus styling  */
+/* focus styling  */
 .button:focus-visible {
     outline: 3px solid var(--highlight-color); /*Als de anchor positioning niet werkt blijft de gebruiker toch een focusrand zien.*/
     outline-offset: 5px;
@@ -140,10 +148,10 @@ input, textarea {
     transition: outline-offset 0.1s ease, box-shadow 0.1s ease;
 }
 
-    /* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
+/* Verwijder de standaard outline zodat alleen onze stijl zichtbaar is */
 .button:focus:not(:focus-visible) {
-        outline: none;
-    }
+    outline: none;
+}
 
 /*Element met focus heet tijdelijk --focus-anchor*/
 .button:focus-visible, a:focus-visible {

@@ -5,18 +5,16 @@ import './agendaItem.css';
 
 const { events } = Astro.props;
 
-const date = new Date(events[0].date);
+const date = new Date(events[0].startDate);
 const dayString = date.toLocaleString('nl-NL', { weekday: 'long' });
-const capitalizedDay =
-    dayString.charAt(0).toUpperCase() + dayString.slice(1);
+const capitalizedDay = dayString.charAt(0).toUpperCase() + dayString.slice(1);
 const day = date.getDate();
 const month = date.toLocaleString('nl-NL', { month: 'long' });
 ---
 
 <section class="agenda-item">
         <h2 class="agenda-item__date">
-            <span class="agenda-item__day">{`${capitalizedDay} ${day}`}</span>
-            <span class="agenda-item__month">{month}</span>
+            {`${capitalizedDay} ${day} ${month}`}
         </h2>
     {
         events.map((event) => <EventItem event={event} />)
