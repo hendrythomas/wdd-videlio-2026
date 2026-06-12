@@ -1,8 +1,3 @@
-:root {
-  --container-radius: 16px;
-  --button-radius: 999px;
-}
-
 body {
   margin: 0;
   display: flex;
@@ -66,7 +61,7 @@ main {
   grid-template-columns: 1fr 1fr;
   grid-auto-flow: dense;
   column-gap: 2rem;
-  
+
   @media (max-width: 800px) {
     display: block;
   }

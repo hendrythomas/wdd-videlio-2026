@@ -40,6 +40,10 @@
     --title-font-size: 4rem;
     --paragraph-font-size: 1.5rem;
 
+    /*Borders*/
+    --container-radius: 16px;
+    --button-radius: 999px;
+
     /*Metrics*/
     --nav-height: 100px;
     --access-button-height: 3.5rem;
@@ -88,6 +92,19 @@ strong {
 
 a {
     color: var(--text-primary);
+}
+
+details {
+
+    > summary {
+        font-size: var(--paragraph-font-size);
+        color: var(--text-primary);
+        list-style: none;
+    }
+    &:not([open]) > summary {
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
 
 input, textarea {
