@@ -104,6 +104,44 @@
                 if (e.key === "Escape") {
                     results.hidden = true;
                     input.value = "";
+                    return;
+                }
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    const links = results.querySelectorAll(".search-result-link");
+                    if (links.length > 0) {
+                        (links[0] as HTMLAnchorElement).focus();
+                    }
+                    return;
+                }
+            });
+
+            results.addEventListener("keydown", (e) => {
+                const links = Array.from(results.querySelectorAll(".search-result-link"));
+                const current = document.activeElement;
+                const index = links.indexOf(current as HTMLAnchorElement);
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    const next = links[index + 1] as HTMLAnchorElement;
+                    if (next) next.focus();
+                }
+
+                if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    if (index === 0) {
+                        input.focus();
+                    } else {
+                        const prev = links[index - 1] as HTMLAnchorElement;
+                        if (prev) prev.focus();
+                    }
+                }
+
+                if (e.key === "Escape") {
+                    results.hidden = true;
+                    input.value = "";
+                    input.focus();
                 }
             });
         } catch {
