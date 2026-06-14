@@ -80,8 +80,7 @@
                         (item: any) => `
         <li role="option">
           <a class="search-result-link" href="${item.url}">
-            <span class="search-result-title">${item.meta.title}</span>
-            <span class="search-result-excerpt">${item.excerpt}</span>
+            <span class="search-result-title">${item.meta.title ?? 'Pagina'}</span>
           </a>
         </li>
       `,
@@ -167,13 +166,13 @@
     border: 1px solid rgba(250, 234, 7, 0.25);
     border-radius: 12px;
     list-style: none;
-    padding: 0.75rem;
+    padding: 0.5rem;
     margin: 0;
     z-index: 9999;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.25rem;
   }
 
   .search-results[hidden] {
@@ -181,17 +180,14 @@
   }
 
   .search-results li + li {
-    border-top: 10px solid var(--highlight-color);
-    padding-top: 0.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 0.25rem;
   }
 
   .search-result-link {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    padding: 0.75rem 1rem;
+    display: block;
+    padding: 0.6rem 1rem;
     text-decoration: none;
-    color: inherit;
     border-radius: 8px;
     transition: background 0.15s ease;
   }
@@ -204,27 +200,11 @@
   }
 
   .search-result-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--highlight-color);
     line-height: 1.3;
-  }
-
-  .search-result-excerpt {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .search-result-excerpt mark {
-    background: rgba(250, 234, 7, 0.25);
-    color: var(--highlight-color);
-    border-radius: 3px;
-    padding: 0 2px;
+    display: block;
   }
 
   .search-no-results {
