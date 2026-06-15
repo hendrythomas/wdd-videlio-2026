@@ -31,7 +31,7 @@ import './mainLayout.css';
 
     <Header />
 
-    <main data-pagefind-ignore>
+    <main class="page" data-pagefind-ignore>
         { backHref && <ButtonLink linkClass="main-layout-back-button" href={backHref}>← Terug</ButtonLink> }
         <slot />
     </main>

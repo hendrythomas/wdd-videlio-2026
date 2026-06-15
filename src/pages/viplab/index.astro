@@ -5,81 +5,79 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import './viplab.css';
 ---
 <MainLayout pageTitle="VIPLab">
-  <main>
-    <section class="intro">
-      <h1>VIPLab</h1>
+  <section class="intro">
+    <h1>VIPLab</h1>
+    <p>
+      VIPLab is de maakplek van Videlio.
+      Samen met makers bouw je hier aan nieuwe hulpmiddelen en oplossingen.
+    </p>
+    <details>
+      <summary>Meer weten over de locatie?</summary>
       <p>
-        VIPLab is de maakplek van Videlio.
-        Samen met makers bouw je hier aan nieuwe hulpmiddelen en oplossingen.
+        Videlio won in 2026 met VIPLab de <a href="https://burstyourbubble.nl">Burst Your Bubble pitchwedstrijd</a>.
+        Hierdoor is er geld beschikbaar voor de eerste inrichting van VIPLab.
+      </p>
+      <p>
+        VIPLab krijgt een plek in het <a href="../Contact#section-location">toekomstige ontmoetingscentrum</a> in Eindhoven.
       </p>
       <details>
-        <summary>Meer weten over de locatie?</summary>
+        <summary>Inrichting?</summary>
         <p>
-          Videlio won in 2026 met VIPLab de <a href="https://burstyourbubble.nl">Burst Your Bubble pitchwedstrijd</a>.
-          Hierdoor is er geld beschikbaar voor de eerste inrichting van VIPLab.
-        </p>
-        <p>
-          VIPLab krijgt een plek in het <a href="../Contact#section-location">toekomstige ontmoetingscentrum</a> in Eindhoven.
+          Het bedrag gebruiken we voor de basis van de werkplek: stevige tafels, gereedschap, materialen, goed licht, vergrotingsmogelijkheden, een groot scherm, een 3D-printer en alles wat nodig is om snel te kunnen starten.
         </p>
         <details>
-          <summary>Inrichting?</summary>
-          <p>
-            Het bedrag gebruiken we voor de basis van de werkplek: stevige tafels, gereedschap, materialen, goed licht, vergrotingsmogelijkheden, een groot scherm, een 3D-printer en alles wat nodig is om snel te kunnen starten.
-          </p>
-          <details>
-            <summary>VIPLab steunen?</summary>
-            <p>Om VIPLab te steunen met materiaal, kennis, ruimte of sponsoring, kan je <a href="../Contact">contact opnemen met Videlio</a>.</p>
-            <ButtonLink href="../Contact/Doneer">Geld doneren</ButtonLink>
-          </details>
+          <summary>VIPLab steunen?</summary>
+          <p>Om VIPLab te steunen met materiaal, kennis, ruimte of sponsoring, kan je <a href="../Contact">contact opnemen met Videlio</a>.</p>
+          <ButtonLink href="../Contact/Doneer">Geld doneren</ButtonLink>
         </details>
       </details>
-    </section>
-    <section class="grid">
-      <img src="../assets/images/decoratie/viplab.webp" alt="Afbeelding van mensen die op tafel een oplossing ontwerpen" loading="lazy">
-      <div>
-        <h2>Breng je uitdaging in</h2>
+    </details>
+  </section>
+  <section class="grid">
+    <img src="../assets/images/decoratie/viplab.webp" alt="Afbeelding van mensen die op tafel een oplossing ontwerpen" loading="lazy">
+    <div>
+      <h2>Breng je uitdaging in</h2>
+      <p>
+        VIPs brengen een uitdaging in.
+        Bijvoorbeeld: “Met hond, stok en tas kom ik handen tekort bij het inchecken.”
+      </p>
+      <p>
+        Videlio zoekt dan mensen die hierbij kunnen helpen.
+        Samen maken, testen of verbeteren we een oplossing.
+      </p>
+      <ButtonLink href="#workshops">Ik wil meebouwen</ButtonLink>
+    </div>
+  </section>
+  <section>
+    <h2>Oplossingen gemaakt door andere VIPs</h2>
+    <div class="carrousel">
+      <div class="carrousel-item">
+        <h3>LumiCane</h3>
         <p>
-          VIPs brengen een uitdaging in.
-          Bijvoorbeeld: “Met hond, stok en tas kom ik handen tekort bij het inchecken.”
-        </p>
+          Een lichtgevende blindenstok ontworpen om VIPs beter zichtbaar en herkenbaar te maken. 
+          <a href="../innovaties/lumicane">Meer lezen over LumiCane</a></p>
+      </div>
+      <div class="carrousel-item">
+        <h3>VibeCap</h3>
         <p>
-          Videlio zoekt dan mensen die hierbij kunnen helpen.
-          Samen maken, testen of verbeteren we een oplossing.
+          Een pet die trilt vóórdat je tegen een lantaarnpaal loopt.
         </p>
-        <ButtonLink href="#workshops">Ik wil meebouwen</ButtonLink>
       </div>
-    </section>
-    <section>
-      <h2>Oplossingen gemaakt door andere VIPs</h2>
-      <div class="carrousel">
-        <div class="carrousel-item">
-          <h3>LumiCane</h3>
-          <p>
-            Een lichtgevende blindenstok ontworpen om VIPs beter zichtbaar en herkenbaar te maken. 
-            <a href="../innovaties/lumicane">Meer lezen over LumiCane</a></p>
-        </div>
-        <div class="carrousel-item">
-          <h3>VibeCap</h3>
-          <p>
-            Een pet die trilt vóórdat je tegen een lantaarnpaal loopt.
-          </p>
-        </div>
-        <div class="carrousel-item">
-          <p>
-            Een handige pasjeshouder voor op je taststok, omdat je met een hond, stok, tas of OV-poortje ineens handen tekortkomt.
-          </p>
-        </div>
-        <div class="carrousel-item">
-          <p>
-            Een balansgewichtje tegen een armverkramping bij het gebruik van een taststok.
-          </p>
-        </div>
+      <div class="carrousel-item">
+        <p>
+          Een handige pasjeshouder voor op je taststok, omdat je met een hond, stok, tas of OV-poortje ineens handen tekortkomt.
+        </p>
       </div>
-    </section>
-    <section>
-      <h2 id="workshops">VIPLab-workshops</h2>
-      <p>Insert workshops</p>
-      <ButtonLink href="../Agenda">Alle workshops bekijken</ButtonLink>
-    </section>
-  </main>
+      <div class="carrousel-item">
+        <p>
+          Een balansgewichtje tegen een armverkramping bij het gebruik van een taststok.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2 id="workshops">VIPLab-workshops</h2>
+    <p>Insert workshops</p>
+    <ButtonLink href="../Agenda">Alle workshops bekijken</ButtonLink>
+  </section>
 </MainLayout>
