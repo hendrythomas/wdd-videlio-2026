@@ -6,6 +6,11 @@
     margin-block-end: 5rem;
 }
 
-main a {
-    color: var(--highlight-color);
+main {
+    h1 {
+        color: var(--highlight-color);
+    }
+    a {
+        color: var(--highlight-color);
+    }
 }

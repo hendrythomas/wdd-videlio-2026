@@ -16,10 +16,9 @@ const currentPath = Astro.url.pathname;
         <input type="checkbox">
     </label>
     <div class="mobile-menu">
-        <Link isActive={currentPath === '/' || currentPath.includes('/Doe-Mee!')} href="../">Doe mee</Link>
+        <Link isActive={currentPath.includes('/meedoen')} href="/meedoen">Doe mee</Link>
         <Link isActive={currentPath.includes('/Agenda')} href="/Agenda">Agenda</Link>
-        <Link isActive={currentPath.includes('/Verhalen-Media')} href="/Verhalen-Media">Verhalen</Link>
-        <Link isActive={currentPath.includes('/innovaties')} href="/innovaties">Innovaties</Link>
+        <Link isActive={currentPath.includes('/viplab')} href="/viplab">VIPLab</Link>
         <Link isActive={currentPath.includes('/Contact')} href="/Contact">Contact</Link>
     </div>
 
