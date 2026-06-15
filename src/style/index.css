@@ -116,6 +116,10 @@ input, textarea {
     resize: none;
 }
 
+:target {
+    scroll-margin-top: calc(var(--nav-height) + var(--access-button-height));
+}
+
 main {
     width: 80dvw;
     margin: auto;
