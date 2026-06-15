@@ -1,13 +1,61 @@
 	---
-	// Serverside code hier
 	import MainLayout from '../layouts/MainLayout.astro';
 	import ReadAloudButton from '../components/AccessibilityOptions/ReadAloudButton.astro';
-
-
 	import './home.css';
+
+	let featuredActivity = null;
+
+	try {
+	  const res = await fetch(
+	    'http://dev1.videlio.nl/wp-json/wp/v2/activities?per_page=100&_embed=true'
+	  );
+	  const activities = await res.json();
+	  const now = new Date();
+
+	  const upcoming = activities
+	    .filter((activity: any) => {
+	      const rawDate = activity.acf?.start_date_time;
+	      if (!rawDate) return false;
+	      return new Date(rawDate) >= now;
+	    })
+	    .sort((a: any, b: any) =>
+	      new Date(a.acf.start_date_time).getTime() -
+	      new Date(b.acf.start_date_time).getTime()
+	    );
+
+	  if (upcoming.length > 0) {
+	    const activity = upcoming[0];
+
+	    // Afbeelding: eerst ACF image veld, dan featured media
+	    const image = activity.acf?.image?.url
+	      ?? activity._embedded?.['wp:featuredmedia']?.[0]?.source_url
+	      ?? null;
+
+	    featuredActivity = {
+	      title: activity.title.rendered,
+	      slug: activity.slug,
+	      date: activity.acf.start_date_time,
+	      image,
+	      excerpt: activity.acf?.summary ?? '',
+	      type: activity._embedded?.['acf:term']?.[0]?.name ?? '',
+	    };
+	  }
+	} catch (e) {
+	  console.warn('WordPress activiteiten niet bereikbaar');
+	}
+
+	const featuredDate = featuredActivity
+	  ? new Date(featuredActivity.date).toLocaleString('nl-NL', {
+	      weekday: 'long',
+	      day: 'numeric',
+	      month: 'long',
+	      hour: '2-digit',
+	      minute: '2-digit',
+	    })
+	  : null;
 	---
-	
-	<MainLayout pageTitle="Doe mee!" title="Doe mee!">
+
+	<MainLayout pageTitle="Doe mee!" title="Home">
 		<main>
 
 			<!--Voor focus-indicator van anchor positioning-->
@@ -26,25 +74,49 @@
 						<p>Videlio. <br />
 							Niet focussen op wat je mist, <strong>maar versterken wie je bent.</strong></p>
 					</div>
-					
+
 
 					<article class="card card-featured hero-card">
 						<div class="card-label" aria-hidden="true">Uitgelicht</div>
-						<a href="/Agenda"
+						<a href={featuredActivity ? `/innovaties/${featuredActivity.slug}` : '/Doe-Mee!/Workshops'}
 						   class="card-link"
-						   aria-label="Uitgelichte workshop: Mindfulness. Bekijk alle workshops van Videlio">
-							<img class="article-image" src="/assets/images/decoratie/mindfulness-workshop.png"
-								alt="Deelnemers aan de workshop mindfulness" />
-							<div class="card-content hero-content">
-								<h2 id="card-workshop" class="card-title">Workshop: Mindfulness</h2>
-								<p class="card-text">Vertel jouw verhaal op jouw manier. In deze workshop ontdek je hoe schrijven een
-									krachtig middel is om jezelf uit te drukken.</p>
-								<div class="card-meta">
-									<span aria-label="Datum">15:00, 15 juni 2026</span>
-									<span aria-label="Locatie">Eindhoven</span>
+						   aria-label={featuredActivity
+						     ? `Uitgelichte activiteit: ${featuredActivity.title}. Bekijk meer`
+						     : 'Bekijk alle workshops van Videlio'}>
+
+							<!-- Afbeelding of placeholder -->
+							{featuredActivity?.image ? (
+								<img
+									class="article-image"
+									src={featuredActivity.image}
+									alt={`Afbeelding bij ${featuredActivity.title}`} />
+							) : (
+								<div class="article-image article-placeholder" aria-hidden="true">
+									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+										<path d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13Z"/>
+										<path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+										<path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>
+									</svg>
 								</div>
+							)}
+
+							<div class="card-content hero-content">
+								<h2 class="card-title">
+									{featuredActivity?.title ?? 'Bekijk onze workshops'}
+								</h2>
+								<p class="card-text">
+									{featuredActivity?.excerpt ?? 'Ontdek alle activiteiten en workshops van Videlio.'}
+								</p>
+								{featuredDate && (
+									<div class="card-meta">
+										<span aria-label="Datum en tijd">{featuredDate}</span>
+										<span aria-label="Locatie">Eindhoven</span>
+									</div>
+								)}
 							</div>
-							<span class="card-btn" aria-hidden="true">Bekijk alle workshops</span>
+							<span class="card-btn" aria-hidden="true">
+								{featuredActivity ? 'Bekijk activiteit' : 'Bekijk alle workshops'}
+							</span>
 						</a>
 					</article>
 				</div>
