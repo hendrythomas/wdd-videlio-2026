@@ -6,24 +6,7 @@ import './agenda.css';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
 ---
 
-<MainLayout pageTitle="Agenda" backHref="/">---
-    import MainLayout from '../../layouts/MainLayout.astro';
-    import Agenda from '../../components/Agenda/Agenda.astro';
-
-    import './agenda.css';
-    import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
-    ---
-
-    <MainLayout pageTitle="Agenda" backHref="/">
-        <main id="agenda-content">
-            <h1>Agenda</h1>
-            <Agenda />
-
-            <h2>VIPLab</h2>
-            <p>Sommige workshops maken deel uit van VIPLab. </p>
-            <ButtonLink href="../viplab">Meer lezen over VIPLab</ButtonLink>
-        </main>
-    </MainLayout>
+<MainLayout title="Bekijk onze agenda" backHref="/">
     <main id="agenda-content">
         <h1>Agenda</h1>
         <Agenda />

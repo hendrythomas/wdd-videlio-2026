@@ -117,7 +117,7 @@ input, textarea {
     resize: none;
 }
 
-.page {
+main {
     width: 80dvw;
     margin: auto;
     height: auto;

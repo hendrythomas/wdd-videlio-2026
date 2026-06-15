@@ -1,0 +1,267 @@
+---
+
+---
+
+<div class="search-wrapper" role="search" aria-label="Zoek op de website">
+  <div id="search-input-wrap" style="position: relative; flex: 1; display: flex; align-items: center;">
+    <span class="search-icon" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+    </span>
+    <label for="search-input" class="sr-only">Zoekterm</label>
+    <input
+      type="search"
+      id="search-input"
+      class="search-input"
+      aria-label="Zoek op de website"
+      aria-controls="search-results"
+      aria-autocomplete="list"
+      autocomplete="off"
+    />
+  </div>
+  <ul
+    id="search-results"
+    class="search-results"
+    role="listbox"
+    aria-label="Zoekresultaten"
+    aria-live="polite"
+    hidden
+  ></ul>
+</div>
+
+<script>
+    async function initSearch() {
+        try {
+            // Dynamische import — Vite probeert dit niet te resolven tijdens dev
+            const pagefind = await new Function('return import("/pagefind/pagefind.js")')();
+            await pagefind.init();
+
+            const input = document.getElementById(
+                "search-input",
+            ) as HTMLInputElement;
+            const results = document.getElementById(
+                "search-results",
+            ) as HTMLUListElement;
+
+            // Verplaats dropdown naar body zodat overflow van nav hem niet afknipt
+            document.body.appendChild(results);
+
+            function positionResults() {
+                const rect = input.getBoundingClientRect();
+                results.style.top = rect.bottom + 8 + "px";
+                results.style.left = rect.left + "px";
+                results.style.width = rect.width + "px";
+            }
+
+            input.addEventListener("input", async () => {
+                const query = input.value.trim();
+
+                if (!query) {
+                    results.hidden = true;
+                    results.innerHTML = "";
+                    return;
+                }
+
+                const search = await pagefind.search(query);
+                const data = await Promise.all(
+                    search.results.slice(0, 6).map((r: any) => r.data()),
+                );
+
+                if (data.length === 0) {
+                    results.innerHTML = `<li class="search-no-results" role="option">Geen resultaten voor "${query}"</li>`;
+                    positionResults();
+                    results.hidden = false;
+                    return;
+                }
+
+                results.innerHTML = data
+                    .map(
+                        (item: any) => `
+        <li role="option">
+          <a class="search-result-link" href="${item.url}">
+            <span class="search-result-title">${item.meta.title ?? 'Pagina'}</span>
+          </a>
+        </li>
+      `,
+                    )
+                    .join("");
+
+                positionResults();
+                results.hidden = false;
+            });
+
+            window.addEventListener("scroll", () => { if (!results.hidden) positionResults(); });
+            window.addEventListener("resize", () => { if (!results.hidden) positionResults(); });
+
+            document.addEventListener("click", (e) => {
+                if (!results.contains(e.target as Node) && e.target !== input) {
+                    results.hidden = true;
+                }
+            });
+
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    results.hidden = true;
+                    input.value = "";
+                    return;
+                }
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    const links = results.querySelectorAll(".search-result-link");
+                    if (links.length > 0) {
+                        (links[0] as HTMLAnchorElement).focus();
+                    }
+                    return;
+                }
+            });
+
+            results.addEventListener("keydown", (e) => {
+                const links = Array.from(results.querySelectorAll(".search-result-link"));
+                const current = document.activeElement;
+                const index = links.indexOf(current as HTMLAnchorElement);
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    const next = links[index + 1] as HTMLAnchorElement;
+                    if (next) next.focus();
+                }
+
+                if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    if (index === 0) {
+                        input.focus();
+                    } else {
+                        const prev = links[index - 1] as HTMLAnchorElement;
+                        if (prev) prev.focus();
+                    }
+                }
+
+                if (e.key === "Escape") {
+                    results.hidden = true;
+                    input.value = "";
+                    input.focus();
+                }
+            });
+        } catch {
+            // Pagefind nog niet beschikbaar — alleen na npm run build
+            console.info("Zoekfunctie niet beschikbaar in dev mode.");
+        }
+    }
+
+    initSearch();
+</script>
+
+<style>
+  .search-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 0.85rem;
+    color: var(--highlight-color);
+    font-size: 1.1rem;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.55rem 1.2rem 0.55rem 2.6rem;
+    margin-right: 0.5rem;
+    background: rgba(250, 234, 7, 0.08);
+    border: 1.5px solid rgba(250, 234, 7, 0.5);
+    border-radius: 10px;
+    color: var(--primary-color);
+    font-family: var(--primary-font), sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .search-input:focus {
+    outline: 3px solid var(--highlight-color);
+    outline-offset: 2px;
+    border-color: var(--highlight-color);
+    background: rgba(250, 234, 7, 0.14);
+    box-shadow: 0 0 0 3px rgba(250, 234, 7, 0.2);
+  }
+
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+  }
+
+  .search-results {
+    position: fixed;
+    background: #1c2330;
+    border: 1px solid rgba(250, 234, 7, 0.25);
+    border-radius: 12px;
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    z-index: 9999;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .search-results[hidden] {
+    display: none;
+  }
+
+  .search-results li + li {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 0.25rem;
+  }
+
+  .search-result-link {
+    display: block;
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.15s ease;
+  }
+
+  .search-result-link:hover,
+  .search-result-link:focus-visible {
+    background: rgba(250, 234, 7, 0.08);
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 2px;
+  }
+
+  .search-result-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--highlight-color);
+    line-height: 1.3;
+    display: block;
+  }
+
+  .search-no-results {
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.9rem;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

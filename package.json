@@ -7,12 +7,15 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npx pagefind --site dist",
     "preview": "astro preview",
     "start": "astro preview --port $PORT --host 0.0.0.0",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.4.2"
+    "astro": "^6.4.2",
+    "pagefind": "^1.5.2"
   }
 }
+
+

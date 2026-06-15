@@ -1,15 +1,19 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
+import ReadAloudButton from '../../../components/AccessibilityOptions/ReadAloudButton.astro';
+
 ---
 
-<MainLayout backHref="/">
+<MainLayout title="Draag bij aan Videlio" backHref="/">
   <main id="main-content" tabindex="-1" aria-label="Draag bij aan Videlio">
 
     <h1>Draag bij aan <strong>Videlio</strong></h1>
 
     <div class="donate-body">
 
-      <div class="donate-intro">
+      <div class="donate-intro" id="donate-intro">
+      <ReadAloudButton variant="asymmetric" targetId="donate-intro" />
+
         <p>Videlio is een stichting zonder winstoogmerk. We zijn afhankelijk van subsidies, co-financiering en donaties om onze activiteiten van hoge kwaliteit te blijven organiseren — samen met onze doelgroep.</p>
         <p>Ons doel is dat mensen met een visuele beperking volwaardig kunnen deelnemen aan de samenleving. Stap voor stap maken wij die wereld toegankelijker en socialer.</p>
         <p>We besteden elke donatie zorgvuldig en leggen als stichting verantwoording af aan jou en de samenleving. <strong>We doen het samen.</strong></p>
