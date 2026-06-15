@@ -5,6 +5,7 @@ footer {
     justify-content: center;
     align-items: center;
     background: rgba(250, 234, 7, 0.06);
+    font-size: var(--paragraph-font-size);
 
     .link-section {
         width: 100%;
@@ -30,6 +31,11 @@ footer {
                 a {
                     align-self: center;
                     color: var(--text-highlight);
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
 
@@ -43,11 +49,6 @@ footer {
                 display: inline-block;
                 width: 100%;
                 text-align: center;
-                text-decoration: none;
-
-                &:hover {
-                    text-decoration: underline;
-                }
             }
         }
 
