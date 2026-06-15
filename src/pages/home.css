@@ -294,6 +294,44 @@ main {
 
 }
 
+/* Placeholder als er geen afbeelding beschikbaar is */
+.article-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: rgba(250, 234, 7, 0.06);
+  border: 1px dashed rgba(250, 234, 7, 0.3);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.article-placeholder svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  stroke: rgba(250, 234, 7, 0.4);
+}
+
+/* Featured kaart hover/focus — identiek aan andere kaarten */
+.card-featured .card-link:hover ~ .card-label,
+.card-featured:hover {
+  border-color: var(--highlight-color);
+}
+
+.card-featured:has(.card-link:hover) .card-btn,
+.card-featured:has(.card-link:focus-visible) .card-btn {
+  background: var(--highlight-color);
+  color: #1a1e24;
+}
+
+.card-featured .card-link:focus-visible {
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
 /* --- Responsive  */
 
 @media (max-width: 900px) {
