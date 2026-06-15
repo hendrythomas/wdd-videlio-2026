@@ -21,3 +21,53 @@ const currentPath = Astro.url.pathname;
         <Link isActive={currentPath.includes('/Contact')} href="/Contact">Contact</Link>
     </div>
 </nav>
+
+<!--Voor focus-indicator van anchor positioning-->
+	<div class="nav-focus-indicator"></div>
+
+<style>
+    .navigation {
+        position: relative;
+    }
+
+    .navigation a:focus-visible,
+    .navigation label:focus-visible,
+    .navigation input:focus-visible {
+        anchor-name: --nav-focus;
+    }
+
+    .navigation a:focus-visible {
+        outline: none;
+    }
+
+    .navigation .hamburger input:focus-visible {
+        anchor-name: --nav-focus;
+    }
+
+    .nav-focus-indicator {
+        position: fixed;
+        position-anchor: --nav-focus;
+        opacity: 0;
+
+        left: anchor(left);
+        top: anchor(top);
+        width: calc(anchor-size(width) + 16px);
+        height: calc(anchor-size(height) + 16px);
+
+        border: 3px solid var(--highlight-color);
+        border-radius: 1rem;
+        pointer-events: none;
+
+        transition: 
+                    all 0.3s ease;
+                    /* left 0.3s ease,
+                    top 0.3s ease,
+                    width 0.3s ease,
+                    height 0.3s ease,
+                    opacity 0.2s ease; */
+    }
+
+    body:has(.navigation :focus-visible) .nav-focus-indicator {
+        opacity: 1;
+    }
+</style>

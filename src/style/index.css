@@ -54,10 +54,8 @@ body, h1, h2, p, a {
 }
 
 body {
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background-color: var(--background);
 }
 
@@ -133,6 +131,7 @@ input, textarea {
 .focus-indicator {
     position: fixed;
     position-anchor: --focus-anchor;
+    opacity: 0;
 
     left: anchor(left);
     top: anchor(top);
@@ -144,8 +143,14 @@ input, textarea {
     pointer-events: none;
 
     transition:
-        left 0.3s ease,
+        all 0.3s ease;
+        /* left 0.3s ease,
         top 0.3s ease,
         width 0.3s ease,
-        height 0.3s ease;
+        height 0.3s ease,
+        opacity 0.2s ease; */
+}
+
+body:has(:focus-visible) .focus-indicator {
+    opacity: 1;
 }
