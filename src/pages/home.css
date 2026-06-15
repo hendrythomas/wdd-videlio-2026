@@ -202,6 +202,7 @@ main {
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   letter-spacing: 0.05em;
+  z-index: 1;
 }
 
 /* Icoon */
@@ -294,6 +295,18 @@ main {
 
 }
 
+/* SVG placeholder zelfde afmetingen als article-image */
+.article-image svg,
+svg.article-image {
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  display: block;
+   border-radius: 1rem;
+  overflow: hidden;
+}
+
 /* Placeholder als er geen afbeelding beschikbaar is */
 .article-placeholder {
   display: flex;
@@ -330,6 +343,41 @@ main {
   outline: 3px solid var(--highlight-color);
   outline-offset: 4px;
   border-radius: 16px;
+}
+
+/* Hero-kaart responsive tekst */
+.hero-card .card-content {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.hero-card .card-title {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.hero-card .card-text {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .hero-card .card-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-card .card-text {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(250, 234, 7, 0.25);
+    padding-bottom: 1rem;
+  }
+
+  .hero-card .card-meta {
+    padding-left: 0;
+  }
 }
 
 /* --- Responsive  */
