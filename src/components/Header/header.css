@@ -12,6 +12,8 @@ body > header {
     padding: 2rem;
     background-color: var(--background);
     z-index: 1;
+    transition: box-shadow 0.1s ease;
+    overflow: visible;
 
     @container scroll-state(scrollable: top) {
         box-shadow: 0 2px 10px 0 #00000060;
