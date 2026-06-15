@@ -27,7 +27,7 @@ body {
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   gap: 2rem;
   font-family: var(--primary-font);
 }
@@ -35,7 +35,6 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  width: 80%;
   gap: 4rem;
 
   >section {
@@ -63,7 +62,7 @@ main {
 
 .hero-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr min(450px, 45%);
   gap: 2rem;
   align-items: start;
 }
@@ -203,6 +202,7 @@ main {
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   letter-spacing: 0.05em;
+  z-index: 1;
 }
 
 /* Icoon */
@@ -293,6 +293,91 @@ main {
   background: var(--highlight-color);
   color: #1a1e24;
 
+}
+
+/* SVG placeholder zelfde afmetingen als article-image */
+.article-image svg,
+svg.article-image {
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  display: block;
+   border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Placeholder als er geen afbeelding beschikbaar is */
+.article-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: rgba(250, 234, 7, 0.06);
+  border: 1px dashed rgba(250, 234, 7, 0.3);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.article-placeholder svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  stroke: rgba(250, 234, 7, 0.4);
+}
+
+/* Featured kaart hover/focus — identiek aan andere kaarten */
+.card-featured .card-link:hover ~ .card-label,
+.card-featured:hover {
+  border-color: var(--highlight-color);
+}
+
+.card-featured:has(.card-link:hover) .card-btn,
+.card-featured:has(.card-link:focus-visible) .card-btn {
+  background: var(--highlight-color);
+  color: #1a1e24;
+}
+
+.card-featured .card-link:focus-visible {
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+/* Hero-kaart responsive tekst */
+.hero-card .card-content {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.hero-card .card-title {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.hero-card .card-text {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .hero-card .card-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-card .card-text {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(250, 234, 7, 0.25);
+    padding-bottom: 1rem;
+  }
+
+  .hero-card .card-meta {
+    padding-left: 0;
+  }
 }
 
 /* --- Responsive  */

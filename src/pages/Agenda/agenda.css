@@ -1,0 +1,16 @@
+#agenda-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    margin-block-end: 5rem;
+}
+
+main {
+    h1 {
+        color: var(--highlight-color);
+    }
+    a {
+        color: var(--highlight-color);
+    }
+}

@@ -3,7 +3,7 @@ import Header from '../components/Header/Header.astro';
 import Footer from '../components/Footer/Footer.astro';
 import ButtonLink from '../components/ButtonLink/ButtonLink.astro';
 
-const { pageTitle, backHref, footerLink } = Astro.props;
+const { title, backHref } = Astro.props;
 
 import '../style/index.css';
 import './mainLayout.css';
@@ -15,13 +15,27 @@ import './mainLayout.css';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/images/branding/favicon.webp">
-    <title>{pageTitle ? `${pageTitle} | Videlio` : 'Videlio'}</title>
+    <title>{title ? `${title} | Videlio` : 'Videlio'}</title>
 </head>
 
 <body>
+    {title && (
+        <span
+            data-pagefind-body
+            aria-hidden="true"
+            style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap;"
+        >
+            {title}
+        </span>
+    )}
+
     <Header />
-    { backHref && <ButtonLink linkClass="main-layout-back-button" href={backHref}>← Terug</ButtonLink> }
-    <slot />
+
+    <main data-pagefind-ignore>
+        { backHref && <ButtonLink linkClass="main-layout-back-button" href={backHref}>← Terug</ButtonLink> }
+        <slot />
+    </main>
+
     <Footer />
 </body>
 

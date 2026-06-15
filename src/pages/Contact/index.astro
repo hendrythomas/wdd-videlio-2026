@@ -2,13 +2,19 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
 import './contact.css'
+import indexCSS from "../../style/index.css";
 ---
 
-<MainLayout pageTitle="Contact" backHref="/">
+
+<MainLayout pageTitle="Contact" backHref="/"  title="Contact ons">
+
+    <!--Voor focus-indicator van anchor positioning-->
+	<div class="focus-indicator"></div>
+
     <main id="main-content" tabindex="-1" aria-label="Over ons">
         <div class="page-wrapper">
             <div class="page-header">
-                <h1 class="page-title">Contact <strong>ons</strong> </h1>
+                <h1 class="page-title"><strong>Contact</strong></h1>
             </div>
 
             <!-- BESTUURSLEDEN / CONTACT -->

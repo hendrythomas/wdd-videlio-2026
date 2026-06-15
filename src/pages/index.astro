@@ -1,102 +1,458 @@
-	---
-	// Serverside code hier
-	import MainLayout from '../layouts/MainLayout.astro';
-	import ReadAloudButton from '../components/AccessibilityOptions/ReadAloudButton.astro';
+﻿---
+import MainLayout from "../layouts/MainLayout.astro";
+import ReadAloudButton from "../components/AccessibilityOptions/ReadAloudButton.astro";
+import "./home.css";
 
-	import './home.css';
-	---
-	<MainLayout pageTitle="Doe mee!">
-		<main>
-			<section class="hero">
-				<h1><strong>Samen</strong> anders zien</h1>
+function decodeHtml(html: string): string {
+	return html
+		.replace(/&#8211;/g, "â€“")
+		.replace(/&#8212;/g, "â€”")
+		.replace(/&#8216;/g, "â€˜")
+		.replace(/&#8217;/g, "â€™")
+		.replace(/&#8220;/g, "â€œ")
+		.replace(/&#8221;/g, "â€")
+		.replace(/&amp;/g, "&")
+		.replace(/&quot;/g, '"')
+		.replace(/&lt;/g, "<")
+		.replace(/&gt;/g, ">");
+}
 
-				<div class="hero-body">
-					<div class="hero-text" id="hero-intro">
-						<ReadAloudButton variant="asymmetric" targetId="hero-intro" />
+let featuredActivity = null;
 
-						<p>Je bent meer dan je blind- of slechtziendheid. Meer dan de wereld soms in jou denkt te zien.</p>
-						<p>Een community <strong>voor, door en met VIPs (Visual Impaired Persons) </strong>, waarin je jezelf niet
-							hoeft uit te leggen, maar juist ontdekt wat je te bieden hebt.</p>
-						<p>Videlio. <br />
-							Niet focussen op wat je mist, <strong>maar versterken wie je bent.</strong></p>
-					</div>
-					
+try {
+	const res = await fetch(
+		"http://dev1.videlio.nl/wp-json/wp/v2/activities?per_page=100&_embed=true",
+	);
+	const activities = await res.json();
+	const now = new Date();
 
-					<article class="card card-featured hero-card">
-						<div class="card-label" aria-label="Uitgelichte workshop">Uitgelicht</div>
-						<img class="article-image" src="/assets/images/decoratie/creatief-schrijven-workshop.png" aria-hidden="true"
-							alt="Deelnemers aan de workshop creatief schrijven" />
-						<div class="card-content hero-content">
-							<h2 id="card-workshop" class="card-title">Workshop: Creatief schrijven</h2>
-							<p class="card-text">Vertel jouw verhaal op jouw manier. In deze workshop ontdek je hoe schrijven een
-								krachtig middel is om jezelf uit te drukken.</p>
-							<div class="card-meta">
-								<span aria-label="Datum">15:00, 15 juni 2026</span>
-								<span aria-label="Locatie">Eindhoven</span>
-							</div>
-						</div>
-						<a href="/Doe-Mee!/Workshops" class="card-btn" aria-label="Uitgelichte workshop van Creatief schrijven, Bekijk alle workshops van Videlio">
-							Bekijk alle workshops
-						</a>
-					</article>
-				</div>
-			</section>
+	const upcoming = activities
+		.filter((activity: any) => {
+			const rawDate = activity.acf?.start_date_time;
+			if (!rawDate) return false;
+			return new Date(rawDate) >= now;
+		})
+		.sort(
+			(a: any, b: any) =>
+				new Date(a.acf.start_date_time).getTime() -
+				new Date(b.acf.start_date_time).getTime(),
+		);
 
-			<div>
-				<h2 class="h2-home"><strong>Ontdek meer:</strong></h2>
+	if (upcoming.length > 0) {
+		const activity = upcoming[0];
 
-				<section class="grid" aria-label="Uitgelichte activiteiten">
+		// Afbeelding: eerst ACF image veld, dan featured media
+		const image =
+			activity.acf?.image?.url ??
+			activity._embedded?.["wp:featuredmedia"]?.[0]?.source_url ??
+			null;
 
-					<!-- Article 1: Inlopen -->
-					<a href="/About" class="card-link" aria-label="Meer informatie over inlopen bij Videlio">
-					<article class="card">
-							<img class="article-image" src="/assets/images/decoratie/loop-binnen.png" alt="" aria-hidden="true">
-							<div class="card-content">
-								<h2 class="card-title">Loop gerust binnen</h2>
-								<p class="card-text">
-									Geen afspraak nodig. Kom langs voor een kopje koffie, een gesprek,
-									of gewoon om even bij andere VIPs te zijn. Je bent altijd welkom.
-								</p>
-								<span class="card-btn" aria-hidden="true">Kom langs</span>
-							</div>
-					</article>
-					</a>
+		featuredActivity = {
+			title: decodeHtml(activity.title.rendered),
+			slug: activity.slug,
+			date: activity.acf.start_date_time,
+			image,
+			excerpt: activity.acf?.summary ?? "",
+			type: activity._embedded?.["acf:term"]?.[0]?.name ?? "",
+		};
+	}
+} catch (e) {
+	console.warn("WordPress activiteiten niet bereikbaar");
+}
 
+const featuredDate = featuredActivity
+	? new Date(featuredActivity.date).toLocaleString("nl-NL", {
+			weekday: "long",
+			day: "numeric",
+			month: "long",
+			hour: "2-digit",
+			minute: "2-digit",
+		})
+	: null;
+---
 
-					<!-- Article 2: Verhalen van VIPs -->
-					<a href="/Verhalen-Media/Verhalen" class="card-link" aria-label="Lees en beluister verhalen van VIPs">
-					<article class="card">
-							<img class="article-image" src="/assets/images/decoratie/viziere.jpg" alt="" aria-hidden="true">
-							<div class="card-content">
-								<h2 class="card-title">Verhalen van VIPs</h2>
-								<p class="card-text">
-									Elke VIP heeft een verhaal. Ontdek hoe mensen met een visuele
-									beperking hun eigen weg vinden — in hun eigen woorden.
-								</p>
-								<span class="card-btn" aria-hidden="true">Bekijk verhalen</span>
-							</div>
-					</article>
-					</a>
+<MainLayout pageTitle="Doe mee!" title="Doe mee!">
+	<!--Voor focus-indicator van anchor positioning-->
+	<div class="focus-indicator"></div>
 
+	<section class="hero">
+		<h1 class="page-title"><strong>Samen</strong> anders zien</h1>
 
-					<!-- Article 3: VIP Lab -->
-					<a href="/Innovaties" class="card-link" aria-label="Meer weten over het VIP Lab">
-					<article class="card">
-							<img class="article-image" src="/assets/images/decoratie/lumicane2.png"
-								alt="Man die s'nachts met een lichtgevende blindenstok loopt.">
-							<div class="card-content">
-								<h2 class="card-title">VIP Lab</h2>
-								<p class="card-text">
-									Innovatie door ervaringsdeskundigheid. In het VIP Lab werken we
-									aan slimme oplossingen die het leven met een visuele beperking
-									makkelijker en rijker maken.
-								</p>
-								<span class="card-btn" aria-hidden="true">Ontdek het lab</span>
-							</div>
-					</article>
-					</a>
+		<div class="hero-body">
+			<div class="hero-text" id="hero-intro">
+				<ReadAloudButton variant="asymmetric" targetId="hero-intro" />
 
-				</section>
+				<p>
+					Je bent meer dan je blind- of slechtziendheid. Meer dan de
+					wereld soms in jou denkt te zien.
+				</p>
+				<p>
+					Een community
+					<strong>voor, door en met VIPs (Visually Impaired People)</strong>,
+					waarin je jezelf niet hoeft uit te leggen,
+					maar juist ontdekt wat je te bieden hebt.
+				</p>
+				<p>
+					Videlio. <br />
+					Niet focussen op wat je mist, <strong
+						>maar versterken wie je bent.</strong>
+				</p>
 			</div>
-		</main>
+
+			<article class="card card-featured hero-card">
+				<a
+					href={featuredActivity
+						? `/Agenda`
+						: "/Doe-Mee!/Workshops"}
+					class="card-link"
+					aria-label={featuredActivity
+						? `Uitgelichte activiteit: ${featuredActivity.title}. Bekijk meer`
+						: "Bekijk alle workshops van Videlio"}
+				>
+					<!-- Afbeelding of placeholder -->
+					{
+						featuredActivity?.image ? (
+							<img
+								class="article-image"
+								src={featuredActivity.image}
+								alt={`Afbeelding bij ${featuredActivity.title}`}
+							/>
+						) : (
+							<svg
+								class="article-image"
+								viewBox="0 0 600 280"
+								xmlns="http://www.w3.org/2000/svg"
+								role="img"
+								aria-label="Placeholder illustratie voor activiteit zonder afbeelding"
+							>
+								<title>Activiteit placeholder</title>
+								<rect
+									width="600"
+									height="280"
+									rx="16"
+									fill="#2F3742"
+								/>
+								<g transform="translate(175, 20)">
+									<rect
+										x="0"
+										y="20"
+										width="250"
+										height="210"
+										rx="14"
+										fill="none"
+										stroke="#FAEA07"
+										stroke-width="2.5"
+									/>
+									<rect
+										x="0"
+										y="20"
+										width="250"
+										height="52"
+										rx="14"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="0"
+										y="56"
+										width="250"
+										height="16"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<line
+										x1="75"
+										y1="6"
+										x2="75"
+										y2="36"
+										stroke="#FAEA07"
+										stroke-width="3.5"
+										stroke-linecap="round"
+									/>
+									<line
+										x1="175"
+										y1="6"
+										x2="175"
+										y2="36"
+										stroke="#FAEA07"
+										stroke-width="3.5"
+										stroke-linecap="round"
+									/>
+									<rect
+										x="18"
+										y="90"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="56"
+										y="90"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="94"
+										y="90"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.5)"
+									/>
+									<rect
+										x="132"
+										y="90"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="170"
+										y="90"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="208"
+										y="90"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="18"
+										y="122"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="56"
+										y="122"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="94"
+										y="122"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="132"
+										y="122"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.9)"
+									/>
+									<rect
+										x="170"
+										y="122"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="208"
+										y="122"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="18"
+										y="154"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="56"
+										y="154"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.4)"
+									/>
+									<rect
+										x="94"
+										y="154"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="132"
+										y="154"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="170"
+										y="154"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="208"
+										y="154"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="18"
+										y="186"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="56"
+										y="186"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="94"
+										y="186"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+									<rect
+										x="132"
+										y="186"
+										width="28"
+										height="22"
+										rx="5"
+										fill="rgba(250,234,7,0.15)"
+									/>
+								</g>
+							</svg>
+						)
+					}
+					<div class="card-label" aria-hidden="true">Uitgelicht</div>
+
+					<div class="card-content hero-content">
+						<h2 class="card-title">
+							{featuredActivity?.title ?? "Bekijk onze workshops"}
+						</h2>
+						<p class="card-text">
+							{
+								featuredActivity?.excerpt ??
+									"Ontdek alle activiteiten en workshops van Videlio."
+							}
+						</p>
+						{
+							featuredDate && (
+								<div class="card-meta">
+									<span aria-label="Datum en tijd">
+										{featuredDate}
+									</span>
+									<span aria-label="Locatie">Eindhoven</span>
+								</div>
+							)
+						}
+					</div>
+					<span class="card-btn" aria-hidden="true">
+						{
+							featuredActivity
+								? "Bekijk activiteit"
+								: "Bekijk alle workshops"
+						}
+					</span>
+				</a>
+			</article>
+		</div>
+	</section>
+
+	<div>
+		<h2 class="h2-home"><strong>Ontdek meer:</strong></h2>
+
+			<section class="grid" aria-label="Uitgelichte activiteiten">
+
+				<a href="/meedoen#gemeenschap" class="card-link" aria-label="Meer weten over het VIP Lab">
+				<article class="card">
+					<img class="article-image" src="/assets/images/decoratie/lumicane2.png"
+						alt="Man die s'nachts met een lichtgevende blindenstok loopt.">
+					<div class="card-content">
+						<h2 class="card-title">Gemeenschap</h2>
+						<p class="card-text">
+							[Update deze tekst] Innovatie door ervaringsdeskundigheid. In het VIP Lab werken we
+							aan slimme oplossingen die het leven met een visuele beperking
+							makkelijker en rijker maken.
+						</p>
+						<span class="card-btn" aria-hidden="true">Ontdek het lab</span>
+					</div>
+				</article>
+				</a>
+
+				<a href="/meedoen#toegankelijkheid" class="card-link" aria-label="Meer informatie over inlopen bij Videlio">
+				<article class="card">
+					<img
+						class="article-image"
+						src="/assets/images/decoratie/loop-binnen.png"
+						alt=""
+						aria-hidden="true"
+					/>
+					<div class="card-content">
+						<h2 class="card-title">Fysieke toegankelijkheid</h2>
+						<p class="card-text">
+							[Update deze tekst] Geen afspraak nodig. Kom langs voor een kopje koffie, een gesprek,
+							of gewoon om even bij andere VIPs te zijn. Je bent altijd welkom.
+						</p>
+						<span class="card-btn" aria-hidden="true"
+							>Kom langs</span
+						>
+					</div>
+				</article>
+				</a>
+
+				<a href="/meedoen#groei" class="card-link" aria-label="Lees en beluister verhalen van VIPs">
+				<article class="card">
+					<img
+						class="article-image"
+						src="/assets/images/decoratie/viziere.jpg"
+						alt=""
+						aria-hidden="true"
+					/>
+					<div class="card-content">
+						<h2 class="card-title">Persoonlijke groei</h2>
+						<p class="card-text">
+							[Update deze tekst] Elke VIP heeft een verhaal. Ontdek hoe mensen met een visuele
+							beperking hun eigen weg vinden — in hun eigen woorden.
+						</p>
+						<span class="card-btn" aria-hidden="true"
+							>Bekijk verhalen</span
+						>
+					</div>
+				</article>
+				</a>
+
+			</section>
 	</MainLayout>

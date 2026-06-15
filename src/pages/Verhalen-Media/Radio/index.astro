@@ -1,9 +1,76 @@
 ---
+//@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
+// import './podcasts.css';
 ---
 
-<MainLayout>
-    <main>
+<MainLayout title="Radio">
+    <section class="project-section">
+        <h1>Rararadio Eindhoven - Zichtbaar met Peter Meuleman</h1>
+            <!--Podcasts John Willemse-->
+            <div class="grid-projects">
+                <!--1e aflevering-->
+                        <div class="project-card">
+                            <div class="image">
+                                <a href="">
+                                    <img src="../../../../assets/images/decoratie/rararadio_peter.jpg">
+                                    <h4>Aflevering 1</h4>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!--2e aflevering-->
+                        <div class="project-card">
+                            <a href="">
+                                <img src="../../../../assets/images/decoratie/rararadio_peter.jpg">
+                                <h4>Aflevering 2</h4>
+                            </a>
+                        </div>
 
-    </main>
+                        <!--3e aflevering-->
+                        <div class="project-card">
+                            <a href="">
+                                <img src="../../../../assets/images/decoratie/rararadio_peter.jpg">
+                                <h4>Aflevering 3</h4>
+                            </a>
+                        </div>
+                    </div>
+            </section>
 </MainLayout>
+
+<style>
+    .project-section {
+        padding: 80px;
+        min-height: 100vh;
+    }
+
+    .project-section h1 {
+        color: var(--highlight-color);
+        margin-bottom: 40px;
+    }
+
+    .grid-projects {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 150px;
+        max-width: 800px;
+    }
+
+    .project-card {
+        width: 400px;
+    }
+
+    .project-card img {
+        width: 100%;
+        border-radius: 10px;
+        display: block;
+    }
+
+    .project-card h4 {
+        color: var(--highlight-color);
+        margin-top: 15px;
+        font-size: 2rem;
+        text-decoration: none;
+    }
+
+</style>

@@ -2,7 +2,10 @@
 body > header > nav {
   overflow-x: auto;
   overflow-y: hidden;
-  transition: box-shadow 0.1s ease;
+}
+
+.navigation {
+  overflow: visible;
 }
 
 body > header,
@@ -22,6 +25,8 @@ body > header > nav > .mobile-menu {
     font-size: var(--paragraph-font-size);
     text-decoration: none;
     font-weight: bold;
+    border-bottom: solid 1px transparent;
+
 
     &:hover {
       color: var(--highlight-color);
@@ -84,7 +89,7 @@ body > header > nav > .mobile-menu {
 
   > .mobile-menu {
     flex-shrink: 0;
-    margin-right: auto;
+    margin-right: 4rem;
   }
 }
 body:has(> header)::before {
@@ -129,4 +134,35 @@ body:has(> header)::before {
       left: 0;
     }
   }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Zoekbalk rechts gedrukt via margin-left: auto */
+.navigation .search-wrapper {
+  overflow: visible;
+  position: relative;
+  margin-left: auto;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Mobiel: logo | zoekbalk | hamburger */
+@media (max-width: 1000px) {
+  .navigation {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Volgorde: 1 logo, 2 zoekbalk, 3 hamburger, 4 mobile-menu */
+  .logo           { order: 1; }
+  .search-wrapper { order: 2; margin-left: 0; }
+  .hamburger      { order: 3; }
+  .mobile-menu    { order: 4; }
 }
