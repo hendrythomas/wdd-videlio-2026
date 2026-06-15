@@ -48,7 +48,7 @@ const { variant = 'asymmetric', targetId } = Astro.props;
       const text = target?.innerText ?? document.body.innerText;
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'nl-NL';
-      utterance.rate = 0.95;
+      utterance.rate = 1.5;
 
       const duration = (text.split(' ').length / 150) * 60 * 1000;
       const start = Date.now();
