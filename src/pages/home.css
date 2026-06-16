@@ -287,6 +287,11 @@ main {
   letter-spacing: 0.02em;
 }
 
+#featured-card-btn{
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+}
+
 .card-btn:hover,
 .card-btn:focus-visible,
 .card-btn-outline:hover,
