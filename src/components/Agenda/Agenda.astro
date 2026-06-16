@@ -10,6 +10,7 @@ const fetchSessions = async () => {
 
     return data.map(session => {
         return {
+            id: session.id,
             title: session.title.rendered,
             summary: session.acf.summary,
             longDescription: session.acf.long_description,

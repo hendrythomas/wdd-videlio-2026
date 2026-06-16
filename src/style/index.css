@@ -104,12 +104,6 @@ a {
     }
 }
 
-summary {
-    font-size: var(--paragraph-font-size);
-    color: var(--text-primary);
-    cursor: pointer;
-}
-
 input, textarea {
     color: var(--secondary-color);
     font-size: var(--paragraph-font-size);

@@ -1,6 +1,7 @@
 ---
 //@ts-nocheck
-import Button from '../../../Button/Button.astro';
+import ButtonLink from '../../../ButtonLink/ButtonLink.astro';
+import ProgressiveDisclosure from '../../../ProgressiveDisclosure/ProgressiveDisclosure.astro';
 
 import './eventItem.css';
 
@@ -37,10 +38,9 @@ if (endDate.getDate() !== startDate.getDate()) {
         </p>
         {
             event.longDescription && (
-                <details class="event-item__details">
-                    <summary>Lees meer</summary>
-                    {event.longDescription}
-                </details>
+                <ProgressiveDisclosure title="Lees meer" id={event.id} className="event-item__details">
+                    <div set:html={event.longDescription} />
+                </ProgressiveDisclosure>
             )
         }
         <div class="event-item__extra-info">
@@ -53,7 +53,8 @@ if (endDate.getDate() !== startDate.getDate()) {
             <span class="event-item__location">
                 Bomanshof 147 <br/> 5611 NR Eindhoven
             </span>
-            <Button buttonClass='event-item__button'>Meld je aan</Button>
+
+            <ButtonLink linkClass='event-item__button' href="mailto:john@videlio.nl">Mail om je aan te melden</ButtonLink>
         </div>
     </div>
 </section>
