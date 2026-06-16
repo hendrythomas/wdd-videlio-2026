@@ -105,3 +105,59 @@ main {
   background-color: #ffffff10;
   scroll-snap-align: start;
 }
+
+.activity-list,
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.article-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.article-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(250, 234, 7, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.article-card-link:hover .article-card,
+.article-card-link:focus-visible .article-card {
+  border-color: var(--highlight-color);
+  transform: translateY(-2px);
+}
+
+.article-card img {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.article-card h3 {
+  color: var(--primary-color);
+  margin: 0 0 0.5rem;
+}
+
+.article-card p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.empty-state {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  margin-top: 2rem;
+}
