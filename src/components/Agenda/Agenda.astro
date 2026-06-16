@@ -7,10 +7,12 @@ import './agenda.css';
 const fetchSessions = async () => {
     const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/activities?&acf_format=standard');
     const data = await res.json();
+    console.log(data);
 
     return data.map(session => {
         const [day, month, year] = session.acf.start_date.split('/');
         const startDate = `${year}-${month}-${day}T${session.acf.start_time || '00:00'}`;
+        const img = session.acf.image;
 
         return {
             id: session.id,
@@ -19,7 +21,9 @@ const fetchSessions = async () => {
             longDescription: session.acf.long_description,
             startDate,
             endTime: session.acf.end_time || null,
-            image: session.acf.image ? session.acf.image.url : null,
+            image: img && typeof img === 'string'
+                ? { url: img, alt: session.acf.image_alt || null }
+                : null,
             types: Array.isArray(session.acf.type) ? session.acf.type.map(t => t.name) : [],
         };
     });
