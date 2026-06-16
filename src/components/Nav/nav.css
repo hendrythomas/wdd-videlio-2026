@@ -21,6 +21,7 @@ body > header > nav > .mobile-menu {
   > a {
     flex-shrink: 0;
     width: fit-content;
+    padding: .5rem .8rem;
     color: var(--text-primary);
     font-size: var(--paragraph-font-size);
     text-decoration: none;
