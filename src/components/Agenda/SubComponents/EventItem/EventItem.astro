@@ -15,6 +15,7 @@ const startDateOptions = {
 };
 
 const startDate = new Date(event.startDate);
+const mailHref = `mailto:john@videlio.nl?subject=Aanmelding%20${event.title}`
 
 ---
 
@@ -54,7 +55,7 @@ const startDate = new Date(event.startDate);
                 Bomanshof 147 5611 NR Eindhoven
             </span>
 
-            <ButtonLink linkClass='event-item__button' href="mailto:john@videlio.nl">Mail om je aan te melden</ButtonLink>
+            <ButtonLink linkClass='event-item__button' href={mailHref}>Mail om je aan te melden</ButtonLink>
         </div>
     </div>
 </section>
