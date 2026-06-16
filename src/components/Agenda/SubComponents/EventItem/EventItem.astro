@@ -52,7 +52,7 @@ const mailHref = `mailto:john@videlio.nl?subject=Aanmelding%20${event.title}`
                 )}
             </span>
             <span class="event-item__location">
-                Bomanshof 147 5611 NR Eindhoven
+                {event.location}
             </span>
 
             <ButtonLink linkClass='event-item__button' href={mailHref}>Mail om je aan te melden</ButtonLink>
