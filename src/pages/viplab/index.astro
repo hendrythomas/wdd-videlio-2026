@@ -1,5 +1,6 @@
 ---
 import ReadAloudButton from '../../components/AccessibilityOptions/ReadAloudButton.astro';
+import ProgressiveDisclosure from '../../components/ProgressiveDisclosure/ProgressiveDisclosure.astro';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
 import MainLayout from '../../layouts/MainLayout.astro';
 import './viplab.css';
@@ -11,8 +12,7 @@ import './viplab.css';
       VIPLab is de maakplek van Videlio.
       Samen met makers bouw je hier aan nieuwe hulpmiddelen en oplossingen.
     </p>
-    <details>
-      <summary>Meer weten over de locatie?</summary>
+    <ProgressiveDisclosure title="Meer weten over de locatie?">
       <p>
         Videlio won in 2026 met VIPLab de <a href="https://burstyourbubble.nl">Burst Your Bubble pitchwedstrijd</a>.
         Hierdoor is er geld beschikbaar voor de eerste inrichting van VIPLab.
@@ -20,18 +20,16 @@ import './viplab.css';
       <p>
         VIPLab krijgt een plek in het <a href="../Contact#section-location">toekomstige ontmoetingscentrum</a> in Eindhoven.
       </p>
-      <details>
-        <summary>Inrichting?</summary>
+      <ProgressiveDisclosure title="Inrichting?">
         <p>
           Het bedrag gebruiken we voor de basis van de werkplek: stevige tafels, gereedschap, materialen, goed licht, vergrotingsmogelijkheden, een groot scherm, een 3D-printer en alles wat nodig is om snel te kunnen starten.
         </p>
-        <details>
-          <summary>VIPLab steunen?</summary>
+        <ProgressiveDisclosure title="VIPLab steunen?">
           <p>Om VIPLab te steunen met materiaal, kennis, ruimte of sponsoring, kan je <a href="../Contact">contact opnemen met Videlio</a>.</p>
           <ButtonLink href="../Contact/Doneer">Geld doneren</ButtonLink>
-        </details>
-      </details>
-    </details>
+        </ProgressiveDisclosure>
+      </ProgressiveDisclosure>
+    </ProgressiveDisclosure>
   </section>
   <section class="grid">
     <img src="../assets/images/decoratie/viplab.webp" alt="Afbeelding van mensen die op tafel een oplossing ontwerpen" loading="lazy">

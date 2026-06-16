@@ -1,0 +1,19 @@
+---
+import './progressiveDisclosure.css';
+import ReadAloudButton from '../AccessibilityOptions/ReadAloudButton.astro';
+
+const {
+    title,
+    id = title,
+    className = '',
+} = Astro.props;
+
+---
+
+<details class={'progressive-disclosure ' + className}>
+    <ReadAloudButton targetId={id + '-content'} variant='pill' />
+    <summary>{title + '..'}</summary>
+    <div id={id + '-content'}>
+        <slot />
+    </div>
+</details>
