@@ -3,6 +3,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import InnovatieCard from '../../components/Innovatie-li/Innovatie-li.astro';
 import ViewToggle from '../../components/Innovatie-li/view-toggle.astro'
 import indexCSS from "../../style/index.css";
+import { decodeHtml, stripHtml } from '../../utils/decodeHtml';
 
 import './innovaties.css';
 
@@ -30,11 +31,11 @@ try {
     id: String(post.id),
     slug: post.slug,
     type: 'innovatie',
-    title: post.title.rendered,
-    summary: post.excerpt.rendered.replace(/<[^>]*>/g, '').trim(),
+    title: decodeHtml(post.title.rendered),
+    summary: stripHtml(post.excerpt.rendered),
     date: post.date,
     image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? '',
-    imageAlt: post.title.rendered,
+    imageAlt: decodeHtml(post.title.rendered),
     tags: post._embedded?.['wp:term']?.flat().map((t: any) => t.name) ?? [],
     detailPath: `/innovaties/${post.slug}`,
   }));

@@ -1,72 +1,61 @@
 ---
 //@ts-nocheck
 import ButtonLink from '../../../ButtonLink/ButtonLink.astro';
+import ProgressiveDisclosure from '../../../ProgressiveDisclosure/ProgressiveDisclosure.astro';
 
 import './eventItem.css';
 
 const { event } = Astro.props;
 
-const startDate = new Date(event.startDate);
-const endDate = new Date(event.endDate);
 const startDateOptions = {
     day: 'numeric',
     month: 'long',
     hour: '2-digit',
     minute: '2-digit',
 };
-const endDateOptions = {
-    hour: '2-digit',
-    minute: '2-digit',
-}
-if (!endDate.getDate() === startDate.getDate()) {
-    endDateOptions = startDateOptions;
-}
+
+const startDate = new Date(event.startDate);
+const mailHref = `mailto:john@videlio.nl?subject=Aanmelding%20${event.title}`
 
 ---
 
 <section class="event-item">
+    {
+        event.image && <img class="event-item__image" src={event.image.url} alt={event.image.alt} />
+    }
     <div class="event-item__main-info">
         <div class="event-item__header">
             <h3 class="event-item__title">{event.title}</h3>
-            <span class="event-item__card-tag">{`${event.type}`}</span>
+            <div class="event-item__types">
+                {event.types.map(type => (
+                        <span class="event-item__card-tag">{type}</span>
+                ))}
+            </div>
         </div>
     </div>
     <div class="event-item__summary">
-        <div aria-hidden="true" class="event-item__extra-info">
-            <span class="event-item__time">
-                <span>{startDate.toLocaleString('nl-NL', startDateOptions)}</span>
-                { event.endDate && (
-                        <span>{`- ${endDate.toLocaleTimeString('nl-NL', endDateOptions)}`}</span>
-                )}
-            </span>
-            <span class="event-item__location">
-                Bomanshof 147 <br/> 5611 NR Eindhoven
-            </span>
-            <ButtonLink linkClass='event-item__button'>Meld je aan</ButtonLink>
-        </div>
         <p>
             {event.summary}
         </p>
         {
             event.longDescription && (
-                <details class="event-item__details">
-                    <summary>Lees meer</summary>
-                    {event.longDescription}
-                </details>
+                <ProgressiveDisclosure title="Lees meer" id={event.id} className="event-item__details">
+                    <div set:html={event.longDescription} />
+                </ProgressiveDisclosure>
             )
         }
-    </div>
-
-    <div class="visually-hidden">
-        <span class="event-item__time">
+        <div class="event-item__extra-info">
+            <span class="event-item__time">
                 <span>{startDate.toLocaleString('nl-NL', startDateOptions)}</span>
-            { event.endDate && (
-                    <span>{`- ${endDate.toLocaleTimeString('nl-NL', endDateOptions)}`}</span>
-            )}
-        </span>
-        <span class="event-item__location">
-            Bomanshof 147 <br/> 5611 NR Eindhoven
-        </span>
-        <ButtonLink linkClass='event-item__button'>Meld je aan</ButtonLink>
+                { event.endTime && (
+                        <span>{`- ${event.endTime}`}</span>
+                )}
+            </span>
+            <span class="event-item__location">
+                {event.location}
+            </span>
+
+            <ButtonLink linkClass='event-item__button' href={mailHref}>Mail om je aan te melden</ButtonLink>
+        </div>
     </div>
 </section>

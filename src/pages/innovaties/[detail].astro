@@ -2,6 +2,7 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import ReadAloud from '../../components/AccessibilityOptions/ReadAloudButton.astro';
 import localInnovaties from '../../data/innovations.json';
+import { decodeHtml } from '../../utils/decodeHtml';
 
 const { detail } = Astro.params;
 
@@ -34,12 +35,12 @@ if (!rawItem) return Astro.redirect('/innovaties');
 // Normaliseer WP post én lokale JSON naar één interface
 const isWp = !!post;
 const item = {
-  title: isWp ? rawItem.title.rendered : rawItem.title,
+  title: isWp ? decodeHtml(rawItem.title.rendered) : rawItem.title,
   summary: isWp ? rawItem.excerpt.rendered : rawItem.summary,
   content: isWp ? rawItem.content.rendered : rawItem.content,
   date: rawItem.date,
   image: isWp ? rawItem._embedded?.['wp:featuredmedia']?.[0]?.source_url : rawItem.image,
-  imageAlt: isWp ? rawItem.title.rendered : (rawItem.imageAlt ?? rawItem.title),
+  imageAlt: isWp ? decodeHtml(rawItem.title.rendered) : (rawItem.imageAlt ?? rawItem.title),
 };
 
 const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
