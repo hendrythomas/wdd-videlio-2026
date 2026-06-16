@@ -1,27 +1,33 @@
 ---
-import ReadAloudButton from '../../components/AccessibilityOptions/ReadAloudButton.astro';
-import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
+//@ts-nocheck
 import MainLayout from '../../layouts/MainLayout.astro';
+import { fetchCategoryContent, sectionMeta } from '../../utils/fetchCategoryContent';
 import './meedoen.css';
+
+const data = await fetchCategoryContent();
+
+const sections = Object.entries(sectionMeta).map(([key, meta]) => ({
+  ...meta,
+  key,
+  featured: data[key].activities[0] ?? null,
+}));
 ---
-<MainLayout pageTitle="Meedoen">
+<MainLayout pageTitle="Doe mee">
   <section class="intro">
     <h1>Doe mee</h1>
-    <p>
-      [Vervang dit] VIPLab is de maakplek van Videlio.
-      Samen met makers bouw je hier aan nieuwe hulpmiddelen en oplossingen.
-    </p>
+    <p>Ontdek de verschillende manieren waarop je bij Videlio kunt meedoen.</p>
   </section>
-  <section>
-    <h2 id="gemeenschap">Videlio Community</h2>
-    <h3>WhatsApp-groep</h3>
-  </section>
-  <section>
-    <h2 id="toegankelijkheid">Fysieke toegankelijkheid</h2>
-    <h3>OV-Knoop</h3>
-  </section>
-  <section>
-    <h2 id="groei">Persoonlijke groei</h2>
-    <h3>Viziere</h3>
+
+  <section class="category-grid">
+    {sections.map(s => (
+      <a href={s.href} class="category-tile">
+        <h2>{s.title}</h2>
+        {s.featured ? (
+          <p class="category-tile-preview">{s.featured.title}</p>
+        ) : (
+          <p class="category-tile-preview category-tile-preview--empty">Nog geen activiteiten gepland</p>
+        )}
+      </a>
+    ))}
   </section>
 </MainLayout>

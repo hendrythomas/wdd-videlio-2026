@@ -5,6 +5,8 @@ import './agendaItem.css';
 
 const { events } = Astro.props;
 
+if (!events?.length) return;
+
 const date = new Date(events[0].startDate);
 const dayString = date.toLocaleString('nl-NL', { weekday: 'long' });
 const capitalizedDay = dayString.charAt(0).toUpperCase() + dayString.slice(1);

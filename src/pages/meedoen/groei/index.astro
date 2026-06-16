@@ -1,0 +1,44 @@
+---
+//@ts-nocheck
+import EventItem from '../../../components/Agenda/SubComponents/EventItem/EventItem.astro';
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { fetchCategoryContent, sectionMeta } from '../../../utils/fetchCategoryContent';
+
+const data = await fetchCategoryContent();
+const section = data.groei;
+const meta = sectionMeta.groei;
+---
+<MainLayout pageTitle={meta.title} backHref="/meedoen">
+  <section class="intro">
+    <h1>{meta.title}</h1>
+    <p>
+      [Vervang dit] Korte introductietekst over persoonlijke groei bij Videlio.
+    </p>
+  </section>
+
+  {section.activities.length > 0 && (
+    <section>
+      <h2>Activiteiten</h2>
+      <div class="activity-list">
+        {section.activities.map(event => <EventItem event={event} />)}
+      </div>
+    </section>
+  )}
+
+  {section.articles.length > 0 && (
+    <section>
+      <h2>Artikelen</h2>
+      <div class="article-list">
+        {section.articles.map(article => (
+          <a href={`/innovaties/${article.slug}`} class="article-card-link">
+            <article class="article-card">
+              {article.image && <img src={article.image} alt={article.title} />}
+              <h3>{article.title}</h3>
+              <p>{article.summary}</p>
+            </article>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</MainLayout>

@@ -15,11 +15,17 @@ const fetchSessions = async () => {
             longDescription: session.acf.long_description,
             startDate: session.acf.start_date_time,
             endDate: session.acf.end_date_time,
-            type: session.acf.type.name
-    }});
+            type: session.acf.type?.name ?? null,
+        };
+    });
 };
 
-const events = await fetchSessions();
+let events = [];
+try {
+    events = await fetchSessions();
+} catch (e) {
+    console.warn('WordPress activiteiten niet bereikbaar', e);
+}
 const groupEventsByDateTime = (events) => {
     const grouped = {};
     for (const event of events) {
