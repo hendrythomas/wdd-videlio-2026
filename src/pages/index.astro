@@ -1,21 +1,8 @@
-﻿﻿	---
+﻿	---
 	import MainLayout from '../layouts/MainLayout.astro';
 	import ReadAloudButton from '../components/AccessibilityOptions/ReadAloudButton.astro';
 	import './home.css';
-
-function decodeHtml(html: string): string {
-	return html
-		.replace(/&#8211;/g, "â€“")
-		.replace(/&#8212;/g, "â€”")
-		.replace(/&#8216;/g, "â€˜")
-		.replace(/&#8217;/g, "â€™")
-		.replace(/&#8220;/g, "â€œ")
-		.replace(/&#8221;/g, "â€")
-		.replace(/&amp;/g, "&")
-		.replace(/&quot;/g, '"')
-		.replace(/&lt;/g, "<")
-		.replace(/&gt;/g, ">");
-}
+import { decodeHtml, stripHtml } from '../utils/decodeHtml';
 
 let featuredActivity = null;
 
@@ -52,7 +39,7 @@ try {
 			slug: activity.slug,
 			date: activity.acf.start_date_time,
 			image,
-			excerpt: activity.acf?.summary ?? "",
+			excerpt: stripHtml(activity.acf?.summary ?? ''),
 			type: activity._embedded?.["acf:term"]?.[0]?.name ?? "",
 		};
 	}
@@ -101,9 +88,7 @@ const featuredDate = featuredActivity
 
 			<article class="card card-featured hero-card">
 				<a
-					href={featuredActivity
-						? `/Agenda`
-						: "/Doe-Mee!/Workshops"}
+					href= "Agenda"
 					class="card-link"
 					aria-label={featuredActivity
 						? `Uitgelichte activiteit: ${featuredActivity.title}. Bekijk meer`
