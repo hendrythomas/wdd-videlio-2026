@@ -22,11 +22,11 @@ const currentPath = Astro.url.pathname;
         <Link isActive={currentPath.includes('/Contact')} href="/Contact">Contact</Link>
     </div>
 
-    <Search />
+    <!-- <Search /> -->
 
 
 <!--Voor focus-indicator van anchor positioning-->
-	<div class="nav-focus-indicator"></div>
+	<!-- <div class="nav-focus-indicator"></div> -->
 
 <style>
     .navigation {
@@ -36,7 +36,7 @@ const currentPath = Astro.url.pathname;
     .navigation a:focus-visible,
     .navigation label:focus-visible,
     .navigation input:focus-visible {
-        anchor-name: --nav-focus;
+        /* anchor-name: --nav-focus; */
     }
 
     .navigation a:focus-visible {
@@ -44,18 +44,18 @@ const currentPath = Astro.url.pathname;
     }
 
     .navigation .hamburger input:focus-visible {
-        anchor-name: --nav-focus;
+        /* anchor-name: --nav-focus; */
     }
 
     .nav-focus-indicator {
         position: fixed;
-        position-anchor: --nav-focus;
+        /* position-anchor: --nav-focus; */
         opacity: 0;
 
-        left: anchor(left);
+        /* left: anchor(left);
         top: anchor(top);
         width: calc(anchor-size(width) + 16px);
-        height: calc(anchor-size(height) + 16px);
+        height: calc(anchor-size(height) + 16px); */
 
         border: 3px solid var(--highlight-color);
         border-radius: 1rem;
