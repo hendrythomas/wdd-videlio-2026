@@ -9,15 +9,20 @@ const fetchSessions = async () => {
     const data = await res.json();
 
     return data.map(session => {
+        const [day, month, year] = session.acf.start_date.split('/');
+        const startDate = `${year}-${month}-${day}T${session.acf.start_time || '00:00'}`;
+
         return {
             id: session.id,
             title: session.title.rendered,
             summary: session.acf.summary,
             longDescription: session.acf.long_description,
-            startDate: session.acf.start_date_time,
-            endDate: session.acf.end_date_time,
-            type: session.acf.type.name
-    }});
+            startDate,
+            endTime: session.acf.end_time || null,
+            image: session.acf.image ? session.acf.image.url : null,
+            types: Array.isArray(session.acf.type) ? session.acf.type.map(t => t.name) : [],
+        };
+    });
 };
 
 const events = await fetchSessions();

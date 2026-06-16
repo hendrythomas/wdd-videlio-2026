@@ -7,21 +7,16 @@ import './eventItem.css';
 
 const { event } = Astro.props;
 
-const startDate = new Date(event.startDate);
-const endDate = new Date(event.endDate);
 const startDateOptions = {
     day: 'numeric',
     month: 'long',
     hour: '2-digit',
     minute: '2-digit',
 };
-let endDateOptions = {
-    hour: '2-digit',
-    minute: '2-digit',
-}
-if (endDate.getDate() !== startDate.getDate()) {
-    endDateOptions = startDateOptions;
-}
+
+const startDate = new Date(event.startDate);
+console.log(event.endTime);
+
 
 ---
 
@@ -46,12 +41,12 @@ if (endDate.getDate() !== startDate.getDate()) {
         <div class="event-item__extra-info">
             <span class="event-item__time">
                 <span>{startDate.toLocaleString('nl-NL', startDateOptions)}</span>
-                { event.endDate && (
-                        <span>{`- ${endDate.toLocaleTimeString('nl-NL', endDateOptions)}`}</span>
+                { event.endTime && (
+                        <span>{`- ${event.endTime}`}</span>
                 )}
             </span>
             <span class="event-item__location">
-                Bomanshof 147 <br/> 5611 NR Eindhoven
+                Bomanshof 147 5611 NR Eindhoven
             </span>
 
             <ButtonLink linkClass='event-item__button' href="mailto:john@videlio.nl">Mail om je aan te melden</ButtonLink>
