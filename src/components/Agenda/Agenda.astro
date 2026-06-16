@@ -1,6 +1,7 @@
 ---
 //@ts-nocheck
 import AgendaItem from './SubComponents/AgendaItem/AgendaItem.astro';
+import { decodeHtml, stripHtml } from '../../utils/decodeHtml';
 
 import './agenda.css';
 
@@ -15,16 +16,16 @@ const fetchSessions = async () => {
 
         return {
             id: session.id,
-            title: session.title.rendered,
-            summary: session.acf.summary,
-            longDescription: session.acf.long_description,
-            location: session.acf.location.name,
+            title: decodeHtml(session.title.rendered),
+            summary: stripHtml(session.acf.summary),
+            longDescription: session.acf.long_description ? decodeHtml(session.acf.long_description) : null,
+            location: session.acf.location?.name ?? null,
             startDate,
             endTime: session.acf.end_time || null,
             image: img && typeof img === 'string'
-                ? { url: img, alt: session.acf.image_alt || null }
+                ? { url: img, alt: session.acf.image_alt ? decodeHtml(session.acf.image_alt) : null }
                 : null,
-            types: Array.isArray(session.acf.type) ? session.acf.type.map(t => t.name) : [],
+            types: Array.isArray(session.acf.type) ? session.acf.type.map(t => decodeHtml(t.name)) : [],
         };
     });
 };
