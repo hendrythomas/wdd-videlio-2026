@@ -1,0 +1,14 @@
+.progressive-disclosure {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    > summary {
+        &::marker {
+            content: '';
+        }
+        color: var(--highlight-color);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
