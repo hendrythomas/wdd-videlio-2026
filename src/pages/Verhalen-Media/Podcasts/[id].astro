@@ -41,7 +41,7 @@ const coverImage = podcast.acf?.image || null;
 
             <h4 id="current-title">{firstAudio.title}</h4>
 
-            <audio id="audio"></audio>
+            <audio id="audio" src={firstAudio.url}></audio>
 
             <div class="control-buttons">
                 <button id="play-button">
@@ -61,13 +61,12 @@ const coverImage = podcast.acf?.image || null;
                         <div class="podcast" data-src={audio.url} data-title={audio.title}>
                             <h4>{audio.title}</h4>
 
-                            <button id="play-button">
+                            <button class="small-play-button">
                                 ▶
                             </button>
                         </div>
                     ))
                 }
-
             </div>
 
         </div>
@@ -167,14 +166,31 @@ const coverImage = podcast.acf?.image || null;
     const playButton = document.getElementById("play-button");
     const title = document.getElementById("current-title");
 
+    // De standaard waarde is die van de eerste podcast aflevering
+    let currentSmallPlayButton = document.querySelector('.small-play-button');
+
     document.querySelectorAll(".podcast")
         .forEach(item => {
+            const smallPlayButton = item.querySelector('.small-play-button');
             item.addEventListener("click", () => {
+
+                // Als deze al aan het afspelen is, zet hem dan op pauze en ga terug
+                if (!audio.paused && smallPlayButton == currentSmallPlayButton) {
+                    audio.pause();
+                    currentSmallPlayButton.textContent = "▶";
+                    playButton.textContent = "▶";
+                    return;
+                }
+
                 audio.src = item.dataset.src;
                 title.textContent = item.dataset.title;
 
                 audio.play();
                 playButton.textContent = "⏸";
+
+                // Zet de playbutton in de lijst weergave ook op pauze en sla deze op.
+                smallPlayButton.textContent = "⏸";
+                currentSmallPlayButton = smallPlayButton;
             });
         });
 
@@ -182,9 +198,11 @@ const coverImage = podcast.acf?.image || null;
         if(audio.paused) {
             audio.play();
             playButton.textContent = "⏸";
+            currentSmallPlayButton.textContent = "⏸";
         } else {
             audio.pause();
             playButton.textContent = "▶";
+            currentSmallPlayButton.textContent = "▶";
         }
     });
 
@@ -209,8 +227,7 @@ const coverImage = podcast.acf?.image || null;
         const podcastCount = document.getElementById("podcast-count");
         const podcasts = document.querySelectorAll(".podcast");
 
-        console.log(podcasts.length);
-
-        podcastCount.textContent = `${podcasts.length} afleveringen`;
+        const podcastAmountString = podcasts.length > 1 ? 'afleveringen' : 'aflevering'
+        podcastCount.textContent = `${podcasts.length} ${podcastAmountString}`;
     })
 </script>
