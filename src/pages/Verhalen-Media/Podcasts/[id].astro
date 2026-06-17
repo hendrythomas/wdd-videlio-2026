@@ -1,0 +1,251 @@
+---
+//@ts-nocheck
+
+export const prerender = false;
+
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+const { id } = Astro.params;
+
+const [podcastRes, episodesRes] = await Promise.all([
+    fetch(`http://dev1.videlio.nl/wp-json/wp/v2/podcast/${id}?acf_format=standard`),
+    fetch(`http://dev1.videlio.nl/wp-json/wp/v2/podcast_aflevering?acf_format=standard`)
+]);
+
+const podcast = await podcastRes.json();
+const allEpisodes = await episodesRes.json();
+
+const filteredAudios = allEpisodes.filter(a => a.acf.podcast.term_id === Number(id))
+
+const audios = filteredAudios.map(audio => {
+    return {
+        title: audio.title.rendered,
+        url: audio.acf.audiobestand,
+        description: audio.acf.beschrijving,
+        date: audio.acf.datum
+    }
+})
+
+const firstAudio = audios[0];
+const coverImage = podcast.acf?.image || null;
+
+---
+
+<MainLayout title={podcast.name} backHref="/Verhalen-Media/Podcasts">
+    <section class="project-section">
+        <h1>{podcast.name}</h1>
+    </section>
+
+    <section class="podcast-page">
+        {firstAudio ? (
+                <div class="audio">
+                    <img src={coverImage} class="main-img">
+
+                    <h3 id="current-title">{firstAudio.title}</h3>
+
+                    <audio id="audio" src={firstAudio.url}></audio>
+
+                    <div class="control-buttons">
+                        <button id="play-button">
+                            ▶
+                        </button>
+
+                        <input type="range" value="0" id="progress">
+                    </div>
+                </div>
+
+                <div class="playlist-container">
+                    <h3 id="podcast-count"></h3>
+
+                    <div class="playlist">
+                        {
+                            audios.map(audio => (
+                                    <div class="podcast" data-src={audio.url} data-title={audio.title}>
+                                        <div class="podcast-info">
+                                            <h4>{audio.title}</h4>
+                                            { audio.date && <p>{audio.date}</p> }
+                                        </div>
+
+                                        <button class="small-play-button">
+                                            ▶
+                                        </button>
+                                    </div>
+                            ))
+                        }
+                    </div>
+
+                </div>
+        ) : (  <img src={coverImage} class="main-img">
+                <p>Deze podcast heeft nog geen afleveringen.</p>)}
+
+    </section>
+</MainLayout>
+
+<style>
+    .project-section {
+        padding: 30px;
+    }
+
+    .project-section h1 {
+        color: var(--highlight-color);
+    }
+
+    .podcast-page {
+        display: flex;
+        gap: 40px;
+        padding: 30px;
+
+        @media (max-width: 650px) {
+            flex-wrap: wrap;
+        }
+    }
+
+    .audio {
+        width: 450px;
+    }
+
+    img {
+        border-radius: 10px;
+    }
+
+    h4 {
+        color: var(--highlight-color);
+    }
+
+    .main-img {
+        width: 100%;
+    }
+
+    .control-buttons {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .control-buttons button {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        border: none;
+        font-size: 18px;
+    }
+
+    #progress {
+        flex: 1;
+    }
+
+    .playlist-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .playlist {
+        overflow-y: scroll;
+        height: 400px;
+        padding: 10px;
+    }
+
+    .podcast {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        border: 2px solid gray;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+
+    .podcast-info {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .podcast button {
+        border-radius: 50%;
+        border: none;
+        height: 30px;
+        width: 30px;
+        font-size: 15px;
+    }
+
+    .podcast:hover {
+        border-color: var(--highlight-color);
+    }
+</style>
+
+<script>
+    //@ts-nocheck
+    const audio = document.getElementById("audio");
+    const progress = document.getElementById("progress");
+    const playButton = document.getElementById("play-button");
+    const title = document.getElementById("current-title");
+
+    // De standaard waarde is die van de eerste podcast aflevering
+    let currentSmallPlayButton = document.querySelector('.small-play-button');
+
+    document.querySelectorAll(".podcast")
+        .forEach(item => {
+            const smallPlayButton = item.querySelector('.small-play-button');
+            item.addEventListener("click", () => {
+
+                // Als deze al aan het afspelen is, zet hem dan op pauze en ga terug
+                if (!audio.paused && smallPlayButton == currentSmallPlayButton) {
+                    audio.pause();
+                    currentSmallPlayButton.textContent = "▶";
+                    playButton.textContent = "▶";
+                    return;
+                }
+
+                audio.src = item.dataset.src;
+                title.textContent = item.dataset.title;
+
+                audio.play();
+                playButton.textContent = "⏸";
+
+                // Zet de playbutton in de lijst weergave ook op pauze en sla deze op.
+                smallPlayButton.textContent = "⏸";
+                currentSmallPlayButton = smallPlayButton;
+            });
+        });
+
+    playButton.addEventListener("click", () => {
+        if(audio.paused) {
+            audio.play();
+            playButton.textContent = "⏸";
+            currentSmallPlayButton.textContent = "⏸";
+        } else {
+            audio.pause();
+            playButton.textContent = "▶";
+            currentSmallPlayButton.textContent = "▶";
+        }
+    });
+
+    audio.addEventListener("loadedmetadata", () => {
+        progress.max = audio.duration;
+    });
+
+    audio.addEventListener("timeupdate", () => {
+        progress.value = audio.currentTime;
+    });
+
+    progress.addEventListener("input", () => {
+        audio.currentTime = progress.value;
+    });
+
+    audio.addEventListener("ended", () => {
+        playButton.textContent = "▶";
+    });
+
+    //Aantal afleveringen
+    document.addEventListener("DOMContentLoaded", () => {
+        const podcastCount = document.getElementById("podcast-count");
+        const podcasts = document.querySelectorAll(".podcast");
+
+        const podcastAmountString = podcasts.length > 1 ? 'afleveringen' : 'aflevering'
+        podcastCount.textContent = `${podcasts.length} ${podcastAmountString}`;
+    })
+</script>

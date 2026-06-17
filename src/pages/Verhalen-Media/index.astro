@@ -1,0 +1,52 @@
+---
+import './verhalen-media.css';
+import MainLayout from "../../layouts/MainLayout.astro";
+
+---
+<MainLayout backHref="/" title="Community">
+    <section class="project-section">
+        <h1>Community</h1>
+
+        <div class="grid-projects">
+            <article class="project-card">
+                <a href="/Verhalen-Media/Verhalen" class="project-card-link" aria-label="Lees of beluister verhalen van mede-VIPs">
+                    <div class="project-card-img-wrap">
+                        <img src="/assets/images/decoratie/verhalenVIPS.png" alt="">
+                    </div>
+                    <div class="info-projects">
+                        <h2>Verhalen van VIPs</h2>
+                        <p>Mensen met een visuele beperking die midden in het leven staan. In hun eigen woorden.</p>
+                        <span class="info-projects-cta" aria-hidden="true">Bekijk alle verhalen van VIPS</span>
+                    </div>
+                </a>
+            </article>
+
+            <article class="project-card">
+                <a href="/Verhalen-Media/Podcasts" class="project-card-link" aria-label="Beluister podcasts van mede-VIPs">
+                    <div class="project-card-img-wrap">
+                        <img src="/assets/images/decoratie/podcast.png" alt="">
+                    </div>
+                    <div class="info-projects">
+                        <h2>Podcasts</h2>
+                        <p>Luister naar VIPs die vertellen hoe zij de wereld ervaren.</p>
+
+                        <span class="info-projects-cta" aria-hidden="true">Bekijk alle podcasts</span>
+                    </div>
+                </a>
+            </article>
+
+            <article class="project-card">
+                <a href="/Verhalen-Media/Radio" class="project-card-link" aria-label="Beluister uitgelichte radio uitzendingen van VIPS">
+                    <div class="project-card-img-wrap">
+                        <img src="/assets/images/decoratie/rararadio.png" alt="">
+                    </div>
+                    <div class="info-projects">
+                        <h2>Radio</h2>
+                        <p>Luister terug naar radio-uitzendingen van en voor mensen met een visuele beperking.</p>
+                        <span class="info-projects-cta" aria-hidden="true">Beluister radio uitzendingen</span>
+                    </div>
+                </a>
+            </article>
+        </div>
+    </section>
+</MainLayout>

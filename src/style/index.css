@@ -118,6 +118,7 @@ main {
     width: 80dvw;
     margin: auto;
     height: auto;
+    margin-block-end: 5em;
 
     @media (max-width: 768px) {
         width: 90dvw;
