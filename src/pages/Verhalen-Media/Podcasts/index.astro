@@ -1,38 +1,44 @@
 ---
 //@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
+import { decodeHtml } from '../../../utils/decodeHtml.js';
 // import './podcasts.css';
+
+const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/podcast?acf_format=standard');
+const data = await res.json();
+
+const podcasts = data.map(podcast => {
+    return {
+        id: podcast.id,
+        title: decodeHtml(podcast.name),
+        image: podcast.acf.image
+    }
+})
+
 ---
 
-<MainLayout title="Podcasts" backHref="/">
+<MainLayout title="Podcasts" backHref="/meedoen/gemeenschap" >
     <section class="project-section">
         <h1>Podcasts</h1>
-            <!--Podcasts John Willemse-->
             <div class="grid-projects">
-                <!--Podcast John-->
+                {
+                    podcasts.map(podcast => (
                         <div class="project-card">
                             <div class="image">
-                                <a href="./Podcasts/john">
-                                    <img src="../assets/images/decoratie/john.png">
-                                    <h4>John Willemse</h4>
+                                <a href=`./Podcasts/${podcast.id}`>
+                                    <img src={podcast.image}>
+                                    <h4>{podcast.title}</h4>
                                 </a>
                             </div>
                         </div>
-                        
-                        <!--Podcast Niet te zien -->
-                        <div class="project-card">
-                            <a href="./Podcasts/niet_te_zien">
-                                <img src="../assets/images/decoratie/niet_te_zien.png">
-                                <h4>Niet te zien</h4>
-                            </a>
-                        </div>
-                    </div>
+                    ))
+                }
+            </div>
             </section>
 </MainLayout>
 
 <style>
     .project-section {
-        padding: 80px;
         min-height: 100vh;
     }
 
@@ -42,20 +48,24 @@ import MainLayout from '../../../layouts/MainLayout.astro';
     }
 
     .grid-projects {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        column-gap: 250px;
-        max-width: 800px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .project-card {
-        width: 400px;
+        width: fit-content;
+        justify-self: center;
     }
 
     .project-card img {
-        width: 100%;
+        height: 20em;
+        aspect-ratio: 1/1;
         border-radius: 10px;
         display: block;
+        object-fit: cover;
     }
 
     .project-card h4 {
