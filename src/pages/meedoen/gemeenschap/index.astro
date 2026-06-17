@@ -2,12 +2,28 @@
 import './gemeenschap.css';
 import MainLayout from "../../../layouts/MainLayout.astro";
 import indexCSS from "../../style/index.css";
+import ProgressiveDisclosure from '../../../components/ProgressiveDisclosure/ProgressiveDisclosure.astro';
 ---
 <MainLayout pageTitle="Media" backHref="/" title="Gemeenschap">
-    <section class="project-section">
+    <section class="intro">
         <h1>Gemeenschap</h1>
-
-        <main class="grid-projects">
+    </section>
+    <section>
+        <h2>Videlio Community</h2>
+        <p>Bij onze WhatsApp-groep kun je terecht kunt met vragen en up-to-date blijven met de gemeenschap.</p>
+        <ProgressiveDisclosure title="Deelnemen.">
+            <div class="qr-grid">
+                <div>
+                    <p>Deelnemen kan via <a href="https://chat.whatsapp.com/Kh0CQyKf791ArJWTgs7qAd">deze link</a>.</p>
+                    <p>Je kunt ook met je telefoon de QR-code aan de linkerkant scannen.</p>
+                </div>
+                <img src="/assets/images/qr-codes/videlio-community-whatsapp.webp" alt="Videlio Community QR-code" loading="lazy">
+            </div>
+        </ProgressiveDisclosure>
+    </section>
+    <section>
+        <h2>Media en verhalen</h2>
+        <div class="grid-projects">
             <article class="project-card">
                 <a href="/Verhalen-Media/Verhalen" class="project-card-link" aria-label="Lees of beluister verhalen van mede-VIPs">
                     <div class="project-card-img-wrap">
@@ -47,6 +63,6 @@ import indexCSS from "../../style/index.css";
                     </div>
                 </a>
             </article>
-        </main>
+        </div>
     </section>
 </MainLayout>
