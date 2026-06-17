@@ -75,7 +75,7 @@ const coverImage = podcast.acf?.image || null;
                     </div>
 
                 </div>
-        ) : (   <img src={coverImage} class="main-img">
+        ) : (  <img src={coverImage} class="main-img">
                 <p>Deze podcast heeft nog geen afleveringen.</p>)}
 
     </section>
@@ -94,6 +94,10 @@ const coverImage = podcast.acf?.image || null;
         display: flex;
         gap: 40px;
         padding: 30px;
+
+        @media (max-width: 650px) {
+            flex-wrap: wrap;
+        }
     }
 
     .audio {
