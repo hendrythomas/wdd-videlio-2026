@@ -1,46 +1,46 @@
 ---
 //@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
-// import './podcasts.css';
+import { decodeHtml } from '../../../utils/decodeHtml.js'
+
+const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/radio-aflevering?acf_format=standard');
+const data = await res.json();
+
+const radios = data.map(radio => {
+    return {
+        id: radio.id,
+        title: decodeHtml(radio.title.rendered),
+        image: radio.acf.thumbnail,
+        url: radio.acf.radio_url,
+        date: radio.acf.datum
+    }
+})
+
 ---
 
-<MainLayout title="Radio">
+<MainLayout title="Radio afleveringen" backHref="/">
     <section class="project-section">
-        <h1>Rararadio Eindhoven - Zichtbaar met Peter Meuleman</h1>
-            <!--Podcasts John Willemse-->
-            <div class="grid-projects">
-                <!--1e aflevering-->
-                        <div class="project-card">
-                            <div class="image">
-                                <a href="">
-                                    <img src="../../../../assets/images/decoratie/rararadio_peter.jpg">
-                                    <h4>Aflevering 1</h4>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <!--2e aflevering-->
-                        <div class="project-card">
-                            <a href="">
-                                <img src="../../../../assets/images/decoratie/rararadio_peter.jpg">
-                                <h4>Aflevering 2</h4>
-                            </a>
-                        </div>
-
-                        <!--3e aflevering-->
-                        <div class="project-card">
-                            <a href="">
-                                <img src="../../../../assets/images/decoratie/rararadio_peter.jpg">
-                                <h4>Aflevering 3</h4>
+        <h1>Radio uitzendingen</h1>
+        <div class="grid-projects">
+            {
+                radios.map(radio => (
+                    <div class="project-card">
+                        <div class="image">
+                            <a target="_blank" href={radio.url}>
+                                <img src={radio.image}>
+                                <h4>{radio.title}</h4>
+                                <p></p>
                             </a>
                         </div>
                     </div>
-            </section>
+                ))
+            }
+        </div>
+    </section>
 </MainLayout>
 
 <style>
     .project-section {
-        padding: 80px;
         min-height: 100vh;
     }
 
@@ -50,20 +50,24 @@ import MainLayout from '../../../layouts/MainLayout.astro';
     }
 
     .grid-projects {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 150px;
-        max-width: 800px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .project-card {
-        width: 400px;
+        width: 15em;
+        justify-self: center;
     }
 
     .project-card img {
-        width: 100%;
+        height: 20em;
+        aspect-ratio: 1/1;
         border-radius: 10px;
         display: block;
+        object-fit: cover;
     }
 
     .project-card h4 {

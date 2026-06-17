@@ -1,6 +1,7 @@
 ---
 //@ts-nocheck
 import MainLayout from '../../../layouts/MainLayout.astro';
+import { decodeHtml } from '../../../utils/decodeHtml.js';
 // import './podcasts.css';
 
 const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/podcast?acf_format=standard');
@@ -9,18 +10,16 @@ const data = await res.json();
 const podcasts = data.map(podcast => {
     return {
         id: podcast.id,
-        title: podcast.name,
+        title: decodeHtml(podcast.name),
         image: podcast.acf.image
     }
 })
 
-console.log(podcasts);
 ---
 
 <MainLayout title="Podcasts" backHref="/">
     <section class="project-section">
         <h1>Podcasts</h1>
-            <!--Podcasts John Willemse-->
             <div class="grid-projects">
                 {
                     podcasts.map(podcast => (
@@ -49,11 +48,11 @@ console.log(podcasts);
     }
 
     .grid-projects {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
         gap: 1rem;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
     }
 
     .project-card {

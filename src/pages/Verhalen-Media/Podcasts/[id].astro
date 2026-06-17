@@ -21,7 +21,8 @@ const audios = filteredAudios.map(audio => {
     return {
         title: audio.title.rendered,
         url: audio.acf.audiobestand,
-        description: audio.acf.beschrijving
+        description: audio.acf.beschrijving,
+        date: audio.acf.datum
     }
 })
 
@@ -36,40 +37,47 @@ const coverImage = podcast.acf?.image || null;
     </section>
 
     <section class="podcast-page">
-        <div class="audio">
-            <img src={coverImage} class="main-img">
+        {firstAudio ? (
+                <div class="audio">
+                    <img src={coverImage} class="main-img">
 
-            <h4 id="current-title">{firstAudio.title}</h4>
+                    <h3 id="current-title">{firstAudio.title}</h3>
 
-            <audio id="audio" src={firstAudio.url}></audio>
+                    <audio id="audio" src={firstAudio.url}></audio>
 
-            <div class="control-buttons">
-                <button id="play-button">
-                    ▶
-                </button>
+                    <div class="control-buttons">
+                        <button id="play-button">
+                            ▶
+                        </button>
 
-                <input type="range" value="0" id="progress">
-            </div>
-        </div>
+                        <input type="range" value="0" id="progress">
+                    </div>
+                </div>
 
-        <div class="playlist-container">
-            <h3 id="podcast-count"></h3>
+                <div class="playlist-container">
+                    <h3 id="podcast-count"></h3>
 
-            <div class="playlist">
-                {
-                    audios.map(audio => (
-                        <div class="podcast" data-src={audio.url} data-title={audio.title}>
-                            <h4>{audio.title}</h4>
+                    <div class="playlist">
+                        {
+                            audios.map(audio => (
+                                    <div class="podcast" data-src={audio.url} data-title={audio.title}>
+                                        <div class="podcast-info">
+                                            <h4>{audio.title}</h4>
+                                            { audio.date && <p>{audio.date}</p> }
+                                        </div>
 
-                            <button class="small-play-button">
-                                ▶
-                            </button>
-                        </div>
-                    ))
-                }
-            </div>
+                                        <button class="small-play-button">
+                                            ▶
+                                        </button>
+                                    </div>
+                            ))
+                        }
+                    </div>
 
-        </div>
+                </div>
+        ) : (   <img src={coverImage} class="main-img">
+                <p>Deze podcast heeft nog geen afleveringen.</p>)}
+
     </section>
 </MainLayout>
 
@@ -144,6 +152,12 @@ const coverImage = podcast.acf?.image || null;
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 15px;
+    }
+
+    .podcast-info {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
     }
 
     .podcast button {
