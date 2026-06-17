@@ -10,7 +10,10 @@ main {
   display: flex;
   flex-direction: column;
   margin-bottom: 4rem;
-  gap: 4rem;
+
+  section:not(:first-of-type) {
+    margin-top: 4rem;
+  }
 
   h1 {
     margin-bottom: 2rem;
@@ -40,7 +43,7 @@ main {
       color: var(--text-primary);
   }
 
-  .button-link {
+  .button-link:not(.main-layout-back-button) {
     width: max-content;
     margin-top: 1rem;
     box-shadow: 0 2px 8px 0 #00000080;
