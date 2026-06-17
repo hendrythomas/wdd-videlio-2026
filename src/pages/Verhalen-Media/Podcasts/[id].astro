@@ -1,9 +1,18 @@
 ---
 //@ts-nocheck
 
-export const prerender = false;
+export const prerender = true;
 
 import MainLayout from '../../../layouts/MainLayout.astro';
+
+export async function getStaticPaths() {
+    const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/podcast?acf_format=standard');
+    const data = await res.json();
+
+    return data.map(podcast => ({
+        params: { id: String(podcast.id) }
+    }));
+}
 
 const { id } = Astro.params;
 
