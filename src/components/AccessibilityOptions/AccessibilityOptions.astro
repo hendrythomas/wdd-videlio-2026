@@ -73,11 +73,15 @@ import '../../style/icons.css';
   });
 
   document.addEventListener('mouseover', (e) => {
-    setCustomCursor(e);
+    setCursor(e);
   }, true);
   document.addEventListener('mouseleave', (e) => {
-    resetCustomCursor();
+    resetCursor();
   }, true);
+
+  document.addEventListener('mousemove', (e) => {
+    moveCursor(e);
+  });
 
   function applySettings(elem = null) {
     tryToggleBigCursor(elem);
@@ -196,7 +200,7 @@ import '../../style/icons.css';
     localStorage.setItem('settings', settingsJson);
   }
 
-  function setCustomCursor(e) {
+  function setCursor(e) {
     const styleCursor = getComputedStyle(e.target).cursor;
     if (styleCursor === 'pointer') {
       cursorStyle = 'pointer';
@@ -207,14 +211,23 @@ import '../../style/icons.css';
     ) {
       cursorStyle = 'text';
     }
-
-    console.log(cursorStyle)
+    updateCursorStyle();
   }
 
-  function resetCustomCursor() {
+  function resetCursor() {
     cursorStyle = 'default';
+    updateCursorStyle();
+  }
 
-    console.log(cursorStyle)
+  function updateCursorStyle() {
+    document.documentElement.setAttribute('big-cursor', cursorStyle);
+  }
+
+  const cursor = document.getElementById('big-cursor');
+
+  function moveCursor() {
+    if (cursor === null) return;
+    // cursor.style.top = 
   }
 
 </script>
