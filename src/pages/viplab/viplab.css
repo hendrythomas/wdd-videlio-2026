@@ -43,7 +43,7 @@ main {
       color: var(--text-primary);
   }
 
-  .button-link {
+  .button-link:not(.main-layout-back-button) {
     width: max-content;
     margin-top: 1rem;
     box-shadow: 0 2px 8px 0 #00000080;
