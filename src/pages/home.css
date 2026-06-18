@@ -9,10 +9,6 @@ p:not(:first-child) {
   margin-top: 1rem;
 }
 
-html {
-  scrollbar-color: #ffffff80 transparent;
-}
-
 main {
   &>section {
     &>p {
