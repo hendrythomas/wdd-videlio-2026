@@ -20,6 +20,7 @@
   aria-label="Zoek op de website"
   hidden>
 
+  <div class="search-focus-rect" id="search-focus-rect" aria-hidden="true"></div>
   <div class="search-dialog-inner">
     <div class="search-dialog-header">
       <label for="search-input" class="sr-only">Zoekterm</label>
@@ -81,6 +82,21 @@
       input.value = '';
       results.innerHTML = '';
       status.textContent = '';
+
+      requestAnimationFrame(() => {
+        const dialogRect = dialog.querySelector('.search-dialog-inner')!.getBoundingClientRect();
+        const focusRect = document.getElementById('search-focus-rect')!;
+
+        focusRect.style.setProperty('--dialog-top',    `${dialogRect.top}px`);
+        focusRect.style.setProperty('--dialog-left',   `${dialogRect.left}px`);
+        focusRect.style.setProperty('--dialog-width',  `${dialogRect.width}px`);
+        focusRect.style.setProperty('--dialog-height', `${dialogRect.height}px`);
+
+        focusRect.classList.remove('animating');
+        void (focusRect as HTMLElement).offsetWidth;
+        focusRect.classList.add('animating');
+      });
+
       input.focus();
     }
 
@@ -156,7 +172,7 @@
       `).join('');
 
       if (announce) {
-        status.textContent = `${data.length} resultaat${data.length === 1 ? '' : 'en'} gevonden. Gebruik de pijltjestoetsen om te navigeren.`;
+        status.textContent = `${data.length} resultaat${data.length === 1 ? '' : 'en'} gevonden. Gebruik de pijltjestoetsen omlaag en omhoog om te navigeren.`;
       }
     }
 
@@ -387,5 +403,39 @@
     color: rgba(255, 255, 255, 0.45);
     font-style: italic;
     text-align: center;
+  }
+
+  /* --- Focus-rechthoek animatie bij openen --- */
+  .search-focus-rect {
+    position: fixed;
+    border: 6px solid var(--highlight-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+  }
+
+  .search-focus-rect.animating {
+    animation: shrinkToDialog 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes shrinkToDialog {
+    0% {
+      top: 8px;
+      left: 8px;
+      width: calc(100vw - 16px);
+      height: calc(100vh - 16px);
+      border-radius: 4px;
+      opacity: 1;
+    }
+    100% {
+      top: var(--dialog-top);
+      left: var(--dialog-left);
+      width: var(--dialog-width);
+      height: var(--dialog-height);
+      border-radius: 16px;
+      opacity: 0;
+    }
   }
 </style>
