@@ -86,7 +86,7 @@ main {
 /* --- Grid sectie  */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   align-items: stretch;
   border-top: solid var(--highlight-color) 2px;
@@ -104,7 +104,6 @@ main {
   overflow: visible;
   height: 100%;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-
   cursor: pointer;
 }
 
@@ -142,7 +141,7 @@ main {
 
 .article-image {
   width: 100%;
-  height: 10rem;
+  height: 15rem;
   object-fit: cover;
   object-position: center;
   display: block;

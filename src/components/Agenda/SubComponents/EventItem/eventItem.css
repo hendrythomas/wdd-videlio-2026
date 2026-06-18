@@ -23,6 +23,10 @@
     height: 100%;
     max-width: 15em;
     object-fit:cover;
+
+    @media (max-width: 600px) {
+        display: none;
+    }
 }
 
 .event-item__header {

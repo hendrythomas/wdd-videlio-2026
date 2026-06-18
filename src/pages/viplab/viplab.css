@@ -216,7 +216,6 @@ main {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-height: 420px;
 }
 
 .innovatie-card--grid .innovatie-card-img-wrap {
@@ -355,7 +354,7 @@ main {
 }
 
 .innovatie-card--list .innovatie-card-link {
-  max-height: 180px;
+
 }
 
 /* Summary afkappen op 2 regels in lijstweergave */
