@@ -49,6 +49,7 @@
   transition:
     left 0.4s ease,
     box-shadow 0.4s ease;
+  z-index: 1;
 
   &:not(:popover-open) {
     left: calc(-1 * var(--width));
