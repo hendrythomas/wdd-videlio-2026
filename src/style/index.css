@@ -178,6 +178,7 @@ button:focus-visible, a:focus-visible {
     pointer-events: none;
 
     transition: .5s;
+    top: -10%;
 }
 
 body:has(:focus-visible) .focus-indicator {
