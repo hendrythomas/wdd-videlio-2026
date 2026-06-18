@@ -15,7 +15,19 @@ import '../../style/icons.css';
     </button>
   </div>
   <div class="access-item">
-    <span>Lettertype</span>
+    <span>Voorleessnelheid</span>
+    <button title="Verlagen" id="setting-decrease-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">remove</i>
+    </button>
+    <button title="Verhogen" id="setting-increase-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">add</i>
+    </button>
+    <button title="Resetten" id="setting-reset-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">refresh</i>
+    </button>
+  </div>
+  <div class="access-item">
+    <span>Lettergrootte</span>
     <button title="Verkleinen" id="setting-decrease-font" data-access-setting>
       <i class="material-icon" aria-hidden="true">remove</i>
     </button>
@@ -52,6 +64,8 @@ import '../../style/icons.css';
 
   let settings = [];
 
+  let cursorStyle = [];
+
   document.addEventListener('DOMContentLoaded', (e) => {
     storageLoadSettings();
     updateCheckboxes();
@@ -70,13 +84,27 @@ import '../../style/icons.css';
     updateTooltips();
   });
 
+  document.addEventListener('mouseover', (e) => {
+    setCursor(e);
+  }, true);
+  document.addEventListener('mouseleave', (e) => {
+    resetCursor();
+  }, true);
+
+  document.addEventListener('mousemove', (e) => {
+    moveCursor(e);
+  });
+
   function applySettings(elem = null) {
-    tryToggleBigCursor(elem);
+    tryToggleBigCursor();
     tryToggleContrastTheme();
     tryIncreaseFontSize(elem);
     tryDecreaseFontSize(elem);
     tryResetFontSize(elem);
     updateDocumentFontSize();
+    tryIncreaseTtsSpeed(elem);
+    tryDecreaseTtsSpeed(elem);
+    tryResetTtsSpeed(elem);
   }
 
   function updateCheckboxes() {
@@ -133,7 +161,47 @@ import '../../style/icons.css';
     settingAddedFontSize.value = 0;
   }
 
-  function tryToggleBigCursor(elem) {
+  function tryToggleBigCursor() {
+    const input = document.getElementById('setting-big-cursor');
+    if (input === null) return;
+
+    const settingBigCursor = getSetting('setting-big-cursor');
+    if (input.checked) {
+      settingBigCursor.value = true;
+    } else {
+      settingBigCursor.value = false;
+    }
+    updateCursorStyle();
+  }
+  
+  function tryIncreaseTtsSpeed(button) {
+    if (button === null || button.id !== 'setting-increase-tts-speed') return;
+
+    const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
+
+    settingAddedTtsSpeed.value += 0.1;
+    if (settingAddedTtsSpeed.value > 4) {
+      settingAddedTtsSpeed.value = 4;
+    }
+  }
+  
+  function tryDecreaseTtsSpeed(button) {
+    if (button === null || button.id !== 'setting-decrease-tts-speed') return;
+
+    const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
+
+    settingAddedTtsSpeed.value -= 0.1;
+    if (settingAddedTtsSpeed.value < -4) {
+      settingAddedTtsSpeed.value = -4;
+    }
+  }
+  
+  function tryResetTtsSpeed(button) {
+    if (button === null || button.id !== 'setting-reset-tts-speed') return;
+
+    const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
+
+    settingAddedTtsSpeed.value = 0;
   }
 
   function tryToggleContrastTheme() {
@@ -164,6 +232,44 @@ import '../../style/icons.css';
         label.title = label.dataset.title;
       }
     }
+  }
+
+  function setCursor(e) {
+    const styleCursor = getComputedStyle(e.target).cursor;
+    if (styleCursor === 'pointer') {
+      cursorStyle = 'pointer';
+    }
+    else if (
+      e.target.lastChild &&
+      e.target.lastChild.nodeName === '#text'
+    ) {
+      cursorStyle = 'text';
+    }
+    updateCursorStyle();
+  }
+
+  function resetCursor() {
+    cursorStyle = 'default';
+    updateCursorStyle();
+  }
+
+  function updateCursorStyle() {
+    const settingBigCursor = getSetting('setting-big-cursor');
+
+    if (settingBigCursor.value === true) {
+      document.documentElement.setAttribute('big-cursor', cursorStyle);
+    }
+    else {
+      document.documentElement.removeAttribute('big-cursor');
+    }
+  }
+
+  const cursor = document.getElementById('big-cursor');
+
+  function moveCursor(e) {
+    if (cursor === null) return;
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top  = `${e.clientY}px`;
   }
 
   function getSetting(key) {

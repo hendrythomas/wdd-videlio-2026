@@ -20,6 +20,27 @@ const { variant = 'asymmetric', targetId } = Astro.props;
 </div>
 
 <script>
+
+  /* code from accessibility options */
+  let settings = [];
+
+  function getSetting(key) {
+    let setting;
+    setting = settings.find(s => {
+      return s.id === key;
+    });
+    if (setting === undefined) {
+      setting = settings.push(new Setting(key, 0));
+    }
+    return setting;
+  }
+  
+  function storageLoadSettings() {
+    const storageSettingsJson = localStorage.getItem('settings');
+    settings = JSON.parse(storageSettingsJson) || [];
+  }
+
+
   document.querySelectorAll('.read-aloud').forEach(widget => {
     const btn = widget.querySelector('.read-aloud-btn') as HTMLButtonElement;
     const label = widget.querySelector('.read-aloud-label') as HTMLElement;
@@ -49,6 +70,11 @@ const { variant = 'asymmetric', targetId } = Astro.props;
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'nl-NL';
       utterance.rate = 1.5;
+
+      /* add tts speed from local storage */
+      storageLoadSettings();
+      const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
+      utterance.rate += settingAddedTtsSpeed.value;
 
       const duration = (text.split(' ').length / 150) * 60 * 1000;
       const start = Date.now();
