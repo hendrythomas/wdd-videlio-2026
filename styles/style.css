@@ -38,9 +38,9 @@
     /*Typografie:*/
     --primary-font: "Noto sans", sans-serif;
     --small-heading-font-size: 1.5rem;
-    --heading-font-size: 2rem;
-    --title-font-size: 4rem;
-    --paragraph-font-size: 1.5rem;
+ --title-font-size: clamp(2.5rem, 6vw, 4rem);
+  --heading-font-size: clamp(1.4rem, 3vw, 2rem);
+  --paragraph-font-size: clamp(1rem, 1.5vw, 1.25rem);
 }
 
 body, h1, h2, p, a {
@@ -54,7 +54,7 @@ body {
 }
 
 h1 {
-    color: var(--text-primary);
+    color: var(--text-primary); 
     font-size: var(--title-font-size);
 }
 

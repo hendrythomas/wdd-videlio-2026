@@ -22,7 +22,6 @@ const currentPath = Astro.url.pathname;
     <div class="mobile-menu">
         <Link isActive={currentPath == '/'} href="/">Doe mee</Link>
         <Link isActive={currentPath.includes('/Agenda')} href="/Agenda">Agenda</Link>
-        <Link isActive={currentPath.includes('/viplab')} href="/viplab">VIPLab</Link>
         <Link isActive={currentPath.includes('/Contact')} href="/Contact">Contact</Link>
     </div>
 
