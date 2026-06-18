@@ -110,7 +110,7 @@ body:has(> header)::before {
 }
 
 /* Mobile menu + grid nav layout */
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   body > header > nav,
   body > header > nav > .mobile-menu {
 
