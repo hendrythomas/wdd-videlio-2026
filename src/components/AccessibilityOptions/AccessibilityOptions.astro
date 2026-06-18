@@ -15,6 +15,18 @@ import '../../style/icons.css';
     </button>
   </div>
   <div class="access-item">
+    <span>Voorleessnelheid</span>
+    <button title="Verlagen" id="setting-decrease-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">remove</i>
+    </button>
+    <button title="Verhogen" id="setting-increase-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">add</i>
+    </button>
+    <button title="Resetten" id="setting-reset-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">refresh</i>
+    </button>
+  </div>
+  <div class="access-item">
     <span>Lettergrootte</span>
     <button title="Verkleinen" id="setting-decrease-font" data-access-setting>
       <i class="material-icon" aria-hidden="true">remove</i>
@@ -39,18 +51,6 @@ import '../../style/icons.css';
       <i class="material-icon" aria-hidden="true"></i>
       <input type="checkbox" id="setting-big-cursor" data-access-setting>
     </label>
-  </div>
-  <div class="access-item">
-    <span>Voorleessnelheid</span>
-    <button title="Verlagen" id="setting-decrease-tts-speed" data-access-setting>
-      <i class="material-icon" aria-hidden="true">remove</i>
-    </button>
-    <button title="Verhogen" id="setting-increase-tts-speed" data-access-setting>
-      <i class="material-icon" aria-hidden="true">add</i>
-    </button>
-    <button title="Resetten" id="setting-reset-tts-speed" data-access-setting>
-      <i class="material-icon" aria-hidden="true">refresh</i>
-    </button>
   </div>
 </div>
 
@@ -180,8 +180,8 @@ import '../../style/icons.css';
     const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
 
     settingAddedTtsSpeed.value += 0.1;
-    if (settingAddedTtsSpeed.value > 1) {
-      settingAddedTtsSpeed.value = 5;
+    if (settingAddedTtsSpeed.value > 4) {
+      settingAddedTtsSpeed.value = 4;
     }
   }
   
@@ -191,8 +191,8 @@ import '../../style/icons.css';
     const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
 
     settingAddedTtsSpeed.value -= 0.1;
-    if (settingAddedTtsSpeed.value < -1) {
-      settingAddedTtsSpeed.value = -5;
+    if (settingAddedTtsSpeed.value < -4) {
+      settingAddedTtsSpeed.value = -4;
     }
   }
   

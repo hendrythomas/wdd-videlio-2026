@@ -73,6 +73,7 @@
   > span {
     flex-shrink: 0;
     margin-right: auto;
+    min-width: min-content;
     max-width: 50%;
     font-size: var(--paragraph-font-size);
   }
