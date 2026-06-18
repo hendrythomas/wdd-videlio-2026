@@ -8,10 +8,10 @@ import ProgressiveDisclosure from '../../../components/ProgressiveDisclosure/Pro
     <section class="intro">
         <h1>Gemeenschap</h1>
     </section>
-    <section>
+    <section id="videlio-community-sectie">
         <h2>Videlio Community</h2>
         <p>Bij onze WhatsApp-groep kun je terecht kunt met vragen en up-to-date blijven met de gemeenschap.</p>
-        <ProgressiveDisclosure title="Deelnemen.">
+        <ProgressiveDisclosure title="Deelnemen." id="whatsapp">
             <div class="qr-grid">
                 <div>
                     <p>Deelnemen aan Videlio Community kan via <a href="https://chat.whatsapp.com/Kh0CQyKf791ArJWTgs7qAd">deze link</a>.</p>
@@ -65,4 +65,23 @@ import ProgressiveDisclosure from '../../../components/ProgressiveDisclosure/Pro
             </article>
         </div>
     </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const expandTarget = params.get('expand');
+
+    if (expandTarget) {
+      const details = document.getElementById(expandTarget) as HTMLDetailsElement | null;
+
+      if (details) {
+        details.open = true;
+
+        setTimeout(() => {
+          details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  });
+</script>
 </MainLayout>
