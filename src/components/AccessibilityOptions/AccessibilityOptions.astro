@@ -40,6 +40,18 @@ import '../../style/icons.css';
       <input type="checkbox" id="setting-big-cursor" data-access-setting>
     </label>
   </div>
+  <div class="access-item">
+    <span>Voorleessnelheid</span>
+    <button title="Verlagen" id="setting-decrease-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">remove</i>
+    </button>
+    <button title="Verhogen" id="setting-increase-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">add</i>
+    </button>
+    <button title="Resetten" id="setting-reset-tts-speed" data-access-setting>
+      <i class="material-icon" aria-hidden="true">refresh</i>
+    </button>
+  </div>
 </div>
 
 <script>
@@ -84,12 +96,15 @@ import '../../style/icons.css';
   });
 
   function applySettings(elem = null) {
-    tryToggleBigCursor(elem);
+    tryToggleBigCursor();
     tryToggleContrastTheme();
     tryIncreaseFontSize(elem);
     tryDecreaseFontSize(elem);
     tryResetFontSize(elem);
     updateDocumentFontSize();
+    tryIncreaseTtsSpeed(elem);
+    tryDecreaseTtsSpeed(elem);
+    tryResetTtsSpeed(elem);
   }
 
   function updateCheckboxes() {
@@ -146,7 +161,7 @@ import '../../style/icons.css';
     settingAddedFontSize.value = 0;
   }
 
-  function tryToggleBigCursor(elem) {
+  function tryToggleBigCursor() {
     const input = document.getElementById('setting-big-cursor');
     if (input === null) return;
 
@@ -157,6 +172,36 @@ import '../../style/icons.css';
       settingBigCursor.value = false;
     }
     updateCursorStyle();
+  }
+  
+  function tryIncreaseTtsSpeed(button) {
+    if (button === null || button.id !== 'setting-increase-tts-speed') return;
+
+    const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
+
+    settingAddedTtsSpeed.value += 0.1;
+    if (settingAddedTtsSpeed.value > 1) {
+      settingAddedTtsSpeed.value = 5;
+    }
+  }
+  
+  function tryDecreaseTtsSpeed(button) {
+    if (button === null || button.id !== 'setting-decrease-tts-speed') return;
+
+    const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
+
+    settingAddedTtsSpeed.value -= 0.1;
+    if (settingAddedTtsSpeed.value < -1) {
+      settingAddedTtsSpeed.value = -5;
+    }
+  }
+  
+  function tryResetTtsSpeed(button) {
+    if (button === null || button.id !== 'setting-reset-tts-speed') return;
+
+    const settingAddedTtsSpeed = getSetting('setting-added-tts-speed');
+
+    settingAddedTtsSpeed.value = 0;
   }
 
   function tryToggleContrastTheme() {
@@ -193,21 +238,18 @@ import '../../style/icons.css';
     const styleCursor = getComputedStyle(e.target).cursor;
     if (styleCursor === 'pointer') {
       cursorStyle = 'pointer';
-      console.log('pointer')
     }
     else if (
       e.target.lastChild &&
       e.target.lastChild.nodeName === '#text'
     ) {
       cursorStyle = 'text';
-      console.log('text')
     }
     updateCursorStyle();
   }
 
   function resetCursor() {
     cursorStyle = 'default';
-    console.log('default')
     updateCursorStyle();
   }
 
