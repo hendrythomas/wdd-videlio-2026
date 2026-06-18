@@ -155,7 +155,7 @@ main {
 /*Element met focus heet tijdelijk --focus-anchor*/
 button:focus-visible, a:focus-visible {
     anchor-name: --focus-anchor;
-    --focus-color: var(--highlight-color);
+    --focus-color: #972a20;
     outline: none;
 }
 
@@ -173,7 +173,7 @@ button:focus-visible, a:focus-visible {
     right:calc(anchor(right) - 0.5em);
     bottom:calc(anchor(bottom) - 0.5em);
 
-    border: 8px solid var(--focus-color, var(--logo-color));
+    border: 5px solid var(--focus-color, var(--logo-color));
     border-radius: 10px;
     pointer-events: none;
 
