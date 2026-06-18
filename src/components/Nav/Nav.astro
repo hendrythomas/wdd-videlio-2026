@@ -2,6 +2,7 @@
 import './nav.css';
 import Link from '../Link/Link.astro';
 import Search from '../AccessibilityOptions/SearchBar.astro';
+import AccessibilityOptions from '../AccessibilityOptions/AccessibilityOptions.astro';
 
 
 const currentPath = Astro.url.pathname;
@@ -11,6 +12,9 @@ const currentPath = Astro.url.pathname;
     <a class="logo" href="/" aria-label="Terug naar startpagina">
         <img src="../assets/images/branding/logo.png" alt="">
     </a>
+
+    <AccessibilityOptions />
+
     <label class="hamburger" aria-label="Open navigatie">
         <i class="material-icon" aria-hidden="true"></i>
         <input type="checkbox">
@@ -22,10 +26,6 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <Search />
-
-
-<!--Voor focus-indicator van anchor positioning-->
-	<!-- <div class="nav-focus-indicator"></div> -->
 
 <style>
     .navigation {
