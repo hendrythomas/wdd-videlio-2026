@@ -47,6 +47,14 @@ try {
 	console.warn("WordPress activiteiten niet bereikbaar");
 }
 
+//@TODO: Deze weghalen zodra het CMS weer werkt
+featuredActivity = {
+	image: '/assets/images/decoratie/meta-ray-ban.webp',
+	title: 'Meta Ray-Ban – Slimme bril demonstratie',
+	date: new Date(2026, 5, 18, 14),
+	type: 'Bijeenkomst',
+};
+
 const featuredDate = featuredActivity
 	? new Date(featuredActivity.date).toLocaleString("nl-NL", {
 			weekday: "long",
@@ -56,6 +64,7 @@ const featuredDate = featuredActivity
 			minute: "2-digit",
 		})
 	: null;
+
 ---
 
 <MainLayout pageTitle="Doe mee!" title="Doe mee!">
@@ -377,42 +386,56 @@ const featuredDate = featuredActivity
 	</section>
 
 	<div>
-		<h2 class="h2-home"><strong>Ontdek meer:</strong></h2>
+		<h2 class="h2-home"><strong>Doe mee!</strong></h2>
 
-			<section class="grid" aria-label="Uitgelichte activiteiten">
+			<section class="home grid" aria-label="Uitgelichte activiteiten">
 
-				<a href="/meedoen/gemeenschap" class="card-link" aria-label="Meer weten over het VIP Lab">
-				<article class="card">
-					<img class="article-image" src="/assets/images/decoratie/lumicane2.png"
-						alt="Man die s'nachts met een lichtgevende blindenstok loopt.">
-					<div class="card-content">
-						<h2 class="card-title">Gemeenschap</h2>
-						<p class="card-text">
-							[Update deze tekst] Innovatie door ervaringsdeskundigheid. In het VIP Lab werken we
-							aan slimme oplossingen die het leven met een visuele beperking
-							makkelijker en rijker maken.
-						</p>
-						<span class="card-btn" aria-hidden="true">Ontdek het lab</span>
-					</div>
-				</article>
+				<a href="/meedoen/gemeenschap" class="card-link" aria-label="Meer weten over onze gemeenschap">
+					<article class="card">
+						<img class="article-image" src="/assets/images/decoratie/loop-binnen.png"
+						     alt="">
+						<div class="card-content">
+							<h2 class="card-title">Gemeenschap</h2>
+							<p class="card-text">
+								Geen afspraak nodig. Kom langs voor een kopje koffie, een gesprek,
+								of gewoon om even bij andere VIPs te zijn. Je bent altijd welkom.
+							</p>
+							<span class="card-btn" aria-hidden="true">Meer over onze gemeenschap</span>
+						</div>
+					</article>
+				</a>
+
+				<a href="/viplab" class="card-link" aria-label="Meer weten over VIPLab">
+					<article class="card">
+						<img class="article-image" src="/assets/images/decoratie/lumicane2.png"
+						     alt="">
+						<div class="card-content">
+							<h2 class="card-title">VIPLab</h2>
+							<p class="card-text">
+								Innovatie door ervaringsdeskundigheid. In het VIP Lab werken we
+								aan slimme oplossingen die het leven met een visuele beperking
+								makkelijker en rijker maken.
+							</p>
+							<span class="card-btn" aria-hidden="true">Meer over VIPLab</span>
+						</div>
+					</article>
 				</a>
 
 				<a href="/meedoen/toegankelijkheid" class="card-link" aria-label="Meer informatie over inlopen bij Videlio">
 				<article class="card">
 					<img
 						class="article-image"
-						src="/assets/images/decoratie/loop-binnen.png"
+						src="/assets/images/decoratie/ov_knoop.jpg"
 						alt=""
 						aria-hidden="true"
 					/>
 					<div class="card-content">
 						<h2 class="card-title">Fysieke toegankelijkheid</h2>
 						<p class="card-text">
-							[Update deze tekst] Geen afspraak nodig. Kom langs voor een kopje koffie, een gesprek,
-							of gewoon om even bij andere VIPs te zijn. Je bent altijd welkom.
+							Fysieke toegankelijkheid in de praktijk. Artikelen en activiteiten voor iedereen.
 						</p>
 						<span class="card-btn" aria-hidden="true"
-							>Kom langs</span
+							>Meer over fysieke toegankelijkheid</span
 						>
 					</div>
 				</article>
@@ -422,7 +445,7 @@ const featuredDate = featuredActivity
 				<article class="card">
 					<img
 						class="article-image"
-						src="/assets/images/decoratie/viziere.webp"
+						src="/assets/images/decoratie/persoonlijke-groei.jpg"
 						alt=""
 						aria-hidden="true"
 						loading="lazy"
@@ -430,11 +453,10 @@ const featuredDate = featuredActivity
 					<div class="card-content">
 						<h2 class="card-title">Persoonlijke groei</h2>
 						<p class="card-text">
-							[Update deze tekst] Elke VIP heeft een verhaal. Ontdek hoe mensen met een visuele
-							beperking hun eigen weg vinden — in hun eigen woorden.
+							Elke VIP heeft een verhaal. Ontdek hoe persoonlijke groei binnen onze gemeenschap bloeit.
 						</p>
 						<span class="card-btn" aria-hidden="true"
-							>Bekijk verhalen</span
+							>Meer over persoonlijke groei</span
 						>
 					</div>
 				</article>
