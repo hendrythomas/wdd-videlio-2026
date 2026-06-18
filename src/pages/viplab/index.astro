@@ -2,10 +2,51 @@
 import ReadAloudButton from '../../components/AccessibilityOptions/ReadAloudButton.astro';
 import ProgressiveDisclosure from '../../components/ProgressiveDisclosure/ProgressiveDisclosure.astro';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.astro';
+import InnovatieCard from '../../components/Innovatie-li/Innovatie-li.astro';
+import ViewToggle from '../../components/Innovatie-li/view-toggle.astro';
 import MainLayout from '../../layouts/MainLayout.astro';
+import { decodeHtml, stripHtml } from '../../utils/decodeHtml';
 import './viplab.css';
+
+
+interface Innovatie {
+  id: string;
+  slug: string;
+  type: string;
+  title: string;
+  summary: string;
+  image: string;
+  imageAlt: string;
+  tags: string[];
+  date: string;
+  detailPath: string;
+}
+
+let innovaties: Innovatie[] = [];
+
+try {
+  const res = await fetch('http://dev1.videlio.nl/wp-json/wp/v2/posts?per_page=100&_embed=true&categories=21');
+  // categories=21 is de VIPLab categorie-id
+  const wpPosts = await res.json();
+
+  innovaties = wpPosts.map((post: any) => ({
+    id: String(post.id),
+    slug: post.slug,
+    type: 'innovatie',
+    title: decodeHtml(post.title.rendered),
+    summary: stripHtml(post.excerpt.rendered),
+    date: post.date,
+    image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? '',
+    imageAlt: decodeHtml(post.title.rendered),
+    tags: post._embedded?.['wp:term']?.flat().map((t: any) => t.name) ?? [],
+    detailPath: `/innovaties/${post.slug}`,
+  }));
+} catch (e) {
+  console.warn('WordPress niet bereikbaar', e);
+}
 ---
-<MainLayout pageTitle="VIPLab">
+
+<MainLayout title="VIPLab" backHref="/">
   <section class="intro">
     <h1>VIPLab</h1>
     <p>
@@ -31,13 +72,14 @@ import './viplab.css';
       </ProgressiveDisclosure>
     </ProgressiveDisclosure>
   </section>
+
   <section class="grid">
-    <img src="../assets/images/decoratie/viplab.webp" alt="Afbeelding van mensen die op tafel een oplossing ontwerpen" loading="lazy">
+    <img src="../assets/images/decoratie/viplab.webp" alt="" loading="lazy">
     <div>
       <h2>Breng je uitdaging in</h2>
       <p>
         VIPs brengen een uitdaging in.
-        Bijvoorbeeld: “Met hond, stok en tas kom ik handen tekort bij het inchecken.”
+        Bijvoorbeeld: "Met hond, stok en tas kom ik handen tekort bij het inchecken."
       </p>
       <p>
         Videlio zoekt dan mensen die hierbij kunnen helpen.
@@ -46,36 +88,51 @@ import './viplab.css';
       <ButtonLink href="#workshops">Ik wil meebouwen</ButtonLink>
     </div>
   </section>
-  <section>
-    <h2>Oplossingen gemaakt door andere VIPs</h2>
-    <div class="carrousel">
-      <div class="carrousel-item">
-        <h3>LumiCane</h3>
-        <p>
-          Een lichtgevende blindenstok ontworpen om VIPs beter zichtbaar en herkenbaar te maken. 
-          <a href="../innovaties/lumicane">Meer lezen over LumiCane</a></p>
-      </div>
-      <div class="carrousel-item">
-        <h3>VibeCap</h3>
-        <p>
-          Een pet die trilt vóórdat je tegen een lantaarnpaal loopt.
-        </p>
-      </div>
-      <div class="carrousel-item">
-        <p>
-          Een handige pasjeshouder voor op je taststok, omdat je met een hond, stok, tas of OV-poortje ineens handen tekortkomt.
-        </p>
-      </div>
-      <div class="carrousel-item">
-        <p>
-          Een balansgewichtje tegen een armverkramping bij het gebruik van een taststok.
-        </p>
-      </div>
+
+  <section class="viplab-innovaties-section">
+    <div class="viplab-innovaties-header">
+      <h2>Innovaties</h2>
+      <ViewToggle />
     </div>
+
+    {innovaties.length > 0 ? (
+      <ul class="innovaties-grid" id="viplab-innovaties-grid" data-view="grid" aria-label="Oplossingen gemaakt door VIPs">
+        {innovaties.map(item => (
+          <li>
+            <InnovatieCard item={item} view="grid" />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty-state">Er zijn nog geen innovaties beschikbaar.</p>
+    )}
   </section>
+
   <section>
     <h2 id="workshops">VIPLab-workshops</h2>
     <p>Insert workshops</p>
     <ButtonLink href="../Agenda">Alle workshops bekijken</ButtonLink>
   </section>
 </MainLayout>
+
+<script>
+  const grid = document.getElementById('viplab-innovaties-grid');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.view-toggle-btn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view as 'grid' | 'list';
+
+      grid?.setAttribute('data-view', view);
+
+      grid?.querySelectorAll<HTMLElement>('.innovatie-card').forEach(card => {
+        card.className = `innovatie-card innovatie-card--${view}`;
+      });
+
+      buttons.forEach(b => {
+        b.classList.toggle('view-toggle-btn--active', b === btn);
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+    });
+  });
+</script>

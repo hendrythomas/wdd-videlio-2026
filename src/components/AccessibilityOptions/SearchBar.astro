@@ -1,258 +1,238 @@
 ---
-
 ---
 
-<div class="search-wrapper" role="search" aria-label="Zoek op de website">
-  <div id="search-input-wrap" style="position: relative; flex: 1; display: flex; align-items: center;">
-    <span class="search-icon" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-    </span>
-    <label for="search-input" class="sr-only">Zoekterm</label>
-    <input
-      type="search"
-      id="search-input"
-      class="search-input"
-      aria-label="Zoek op de website"
-      aria-controls="search-results"
-      aria-autocomplete="list"
-      autocomplete="off"
-    />
+<button
+  id="search-trigger"
+  class="search-trigger"
+  aria-label="Open zoeken"
+  aria-haspopup="dialog">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+  </svg>
+  <span>Zoek op de website</span>
+</button>
+
+<div
+  id="search-dialog"
+  class="search-dialog"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Zoek op de website"
+  hidden>
+
+  <div class="search-focus-rect" id="search-focus-rect" aria-hidden="true"></div>
+  <div class="search-dialog-inner">
+    <div class="search-dialog-header">
+      <label for="search-input" class="sr-only">Zoekterm</label>
+      <span class="search-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <input
+        type="search"
+        id="search-input"
+        class="search-input"
+        placeholder="Zoeken op de website..."
+        aria-autocomplete="list"
+        aria-controls="search-results"
+        autocomplete="off"
+      />
+      <button id="search-close" class="search-close" aria-label="Sluit zoeken">
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
+
+    <!-- Onzichtbare live region voor screenreader-aankondigingen -->
+    <div id="search-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <ul
+      id="search-results"
+      class="search-results"
+      role="listbox"
+      aria-label="Zoekresultaten">
+    </ul>
   </div>
-  <ul
-    id="search-results"
-    class="search-results"
-    role="listbox"
-    aria-label="Zoekresultaten"
-    aria-live="polite"
-    hidden
-  ></ul>
 </div>
 
 <script>
-    async function initSearch() {
-        try {
-            // Dynamische import — Vite probeert dit niet te resolven tijdens dev
-            const pagefind = await new Function('return import("/pagefind/pagefind.js")')();
-            await pagefind.init();
+  async function initSearch() {
+    const trigger = document.getElementById('search-trigger') as HTMLButtonElement;
+    const dialog = document.getElementById('search-dialog') as HTMLDivElement;
+    const closeBtn = document.getElementById('search-close') as HTMLButtonElement;
+    const input = document.getElementById('search-input') as HTMLInputElement;
+    const results = document.getElementById('search-results') as HTMLUListElement;
+    const status = document.getElementById('search-status') as HTMLDivElement;
 
-            const input = document.getElementById(
-                "search-input",
-            ) as HTMLInputElement;
-            const results = document.getElementById(
-                "search-results",
-            ) as HTMLUListElement;
+    let pagefind: any = null;
+    let debounceTimer: ReturnType<typeof setTimeout>;
+    let lastResults: any[] = [];
 
-            // Verplaats dropdown naar body zodat overflow van nav hem niet afknipt
-            document.body.appendChild(results);
-
-            function positionResults() {
-                const rect = input.getBoundingClientRect();
-                results.style.top = rect.bottom + 8 + "px";
-                results.style.left = rect.left + "px";
-                results.style.width = rect.width + "px";
-            }
-
-            input.addEventListener("input", async () => {
-                const query = input.value.trim();
-
-                if (!query) {
-                    results.hidden = true;
-                    results.innerHTML = "";
-                    return;
-                }
-
-                const search = await pagefind.search(query);
-                const data = await Promise.all(
-                    search.results.slice(0, 6).map((r: any) => r.data()),
-                );
-
-                if (data.length === 0) {
-                    results.innerHTML = `<li class="search-no-results" role="option">Geen resultaten voor "${query}"</li>`;
-                    positionResults();
-                    results.hidden = false;
-                    return;
-                }
-
-                results.innerHTML = data
-                    .map(
-                        (item: any) => `
-        <li role="option">
-          <a class="search-result-link" href="${item.url}">
-            <span class="search-result-title">${item.meta.title ?? 'Pagina'}</span>
-          </a>
-        </li>
-      `,
-                    )
-                    .join("");
-
-                positionResults();
-                results.hidden = false;
-            });
-
-            window.addEventListener("scroll", () => { if (!results.hidden) positionResults(); });
-            window.addEventListener("resize", () => { if (!results.hidden) positionResults(); });
-
-            document.addEventListener("click", (e) => {
-                if (!results.contains(e.target as Node) && e.target !== input) {
-                    results.hidden = true;
-                }
-            });
-
-            input.addEventListener("keydown", (e) => {
-                if (e.key === "Escape") {
-                    results.hidden = true;
-                    input.value = "";
-                    return;
-                }
-
-                if (e.key === "ArrowDown") {
-                    e.preventDefault();
-                    const links = results.querySelectorAll(".search-result-link");
-                    if (links.length > 0) {
-                        (links[0] as HTMLAnchorElement).focus();
-                    }
-                    return;
-                }
-            });
-
-            results.addEventListener("keydown", (e) => {
-                const links = Array.from(results.querySelectorAll(".search-result-link"));
-                const current = document.activeElement;
-                const index = links.indexOf(current as HTMLAnchorElement);
-
-                if (e.key === "ArrowDown") {
-                    e.preventDefault();
-                    const next = links[index + 1] as HTMLAnchorElement;
-                    if (next) next.focus();
-                }
-
-                if (e.key === "ArrowUp") {
-                    e.preventDefault();
-                    if (index === 0) {
-                        input.focus();
-                    } else {
-                        const prev = links[index - 1] as HTMLAnchorElement;
-                        if (prev) prev.focus();
-                    }
-                }
-
-                if (e.key === "Escape") {
-                    results.hidden = true;
-                    input.value = "";
-                    input.focus();
-                }
-            });
-        } catch {
-            // Pagefind nog niet beschikbaar — alleen na npm run build
-            console.info("Zoekfunctie niet beschikbaar in dev mode.");
-        }
+    try {
+      pagefind = await new Function('return import("/pagefind/pagefind.js")')();
+      await pagefind.init();
+    } catch {
+      console.info('Zoekfunctie niet beschikbaar in dev mode.');
     }
 
-    initSearch();
+    // --- Dialog openen/sluiten ---
+    function openDialog() {
+      dialog.hidden = false;
+      document.body.style.overflow = 'hidden';
+      input.value = '';
+      results.innerHTML = '';
+      status.textContent = '';
+
+      requestAnimationFrame(() => {
+        const dialogRect = dialog.querySelector('.search-dialog-inner')!.getBoundingClientRect();
+        const focusRect = document.getElementById('search-focus-rect')!;
+
+        focusRect.style.setProperty('--dialog-top',    `${dialogRect.top}px`);
+        focusRect.style.setProperty('--dialog-left',   `${dialogRect.left}px`);
+        focusRect.style.setProperty('--dialog-width',  `${dialogRect.width}px`);
+        focusRect.style.setProperty('--dialog-height', `${dialogRect.height}px`);
+
+        focusRect.classList.remove('animating');
+        void (focusRect as HTMLElement).offsetWidth;
+        focusRect.classList.add('animating');
+      });
+
+      input.focus();
+    }
+
+    function closeDialog() {
+      dialog.hidden = true;
+      document.body.style.overflow = '';
+      trigger.focus();
+    }
+
+    // Capture-fase: vangt Escape altijd, ook als focus in de results-lijst zit
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !dialog.hidden) {
+        e.stopPropagation();
+        closeDialog();
+      }
+    }, true);
+
+    // Focus trap: Tab cyclet binnen de open dialog
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key !== 'Tab' || dialog.hidden) return;
+
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'input, button, a[href], [tabindex]:not([tabindex="-1"])'
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }, true);
+
+    trigger.addEventListener('click', openDialog);
+    closeBtn.addEventListener('click', closeDialog);
+
+    // Klik buiten de dialog-inner sluit hem
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) closeDialog();
+    });
+
+    // --- Zoekresultaten renderen ---
+    async function runSearch(query: string, announce: boolean) {
+      if (!pagefind || !query) {
+        results.innerHTML = '';
+        lastResults = [];
+        if (announce) status.textContent = 'Voer een zoekterm in.';
+        return;
+      }
+
+      const search = await pagefind.search(query);
+      const data = await Promise.all(
+        search.results.slice(0, 8).map((r: any) => r.data())
+      );
+
+      lastResults = data;
+
+      if (data.length === 0) {
+        results.innerHTML = `<li class="search-no-results" role="option">Geen resultaten voor "${query}"</li>`;
+        if (announce) status.textContent = `Geen resultaten gevonden voor ${query}.`;
+        return;
+      }
+
+      results.innerHTML = data.map((item: any, i: number) => `
+        <li role="option" id="search-option-${i}" tabindex="-1">
+          <a class="search-result-link" href="${item.url}">
+            <span class="search-result-title">${item.meta.title}</span>
+          </a>
+        </li>
+      `).join('');
+
+      if (announce) {
+        status.textContent = `${data.length} resultaat${data.length === 1 ? '' : 'en'} gevonden. Gebruik de pijltjestoetsen omlaag en omhoog om te navigeren.`;
+      }
+    }
+
+    // --- Typen: debounce 1 sec, dan pas aankondigen ---
+    input.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      const query = input.value.trim();
+
+      debounceTimer = setTimeout(() => {
+        runSearch(query, true); // na 1 sec stilte: wel aankondigen
+      }, 1000);
+    });
+
+    // --- Enter: direct zoeken/aankondigen, of navigeren als er al een resultaat focus heeft ---
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        clearTimeout(debounceTimer);
+        const query = input.value.trim();
+
+        if (lastResults.length > 0) {
+          // Ga direct naar het eerste/beste resultaat
+          window.location.href = lastResults[0].url;
+        } else {
+          // Nog geen resultaten geladen — zoek nu direct en lees voor
+          runSearch(query, true);
+        }
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const first = results.querySelector('.search-result-link') as HTMLAnchorElement;
+        first?.focus();
+      }
+    });
+
+    // Navigatie binnen de resultatenlijst
+    results.addEventListener('keydown', (e) => {
+      const links = Array.from(results.querySelectorAll('.search-result-link')) as HTMLAnchorElement[];
+      const currentIndex = links.indexOf(document.activeElement as HTMLAnchorElement);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        links[currentIndex + 1]?.focus();
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (currentIndex === 0) {
+          input.focus();
+        } else {
+          links[currentIndex - 1]?.focus();
+        }
+      }
+    });
+  }
+
+  initSearch();
 </script>
 
 <style>
-  .search-wrapper {
-    position: relative;
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 0.85rem;
-    color: var(--highlight-color);
-    font-size: 1.1rem;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 0.55rem 1.2rem 0.55rem 2.6rem;
-    margin-right: 0.5rem;
-    background: rgba(250, 234, 7, 0.08);
-    border: 1.5px solid rgba(250, 234, 7, 0.5);
-    border-radius: 10px;
-    color: var(--primary-color);
-    font-family: var(--primary-font), sans-serif;
-    font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .search-input:focus {
-    outline: 3px solid var(--highlight-color);
-    outline-offset: 2px;
-    border-color: var(--highlight-color);
-    background: rgba(250, 234, 7, 0.14);
-    box-shadow: 0 0 0 3px rgba(250, 234, 7, 0.2);
-  }
-
-  .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-    font-style: italic;
-  }
-
-  .search-results {
-    position: fixed;
-    background: #1c2330;
-    border: 1px solid rgba(250, 234, 7, 0.25);
-    border-radius: 12px;
-    list-style: none;
-    padding: 0.5rem;
-    margin: 0;
-    z-index: 9999;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .search-results[hidden] {
-    display: none;
-  }
-
-  .search-results li + li {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    padding-top: 0.25rem;
-  }
-
-  .search-result-link {
-    display: block;
-    padding: 0.6rem 1rem;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background 0.15s ease;
-  }
-
-  .search-result-link:hover,
-  .search-result-link:focus-visible {
-    background: rgba(250, 234, 7, 0.08);
-    outline: 2px solid var(--highlight-color);
-    outline-offset: 2px;
-  }
-
-  .search-result-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--highlight-color);
-    line-height: 1.3;
-    display: block;
-  }
-
-  .search-no-results {
-    padding: 1rem;
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 0.9rem;
-    font-style: italic;
-    text-align: center;
-  }
-
   .sr-only {
     position: absolute;
     width: 1px;
@@ -263,5 +243,199 @@
     clip: rect(0 0 0 0);
     white-space: nowrap;
     border: 0;
+  }
+
+  /* --- Trigger knop in de nav --- */
+  .search-trigger {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    background: rgba(250, 234, 7, 0.08);
+    border: 1.5px solid rgba(250, 234, 7, 0.5);
+    border-radius: 10px;
+    color: var(--primary-color);
+    font-family: var(--primary-font), sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .search-trigger span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  .search-trigger:hover,
+  .search-trigger:focus-visible {
+    border-color: var(--highlight-color);
+    background: rgba(250, 234, 7, 0.14);
+    outline: 3px solid var(--highlight-color);
+    outline-offset: 2px;
+  }
+
+  .search-trigger svg {
+    color: var(--highlight-color);
+    flex-shrink: 0;
+  }
+
+  /* --- Dialog overlay --- */
+  .search-dialog[hidden] {
+    display: none !important;
+  }
+
+  .search-dialog {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 8vh;
+  }
+
+  .search-dialog-inner {
+    width: 90%;
+    max-width: 600px;
+    background: #1c2330;
+    border: 1px solid rgba(250, 234, 7, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  .search-dialog-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(250, 234, 7, 0.15);
+  }
+
+  .search-icon {
+    color: var(--highlight-color);
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-family: var(--primary-font), sans-serif;
+    font-size: 1.1rem;
+    outline: none;
+  }
+
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .search-close {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .search-close:hover,
+  .search-close:focus-visible {
+    background: rgba(250, 234, 7, 0.12);
+    color: var(--highlight-color);
+    outline: 2px solid var(--highlight-color);
+  }
+
+  /* --- Resultatenlijst --- */
+  .search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0.85rem;
+    max-height: 50vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .search-results li + li {
+    border-top: 1px solid rgba(250, 234, 7, 0.15);
+    padding-top: 0.6rem;
+  }
+
+  .search-result-link {
+    display: block;
+    padding: 1.1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .search-result-link:hover,
+  .search-result-link:focus {
+    background: rgba(250, 234, 7, 0.1);
+    border-color: rgba(250, 234, 7, 0.3);
+    outline: 2px solid var(--highlight-color);
+    outline-offset: -2px;
+  }
+
+  .search-result-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--highlight-color);
+  }
+
+  .search-no-results {
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* --- Focus-rechthoek animatie bij openen --- */
+  .search-focus-rect {
+    position: fixed;
+    border: 6px solid var(--highlight-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+  }
+
+  .search-focus-rect.animating {
+    animation: shrinkToDialog 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes shrinkToDialog {
+    0% {
+      top: 8px;
+      left: 8px;
+      width: calc(100vw - 16px);
+      height: calc(100vh - 16px);
+      border-radius: 4px;
+      opacity: 1;
+    }
+    100% {
+      top: var(--dialog-top);
+      left: var(--dialog-left);
+      width: var(--dialog-width);
+      height: var(--dialog-height);
+      border-radius: 16px;
+      opacity: 0;
+    }
   }
 </style>

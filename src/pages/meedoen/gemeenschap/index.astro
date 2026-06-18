@@ -1,18 +1,87 @@
 ---
-import ReadAloudButton from '../../../components/AccessibilityOptions/ReadAloudButton.astro';
-import ButtonLink from '../../../components/ButtonLink/ButtonLink.astro';
-import MainLayout from '../../../layouts/MainLayout.astro';
 import './gemeenschap.css';
+import MainLayout from "../../../layouts/MainLayout.astro";
+import indexCSS from "../../style/index.css";
+import ProgressiveDisclosure from '../../../components/ProgressiveDisclosure/ProgressiveDisclosure.astro';
 ---
-<MainLayout pageTitle="Gemeenschap" backHref="/meedoen">
-  <section class="intro">
-    <h1>Videlio Community</h1>
-    <p>
-      [Vervang dit] VIPLab is de maakplek van Videlio.
-      Samen met makers bouw je hier aan nieuwe hulpmiddelen en oplossingen.
-    </p>
-  </section>
-  <section>
-    <h2>WhatsApp-groep</h2>
-  </section>
+<MainLayout pageTitle="Media" backHref="/" title="Gemeenschap">
+    <section class="intro">
+        <h1>Gemeenschap</h1>
+    </section>
+    <section id="videlio-community-sectie">
+        <h2>Videlio Community</h2>
+        <p>Bij onze WhatsApp-groep kun je terecht kunt met vragen en up-to-date blijven met de gemeenschap.</p>
+        <ProgressiveDisclosure title="Deelnemen." id="whatsapp">
+            <div class="qr-grid">
+                <div>
+                    <p>Deelnemen aan Videlio Community kan via <a href="https://chat.whatsapp.com/Kh0CQyKf791ArJWTgs7qAd">deze link</a>.</p>
+                    <p>Je kunt ook met je telefoon de QR-code aan de linkerkant scannen.</p>
+                </div>
+                <img src="/assets/images/qr-codes/videlio-community-whatsapp.webp" alt="Videlio Community QR-code" loading="lazy">
+            </div>
+        </ProgressiveDisclosure>
+    </section>
+    <section>
+        <h2>Media en verhalen</h2>
+        <div class="grid-projects">
+            <article class="project-card">
+                <a href="/Verhalen-Media/Verhalen" class="project-card-link" aria-label="Lees of beluister verhalen van mede-VIPs">
+                    <div class="project-card-img-wrap">
+                        <img src="/assets/images/decoratie/verhalenVIPS.png" alt="">
+                    </div>
+                    <div class="info-projects">
+                        <h2>Verhalen van VIPs</h2>
+                        <p>Mensen met een visuele beperking die midden in het leven staan. In hun eigen woorden.</p>
+                        <span class="info-projects-cta" aria-hidden="true">Bekijk alle verhalen van VIPS</span>
+                    </div>
+                </a>
+            </article>
+
+            <article class="project-card">
+                <a href="/Verhalen-Media/Podcasts" class="project-card-link" aria-label="Beluister podcasts van mede-VIPs">
+                    <div class="project-card-img-wrap">
+                        <img src="/assets/images/decoratie/podcast.png" alt="">
+                    </div>
+                    <div class="info-projects">
+                        <h2>Podcasts</h2>
+                        <p>Luister naar VIPs die vertellen hoe zij de wereld ervaren.</p>
+
+                        <span class="info-projects-cta" aria-hidden="true">Bekijk alle podcasts</span>
+                    </div>
+                </a>
+            </article>
+
+            <article class="project-card">
+                <a href="/Verhalen-Media/Radio" class="project-card-link" aria-label="Beluister uitgelichte radio uitzendingen van VIPS">
+                    <div class="project-card-img-wrap">
+                        <img src="/assets/images/decoratie/rararadio.png" alt="">
+                    </div>
+                    <div class="info-projects">
+                        <h2>Radio</h2>
+                        <p>Luister terug naar radio-uitzendingen van en voor mensen met een visuele beperking.</p>
+                        <span class="info-projects-cta" aria-hidden="true">Beluister radio uitzendingen</span>
+                    </div>
+                </a>
+            </article>
+        </div>
+    </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const expandTarget = params.get('expand');
+
+    if (expandTarget) {
+      const details = document.getElementById(expandTarget) as HTMLDetailsElement | null;
+
+      if (details) {
+        details.open = true;
+
+        setTimeout(() => {
+          details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  });
+</script>
 </MainLayout>

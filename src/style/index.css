@@ -67,7 +67,6 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background-color: var(--background);
 }
 
@@ -119,6 +118,7 @@ main {
     width: 80dvw;
     margin: auto;
     height: auto;
+    margin-block-end: 5em;
 
     @media (max-width: 768px) {
         width: 90dvw;
@@ -153,27 +153,26 @@ main {
 }
 
 /*Element met focus heet tijdelijk --focus-anchor*/
-.button:focus-visible, a:focus-visible {
+button:focus-visible, a:focus-visible {
     anchor-name: --focus-anchor;
+    --focus-color: var(--highlight-color);
+    outline: none;
 }
 
 /*Beweegt indicator naar volgend element met tab*/
 .focus-indicator {
     position: fixed;
     position-anchor: --focus-anchor;
+    z-index: 1000;
 
-    left: anchor(left);
-    top: anchor(top);
-    width: anchor-size(width);
-    height: anchor-size(height);
+    left: calc(anchor(left) - 0.5em);
+    top: calc(anchor(top) - 0.5em);
+    right:calc(anchor(right) - 0.5em);
+    bottom:calc(anchor(bottom) - 0.5em);
 
-    border: 3px solid var(--highlight-color);
+    border: 3px solid var(--focus-color, var(--highlight-color));
     border-radius: 10px;
     pointer-events: none;
 
-    transition:
-        left 0.3s ease,
-        top 0.3s ease,
-        width 0.3s ease,
-        height 0.3s ease;
+    transition: .5s;
 }

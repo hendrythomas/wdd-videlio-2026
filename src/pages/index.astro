@@ -60,7 +60,7 @@ const featuredDate = featuredActivity
 
 <MainLayout pageTitle="Doe mee!" title="Doe mee!">
 	<!--Voor focus-indicator van anchor positioning-->
-	<div class="focus-indicator"></div>
+	<!-- <div class="focus-indicator"></div> -->
 
 	<section class="hero">
 		<h1 class="page-title"><strong>Samen</strong> anders zien</h1>
@@ -364,7 +364,7 @@ const featuredDate = featuredActivity
 							)
 						}
 					</div>
-					<span class="card-btn" aria-hidden="true">
+					<span class="card-btn" id="featured-card-btn" aria-hidden="true">
 						{
 							featuredActivity
 								? "Bekijk activiteit"
@@ -381,7 +381,7 @@ const featuredDate = featuredActivity
 
 			<section class="grid" aria-label="Uitgelichte activiteiten">
 
-				<a href="/meedoen#gemeenschap" class="card-link" aria-label="Meer weten over het VIP Lab">
+				<a href="/meedoen/gemeenschap" class="card-link" aria-label="Meer weten over het VIP Lab">
 				<article class="card">
 					<img class="article-image" src="/assets/images/decoratie/lumicane2.png"
 						alt="Man die s'nachts met een lichtgevende blindenstok loopt.">
@@ -397,7 +397,7 @@ const featuredDate = featuredActivity
 				</article>
 				</a>
 
-				<a href="/meedoen#toegankelijkheid" class="card-link" aria-label="Meer informatie over inlopen bij Videlio">
+				<a href="/meedoen/toegankelijkheid" class="card-link" aria-label="Meer informatie over inlopen bij Videlio">
 				<article class="card">
 					<img
 						class="article-image"
@@ -418,13 +418,14 @@ const featuredDate = featuredActivity
 				</article>
 				</a>
 
-				<a href="/meedoen#groei" class="card-link" aria-label="Lees en beluister verhalen van VIPs">
+				<a href="/meedoen/groei" class="card-link" aria-label="Lees en beluister verhalen van VIPs">
 				<article class="card">
 					<img
 						class="article-image"
-						src="/assets/images/decoratie/viziere.jpg"
+						src="/assets/images/decoratie/viziere.webp"
 						alt=""
 						aria-hidden="true"
+						loading="lazy"
 					/>
 					<div class="card-content">
 						<h2 class="card-title">Persoonlijke groei</h2>

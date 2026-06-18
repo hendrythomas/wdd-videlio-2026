@@ -9,7 +9,7 @@ body > header {
     left: 0;
     top:  0;
     width: 100%;
-    padding: 2rem;
+    padding: 0.5rem;
     background-color: var(--background);
     z-index: 2;
     transition: box-shadow 0.1s ease;
