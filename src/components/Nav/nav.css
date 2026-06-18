@@ -92,13 +92,24 @@ body > header > nav > .mobile-menu {
     flex-shrink: 0;
     margin-right: 4rem;
   }
+
+  > .search-trigger {
+    flex: 1 1 auto;
+    width: auto;
+  }
 }
 body:has(> header)::before {
   content: '';
   margin-top: calc(var(--nav-height) + var(--access-button-height));
 }
 
-/* mobile menu */
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Mobile menu + grid nav layout */
 @media (max-width: 1000px) {
   body > header > nav,
   body > header > nav > .mobile-menu {
@@ -135,25 +146,8 @@ body:has(> header)::before {
       left: 0;
     }
   }
-}
 
-.navigation {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-/* Zoekbalk rechts gedrukt via margin-left: auto */
-.navigation .search-wrapper {
-  overflow: visible;
-  position: relative;
-  margin-left: auto;
-  max-width: 500px;
-  width: 100%;
-}
-
-/* Mobiel: logo | zoekbalk | hamburger */
-@media (max-width: 1000px) {
+  /* Logo | zoekknop | hamburger */
   .navigation {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -161,9 +155,8 @@ body:has(> header)::before {
     gap: 1rem;
   }
 
-  /* Volgorde: 1 logo, 2 zoekbalk, 3 hamburger, 4 mobile-menu */
-  .logo           { order: 1; }
-  .search-wrapper { order: 2; margin-left: 0; }
-  .hamburger      { order: 3; }
-  .mobile-menu    { order: 4; }
+  .logo            { order: 1; }
+  .search-trigger  { order: 2; margin-left: 0 !important; max-width: none; position: static !important; }
+  .hamburger       { order: 3; }
+  .mobile-menu     { order: 4; }
 }

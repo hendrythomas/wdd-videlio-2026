@@ -9,10 +9,6 @@ p:not(:first-child) {
   margin-top: 1rem;
 }
 
-html {
-  scrollbar-color: #ffffff80 transparent;
-}
-
 main {
   &>section {
     &>p {
@@ -86,7 +82,7 @@ main {
 /* --- Grid sectie  */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   align-items: stretch;
   border-top: solid var(--highlight-color) 2px;
@@ -104,7 +100,6 @@ main {
   overflow: visible;
   height: 100%;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-
   cursor: pointer;
 }
 
@@ -142,7 +137,7 @@ main {
 
 .article-image {
   width: 100%;
-  height: 10rem;
+  height: 15rem;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -398,4 +393,31 @@ svg.article-image {
   .grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* --- Hero titel --- */
+.page-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.brand-name {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  color: var(--highlight-color);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.tagline {
+  font-size: clamp(1.5rem, 2.5vw, 2.6rem);
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+.tagline strong {
+  font-weight: 700;
+  color: var(--highlight-color);
 }

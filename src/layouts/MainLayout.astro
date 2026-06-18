@@ -3,10 +3,11 @@ import Header from '../components/Header/Header.astro';
 import Footer from '../components/Footer/Footer.astro';
 import ButtonLink from '../components/ButtonLink/ButtonLink.astro';
 
-const { title, backHref } = Astro.props;
+const { title, backHref, backLabel } = Astro.props;
 
 import '../style/index.css';
 import './mainLayout.css';
+import BigCursor from '../components/BigCursor/BigCursor.astro';
 ---
 
 <html lang="nl">
@@ -32,11 +33,17 @@ import './mainLayout.css';
     <Header />
 
     <main data-pagefind-ignore>
-        { backHref && <ButtonLink linkClass="main-layout-back-button" href={backHref}>← Terug</ButtonLink> }
+        { backHref && (
+            <ButtonLink linkClass="main-layout-back-button" href={backHref}>
+                ← Terug{backLabel ? ` naar ${backLabel}` : ''}
+            </ButtonLink>
+        )}
         <slot />
     </main>
 
     <Footer />
+
+    <BigCursor/>
 </body>
 
 </html>

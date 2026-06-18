@@ -1,0 +1,25 @@
+#big-cursor {
+  --path-default: url('/assets/cursors/default.webp');
+  --path-pointer: url('/assets/cursors/pointer.webp');
+  --path-text: url('/assets/cursors/text.webp');
+  position: fixed;
+  left: 0;
+  top:  0;
+  width:  75px;
+  height: 75px;
+  background-image: var(--path-default);
+  background-size: 100%;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+html[big-cursor] #big-cursor {
+  opacity: 1;
+}
+html[big-cursor='text'] #big-cursor {
+  background-image: var(--path-text);
+}
+html[big-cursor='pointer'] #big-cursor {
+  background-image: var(--path-pointer);
+}

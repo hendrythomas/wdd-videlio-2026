@@ -47,14 +47,27 @@ const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
   year: 'numeric',
   month: 'long',
 });
+
+const slugToSection: Record<string, { href: string; label: string }> = {
+  'fysieke-toegankelijkheid': { href: '/meedoen/toegankelijkheid', label: 'Fysieke toegankelijkheid' },
+  'persoonlijke-groei':       { href: '/meedoen/groei',            label: 'Persoonlijke groei' },
+  'viplab':                   { href: '/viplab',                   label: 'VIPLab' },
+  'community':                { href: '/meedoen/gemeenschap',      label: 'Videlio Community' },
+};
+
+const categories = isWp ? (rawItem._embedded?.['wp:term']?.[0] ?? []) : [];
+
+let backHref  = '/innovaties';
+let backLabel = 'Innovaties';
+
+for (const cat of categories) {
+  const match = slugToSection[cat.slug];
+  if (match) { backHref = match.href; backLabel = match.label; break; }
+}
 ---
 
-<MainLayout title={item.title}>
+<MainLayout title={item.title} backHref={backHref} backLabel={backLabel}>
   <article class="detail-page">
-
-    <div class="detail-back-wrap">
-      <a href="/innovaties" class="detail-back">← Terug naar overzicht</a>
-    </div>
 
     <div class="detail-hero">
       <div class="detail-hero-meta">
@@ -94,31 +107,6 @@ const formattedDate = new Date(item.date).toLocaleDateString('nl-NL', {
     margin: 0 auto;
     padding: 3rem 1.5rem 6rem;
     font-family: var(--primary-font), sans-serif;
-  }
-
-  /* --- Terug link  */
-  .detail-back-wrap {
-    margin-bottom: 2.5rem;
-  }
-
-  .detail-back {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--highlight-color);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: 1px solid rgba(250, 234, 7, 0.35);
-    border-radius: 999px;
-    padding: 0.45rem 1.1rem;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-
-  .detail-back:hover,
-  .detail-back:focus-visible {
-    background: var(--highlight-color);
-    color: #1a1e24;
   }
 
   /* --- Hero grid: afbeelding links, tekst rechts  */

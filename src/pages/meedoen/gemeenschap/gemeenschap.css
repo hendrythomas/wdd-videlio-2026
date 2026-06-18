@@ -50,13 +50,19 @@ main .qr-grid {
   grid-auto-flow: dense;
   column-gap: 2rem;
 
+  @media (max-width: 800px) {
+    display: block;
+  }
+
   div {
     grid-column: 2;
+    margin-top: 1rem;
   }
 
   img {
     grid-column: 1;
     width: 400px;
+    margin-top: 1rem;
     box-shadow: 0 2px 8px 0 #00000040;
   }
 }
