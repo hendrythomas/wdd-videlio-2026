@@ -147,6 +147,16 @@ import '../../style/icons.css';
   }
 
   function tryToggleBigCursor(elem) {
+    const input = document.getElementById('setting-big-cursor');
+    if (input === null) return;
+
+    const settingBigCursor = getSetting('setting-big-cursor');
+    if (input.checked) {
+      settingBigCursor.value = true;
+    } else {
+      settingBigCursor.value = false;
+    }
+    updateCursorStyle();
   }
 
   function tryToggleContrastTheme() {
@@ -179,6 +189,47 @@ import '../../style/icons.css';
     }
   }
 
+  function setCursor(e) {
+    const styleCursor = getComputedStyle(e.target).cursor;
+    if (styleCursor === 'pointer') {
+      cursorStyle = 'pointer';
+      console.log('pointer')
+    }
+    else if (
+      e.target.lastChild &&
+      e.target.lastChild.nodeName === '#text'
+    ) {
+      cursorStyle = 'text';
+      console.log('text')
+    }
+    updateCursorStyle();
+  }
+
+  function resetCursor() {
+    cursorStyle = 'default';
+    console.log('default')
+    updateCursorStyle();
+  }
+
+  function updateCursorStyle() {
+    const settingBigCursor = getSetting('setting-big-cursor');
+
+    if (settingBigCursor.value === true) {
+      document.documentElement.setAttribute('big-cursor', cursorStyle);
+    }
+    else {
+      document.documentElement.removeAttribute('big-cursor');
+    }
+  }
+
+  const cursor = document.getElementById('big-cursor');
+
+  function moveCursor(e) {
+    if (cursor === null) return;
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top  = `${e.clientY}px`;
+  }
+
   function getSetting(key) {
     let setting;
     setting = settings.find(s => {
@@ -198,36 +249,6 @@ import '../../style/icons.css';
   function storageSaveSettings() {
     const settingsJson = JSON.stringify(settings)
     localStorage.setItem('settings', settingsJson);
-  }
-
-  function setCursor(e) {
-    const styleCursor = getComputedStyle(e.target).cursor;
-    if (styleCursor === 'pointer') {
-      cursorStyle = 'pointer';
-    }
-    else if (
-      e.target.lastChild &&
-      e.target.lastChild.nodeName === '#text'
-    ) {
-      cursorStyle = 'text';
-    }
-    updateCursorStyle();
-  }
-
-  function resetCursor() {
-    cursorStyle = 'default';
-    updateCursorStyle();
-  }
-
-  function updateCursorStyle() {
-    document.documentElement.setAttribute('big-cursor', cursorStyle);
-  }
-
-  const cursor = document.getElementById('big-cursor');
-
-  function moveCursor() {
-    if (cursor === null) return;
-    // cursor.style.top = 
   }
 
 </script>
