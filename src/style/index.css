@@ -161,18 +161,26 @@ button:focus-visible, a:focus-visible {
 
 /*Beweegt indicator naar volgend element met tab*/
 .focus-indicator {
+    display: none;
+
     position: fixed;
     position-anchor: --focus-anchor;
     z-index: 1000;
+    left: -1000px;
 
     left: calc(anchor(left) - 0.5em);
     top: calc(anchor(top) - 0.5em);
     right:calc(anchor(right) - 0.5em);
     bottom:calc(anchor(bottom) - 0.5em);
 
-    border: 3px solid var(--focus-color, var(--highlight-color));
+    border: 8px solid var(--focus-color, var(--logo-color));
     border-radius: 10px;
     pointer-events: none;
 
     transition: .5s;
+    top: -10%;
+}
+
+body:has(:focus-visible) .focus-indicator {
+    display: block;
 }
