@@ -368,6 +368,10 @@ main {
 
 /* --- Responsive  */
 @media (max-width: 640px) {
+  .view-toggle {
+    display: none;
+  }
+
   .innovaties-grid[data-view="grid"],
   .innovaties-grid[data-view="list"] {
     grid-template-columns: 1fr;
